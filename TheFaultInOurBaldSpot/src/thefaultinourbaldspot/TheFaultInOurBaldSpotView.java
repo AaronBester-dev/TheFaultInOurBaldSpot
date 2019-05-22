@@ -25,7 +25,6 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         super(app);
 //Whats up boizzzzz!!!
 //Aaron is a baby boi
-//asgjhsadgasdgasdgj
         initComponents();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
