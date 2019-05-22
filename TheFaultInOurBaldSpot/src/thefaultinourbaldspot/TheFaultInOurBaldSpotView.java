@@ -23,7 +23,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
 
     public TheFaultInOurBaldSpotView(SingleFrameApplication app) {
         super(app);
-
+//Whats up boizzzzz!!!
         initComponents();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
