@@ -29,18 +29,20 @@ public class Brayden extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        user = new javax.swing.JLabel();
         wallLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1080, 720));
+        setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
             }
         });
 
-        jLabel1.setText("teacher");
+        user.setText("User");
 
         wallLabel.setText("red brick wall");
 
@@ -49,23 +51,18 @@ public class Brayden extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
-                .addComponent(wallLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
+                .addContainerGap(636, Short.MAX_VALUE)
+                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(351, 351, 351))
+            .addComponent(wallLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(wallLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71))))
+                .addGap(228, 228, 228)
+                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addComponent(wallLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         wallLabel.getAccessibleContext().setAccessibleName("wallLabel");
@@ -95,26 +92,26 @@ public class Brayden extends javax.swing.JFrame {
 
         //up key pressed
         if (evt.getKeyCode() == 38) {
-            if (!checkCollision(jLabel1, 0, -10)) {
-                jLabel1.setLocation(jLabel1.getLocation().x, jLabel1.getLocation().y - 10);
+            if (!checkCollision(user, 0, -10)) {
+                user.setLocation(user.getLocation().x, user.getLocation().y - 10);
             }
         }
         //down key pressed
         if (evt.getKeyCode() == 40) {
-            if (!checkCollision(jLabel1, 0, 10)) {
-                jLabel1.setLocation(jLabel1.getLocation().x, jLabel1.getLocation().y + 10);
+            if (!checkCollision(user, 0, 10)) {
+                user.setLocation(user.getLocation().x, user.getLocation().y + 10);
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(jLabel1, -10, 0)) {
-                jLabel1.setLocation(jLabel1.getLocation().x - 10, jLabel1.getLocation().y);
+            if (!checkCollision(user, -10, 0)) {
+                user.setLocation(user.getLocation().x - 10, user.getLocation().y);
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(jLabel1, 10, 0)) {
-                jLabel1.setLocation(jLabel1.getLocation().x + 10, jLabel1.getLocation().y);
+            if (!checkCollision(user, 10, 0)) {
+                user.setLocation(user.getLocation().x + 10, user.getLocation().y);
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -125,7 +122,7 @@ public class Brayden extends javax.swing.JFrame {
     public Brayden() {
         initComponents();
         //Initialize the label with the scaled image icon
-        myInitComponents(jLabel1);
+        myInitComponents(user);
     }
 
     //Initializes the labels with their images
@@ -139,12 +136,12 @@ public class Brayden extends javax.swing.JFrame {
             e.printStackTrace();
         }
         //Create a temporary Image and scale it to the size of the label 
-        Image tempImg = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(),
+        Image tempImg = img.getScaledInstance(jLabel1.getWidth(), user.getHeight(),
                 Image.SCALE_SMOOTH);
         //Create and Image Icon from the new scaled image
         ImageIcon imageIcon = new ImageIcon(tempImg);
         //Set the label's icon property to the new icon
-        jLabel1.setIcon(imageIcon);
+        user.setIcon(imageIcon);
 
         
         //same as above, but in a condensed version
@@ -194,7 +191,7 @@ public class Brayden extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel user;
     private javax.swing.JLabel wallLabel;
     // End of variables declaration//GEN-END:variables
 }
