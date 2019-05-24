@@ -33,11 +33,11 @@ public class JohnForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -71,6 +71,9 @@ public class JohnForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        System.out.println("Hello!");
+                
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JohnForm().setVisible(true);
