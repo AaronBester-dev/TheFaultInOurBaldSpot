@@ -31,10 +31,19 @@ public class Brayden extends javax.swing.JFrame {
 
         user = new javax.swing.JLabel();
         wallLabel = new javax.swing.JLabel();
+        wallLabel1 = new javax.swing.JLabel();
+        pot = new javax.swing.JLabel();
+        potato = new javax.swing.JLabel();
+        dish = new javax.swing.JLabel();
+        tomato = new javax.swing.JLabel();
+        sink = new javax.swing.JLabel();
+        dryRack = new javax.swing.JLabel();
+        onion = new javax.swing.JLabel();
+        pot1 = new javax.swing.JLabel();
+        pot2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -44,24 +53,87 @@ public class Brayden extends javax.swing.JFrame {
 
         user.setText("User");
 
-        wallLabel.setText("red brick wall");
+        wallLabel.setText("wall1");
+
+        wallLabel1.setText("wall2");
+
+        pot.setText("Pot1");
+
+        potato.setText("jLabel1");
+
+        dish.setText("jLabel1");
+
+        tomato.setText("jLabel1");
+
+        sink.setText("jLabel1");
+
+        dryRack.setText("jLabel1");
+
+        onion.setText("jLabel1");
+
+        pot1.setText("Pot2");
+
+        pot2.setText("Pot3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(636, Short.MAX_VALUE)
-                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(351, 351, 351))
             .addComponent(wallLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(wallLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .addGap(450, 450, 450))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(429, 429, 429)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(potato)
+                            .addComponent(dish)
+                            .addComponent(tomato)
+                            .addComponent(sink)
+                            .addComponent(dryRack)
+                            .addComponent(onion)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(pot, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pot1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pot2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
+                        .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(228, 228, 228)
-                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addGap(128, 128, 128)
+                .addComponent(wallLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pot, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pot1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pot2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(potato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dish)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tomato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sink)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dryRack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(onion)
+                .addGap(299, 299, 299)
                 .addComponent(wallLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -78,7 +150,13 @@ public class Brayden extends javax.swing.JFrame {
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
 //check if temporary rectangle intersect with wallLabel        
-        if (rect.intersects(wallLabel.getBounds())) {
+       // if (rect.intersects(wallLabel.getBounds())) {
+      //      return true;
+      //  } else {
+      //      return false;
+      //  }
+        
+        if (rect.intersects(wallLabel1.getBounds())) {
             return true;
         } else {
             return false;
@@ -93,25 +171,25 @@ public class Brayden extends javax.swing.JFrame {
         //up key pressed
         if (evt.getKeyCode() == 38) {
             if (!checkCollision(user, 0, -10)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y - 10);
+                user.setLocation(user.getLocation().x, user.getLocation().y - 20);
             }
         }
         //down key pressed
         if (evt.getKeyCode() == 40) {
             if (!checkCollision(user, 0, 10)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y + 10);
+                user.setLocation(user.getLocation().x, user.getLocation().y + 20);
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
             if (!checkCollision(user, -10, 0)) {
-                user.setLocation(user.getLocation().x - 10, user.getLocation().y);
+                user.setLocation(user.getLocation().x - 20, user.getLocation().y);
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
             if (!checkCollision(user, 10, 0)) {
-                user.setLocation(user.getLocation().x + 10, user.getLocation().y);
+                user.setLocation(user.getLocation().x + 20, user.getLocation().y);
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -131,7 +209,7 @@ public class Brayden extends javax.swing.JFrame {
         BufferedImage img = null;
         //set the Buffered Image to the picture file
         try {
-            img = ImageIO.read(new File("Test1.png"));
+            img = ImageIO.read(new File("braydenNude.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,7 +224,35 @@ public class Brayden extends javax.swing.JFrame {
         
         //same as above, but in a condensed version
         try {
-            wallLabel.setIcon(new ImageIcon((ImageIO.read(new File("Test2.jpg"))).getScaledInstance(wallLabel.getWidth(), wallLabel.getHeight(), Image.SCALE_SMOOTH)));
+            wallLabel.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel.getWidth(), wallLabel.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                //same as above, but in a condensed version
+        try {
+            wallLabel1.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel1.getWidth(), wallLabel1.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                //same as above, but in a condensed version
+        try {
+            pot1.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot1.getWidth(), pot1.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                        //same as above, but in a condensed version
+        try {
+            pot2.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot2.getWidth(), pot2.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                        //same as above, but in a condensed version
+        try {
+            pot.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot.getWidth(), pot.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -191,7 +297,17 @@ public class Brayden extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dish;
+    private javax.swing.JLabel dryRack;
+    private javax.swing.JLabel onion;
+    private javax.swing.JLabel pot;
+    private javax.swing.JLabel pot1;
+    private javax.swing.JLabel pot2;
+    private javax.swing.JLabel potato;
+    private javax.swing.JLabel sink;
+    private javax.swing.JLabel tomato;
     private javax.swing.JLabel user;
     private javax.swing.JLabel wallLabel;
+    private javax.swing.JLabel wallLabel1;
     // End of variables declaration//GEN-END:variables
 }

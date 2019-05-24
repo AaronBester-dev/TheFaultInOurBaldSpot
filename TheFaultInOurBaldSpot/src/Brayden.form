@@ -4,9 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="name" type="java.lang.String" value="mainFrame" noResource="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1080, 720]"/>
-    </Property>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1080, 720]"/>
     </Property>
@@ -33,20 +30,72 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace pref="636" max="32767" attributes="0"/>
-              <Component id="user" min="-2" pref="93" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="351" max="-2" attributes="0"/>
-          </Group>
           <Component id="wallLabel" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="wallLabel1" pref="630" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="450" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="429" pref="429" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="potato" min="-2" max="-2" attributes="0"/>
+                          <Component id="dish" min="-2" max="-2" attributes="0"/>
+                          <Component id="tomato" min="-2" max="-2" attributes="0"/>
+                          <Component id="sink" min="-2" max="-2" attributes="0"/>
+                          <Component id="dryRack" min="-2" max="-2" attributes="0"/>
+                          <Component id="onion" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="pot" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pot1" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pot2" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="user" min="-2" pref="160" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
-              <Component id="user" min="-2" pref="91" max="-2" attributes="0"/>
-              <EmptySpace pref="379" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+              <Component id="wallLabel1" min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="pot" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="pot1" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="pot2" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                      <Component id="user" min="-2" pref="184" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Component id="potato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="dish" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="tomato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="sink" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="dryRack" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="onion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="299" max="-2" attributes="0"/>
               <Component id="wallLabel" min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -60,12 +109,62 @@
     </Component>
     <Component class="javax.swing.JLabel" name="wallLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="red brick wall"/>
+        <Property name="text" type="java.lang.String" value="wall1"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="wallLabel"/>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="wallLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="wall2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="pot">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pot1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="potato">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dish">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tomato">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="sink">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dryRack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="onion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="pot1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pot2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="pot2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pot3"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
