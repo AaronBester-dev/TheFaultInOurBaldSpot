@@ -1,3 +1,7 @@
+package Brayden;
+
+
+
 /*
  * Written by Mr. van Straten
  * May 21, 2019
@@ -150,18 +154,22 @@ public class Brayden extends javax.swing.JFrame {
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-//check if temporary rectangle intersect with wallLabel        
-       // if (rect.intersects(wallLabel.getBounds())) {
-      //      return true;
-      //  } else {
-      //      return false;
-      //  }
-        
-        if (rect.intersects(wallLabel1.getBounds())) {
-            return true;
-        } else {
-            return false;
-        }
+     javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
+
+    //fill in elements
+    blocks[0] = wallLabel;
+    blocks[1] = wallLabel;
+    blocks[2] = table;
+
+//    for(javax.swing.JLabel item :blocks){
+//            if (rect.intersects(item.getBounds())) {
+//            return true;
+//        } 
+         
+            
+//    }
+     return false;  
+    
     }
 
     //checks which key is pressed and moves image if no collision is detected
