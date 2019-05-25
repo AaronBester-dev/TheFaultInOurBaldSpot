@@ -3,6 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="autoRequestFocus" type="boolean" value="false"/>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1080, 720]"/>
@@ -31,13 +32,39 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1020" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="480" max="-2" attributes="0"/>
+              <Component id="tataPlane" min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace pref="440" max="32767" attributes="0"/>
+              <Component id="rightSideWall" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="720" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="tataPlane" min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+          </Group>
+          <Component id="rightSideWall" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="tataPlane">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="tataPlane.icon"/>
+        <Property name="text" type="java.lang.String" resourceKey="tataPlane.text"/>
+        <Property name="name" type="java.lang.String" value="tataPlane" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="rightSideWall">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="rightSideWall.icon"/>
+        <Property name="text" type="java.lang.String" resourceKey="rightSideWall.text"/>
+        <Property name="name" type="java.lang.String" value="rightSideWall" noResource="true"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>
