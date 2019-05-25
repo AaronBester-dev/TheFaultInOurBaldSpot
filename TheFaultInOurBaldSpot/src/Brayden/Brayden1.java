@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class Brayden extends javax.swing.JFrame {
+public class Brayden1 extends javax.swing.JFrame {
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,16 +158,16 @@ public class Brayden extends javax.swing.JFrame {
 
     //fill in elements
     blocks[0] = wallLabel;
-    blocks[1] = wallLabel;
+    blocks[1] = wallLabel1;
     blocks[2] = table;
 
-//    for(javax.swing.JLabel item :blocks){
-//            if (rect.intersects(item.getBounds())) {
-//            return true;
-//        } 
+   for(javax.swing.JLabel item :blocks){
+           if (rect.intersects(item.getBounds())) {
+          return true;
+      } 
          
             
-//    }
+   }
      return false;  
     
     }
@@ -206,7 +206,7 @@ public class Brayden extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public Brayden() {
+    public Brayden1() {
         initComponents();
         //Initialize the label with the scaled image icon
         myInitComponents(user);
@@ -235,35 +235,35 @@ public class Brayden extends javax.swing.JFrame {
         try {
             wallLabel.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel.getWidth(), wallLabel.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
                 //same as above, but in a condensed version
         try {
             wallLabel1.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel1.getWidth(), wallLabel1.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
                 //same as above, but in a condensed version
         try {
             pot1.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot1.getWidth(), pot1.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
                         //same as above, but in a condensed version
         try {
             pot2.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot2.getWidth(), pot2.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
                         //same as above, but in a condensed version
         try {
             pot.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot.getWidth(), pot.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(Brayden.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -284,14 +284,18 @@ public class Brayden extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Brayden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Brayden1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Brayden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Brayden1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Brayden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Brayden1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Brayden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Brayden1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -300,7 +304,7 @@ public class Brayden extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Brayden().setVisible(true);
+                new Brayden1().setVisible(true);
             }
         });
     }
