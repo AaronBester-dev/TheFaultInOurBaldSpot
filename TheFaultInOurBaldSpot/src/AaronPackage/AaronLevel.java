@@ -5,6 +5,8 @@
  */
 package AaronPackage;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author aaron.bester708
@@ -18,9 +20,23 @@ public class AaronLevel {
          
         }
     public static void intializeGrid(){
-        int levelHeight;
+        int levelHeight = 0;
         int levelWidth;
+        int screenHeight;
+        int screenWidth;
+        String levelGrid [][] = new String [54][36];
+        JLabel pictureGrid[][] = new JLabel [54][36] ;        
         
+        for(levelHeight = 0; levelHeight <= 36; levelHeight++) {
+           for(levelWidth = 0; levelWidth <= 54; levelWidth++) {
+        levelGrid[levelWidth][levelHeight] = "A";
+           pictureGrid[levelWidth][levelHeight] = new JLabel();
+            
+        
+            
+           
+    }
+    }
         
         
     } 
