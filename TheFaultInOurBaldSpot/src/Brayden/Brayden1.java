@@ -269,6 +269,11 @@ public class Brayden1 extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -15,6 +15,8 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import Brayden.Brayden1;
+import AaronPackage.AaronForm;
 
 /**
  * The application's main frame.
@@ -101,11 +103,10 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        menuBar = new javax.swing.JMenuBar();
-        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
-        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        brayden = new javax.swing.JButton();
+        aaron = new javax.swing.JButton();
+        Alex = new javax.swing.JButton();
+        john = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -114,38 +115,65 @@ public class TheFaultInOurBaldSpotView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(TheFaultInOurBaldSpotView.class);
+        brayden.setText(resourceMap.getString("brayden.text")); // NOI18N
+        brayden.setName("brayden"); // NOI18N
+        brayden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                braydenActionPerformed(evt);
+            }
+        });
+
+        aaron.setText(resourceMap.getString("aaron.text")); // NOI18N
+        aaron.setName("aaron"); // NOI18N
+        aaron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aaronActionPerformed(evt);
+            }
+        });
+
+        Alex.setText(resourceMap.getString("Alex.text")); // NOI18N
+        Alex.setName("Alex"); // NOI18N
+        Alex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlexActionPerformed(evt);
+            }
+        });
+
+        john.setText(resourceMap.getString("john.text")); // NOI18N
+        john.setName("john"); // NOI18N
+        john.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                johnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(brayden)
+                .addGap(18, 18, 18)
+                .addComponent(aaron)
+                .addGap(18, 18, 18)
+                .addComponent(Alex)
+                .addGap(18, 18, 18)
+                .addComponent(john)
+                .addContainerGap(267, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(brayden)
+                    .addComponent(aaron)
+                    .addComponent(Alex)
+                    .addComponent(john))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
-
-        menuBar.setName("menuBar"); // NOI18N
-
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(TheFaultInOurBaldSpotView.class);
-        fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
-        fileMenu.setName("fileMenu"); // NOI18N
-
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getActionMap(TheFaultInOurBaldSpotView.class, this);
-        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
-        exitMenuItem.setName("exitMenuItem"); // NOI18N
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
 
         statusPanel.setName("statusPanel"); // NOI18N
 
@@ -162,11 +190,11 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -185,13 +213,35 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         );
 
         setComponent(mainPanel);
-        setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void braydenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_braydenActionPerformed
+     Brayden1 braydenObject = new Brayden1();
+     braydenObject.setVisible(true);
+    }//GEN-LAST:event_braydenActionPerformed
+
+    private void aaronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaronActionPerformed
+     AaronForm aaronObject = new AaronForm();
+     aaronObject.setVisible(true);
+    }//GEN-LAST:event_aaronActionPerformed
+
+    private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
+     Brayden1 braydenObject = new Brayden1();
+     braydenObject.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_AlexActionPerformed
+
+    private void johnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_johnActionPerformed
+     Brayden1 braydenObject = new Brayden1();
+     braydenObject.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_johnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JButton Alex;
+    javax.swing.JButton aaron;
+    javax.swing.JButton brayden;
+    javax.swing.JButton john;
     javax.swing.JPanel mainPanel;
-    javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;

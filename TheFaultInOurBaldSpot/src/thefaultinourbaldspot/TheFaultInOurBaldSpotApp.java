@@ -40,5 +40,6 @@ public class TheFaultInOurBaldSpotApp extends SingleFrameApplication {
      */
     public static void main(String[] args) {
         launch(TheFaultInOurBaldSpotApp.class, args);
+
     }
 }
