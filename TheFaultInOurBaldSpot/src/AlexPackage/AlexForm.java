@@ -1,3 +1,5 @@
+package AlexPackage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -62,8 +64,8 @@ public class AlexForm extends javax.swing.JFrame {
 
         //same as above, but in a condensed version
         try {
-            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
@@ -88,7 +90,6 @@ public class AlexForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(900, 1000));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 1000));
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -109,12 +110,12 @@ public class AlexForm extends javax.swing.JFrame {
         rightSideWall.setText(resourceMap.getString("rightSideWall.text")); // NOI18N
         rightSideWall.setName("rightSideWall"); // NOI18N
         getContentPane().add(rightSideWall);
-        rightSideWall.setBounds(830, 0, 70, 1000);
+        rightSideWall.setBounds(820, 0, 80, 1000);
 
         leftSideWall.setText(resourceMap.getString("leftSideWall.text")); // NOI18N
         leftSideWall.setName("leftSideWall"); // NOI18N
         getContentPane().add(leftSideWall);
-        leftSideWall.setBounds(0, 0, 70, 1000);
+        leftSideWall.setBounds(0, 0, 80, 1000);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("Background.text")); // NOI18N
