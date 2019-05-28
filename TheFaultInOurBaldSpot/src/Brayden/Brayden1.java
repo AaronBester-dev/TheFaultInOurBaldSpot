@@ -64,7 +64,7 @@ TimerTask task = new TimerTask(){
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setForeground(new java.awt.Color(102, 0, 0));
         setName("mainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1080, 720));
+        setPreferredSize(new java.awt.Dimension(1080, 880));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
