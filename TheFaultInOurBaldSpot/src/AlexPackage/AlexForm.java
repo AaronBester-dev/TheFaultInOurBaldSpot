@@ -68,6 +68,8 @@ public class AlexForm extends javax.swing.JFrame {
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
+           // hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
+           // hellWallTop.setIcon(new ImageIcon((ImageIO.read(new File("hellWallTop.png"))).getScaledInstance(hellWallTop.getWidth(), hellWallTop.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,10 +84,19 @@ public class AlexForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        hellWallTop1 = new javax.swing.JLabel();
         tataPlane = new javax.swing.JLabel();
         rightSideWall = new javax.swing.JLabel();
         leftSideWall = new javax.swing.JLabel();
+        hellWallTop = new javax.swing.JLabel();
+        hellWallBottom = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
+
+        hellWallTop1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AlexForm.class);
+        hellWallTop1.setText(resourceMap.getString("hellWallTop1.text")); // NOI18N
+        hellWallTop1.setToolTipText(resourceMap.getString("hellWallTop1.toolTipText")); // NOI18N
+        hellWallTop1.setName("hellWallTop1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -100,12 +111,11 @@ public class AlexForm extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AlexForm.class);
         tataPlane.setText(resourceMap.getString("tataPlane.text")); // NOI18N
         tataPlane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tataPlane.setName("tataPlane"); // NOI18N
         getContentPane().add(tataPlane);
-        tataPlane.setBounds(420, 797, 60, 60);
+        tataPlane.setBounds(410, 640, 60, 60);
 
         rightSideWall.setIcon(resourceMap.getIcon("rightSideWall.icon")); // NOI18N
         rightSideWall.setText(resourceMap.getString("rightSideWall.text")); // NOI18N
@@ -117,6 +127,19 @@ public class AlexForm extends javax.swing.JFrame {
         leftSideWall.setName("leftSideWall"); // NOI18N
         getContentPane().add(leftSideWall);
         leftSideWall.setBounds(0, 0, 80, 1000);
+
+        hellWallTop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hellWallTop.setText(resourceMap.getString("hellWallTop.text")); // NOI18N
+        hellWallTop.setName("hellWallTop"); // NOI18N
+        getContentPane().add(hellWallTop);
+        hellWallTop.setBounds(80, 0, 740, 80);
+        hellWallTop.getAccessibleContext().setAccessibleName(resourceMap.getString("hellWallTop.AccessibleContext.accessibleName")); // NOI18N
+
+        hellWallBottom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hellWallBottom.setText(resourceMap.getString("hellWallBottom.text")); // NOI18N
+        hellWallBottom.setName("hellWallBottom"); // NOI18N
+        getContentPane().add(hellWallBottom);
+        hellWallBottom.setBounds(80, 810, 740, 80);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("Background.text")); // NOI18N
@@ -131,26 +154,26 @@ public class AlexForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         //up key pressed
         if (evt.getKeyCode() == 38) {
-            if (!checkCollision(tataPlane, 0, -10)) {
-                tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y - 10);
+            if (!checkCollision(tataPlane, 0, -15)) {
+                tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y - 15);
             }
         }
         //down key pressed
         if (evt.getKeyCode() == 40) {
-            if (!checkCollision(tataPlane, 0, 10)) {
-                tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y + 10);
+            if (!checkCollision(tataPlane, 0, 15)) {
+                tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y + 15);
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(tataPlane, -10, 0)) {
-                tataPlane.setLocation(tataPlane.getLocation().x - 10, tataPlane.getLocation().y);
+            if (!checkCollision(tataPlane, -15, 0)) {
+                tataPlane.setLocation(tataPlane.getLocation().x - 15, tataPlane.getLocation().y);
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(tataPlane, 10, 0)) {
-                tataPlane.setLocation(tataPlane.getLocation().x + 10, tataPlane.getLocation().y);
+            if (!checkCollision(tataPlane, 15, 0)) {
+                tataPlane.setLocation(tataPlane.getLocation().x + 15, tataPlane.getLocation().y);
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -188,10 +211,14 @@ public class AlexForm extends javax.swing.JFrame {
                 new AlexForm().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
+    private javax.swing.JLabel hellWallBottom;
+    private javax.swing.JLabel hellWallTop;
+    private javax.swing.JLabel hellWallTop1;
     private javax.swing.JLabel leftSideWall;
     private javax.swing.JLabel rightSideWall;
     private javax.swing.JLabel tataPlane;
