@@ -234,7 +234,9 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_AlexActionPerformed
 
     private void johnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_johnActionPerformed
-  // JohnPackage johnObject = new JohnPackage();       
+   JohnF johnObject = new JohnF();   
+   johnObject.setVisible(true);
+   
     }//GEN-LAST:event_johnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
