@@ -17,6 +17,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import Brayden.Brayden1;
 import AaronPackage.AaronForm;
+import JohnPackage.JohnF;
+//import AlexPackage.AlexForm;
 
 /**
  * The application's main frame.
@@ -232,8 +234,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_AlexActionPerformed
 
     private void johnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_johnActionPerformed
-     Brayden1 braydenObject = new Brayden1();
-     braydenObject.setVisible(true);        // TODO add your handling code here:
+  // JohnPackage johnObject = new JohnPackage();       
     }//GEN-LAST:event_johnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
