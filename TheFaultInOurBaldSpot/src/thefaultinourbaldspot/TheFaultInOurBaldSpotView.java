@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import Brayden.Brayden1;
 import AaronPackage.AaronForm;
 import JohnPackage.JohnF;
-//import AlexPackage.AlexForm;
+import AlexPackage.AlexForm;
 
 /**
  * The application's main frame.
@@ -229,8 +229,8 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
-     Brayden1 braydenObject = new Brayden1();
-     braydenObject.setVisible(true);        // TODO add your handling code here:
+     AlexForm alexObject = new AlexForm();
+     alexObject.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_AlexActionPerformed
 
     private void johnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_johnActionPerformed
