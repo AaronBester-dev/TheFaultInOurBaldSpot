@@ -90,6 +90,7 @@ public class AlexForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(900, 1000));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 1000));
         addKeyListener(new java.awt.event.KeyAdapter() {
