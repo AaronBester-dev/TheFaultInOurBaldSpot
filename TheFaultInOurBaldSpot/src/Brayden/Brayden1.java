@@ -1,16 +1,12 @@
 package Brayden;
 
-
-
 /*
- * Written by Mr. van Straten
+ * Written by Brayden McQueen
  * May 21, 2019
- * JFrameImages
- * This is a demo program for images and collision detection
+ * Brayden's Game
+ * Game that makes the user feed poor homless people and do it fast!
  */
-
-
-import java.awt.Component;
+//imports
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -20,13 +16,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Brayden1 extends javax.swing.JFrame {
 public int counter = 150;
-
+//This makes the main timer
 Timer timer = new Timer();
 TimerTask task = new TimerTask(){
         public void run(){
@@ -34,10 +29,6 @@ TimerTask task = new TimerTask(){
         timerBoy.setText(String.valueOf(counter));
         }
         };
-
-
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,53 +136,50 @@ TimerTask task = new TimerTask(){
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+    Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-     javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
-
-    //fill in elements
+        
+    //creates an array to tell the collision what the user cant run into    
+    javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
     blocks[0] = wallLabel;
     blocks[1] = wallLabel1;
     blocks[2] = table;
-
+//cheacks the collision and returns teu or false
    for(javax.swing.JLabel item :blocks){
            if (rect.intersects(item.getBounds())) {
           return true;
-      } 
-         
-            
+      }     
    }
      return false;  
-    
     }
 
     //checks which key is pressed and moves image if no collision is detected
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         //prints KeyCode for the key pressed
-        // System.out.println(evt.getKeyCode());
+        //System.out.println(evt.getKeyCode());
 
-        //up key pressed
-        if (evt.getKeyCode() == 38) {
+        //up key pressed (w)
+        if (evt.getKeyCode() == 87) {
             if (!checkCollision(user, 0, -10)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y - 20);
+                user.setLocation(user.getLocation().x, user.getLocation().y - 30);
             }
         }
-        //down key pressed
-        if (evt.getKeyCode() == 40) {
+        //down key pressed(s)
+        if (evt.getKeyCode() == 83) {
             if (!checkCollision(user, 0, 10)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y + 20);
+                user.setLocation(user.getLocation().x, user.getLocation().y + 30);
             }
         }
-        //left key pressed
-        if (evt.getKeyCode() == 37) {
+        //left key pressed(a)
+        if (evt.getKeyCode() == 65) {
             if (!checkCollision(user, -10, 0)) {
-                user.setLocation(user.getLocation().x - 20, user.getLocation().y);
+                user.setLocation(user.getLocation().x - 30, user.getLocation().y);
             }
         }
-        //right key pressed
-        if (evt.getKeyCode() == 39) {
+        //right key pressed(d)
+        if (evt.getKeyCode() == 68) {
             if (!checkCollision(user, 10, 0)) {
-                user.setLocation(user.getLocation().x + 20, user.getLocation().y);
+                user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -209,99 +197,42 @@ TimerTask task = new TimerTask(){
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
+        //starts timer
         timer.scheduleAtFixedRate(task, 1000, 1000 );
-       
-
-        
-//set the Buffered Image to the picture file
+        //Set the jLables' icon to the image it needs
         try {
-            img = ImageIO.read(new File("braydenNude.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Create a temporary Image and scale it to the size of the label 
-        Image tempImg = img.getScaledInstance(jLabel1.getWidth(), user.getHeight(),
-                Image.SCALE_SMOOTH);
-        //Create and Image Icon from the new scaled image
-        ImageIcon imageIcon = new ImageIcon(tempImg);
-        //Set the label's icon property to the new icon
-        user.setIcon(imageIcon);
-
-        
-        //same as above, but in a condensed version
-        try {
+            user.setIcon(new ImageIcon((ImageIO.read(new File("braydenNude.png"))).getScaledInstance(user.getWidth(), user.getHeight(), Image.SCALE_SMOOTH)));
+         
             wallLabel.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel.getWidth(), wallLabel.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-                //same as above, but in a condensed version
-        try {
+
             wallLabel1.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel1.getWidth(), wallLabel1.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-                //same as above, but in a condensed version
-        try {
+
             pot1.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot1.getWidth(), pot1.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-                        //same as above, but in a condensed version
-        try {
+
             pot2.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot2.getWidth(), pot2.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-                        //same as above, but in a condensed version
-        try {
+
             pot.setIcon(new ImageIcon((ImageIO.read(new File("pot.png"))).getScaledInstance(pot.getWidth(), pot.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             table.setIcon(new ImageIcon((ImageIO.read(new File("tab.png"))).getScaledInstance(table.getWidth(), table.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             bar.setIcon(new ImageIcon((ImageIO.read(new File("bar.png"))).getScaledInstance(bar.getWidth(), bar.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             potato.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potato.getWidth(), potato.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             tomato.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(tomato.getWidth(), tomato.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             onion.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(onion.getWidth(), onion.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+
             background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+
+            sink.setIcon(new ImageIcon((ImageIO.read(new File("sink.png"))).getScaledInstance(sink.getWidth(), sink.getHeight(), Image.SCALE_SMOOTH)));
+
+            dryRack.setIcon(new ImageIcon((ImageIO.read(new File("dish.png"))).getScaledInstance(dryRack.getWidth(), dryRack.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
