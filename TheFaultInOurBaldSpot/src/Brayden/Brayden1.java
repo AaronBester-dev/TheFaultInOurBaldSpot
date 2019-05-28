@@ -25,13 +25,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Brayden1 extends javax.swing.JFrame {
-int counter = 120;
+public int counter = 150;
 
-Timer timerBoy = new Timer();
+Timer timer = new Timer();
 TimerTask task = new TimerTask(){
         public void run(){
         counter--;
-         
+        timerBoy.setText(String.valueOf(counter));
         }
         };
 
@@ -208,8 +208,9 @@ TimerTask task = new TimerTask(){
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
+        timer.scheduleAtFixedRate(task, 1000, 1000 );
        
-        //timerBoy.setText(counter);
+
         
 //set the Buffered Image to the picture file
         try {
