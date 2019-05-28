@@ -29,8 +29,12 @@ public class JohnF extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cutBox = new javax.swing.JLabel();
         health = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
+        lungs = new javax.swing.JLabel();
+        ribs = new javax.swing.JLabel();
+        heart = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,6 +48,10 @@ public class JohnF extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        cutBox.setText("cutBox");
+        getContentPane().add(cutBox);
+        cutBox.setBounds(380, 350, 41, 30);
+
         health.setText("Health");
         getContentPane().add(health);
         health.setBounds(10, 10, 71, 73);
@@ -53,6 +61,18 @@ public class JohnF extends javax.swing.JFrame {
         time.setBounds(1010, 0, 70, 90);
         time.getAccessibleContext().setAccessibleName("wallLabel");
         time.getAccessibleContext().setAccessibleDescription("");
+
+        lungs.setText("Lungs");
+        getContentPane().add(lungs);
+        lungs.setBounds(490, 150, 110, 40);
+
+        ribs.setText("Ribs");
+        getContentPane().add(ribs);
+        ribs.setBounds(320, 280, 410, 400);
+
+        heart.setText("heart");
+        getContentPane().add(heart);
+        heart.setBounds(490, 180, 70, 70);
 
         background.setText("background");
         getContentPane().add(background);
@@ -122,7 +142,9 @@ public class JohnF extends javax.swing.JFrame {
                
         //same as above, but in a condensed version
         try {
+            
             background.setIcon(new ImageIcon((ImageIO.read(new File("JSumBackground.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+            ribs.setIcon(new ImageIcon((ImageIO.read(new File("JSumRibs.png"))).getScaledInstance(ribs.getWidth(), ribs.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -168,7 +190,11 @@ public class JohnF extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JLabel cutBox;
     private javax.swing.JLabel health;
+    private javax.swing.JLabel heart;
+    private javax.swing.JLabel lungs;
+    private javax.swing.JLabel ribs;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
