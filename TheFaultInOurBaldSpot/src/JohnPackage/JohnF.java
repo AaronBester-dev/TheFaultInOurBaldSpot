@@ -36,6 +36,7 @@ public class JohnF extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1080, 720));
+        setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
