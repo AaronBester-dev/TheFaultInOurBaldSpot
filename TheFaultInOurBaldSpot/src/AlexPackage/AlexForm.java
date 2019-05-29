@@ -5,6 +5,8 @@ package AlexPackage;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -23,6 +25,14 @@ import javax.swing.JFrame;
  */
 public class AlexForm extends javax.swing.JFrame {
 
+    Timer gameTimer  = new Timer(); 
+    int timePassed = 0;
+    TimerTask task = new TimerTask() {
+        public void run() {
+            timePassed ++;
+            System.out.println("Seconds Passed: " + timePassed);
+        }
+    };
     /**
      * Creates new form AlexForm
      */
@@ -88,6 +98,7 @@ public class AlexForm extends javax.swing.JFrame {
         tataPlane = new javax.swing.JLabel();
         rightSideWall = new javax.swing.JLabel();
         leftSideWall = new javax.swing.JLabel();
+        timerLabel = new javax.swing.JLabel();
         hellWallTop = new javax.swing.JLabel();
         hellWallBottom = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
@@ -127,6 +138,12 @@ public class AlexForm extends javax.swing.JFrame {
         leftSideWall.setName("leftSideWall"); // NOI18N
         getContentPane().add(leftSideWall);
         leftSideWall.setBounds(0, 0, 80, 1000);
+
+        timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timerLabel.setText(resourceMap.getString("timerLabel.text")); // NOI18N
+        timerLabel.setName("timerLabel"); // NOI18N
+        getContentPane().add(timerLabel);
+        timerLabel.setBounds(680, 20, 80, 50);
 
         hellWallTop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         hellWallTop.setText(resourceMap.getString("hellWallTop.text")); // NOI18N
@@ -211,7 +228,8 @@ public class AlexForm extends javax.swing.JFrame {
                 new AlexForm().setVisible(true);
             }
         });
-        
+       gameTimer.scheduleAtFixedRate(task, 1000, 1000);
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,5 +240,6 @@ public class AlexForm extends javax.swing.JFrame {
     private javax.swing.JLabel leftSideWall;
     private javax.swing.JLabel rightSideWall;
     private javax.swing.JLabel tataPlane;
+    private javax.swing.JLabel timerLabel;
     // End of variables declaration//GEN-END:variables
 }
