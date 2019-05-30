@@ -1,5 +1,4 @@
 package AlexPackage;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,6 +23,7 @@ import javax.swing.JFrame;
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame {
+    
     public int counter = 120;
     Timer gameTimer  = new Timer(); 
     TimerTask task = new TimerTask() {
@@ -34,14 +34,10 @@ public class AlexForm extends javax.swing.JFrame {
         }
     };
   
-    /**
-     * Creates new form AlexForm
-     */
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
 //check if temporary rectangle intersect with wallLabel        
         if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds()) || rect.intersects(hellWallBottom.getBounds())) {
             return true;
@@ -52,7 +48,6 @@ public class AlexForm extends javax.swing.JFrame {
 
     public AlexForm() {
         initComponents();
-
         myInitComponents();
     }
 
@@ -83,9 +78,9 @@ public class AlexForm extends javax.swing.JFrame {
 
         hellWallTop1 = new javax.swing.JLabel();
         tataPlane = new javax.swing.JLabel();
+        timerLabel = new javax.swing.JLabel();
         rightSideWall = new javax.swing.JLabel();
         leftSideWall = new javax.swing.JLabel();
-        timerLabel = new javax.swing.JLabel();
         hellWallTop = new javax.swing.JLabel();
         hellWallBottom = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
@@ -115,6 +110,14 @@ public class AlexForm extends javax.swing.JFrame {
         getContentPane().add(tataPlane);
         tataPlane.setBounds(410, 640, 60, 60);
 
+        timerLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        timerLabel.setForeground(resourceMap.getColor("timerLabel.foreground")); // NOI18N
+        timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timerLabel.setText(resourceMap.getString("timerLabel.text")); // NOI18N
+        timerLabel.setName("timerLabel"); // NOI18N
+        getContentPane().add(timerLabel);
+        timerLabel.setBounds(820, 0, 80, 50);
+
         rightSideWall.setIcon(resourceMap.getIcon("rightSideWall.icon")); // NOI18N
         rightSideWall.setText(resourceMap.getString("rightSideWall.text")); // NOI18N
         rightSideWall.setName("rightSideWall"); // NOI18N
@@ -125,14 +128,6 @@ public class AlexForm extends javax.swing.JFrame {
         leftSideWall.setName("leftSideWall"); // NOI18N
         getContentPane().add(leftSideWall);
         leftSideWall.setBounds(0, 0, 80, 1000);
-
-        timerLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        timerLabel.setForeground(resourceMap.getColor("timerLabel.foreground")); // NOI18N
-        timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timerLabel.setText(resourceMap.getString("timerLabel.text")); // NOI18N
-        timerLabel.setName("timerLabel"); // NOI18N
-        getContentPane().add(timerLabel);
-        timerLabel.setBounds(680, 20, 80, 50);
 
         hellWallTop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         hellWallTop.setText(resourceMap.getString("hellWallTop.text")); // NOI18N
@@ -184,15 +179,13 @@ public class AlexForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        int strength, speed, health;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -210,7 +203,6 @@ public class AlexForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AlexForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -219,6 +211,20 @@ public class AlexForm extends javax.swing.JFrame {
         });
     }
 
+    public static void enemySpawning (int strength, int speed, int health) {
+     int spawn = (int)(Math.random()*20 +1);
+      if (spawn <=12 ) {
+          impSpawn(strength,speed,health);
+      }
+    }
+    
+    public static void impSpawn(int strength, int speed, int health){
+        strength = 1;
+        speed = 3;
+        health = 1;
+        EnemiesClass Imp = new EnemiesClass(health,speed, strength);   
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel hellWallBottom;
