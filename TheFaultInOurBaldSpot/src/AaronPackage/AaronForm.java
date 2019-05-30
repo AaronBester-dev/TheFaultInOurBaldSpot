@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
+import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
 
@@ -161,10 +161,7 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
-         if(player.getLocation().y > 0){
-               player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-               
-        }
+       
         
     }//GEN-LAST:event_formKeyPressed
 
