@@ -71,6 +71,11 @@ public class AaronForm extends javax.swing.JFrame {
         bottomFloor.setName("bottomFloor"); // NOI18N
 
         player.setName("player"); // NOI18N
+        player.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                playerKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +84,7 @@ public class AaronForm extends javax.swing.JFrame {
             .addComponent(bottomFloor, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,6 +98,46 @@ public class AaronForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ 
+    private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+//check if temporary rectangle intersect with wallLabel        
+        if (rect.intersects(bottomFloor.getBounds())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    private void playerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_playerKeyPressed
+         if (evt.getKeyCode() == 38) {
+            if (!checkCollision(player, 0, -10)) {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 10);
+            }
+        }
+        //down key pressed
+        if (evt.getKeyCode() == 40) {
+            if (!checkCollision(player, 0, 10)) {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+            }
+        }
+        //left key pressed
+        if (evt.getKeyCode() == 37) {
+            if (!checkCollision(player, -10, 0)) {
+                player.setLocation(player.getLocation().x - 10, player.getLocation().y);
+            }
+        }
+        //right key pressed
+        if (evt.getKeyCode() == 39) {
+            if (!checkCollision(player, 10, 0)) {
+                player.setLocation(player.getLocation().x + 10, player.getLocation().y);
+            }
+        }
+    }//GEN-LAST:event_playerKeyPressed
 
     /**
      * @param args the command line arguments

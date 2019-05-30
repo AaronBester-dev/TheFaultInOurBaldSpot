@@ -43,7 +43,7 @@ public class AlexForm extends javax.swing.JFrame {
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
 //check if temporary rectangle intersect with wallLabel        
-        if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds())) {
+        if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds()) || rect.intersects(hellWallBottom.getBounds())) {
             return true;
         } else {
             return false;
@@ -65,7 +65,7 @@ public class AlexForm extends javax.swing.JFrame {
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
-           // hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
+            hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
            // hellWallTop.setIcon(new ImageIcon((ImageIO.read(new File("hellWallTop.png"))).getScaledInstance(hellWallTop.getWidth(), hellWallTop.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,7 +126,7 @@ public class AlexForm extends javax.swing.JFrame {
         getContentPane().add(leftSideWall);
         leftSideWall.setBounds(0, 0, 80, 1000);
 
-        timerLabel.setFont(resourceMap.getFont("timerLabel.font")); // NOI18N
+        timerLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         timerLabel.setForeground(resourceMap.getColor("timerLabel.foreground")); // NOI18N
         timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timerLabel.setText(resourceMap.getString("timerLabel.text")); // NOI18N
@@ -145,7 +145,7 @@ public class AlexForm extends javax.swing.JFrame {
         hellWallBottom.setText(resourceMap.getString("hellWallBottom.text")); // NOI18N
         hellWallBottom.setName("hellWallBottom"); // NOI18N
         getContentPane().add(hellWallBottom);
-        hellWallBottom.setBounds(80, 810, 740, 80);
+        hellWallBottom.setBounds(0, 920, 900, 80);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("Background.text")); // NOI18N
