@@ -12,9 +12,13 @@ package Brayden;
 public class soup {
 
 private boolean potato, tomato, mushroom;
+private String photoCode;
     
-public soup (boolean potato, boolean tomato, boolean mushroom){
-    
+public soup (boolean uPotato, boolean uTomato, boolean uMushroom, String uPhotoCode){
+  potato  = uPotato;
+  tomato = uTomato;
+  mushroom = uMushroom;
+  photoCode = uPhotoCode;  
 }
     
     
