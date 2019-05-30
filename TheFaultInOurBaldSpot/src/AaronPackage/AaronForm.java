@@ -161,9 +161,15 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
+         if(player.getLocation().y > 0){
+               player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+               
+        }
         
     }//GEN-LAST:event_formKeyPressed
 
+   
+    
     /**
      * @param args the command line arguments
      */
