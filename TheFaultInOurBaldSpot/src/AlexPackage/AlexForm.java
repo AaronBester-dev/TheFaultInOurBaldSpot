@@ -24,15 +24,16 @@ import javax.swing.JFrame;
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame {
-
+    public int counter = 120;
     Timer gameTimer  = new Timer(); 
-    int timePassed = 0;
     TimerTask task = new TimerTask() {
         public void run() {
-            timePassed ++;
-            System.out.println("Seconds Passed: " + timePassed);
+            counter --;
+            timerLabel.setText(String.valueOf(counter));
+            System.out.println("Seconds Passed: " + counter);
         }
     };
+  
     /**
      * Creates new form AlexForm
      */
@@ -52,27 +53,13 @@ public class AlexForm extends javax.swing.JFrame {
     public AlexForm() {
         initComponents();
 
-        myInitComponents();//tataPlane);
+        myInitComponents();
     }
 
-    public void myInitComponents() {//javax.swing.JLabel jLabel1) {
-        //Initialize a Buffered Image
+    public void myInitComponents() {
         BufferedImage img = null;
-        //set the Buffered Image to the picture file
-//        try {
-//            img = ImageIO.read(new File("tataPlane.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        //Create a temporary Image and scale it to the size of the label 
-//        Image tempImg = img.getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(),
-//                Image.SCALE_SMOOTH);
-//        //Create and Image Icon from the new scaled image
-//        ImageIcon imageIcon = new ImageIcon(tempImg);
-//        //Set the label's icon property to the new icon
-//       tataPlane.setIcon(imageIcon);
-
         //same as above, but in a condensed version
+        gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
             backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
@@ -139,6 +126,8 @@ public class AlexForm extends javax.swing.JFrame {
         getContentPane().add(leftSideWall);
         leftSideWall.setBounds(0, 0, 80, 1000);
 
+        timerLabel.setFont(resourceMap.getFont("timerLabel.font")); // NOI18N
+        timerLabel.setForeground(resourceMap.getColor("timerLabel.foreground")); // NOI18N
         timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timerLabel.setText(resourceMap.getString("timerLabel.text")); // NOI18N
         timerLabel.setName("timerLabel"); // NOI18N
@@ -166,7 +155,7 @@ public class AlexForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
@@ -228,8 +217,6 @@ public class AlexForm extends javax.swing.JFrame {
                 new AlexForm().setVisible(true);
             }
         });
-       gameTimer.scheduleAtFixedRate(task, 1000, 1000);
-       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
