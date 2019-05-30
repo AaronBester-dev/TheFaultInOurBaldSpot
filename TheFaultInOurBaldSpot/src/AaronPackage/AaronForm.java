@@ -139,8 +139,8 @@ public class AaronForm extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
        
         if (evt.getKeyCode() == 90) {
-            if (!checkCollision(player, 0, -50) && (checkCollision(player,0,+50)) ) {
-                player.setLocation(player.getLocation().x, player.getLocation().y - 50);
+            if (!checkCollision(player, 0, -100) && (checkCollision(player,0,+100)) ) {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 100);
             }
         }
         //down key pressed
