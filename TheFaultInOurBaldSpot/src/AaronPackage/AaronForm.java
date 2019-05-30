@@ -15,33 +15,21 @@ import javax.swing.JFrame;
 
 public class AaronForm extends javax.swing.JFrame {
 
-   
-  public void myInitComponents(javax.swing.JLabel jLabel1) {
-        //Initialize a Buffered Image
-        BufferedImage img = null;
-        //set the Buffered Image to the picture file
-        try {
-            img = ImageIO.read(new File("AaronFloor.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Create a temporary Image and scale it to the size of the label 
-        Image tempImg = img.getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(),
-                Image.SCALE_SMOOTH);
-        //Create and Image Icon from the new scaled image
-        ImageIcon imageIcon = new ImageIcon(tempImg);
-        //Set the label's icon property to the new icon
-        bottomFloor.setIcon(imageIcon);
+    
+     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-        
-//        same as above, but in a condensed version
-        try {
-            player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+//check if temporary rectangle intersect with wallLabel        
+        if (rect.intersects(bottomFloor.getBounds())) {
+            return true;
+        } else {
+            return false;
         }
     }
-  
+   
+
   
   
     public AaronForm() {
@@ -67,6 +55,11 @@ public class AaronForm extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         bottomFloor.setName("bottomFloor"); // NOI18N
 
@@ -98,9 +91,8 @@ public class AaronForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
-    private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+ public boolean checkGround(javax.swing.JLabel _lbl, int _x, int _y){
+    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
@@ -110,13 +102,45 @@ public class AaronForm extends javax.swing.JFrame {
         } else {
             return false;
         }
+}
+    
+     public void myInitComponents(javax.swing.JLabel jLabel1) {
+        //Initialize a Buffered Image
+        BufferedImage img = null;
+        //set the Buffered Image to the picture file
+        try {
+            img = ImageIO.read(new File("AaronFloor.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Create a temporary Image and scale it to the size of the label 
+        Image tempImg = img.getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(),
+                Image.SCALE_SMOOTH);
+        //Create and Image Icon from the new scaled image
+        ImageIcon imageIcon = new ImageIcon(tempImg);
+        //Set the label's icon property to the new icon
+        bottomFloor.setIcon(imageIcon);
+
+        
+//        same as above, but in a condensed version
+        try {
+            player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+  
     
     
     private void playerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_playerKeyPressed
-         if (evt.getKeyCode() == 38) {
-            if (!checkCollision(player, 0, -10)) {
-                player.setLocation(player.getLocation().x, player.getLocation().y - 10);
+       
+    }//GEN-LAST:event_playerKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+       
+        if (evt.getKeyCode() == 90) {
+            if (!checkCollision(player, 0, -50) && (checkCollision(player,0,+50)) ) {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 50);
             }
         }
         //down key pressed
@@ -137,7 +161,8 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
-    }//GEN-LAST:event_playerKeyPressed
+        
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
