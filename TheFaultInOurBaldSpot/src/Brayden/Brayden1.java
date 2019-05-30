@@ -34,6 +34,12 @@ TimerTask task = new TimerTask(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        orderOne = new javax.swing.JLabel();
+        orderTwo = new javax.swing.JLabel();
+        orderThree = new javax.swing.JLabel();
+        orderFour = new javax.swing.JLabel();
+        orderFive = new javax.swing.JLabel();
+        orderSix = new javax.swing.JLabel();
         timerBoy = new javax.swing.JLabel();
         user = new javax.swing.JLabel();
         wallLabel = new javax.swing.JLabel();
@@ -63,6 +69,31 @@ TimerTask task = new TimerTask(){
             }
         });
         getContentPane().setLayout(null);
+
+        orderOne.setText("orderOne");
+        getContentPane().add(orderOne);
+        orderOne.setBounds(550, 10, 60, 60);
+        orderOne.getAccessibleContext().setAccessibleName("order1");
+
+        orderTwo.setText("orderTwo");
+        getContentPane().add(orderTwo);
+        orderTwo.setBounds(650, 10, 60, 60);
+
+        orderThree.setText("orderThree");
+        getContentPane().add(orderThree);
+        orderThree.setBounds(730, 10, 60, 60);
+
+        orderFour.setText("orderFour");
+        getContentPane().add(orderFour);
+        orderFour.setBounds(830, 10, 60, 60);
+
+        orderFive.setText("orderFive");
+        getContentPane().add(orderFive);
+        orderFive.setBounds(920, 10, 60, 60);
+
+        orderSix.setText("orderSix");
+        getContentPane().add(orderSix);
+        orderSix.setBounds(1010, 10, 60, 60);
 
         timerBoy.setBackground(new java.awt.Color(255, 51, 51));
         timerBoy.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
@@ -280,6 +311,12 @@ TimerTask task = new TimerTask(){
     private javax.swing.JLabel bar;
     private javax.swing.JLabel dryRack;
     private javax.swing.JLabel onion;
+    private javax.swing.JLabel orderFive;
+    private javax.swing.JLabel orderFour;
+    private javax.swing.JLabel orderOne;
+    private javax.swing.JLabel orderSix;
+    private javax.swing.JLabel orderThree;
+    private javax.swing.JLabel orderTwo;
     private javax.swing.JLabel pot;
     private javax.swing.JLabel pot1;
     private javax.swing.JLabel pot2;
