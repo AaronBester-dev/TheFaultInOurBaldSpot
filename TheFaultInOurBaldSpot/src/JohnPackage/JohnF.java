@@ -1,9 +1,4 @@
 
-
-
-
-
-
 /*
  * Written by Mr. van Straten
  * May 21, 2019
@@ -15,6 +10,7 @@ package JohnPackage;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -28,7 +24,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class JohnF extends javax.swing.JFrame {
-        int mx, my;
+
+    int mx, my;
+    boolean boneSawClick = false;
+
+    public JohnF() {
+        initComponents();
+        //Initialize the label with the scaled image icon
+        myInitComponents(background);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,25 +43,50 @@ public class JohnF extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        boneSaw = new javax.swing.JLabel();
         cutBox = new javax.swing.JLabel();
         health = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         lungs = new javax.swing.JLabel();
         ribs = new javax.swing.JLabel();
         heart = new javax.swing.JLabel();
-        boneSaw = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
             }
         });
         getContentPane().setLayout(null);
+
+        boneSaw.setText("boneSaw");
+        boneSaw.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                boneSawMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                boneSawMouseMoved(evt);
+            }
+        });
+        boneSaw.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boneSawMouseClicked(evt);
+            }
+        });
+        getContentPane().add(boneSaw);
+        boneSaw.setBounds(10, 430, 50, 150);
 
         cutBox.setText("cutBox");
         getContentPane().add(cutBox);
@@ -83,20 +113,6 @@ public class JohnF extends javax.swing.JFrame {
         heart.setText("heart");
         getContentPane().add(heart);
         heart.setBounds(370, 110, 70, 70);
-
-        boneSaw.setText("boneSaw");
-        boneSaw.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                boneSawMouseMoved(evt);
-            }
-        });
-        boneSaw.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boneSawMouseClicked(evt);
-            }
-        });
-        getContentPane().add(boneSaw);
-        boneSaw.setBounds(10, 430, 50, 150);
 
         background.setText("background");
         getContentPane().add(background);
@@ -125,9 +141,10 @@ public class JohnF extends javax.swing.JFrame {
         // System.out.println(evt.getKeyCode());
 
         //up key pressed
-        if (evt.getKeyCode() == 38) {
-            if (!checkCollision(health, 0, -10)) {
-                health.setLocation(health.getLocation().x, health.getLocation().y - 10);
+        if (evt.getKeyCode() == 32) {
+            if (boneSawClick == true) {
+                boneSawClick = false;
+                boneSaw.setLocation(10, 430);
             }
         }
         //down key pressed
@@ -151,41 +168,70 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void boneSawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseClicked
-        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-                new ImageIcon("JSumBoneSaw.png").getImage(),
-                new Point(0, 0), "custom cursor"));
-        
-        Cursor.E_RESIZE_CURSOR = (30, 30);
-        
+//        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+//                new ImageIcon("JSumBoneSaw.png").getImage(),
+//                new Point(0, 0), "custom cursor"));
+
+        boneSawClick = true;
     }//GEN-LAST:event_boneSawMouseClicked
 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
- 
+            
+//mx = evt.getX();
+//        my = evt.getY();
+//        if (boneSawClick == true) {
+//            boneSaw.setLocation((mx - 28), (my - 32));
+            System.out.println("BM");
+//        }
     }//GEN-LAST:event_boneSawMouseMoved
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        mx = evt.getX();
+        my = evt.getY();
+        if (boneSawClick == true) {
+            boneSaw.setLocation((mx - 28), (my - 32));
+            System.out.println("FM");
+        }
+    }//GEN-LAST:event_formMouseMoved
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        mx = evt.getX();
+        my = evt.getY();
+        if (boneSawClick == true) {
+            boneSaw.setLocation((mx - 28), (my - 32));
+            System.out.println("FD");
+        }
+    }//GEN-LAST:event_formMouseDragged
+
+    private void boneSawMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseDragged
+        mx = evt.getX();
+        my = evt.getY();
+        System.out.println("BD");
+        if (boneSawClick == true) {
+            boneSaw.setLocation((mx - 28), (my - 32));
+            System.out.println("BD");
+
+        }
+    }//GEN-LAST:event_boneSawMouseDragged
 
     /**
      * Creates new form NewJFrame
      */
-    public JohnF() {
-        initComponents();
-        //Initialize the label with the scaled image icon
-        myInitComponents(background);
-    }
-
-    //Initializes the labels with their images
+//Initializes the labels with their images
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-               
+
         //same as above, but in a condensed version
         try {
-            
+
             background.setIcon(new ImageIcon((ImageIO.read(new File("JSumBackground.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
             ribs.setIcon(new ImageIcon((ImageIO.read(new File("JSumRibs.png"))).getScaledInstance(ribs.getWidth(), ribs.getHeight(), Image.SCALE_SMOOTH)));
             cutBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox.getWidth(), cutBox.getHeight(), Image.SCALE_SMOOTH)));
             boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(JohnF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JohnF.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -206,13 +252,17 @@ public class JohnF extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JohnF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JohnF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JohnF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JohnF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JohnF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JohnF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JohnF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JohnF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
