@@ -9,11 +9,11 @@ package AlexPackage;
  *
  * @author alexander.rejep819
  */
-    public class DeathWish extends EnemiesClass {
+public class DeathWish extends EnemiesClass {
 
-        public DeathWish(int a, int b, int c){
-             health = a;
-        speed = b;
-        strength = c;
-        }
+    public DeathWish() {
+        health = 1;
+        speed = 3;
+        strength = 3;
     }
+}

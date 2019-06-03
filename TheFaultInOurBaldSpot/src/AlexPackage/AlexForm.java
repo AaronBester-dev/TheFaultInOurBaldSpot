@@ -1,10 +1,12 @@
 package AlexPackage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 import AlexPackage.EnemiesClass.*;
+import AlexPackage.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Component;
@@ -18,23 +20,32 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
 /**
  *
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame {
-    
+
     public int counter = 120;
-    Timer gameTimer  = new Timer(); 
+    Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
-            counter --;
+            counter--;
             timerLabel.setText(String.valueOf(counter));
             System.out.println("Seconds Passed: " + counter);
         }
     };
-  
+
+    ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
+    ArrayList<EnemiesClass> enemyLabels = new ArrayList<EnemiesClass>(0);
+
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -62,7 +73,7 @@ public class AlexForm extends javax.swing.JFrame {
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
             hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
-           // hellWallTop.setIcon(new ImageIcon((ImageIO.read(new File("hellWallTop.png"))).getScaledInstance(hellWallTop.getWidth(), hellWallTop.getHeight(), Image.SCALE_SMOOTH)));
+            // hellWallTop.setIcon(new ImageIcon((ImageIO.read(new File("hellWallTop.png"))).getScaledInstance(hellWallTop.getWidth(), hellWallTop.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,10 +162,20 @@ public class AlexForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
+        if (evt.getKeyCode() == 32) {
+            JLabel bullet = new JLabel();
+            bullet.setPreferredSize(new Dimension(10,10));
+            try {
+                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         if (evt.getKeyCode() == 38) {
             if (!checkCollision(tataPlane, 0, -15)) {
                 tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y - 15);
@@ -212,21 +233,30 @@ public class AlexForm extends javax.swing.JFrame {
         });
     }
 
-    public static void enemySpawning (int strength, int speed, int health) {
-     int spawn = (int)(Math.random()*20 +1);
-      if (spawn <=12 ) {
-          impSpawn(strength,speed,health);
-      }
+    public static void enemySpawning(int strength, int speed, int health) {
+        int spawn = (int) (Math.random() * 100 + 1);
+        if (spawn <= 30) {
+            impSpawn();
+        }
     }
-    
-    public static void impSpawn(int strength, int speed, int health){
-        strength = 1;
-        speed = 3;
-        health = 1;
-        Imp ImpClass;   
-        ImpClass = new Imp(health,speed, strength);
+
+    public static void impSpawn() {
+        Imp imp1 = new Imp();
+
     }
-    
+
+    public static void demonSpawn() {
+        Demon demon1 = new Demon();
+    }
+
+    public static void beholderSpawn() {
+        Beholder beholder1 = new Beholder();
+    }
+
+    public static void deathWishSpawn() {
+        DeathWish suicide1 = new DeathWish();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel hellWallBottom;

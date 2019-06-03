@@ -10,11 +10,11 @@ package AlexPackage;
  * @author alexander.rejep819
  */
 public class Imp extends EnemiesClass {
-    
 
-        public Imp(int a, int b, int c){
-             health = a;
-        speed = b;
-        strength = c;
-        }
+    public Imp() {
+        health = 1;
+        speed = 3;
+        strength = 1; 
+        picFile = "Impling";
+    }
 }

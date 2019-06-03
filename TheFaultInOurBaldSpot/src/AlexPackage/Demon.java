@@ -11,9 +11,9 @@ package AlexPackage;
  */
 public class Demon extends EnemiesClass {
 
-    public Demon (int a, int b, int c){
-             health = a;
-        speed = b;
-        strength = c;
+    public Demon (){
+        health = 3;
+        speed = 1;
+        strength = 2;
         }
     }
