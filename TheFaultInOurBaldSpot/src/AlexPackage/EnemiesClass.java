@@ -43,20 +43,5 @@ public class EnemiesClass {
     public void setStrength (int sT){
         strength = sT;
     }
-    
-    public class Imp extends EnemiesClass {
 
-    }
-
-    public class Demon extends EnemiesClass {
-
-    }
-
-    public class Beholder extends EnemiesClass {
-
-    }
-
-    public class DeathWishDemon extends EnemiesClass {
-
-    }
 }
