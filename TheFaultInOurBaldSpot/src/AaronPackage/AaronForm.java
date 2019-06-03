@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
-
+   
     
      private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -137,10 +137,12 @@ public class AaronForm extends javax.swing.JFrame {
     }//GEN-LAST:event_playerKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-       
+       int speed = 10;
+      long gravityTimer = -1;
         if (evt.getKeyCode() == 90) {
-            if (!checkCollision(player, 0, -100) && (checkCollision(player,0,+100)) ) {
+            if (!checkCollision(player, 0, -100) && (checkCollision(player,0,+ 10)) ) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
+                
             }
         }
         //down key pressed
