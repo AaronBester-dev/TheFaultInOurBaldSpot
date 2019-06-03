@@ -9,6 +9,11 @@ package AlexPackage;
  *
  * @author alexander.rejep819
  */
-public class Demon {
-    
-}
+public class Demon extends EnemiesClass {
+
+    public Demon (int a, int b, int c){
+             health = a;
+        speed = b;
+        strength = c;
+        }
+    }

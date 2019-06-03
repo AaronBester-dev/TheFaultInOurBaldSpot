@@ -4,6 +4,7 @@ package AlexPackage;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import AlexPackage.EnemiesClass.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Component;
@@ -222,7 +223,8 @@ public class AlexForm extends javax.swing.JFrame {
         strength = 1;
         speed = 3;
         health = 1;
-        EnemiesClass Imp = new EnemiesClass(health,speed, strength);   
+        Imp ImpClass;   
+        ImpClass = new Imp(health,speed, strength);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

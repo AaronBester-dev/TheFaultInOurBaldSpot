@@ -9,6 +9,12 @@ package AlexPackage;
  *
  * @author alexander.rejep819
  */
-public class Imp {
+public class Imp extends EnemiesClass {
     
+
+        public Imp(int a, int b, int c){
+             health = a;
+        speed = b;
+        strength = c;
+        }
 }

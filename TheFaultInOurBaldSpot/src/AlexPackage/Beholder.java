@@ -9,6 +9,12 @@ package AlexPackage;
  *
  * @author alexander.rejep819
  */
-public class Beholder {
-    
-}
+    public class Beholder extends EnemiesClass {
+
+        public Beholder(int a, int b, int c){
+             health = a;
+        speed = b;
+        strength = c;
+        }
+    }
+
