@@ -1,5 +1,8 @@
 package AaronPackage;
 
+import java.awt.Toolkit;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -13,8 +16,36 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingWorker;
 
+
+
+
 public class AaronForm extends javax.swing.JFrame {
-   
+ Toolkit gravityToolkit;
+    Timer gravityTimer;
+    
+     public void gravity(){
+ gravityToolkit = Toolkit.getDefaultToolkit();
+        gravityTimer = new Timer();
+        gravityTimer.schedule(new GravityTask(),
+                       0,        //initial delay
+                       1*1000);  //subsequent rate
+ }
+   class GravityTask extends TimerTask {
+	int numWarningBeeps = 3;
+
+        public void run() {
+	    if (numWarningBeeps > 0) {
+	           player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+		System.out.println("Beep!");
+		numWarningBeeps--;
+	    } else {
+	        gravityToolkit.beep(); 
+                System.out.println("Time's up!");
+	        gravityTimer.cancel(); //Not necessary because we call System.exit
+	       
+	    }
+        }
+    }
     
      private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -50,6 +81,7 @@ public class AaronForm extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         bottomFloor = new javax.swing.JLabel();
         player = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -70,20 +102,31 @@ public class AaronForm extends javax.swing.JFrame {
             }
         });
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
+        jLabel1.setText(resourceMap.getString("bullet.text")); // NOI18N
+        jLabel1.setName("bullet"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bottomFloor, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(311, 311, 311)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 349, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                 .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,7 +146,8 @@ public class AaronForm extends javax.swing.JFrame {
             return false;
         }
 }
-    
+ 
+
      public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
@@ -200,6 +244,7 @@ public class AaronForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AaronForm().setVisible(true);
+              
             }
         });
     }
@@ -207,6 +252,7 @@ public class AaronForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
     javax.swing.ButtonGroup buttonGroup1;
+    javax.swing.JLabel jLabel1;
     javax.swing.JLabel player;
     // End of variables declaration//GEN-END:variables
 }
