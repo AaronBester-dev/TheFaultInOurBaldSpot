@@ -167,51 +167,36 @@ public class JohnF extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
+    private void moveTool() {
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        if (boneSawClick == true) {
+            boneSaw.setLocation((mx - 28), (my - 32));       
+        }
+    }
+
     private void boneSawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseClicked
 //        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 //                new ImageIcon("JSumBoneSaw.png").getImage(),
 //                new Point(0, 0), "custom cursor"));
 
-        boneSawClick = true;
+        boneSawClick = true; 
     }//GEN-LAST:event_boneSawMouseClicked
 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
-            
-//mx = evt.getX();
-//        my = evt.getY();
-//        if (boneSawClick == true) {
-//            boneSaw.setLocation((mx - 28), (my - 32));
-            System.out.println("BM");
-//        }
+        moveTool();
     }//GEN-LAST:event_boneSawMouseMoved
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        mx = evt.getX();
-        my = evt.getY();
-        if (boneSawClick == true) {
-            boneSaw.setLocation((mx - 28), (my - 32));
-            System.out.println("FM");
-        }
+        moveTool();
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        mx = evt.getX();
-        my = evt.getY();
-        if (boneSawClick == true) {
-            boneSaw.setLocation((mx - 28), (my - 32));
-            System.out.println("FD");
-        }
+        moveTool();
     }//GEN-LAST:event_formMouseDragged
 
     private void boneSawMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseDragged
-        mx = evt.getX();
-        my = evt.getY();
-        System.out.println("BD");
-        if (boneSawClick == true) {
-            boneSaw.setLocation((mx - 28), (my - 32));
-            System.out.println("BD");
-
-        }
+        moveTool();
     }//GEN-LAST:event_boneSawMouseDragged
 
     /**
