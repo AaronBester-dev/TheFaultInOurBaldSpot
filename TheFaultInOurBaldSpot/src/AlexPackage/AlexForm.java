@@ -35,6 +35,9 @@ public class AlexForm extends javax.swing.JFrame {
 
     public int counter = 120;
     Timer gameTimer = new Timer();
+    
+    
+    
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
@@ -42,7 +45,28 @@ public class AlexForm extends javax.swing.JFrame {
             System.out.println("Seconds Passed: " + counter);
         }
     };
+    TimerTask Animate = new TimerTask() {
+        public void run() {
+            //System.out.println("MOVE");
+         try {
+            for(JLabel item:bullets)
+            {
+      
+                item.setLocation(item.getLocation().x, item.getLocation().y -2);
+            }
+            for (JLabel item:bullets){
+                if (item.getLocation().y <-20) {
+                    bullets.remove(item);
+                    System.out.println("REMOVED");
+                }
+            }
+         } catch(Exception e) {}
+           // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
+        }
+    };
 
+    
+    
     ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
     ArrayList<EnemiesClass> enemyLabels = new ArrayList<EnemiesClass>(0);
     ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
@@ -69,7 +93,7 @@ public class AlexForm extends javax.swing.JFrame {
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
-            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+            //backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
@@ -78,6 +102,10 @@ public class AlexForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+  
+    gameTimer.scheduleAtFixedRate(Animate,100, 10);
+    
+    
     }
 
     /**
@@ -168,7 +196,7 @@ public class AlexForm extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
-this.repaint();
+//this.repaint();
         
         //Try layeredPane layout instead of Null layout
         //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
@@ -204,14 +232,14 @@ this.repaint();
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(tataPlane, -15, 0)) {
-                tataPlane.setLocation(tataPlane.getLocation().x - 15, tataPlane.getLocation().y);
+            if (!checkCollision(tataPlane, -25, 0)) {
+                tataPlane.setLocation(tataPlane.getLocation().x - 25, tataPlane.getLocation().y);
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(tataPlane, 15, 0)) {
-                tataPlane.setLocation(tataPlane.getLocation().x + 15, tataPlane.getLocation().y);
+            if (!checkCollision(tataPlane, 25, 0)) {
+                tataPlane.setLocation(tataPlane.getLocation().x + 25, tataPlane.getLocation().y);
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -285,7 +313,8 @@ this.repaint();
             System.out.println("NO IMAGE");
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setComponentZOrder(bullet, 0);
+        //setComponentZOrder(bullet, 0);
+        bullets.add(bullet);
         System.out.println("Try performed");
         
     }
