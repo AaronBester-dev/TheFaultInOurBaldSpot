@@ -9,45 +9,20 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
-
-
-
 public class AaronForm extends javax.swing.JFrame {
- Toolkit gravityToolkit;
-    Timer gravityTimer;
-    
-     public void gravity(){
- gravityToolkit = Toolkit.getDefaultToolkit();
-        gravityTimer = new Timer();
-        gravityTimer.schedule(new GravityTask(),
-                       0,        //initial delay
-                       1*1000);  //subsequent rate
- }
-   class GravityTask extends TimerTask {
-	int numWarningBeeps = 3;
 
-        public void run() {
-	    if (numWarningBeeps > 0) {
-	           player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-		System.out.println("Beep!");
-		numWarningBeeps--;
-	    } else {
-	        gravityToolkit.beep(); 
-                System.out.println("Time's up!");
-	        gravityTimer.cancel(); //Not necessary because we call System.exit
-	       
-	    }
-        }
-    }
-    
-     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
+    ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
+
+    private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
@@ -59,14 +34,17 @@ public class AaronForm extends javax.swing.JFrame {
             return false;
         }
     }
-   
 
-  
-  
+    public void GravityTimer(){
+       
+        
+    
+    }
+    
     public AaronForm() {
         initComponents();
-        
-           myInitComponents(bottomFloor);
+
+        myInitComponents();
     }
 
     /**
@@ -81,7 +59,6 @@ public class AaronForm extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         bottomFloor = new javax.swing.JLabel();
         player = new javax.swing.JLabel();
-        bullet1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -101,10 +78,6 @@ public class AaronForm extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
-        bullet1.setText(resourceMap.getString("bullet1.text")); // NOI18N
-        bullet1.setName("bullet1"); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,86 +87,62 @@ public class AaronForm extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(578, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bullet1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(348, 348, 348))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(bullet1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addContainerGap(349, Short.MAX_VALUE)
                 .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bullet1.getAccessibleContext().setAccessibleName(resourceMap.getString("bullet1.AccessibleContext.accessibleName")); // NOI18N
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
- public boolean checkGround(javax.swing.JLabel _lbl, int _x, int _y){
-    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+// public boolean checkGround(javax.swing.JLabel _lbl, int _x, int _y){
+//    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+////also same width and height as original
+//        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+//
+////check if temporary rectangle intersect with wallLabel        
+//        if (rect.intersects(bottomFloor.getBounds())) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//}
 
-//check if temporary rectangle intersect with wallLabel        
-        if (rect.intersects(bottomFloor.getBounds())) {
-            return true;
-        } else {
-            return false;
-        }
-}
- 
-
-     public void myInitComponents(javax.swing.JLabel jLabel1) {
+    public void myInitComponents() {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
-        try {
-            img = ImageIO.read(new File("AaronFloor.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Create a temporary Image and scale it to the size of the label 
-        Image tempImg = img.getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(),
-                Image.SCALE_SMOOTH);
-        //Create and Image Icon from the new scaled image
-        ImageIcon imageIcon = new ImageIcon(tempImg);
-        //Set the label's icon property to the new icon
-        bottomFloor.setIcon(imageIcon);
 
-        
 //        same as above, but in a condensed version
         try {
             player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         try {
-            bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
     }
-  
-    
-    
+
+
     private void playerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_playerKeyPressed
-       
+
     }//GEN-LAST:event_playerKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-       int speed = 10;
-      long gravityTimer = -1;
+
+        if (evt.getKeyCode() == 88) {
+
+            bullet();
+        }
+
         if (evt.getKeyCode() == 90) {
-            if (!checkCollision(player, 0, -100) && (checkCollision(player,0,+ 10)) ) {
+            if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
-                
+
             }
         }
         //down key pressed
@@ -214,12 +163,10 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
-       
-        
+
+
     }//GEN-LAST:event_formKeyPressed
 
-   
-    
     /**
      * @param args the command line arguments
      */
@@ -251,14 +198,31 @@ public class AaronForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AaronForm().setVisible(true);
-              
+
             }
         });
     }
 
+    public void bullet() {
+        JLabel bullet1 = new JLabel();
+
+        System.out.println("Label Created");
+        getContentPane().add(bullet1);
+        bullet1.setBounds(player.getX() + 5, player.getWidth() + 30, 50, 100);
+
+        System.out.println("Bounds Set");
+        try {
+            bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setComponentZOrder(bullet1, 0);
+        System.out.println("Try performed");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
-    javax.swing.JLabel bullet1;
     javax.swing.ButtonGroup buttonGroup1;
     javax.swing.JLabel player;
     // End of variables declaration//GEN-END:variables
