@@ -18,15 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
-
-
-
 public class AaronForm extends javax.swing.JFrame {
-  ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
-    
-  
-    
-     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
+
+    ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
+
+    private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
@@ -38,14 +34,17 @@ public class AaronForm extends javax.swing.JFrame {
             return false;
         }
     }
-   
 
-  
-  
+    public void GravityTimer(){
+       
+        
+    
+    }
+    
     public AaronForm() {
         initComponents();
-        
-           myInitComponents();
+
+        myInitComponents();
     }
 
     /**
@@ -112,44 +111,38 @@ public class AaronForm extends javax.swing.JFrame {
 //            return false;
 //        }
 //}
- 
 
-     public void myInitComponents() {
+    public void myInitComponents() {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
-     
 
-        
 //        same as above, but in a condensed version
         try {
             player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
-                 bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
+            bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
-        
     }
-  
-    
-    
+
+
     private void playerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_playerKeyPressed
-       
+
     }//GEN-LAST:event_playerKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-     
-         if (evt.getKeyCode() == 88) {
-              
-          bullet();
+
+        if (evt.getKeyCode() == 88) {
+
+            bullet();
         }
-        
+
         if (evt.getKeyCode() == 90) {
-            if (!checkCollision(player, 0, -100) && (checkCollision(player,0,+ 10)) ) {
+            if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
-                
+
             }
         }
         //down key pressed
@@ -170,13 +163,10 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
-         
-        
+
+
     }//GEN-LAST:event_formKeyPressed
 
-     
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -208,17 +198,17 @@ public class AaronForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AaronForm().setVisible(true);
-              
+
             }
         });
     }
-    
-     public void bullet() {
+
+    public void bullet() {
         JLabel bullet1 = new JLabel();
 
         System.out.println("Label Created");
         getContentPane().add(bullet1);
-        bullet1.setBounds(player.getX()+5, player.getWidth()+30,  50, 100);
+        bullet1.setBounds(player.getX() + 5, player.getWidth() + 30, 50, 100);
 
         System.out.println("Bounds Set");
         try {
@@ -227,7 +217,7 @@ public class AaronForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setComponentZOrder(bullet1,0 );
+        setComponentZOrder(bullet1, 0);
         System.out.println("Try performed");
     }
 
