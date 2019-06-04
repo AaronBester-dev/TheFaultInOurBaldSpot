@@ -191,25 +191,25 @@ TimerTask task = new TimerTask(){
 
         //up key pressed (w)
         if (evt.getKeyCode() == 87) {
-            if (!checkCollision(user, 0, -10)) {
+            if (!checkCollision(user, 0, -30)) {
                 user.setLocation(user.getLocation().x, user.getLocation().y - 30);
             }
         }
         //down key pressed(s)
         if (evt.getKeyCode() == 83) {
-            if (!checkCollision(user, 0, 10)) {
+            if (!checkCollision(user, 0, 30)) {
                 user.setLocation(user.getLocation().x, user.getLocation().y + 30);
             }
         }
         //left key pressed(a)
         if (evt.getKeyCode() == 65) {
-            if (!checkCollision(user, -10, 0)) {
+            if (!checkCollision(user, -30, 0)) {
                 user.setLocation(user.getLocation().x - 30, user.getLocation().y);
             }
         }
         //right key pressed(d)
         if (evt.getKeyCode() == 68) {
-            if (!checkCollision(user, 10, 0)) {
+            if (!checkCollision(user, 30, 0)) {
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }

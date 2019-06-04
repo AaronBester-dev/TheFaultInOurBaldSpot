@@ -188,7 +188,6 @@ public class AlexForm extends javax.swing.JFrame {
         backGround.setName("Background"); // NOI18N
         getContentPane().add(backGround);
         backGround.setBounds(0, 0, 900, 1000);
-        backGround.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
