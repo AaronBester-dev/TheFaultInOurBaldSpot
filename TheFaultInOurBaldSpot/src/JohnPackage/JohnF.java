@@ -97,6 +97,12 @@ public class JohnF extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boneSawMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                boneSawMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                boneSawMouseReleased(evt);
+            }
         });
         getContentPane().add(boneSaw);
         boneSaw.setBounds(10, 430, 50, 150);
@@ -205,14 +211,12 @@ public class JohnF extends javax.swing.JFrame {
 //        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 //                new ImageIcon("JSumBoneSaw.png").getImage(),
 //                new Point(0, 0), "custom cursor"));
-
         boneSawClick = true;
-//        int counter = 0;
-//        counter++;
-//        if (counter > 0) {
-//            injured();
-//            System.out.println("hello");
-//        }
+        int counter = 0;
+        counter++;
+        if (counter > 1) {
+            injured();
+        }
     }//GEN-LAST:event_boneSawMouseClicked
 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
@@ -232,40 +236,48 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_boneSawMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if (boneSawClick == true) {
-            injured();
-            System.out.println("hello");
-        }
-            
+
     }//GEN-LAST:event_formMouseClicked
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
-//        if (cutClick = true) {
-//            injured();
-//        }
+        if (cutClick == true) {
+            injured();
+        }
     }//GEN-LAST:event_cutBoxMouseExited
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
-        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
 
-        if (mx > 410 & mx < 440 & my < 310 & my > 300) {
-            cutClick = true;
-        }
-        if (boneSawClick == true) {
-            injured();
-        }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        if (boneSawClick == true) {
-            if (mx > 410 & mx < 440 & my > 380 & my < 400) {
-            } else {
-                injured();
-            }
-        }
 
     }//GEN-LAST:event_formMouseReleased
+
+    private void boneSawMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMousePressed
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+            System.out.println("Hello");
+        if (mx > 400 & mx < 450 & my < 350 & my > 290) {
+            cutClick = true;
+            System.out.println("Hellooooo");
+        }
+        else if (boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_boneSawMousePressed
+
+    private void boneSawMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseReleased
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        System.out.println("Bone Saw released");
+         System.out.println(cutClick);
+        if (cutClick == true ) {
+            if (mx > 400 & mx < 450 & my > 360 & my < 500 ) {
+                System.out.println("Awesome");
+                cutBox.hide();
+            }
+        }
+    }//GEN-LAST:event_boneSawMouseReleased
 
     /**
      * Creates new form NewJFrame
