@@ -45,6 +45,7 @@ public class AlexForm extends javax.swing.JFrame {
 
     ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
     ArrayList<EnemiesClass> enemyLabels = new ArrayList<EnemiesClass>(0);
+    ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -68,8 +69,8 @@ public class AlexForm extends javax.swing.JFrame {
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
-            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+           backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
             hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
@@ -166,14 +167,26 @@ public class AlexForm extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
-        if (evt.getKeyCode() == 32) {
+        
+        //Try layeredPane layout instead of Null layout
+        //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
+        
+        if (evt.getKeyCode() == 75) {
             JLabel bullet = new JLabel();
-            bullet.setPreferredSize(new Dimension(10,10));
-            try {
+              
+            System.out.println("Label Created");
+            bullet.setBounds(tataPlane.getX()+tataPlane.getWidth()/2, tataPlane.getY()-10, 5, 10);
+           
+            System.out.println("Bounds Set");
+          try {
                 bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
+                System.out.println("NO IMAGE");
                 Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+  getContentPane().add(bullet);
+    bullet.repaint();
+            System.out.println("Try performed");
         }
 
         if (evt.getKeyCode() == 38) {
