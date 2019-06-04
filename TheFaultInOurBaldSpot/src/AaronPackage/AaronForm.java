@@ -9,11 +9,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 
@@ -22,6 +24,8 @@ import javax.swing.SwingWorker;
 public class AaronForm extends javax.swing.JFrame {
  Toolkit gravityToolkit;
     Timer gravityTimer;
+    
+    ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
     
      public void gravity(){
  gravityToolkit = Toolkit.getDefaultToolkit();
@@ -81,7 +85,6 @@ public class AaronForm extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         bottomFloor = new javax.swing.JLabel();
         player = new javax.swing.JLabel();
-        bullet1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -101,10 +104,6 @@ public class AaronForm extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
-        bullet1.setText(resourceMap.getString("bullet1.text")); // NOI18N
-        bullet1.setName("bullet1"); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,23 +113,15 @@ public class AaronForm extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(578, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bullet1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(348, 348, 348))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(bullet1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addContainerGap(349, Short.MAX_VALUE)
                 .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        bullet1.getAccessibleContext().setAccessibleName(resourceMap.getString("bullet1.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,11 +164,7 @@ public class AaronForm extends javax.swing.JFrame {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         try {
-            bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         
     }
   
@@ -214,7 +201,22 @@ public class AaronForm extends javax.swing.JFrame {
                 player.setLocation(player.getLocation().x + 10, player.getLocation().y);
             }
         }
-       
+          if (evt.getKeyCode() == 88) {
+               JLabel bullet1 = new JLabel();
+              
+            System.out.println("Label Created");
+            bullet1.setBounds(player.getX()+5+player.getWidth(), player.getY()-10, 5, 10);
+           
+            System.out.println("Bounds Set");
+          try {
+                bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                 getContentPane().add(bullet1);
+    bullet1.repaint();
+            }
+        }
         
     }//GEN-LAST:event_formKeyPressed
 
@@ -258,7 +260,6 @@ public class AaronForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
-    javax.swing.JLabel bullet1;
     javax.swing.ButtonGroup buttonGroup1;
     javax.swing.JLabel player;
     // End of variables declaration//GEN-END:variables
