@@ -240,7 +240,7 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
-        if (cutClick == true) {
+        if (cutClick == true & boneSawClick == true) {
             injured();
         }
     }//GEN-LAST:event_cutBoxMouseExited
