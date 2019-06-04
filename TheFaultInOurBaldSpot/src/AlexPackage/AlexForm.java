@@ -167,7 +167,8 @@ public class AlexForm extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
-
+this.repaint();
+        
         //Try layeredPane layout instead of Null layout
         //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
         if (evt.getKeyCode() == 75) {
@@ -275,8 +276,7 @@ public class AlexForm extends javax.swing.JFrame {
 
         System.out.println("Label Created");
         getContentPane().add(bullet);
-        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
-
+        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 8, 12);
         System.out.println("Bounds Set");
         try {
             bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
@@ -286,6 +286,7 @@ public class AlexForm extends javax.swing.JFrame {
         }
         setComponentZOrder(bullet, 0);
         System.out.println("Try performed");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

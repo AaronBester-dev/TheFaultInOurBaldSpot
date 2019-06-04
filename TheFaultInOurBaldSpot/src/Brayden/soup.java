@@ -14,13 +14,24 @@ public class soup {
 private boolean potato, tomato, mushroom;
 private String photoCode;
     
-public soup (boolean uPotato, boolean uTomato, boolean uMushroom, String uPhotoCode){
-  potato  = uPotato;
-  tomato = uTomato;
-  mushroom = uMushroom;
+public soup (String uPhotoCode){
+  potato  = randomB();
+  tomato = randomB();
+  mushroom = randomB();
   photoCode = uPhotoCode;  
 }
+public boolean randomB(){
+int numOne = (int)(Math.random() * 2 + 1);
+    if (numOne == 1) {
+        return true;
+    } else {
+        return false;
     
+}
+    
+    
+
+}
     
     
 }
