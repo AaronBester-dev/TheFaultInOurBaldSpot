@@ -52,7 +52,7 @@ public class AlexForm extends javax.swing.JFrame {
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //check if temporary rectangle intersect with wallLabel        
-        if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds()) || rect.intersects(hellWallBottom.getBounds())) {
+        if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds()) || rect.intersects(hellWallBottom.getBounds()) || rect.intersects(hellWallTop.getBounds())) {
             return true;
         } else {
             return false;
@@ -69,8 +69,8 @@ public class AlexForm extends javax.swing.JFrame {
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
-           backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
             hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
@@ -146,7 +146,7 @@ public class AlexForm extends javax.swing.JFrame {
         hellWallTop.setText(resourceMap.getString("hellWallTop.text")); // NOI18N
         hellWallTop.setName("hellWallTop"); // NOI18N
         getContentPane().add(hellWallTop);
-        hellWallTop.setBounds(80, 0, 740, 80);
+        hellWallTop.setBounds(0, 0, 900, 60);
         hellWallTop.getAccessibleContext().setAccessibleName(resourceMap.getString("hellWallTop.AccessibleContext.accessibleName")); // NOI18N
 
         hellWallBottom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,6 +160,7 @@ public class AlexForm extends javax.swing.JFrame {
         backGround.setName("Background"); // NOI18N
         getContentPane().add(backGround);
         backGround.setBounds(0, 0, 900, 1000);
+        backGround.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,26 +168,26 @@ public class AlexForm extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
-        
+
         //Try layeredPane layout instead of Null layout
         //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
-        
         if (evt.getKeyCode() == 75) {
-            JLabel bullet = new JLabel();
-              
-            System.out.println("Label Created");
-            bullet.setBounds(tataPlane.getX()+tataPlane.getWidth()/2, tataPlane.getY()-10, 5, 10);
-           
-            System.out.println("Bounds Set");
-          try {
-                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                System.out.println("NO IMAGE");
-                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-  getContentPane().add(bullet);
-    bullet.repaint();
-            System.out.println("Try performed");
+//            JLabel bullet = new JLabel();
+//
+//            System.out.println("Label Created");
+//            getContentPane().add(bullet);
+//            bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
+//
+//            System.out.println("Bounds Set");
+//            try {
+//                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
+//            } catch (IOException ex) {
+//                System.out.println("NO IMAGE");
+//                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            setComponentZOrder(bullet, 0);
+//            System.out.println("Try performed");
+            bullet();
         }
 
         if (evt.getKeyCode() == 38) {
@@ -268,6 +269,24 @@ public class AlexForm extends javax.swing.JFrame {
 
     public static void deathWishSpawn() {
         DeathWish suicide1 = new DeathWish();
+    }
+
+    public void bullet() {
+        JLabel bullet = new JLabel();
+
+        System.out.println("Label Created");
+        getContentPane().add(bullet);
+        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
+
+        System.out.println("Bounds Set");
+        try {
+            bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setComponentZOrder(bullet, 0);
+        System.out.println("Try performed");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
