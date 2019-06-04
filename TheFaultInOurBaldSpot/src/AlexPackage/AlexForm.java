@@ -67,8 +67,8 @@ public class AlexForm extends javax.swing.JFrame {
 
     
     
-    ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
-    ArrayList<EnemiesClass> enemyLabels = new ArrayList<EnemiesClass>(0);
+    static ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
+   static  ArrayList<JLabel> enemyLabels = new ArrayList<JLabel>(0);
     ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
@@ -93,7 +93,7 @@ public class AlexForm extends javax.swing.JFrame {
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
-            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+           // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
@@ -273,18 +273,29 @@ public class AlexForm extends javax.swing.JFrame {
                 new AlexForm().setVisible(true);
             }
         });
+      
     }
 
-    public static void enemySpawning(int strength, int speed, int health) {
+    public void enemySpawning() {
         int spawn = (int) (Math.random() * 100 + 1);
         if (spawn <= 30) {
-            impSpawn();
+            impSpawn(enemyStats, enemyLabels);
         }
     }
 
-    public static void impSpawn() {
+    public  void impSpawn(ArrayList enemyStats, ArrayList enemyLabels) {
         Imp imp1 = new Imp();
-
+        enemyStats.add(imp1);
+        JLabel imp = new JLabel();
+        getContentPane().add(imp);
+        imp.setBounds(2,40, 40, 40);
+         try {
+            imp.setIcon(new ImageIcon((ImageIO.read(new File("Impling.png"))).getScaledInstance(imp.getWidth(), imp.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        enemyLabels.add(imp);   
     }
 
     public static void demonSpawn() {
@@ -312,8 +323,8 @@ public class AlexForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setComponentZOrder(bullet, 0);
-        getContentPane().repaint();
+        //setComponentZOrder(bullet, 0);
+       // getContentPane().repaint();
         bullets.add(bullet);
         System.out.println("Try performed");
         
