@@ -93,7 +93,7 @@ public class AlexForm extends javax.swing.JFrame {
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
-            //backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+            backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
@@ -312,7 +312,8 @@ public class AlexForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //setComponentZOrder(bullet, 0);
+        setComponentZOrder(bullet, 0);
+        getContentPane().repaint();
         bullets.add(bullet);
         System.out.println("Try performed");
         
