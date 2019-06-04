@@ -276,8 +276,7 @@ public class AlexForm extends javax.swing.JFrame {
 
         System.out.println("Label Created");
         getContentPane().add(bullet);
-        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
-
+        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 8, 12);
         System.out.println("Bounds Set");
         try {
             bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
@@ -287,6 +286,7 @@ public class AlexForm extends javax.swing.JFrame {
         }
         setComponentZOrder(bullet, 0);
         System.out.println("Try performed");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
