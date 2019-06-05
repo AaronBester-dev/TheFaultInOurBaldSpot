@@ -20,6 +20,19 @@ import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
 
+   Timer aaronGameTimer = new Timer();
+   
+   TimerTask gravity = new TimerTask(){
+       public void run(){
+           
+         if ((!checkCollision(player, 0, +10))) {   
+          player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+       }
+       }
+   };
+  
+   
+   
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
@@ -68,34 +81,17 @@ public class AaronForm extends javax.swing.JFrame {
                 formKeyPressed(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         bottomFloor.setName("bottomFloor"); // NOI18N
+        getContentPane().add(bottomFloor);
+        bottomFloor.setBounds(0, 542, 772, 70);
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
+        player.setText(resourceMap.getString("player.text")); // NOI18N
         player.setName("player"); // NOI18N
-        player.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                playerKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bottomFloor, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(578, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(349, Short.MAX_VALUE)
-                .addComponent(player, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bottomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(player);
+        player.setBounds(86, 338, 115, 198);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,21 +124,18 @@ public class AaronForm extends javax.swing.JFrame {
     }
 
 
-    private void playerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_playerKeyPressed
-
-    }//GEN-LAST:event_playerKeyPressed
-
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
         if (evt.getKeyCode() == 88) {
-
+  
             bullet();
+           
         }
 
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
-
+aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
             }
         }
         //down key pressed
@@ -217,8 +210,10 @@ public class AaronForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setComponentZOrder(bullet1, 0);
+      //  setComponentZOrder(bullet1, 0);
         System.out.println("Try performed");
+        staplebullets.add(bullet1);
+         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
