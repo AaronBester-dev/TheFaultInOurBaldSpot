@@ -20,6 +20,19 @@ import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
 
+   Timer aaronGameTimer = new Timer();
+   
+   TimerTask gravity = new TimerTask(){
+       public void run(){
+           
+         if ((!checkCollision(player, 0, +10))) {   
+          player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+       }
+       }
+   };
+  
+   
+   
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
@@ -122,7 +135,7 @@ public class AaronForm extends javax.swing.JFrame {
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
-
+aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
             }
         }
         //down key pressed
