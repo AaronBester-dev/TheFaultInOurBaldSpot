@@ -17,6 +17,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,7 +30,44 @@ public class JohnF extends javax.swing.JFrame {
     int mx, my;
     boolean boneSawClick = false;
     boolean cutClick = false;
+    boolean cut1 = false;
     int healthValue = 100;
+    
+    
+ 
+    
+    
+    private void injured() {
+        Timer injuredTimer = new Timer();
+        TimerTask stopInjured = new TimerTask() {
+        public void run() {
+                  hurt.setVisible(false);
+//            try {
+//                hurt.setVisible(false);
+//               
+//               // injuredTimer.wait(0);
+//            } catch (InterruptedException ex) {
+//                //Logger.getLogger(JohnF.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+           
+        }
+        
+    };
+        
+  injuredTimer.schedule(stopInjured, 1000);
+  
+        hurt.show();
+        System.out.println("injured");
+        healthValue = healthValue - 5;
+        healthBar.setValue(healthValue);
+    }   
+    
+    
+    
+    
+    
+    
+    
     
     public JohnF() {
         initComponents();
@@ -56,6 +95,7 @@ public class JohnF extends javax.swing.JFrame {
         lungs = new javax.swing.JLabel();
         ribs = new javax.swing.JLabel();
         heart = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -156,6 +196,11 @@ public class JohnF extends javax.swing.JFrame {
         getContentPane().add(heart);
         heart.setBounds(990, 80, 70, 70);
 
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("BONE SAW");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(5, 580, 70, 16);
+
         background.setText("background");
         getContentPane().add(background);
         background.setBounds(0, 0, 1080, 720);
@@ -217,20 +262,22 @@ public class JohnF extends javax.swing.JFrame {
         }
     }
 
-    private void injured() {
-        hurt.show();
-        System.out.println("injured");
-        healthValue = healthValue - 5;
-        healthBar.setValue(healthValue);
-    }
+    
+    
+    
+    
+   
+    
+    
+    
 
     private void boneSawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseClicked
 //        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 //                new ImageIcon("JSumBoneSaw.png").getImage(),
 //                new Point(0, 0), "custom cursor"));
         boneSawClick = true;
-        int counter = 0;
-        counter++;
+//        int counter = 0;
+//        counter++;
     }//GEN-LAST:event_boneSawMouseClicked
 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
@@ -250,10 +297,10 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_boneSawMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-       mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
-       my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        
-       System.out.println(mx + ", " + my);
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
+        System.out.println(mx + ", " + my);
     }//GEN-LAST:event_formMouseClicked
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
@@ -264,14 +311,11 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_cutBoxMouseExited
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
- mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-            System.out.println("Hello");
         if (mx > 433 & mx < 449 & my < 340 & my > 320) {
             cutClick = true;
-            System.out.println("Hellooooo");
-        }
-        else if (boneSawClick == true) {
+        } else if (boneSawClick == true) {
             injured();
         }
     }//GEN-LAST:event_formMousePressed
@@ -279,13 +323,14 @@ public class JohnF extends javax.swing.JFrame {
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        System.out.println("Bone Saw released");
-        System.out.println(cutClick);
         if (cutClick == true) {
-            if (mx > 420 & mx < 440 & my > 410 & my < 430) {
+            if (mx > 433 & mx < 449 & my > 410 & my < 430) {
                 System.out.println("Awesome");
-                System.out.println("Release");
+                cut1 = true;
                 cutBox.hide();
+            } else {
+                injured();
+                cutClick = false;
             }
         }
     }//GEN-LAST:event_formMouseReleased
@@ -295,11 +340,11 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_boneSawMousePressed
 
     private void boneSawMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseReleased
-        
+
     }//GEN-LAST:event_boneSawMouseReleased
 
     private void cutBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutBoxFocusLost
-     
+
     }//GEN-LAST:event_cutBoxFocusLost
 
     private void cutBoxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseMoved
@@ -381,6 +426,7 @@ public class JohnF extends javax.swing.JFrame {
     private javax.swing.JProgressBar healthBar;
     private javax.swing.JLabel heart;
     private javax.swing.JLabel hurt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lungs;
     private javax.swing.JLabel ribs;
     private javax.swing.JLabel time;
