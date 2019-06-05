@@ -22,6 +22,24 @@ public class AaronForm extends javax.swing.JFrame {
 
    Timer aaronGameTimer = new Timer();
    
+   TimerTask bulletMovement = new TimerTask(){
+     public void run(){
+           
+          try {
+            for(JLabel item:staplebullets)
+            {
+      
+                item.setLocation(item.getLocation().x + 20, item.getLocation().y);
+            }
+            for (JLabel item:staplebullets){
+                if (item.getLocation().y <-20) {
+                    staplebullets.remove(item);
+                    System.out.println("REMOVED");
+                }
+            }
+         } catch(Exception e) {}
+       }
+};
    TimerTask gravity = new TimerTask(){
        public void run(){
            
@@ -75,10 +93,14 @@ public class AaronForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -126,11 +148,7 @@ public class AaronForm extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
-        if (evt.getKeyCode() == 88) {
-  
-            bullet();
-           
-        }
+      
 
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
@@ -159,6 +177,15 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
 
 
     }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+         if (evt.getKeyCode() == 88) {
+  
+            bullet();
+            aaronGameTimer.scheduleAtFixedRate(bulletMovement,100,10);
+           
+        }
+    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
@@ -201,7 +228,7 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
 
         System.out.println("Label Created");
         getContentPane().add(bullet1);
-        bullet1.setBounds(player.getX() + 5, player.getWidth() + 30, 50, 100);
+        bullet1.setBounds(player.getX() + player.getWidth() + 10, player.getY(), 50, 100);
 
         System.out.println("Bounds Set");
         try {
