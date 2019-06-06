@@ -15,5 +15,6 @@ public class Demon extends EnemiesClass {
         health = 3;
         speed = 1;
         strength = 2;
+        height =3;
         }
     }

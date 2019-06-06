@@ -11,15 +11,8 @@ package AlexPackage;
  */
 public class EnemiesClass {
 
-    int health, speed, strength;
+    int health, speed, strength, height;
     String picFile, soundFile; 
-
-//    public EnemiesClass(int hP, int sP, int sT) {
-//        health = hP;
-//        speed = sP;
-//        strength = sT;
-//        // add gets and sets for health speed and strength
-//    }
 
     public int getHealth() {
         return health;
@@ -44,5 +37,12 @@ public class EnemiesClass {
     public void setStrength (int sT){
         strength = sT;
     }
+   
+       public int getHeight() {
+        return height;
+    }
 
+    public void setHeight(int hT){
+        height = hT;
+    }    
 }
