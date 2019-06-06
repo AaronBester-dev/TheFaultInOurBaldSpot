@@ -7,7 +7,9 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,7 +54,12 @@ public class AaronForm extends javax.swing.JFrame {
    
    
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
+ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
+ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
 
+
+    
+    
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -65,18 +72,44 @@ public class AaronForm extends javax.swing.JFrame {
             return false;
         }
     }
+    
+    
 
-    public void GravityTimer(){
-       
-        
     
-    }
-    
+   
     public AaronForm() {
         initComponents();
 
         myInitComponents();
     }
+   
+    public static void readLevelFile(ArrayList numPsalms, ArrayList wordPsalms) throws IOException {
+        //Initilizises a string varibable that stores the line the program is currently reading
+        String myLine;
+        BufferedReader readFile = new BufferedReader(new FileReader("AaronsLevelFile.txt"));
+        //Do statement ensures that the program only stops reading the file when it reaches a blank line
+        do {
+            //Stores the line that the program is currently looking at as the variable myLine
+            myLine = readFile.readLine();
+
+//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
+            if (myLine == null) {
+                numPsalms.remove(myLine);
+
+                break;
+            }
+            //Adds the psalm number to the number psalms array
+            numPsalms.add(myLine);
+            myLine = readFile.readLine();
+            //Adds the psalm words to the word psalms array
+            wordPsalms.add(myLine);
+
+            
+        } while (true);
+//Closez the file to ensure there is no complications
+        readFile.close();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,6 +274,11 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
         System.out.println("Try performed");
         staplebullets.add(bullet1);
          
+    }
+    
+    public void spikeCreator(){
+        Spikes spike = new Spikes();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
