@@ -58,6 +58,7 @@ ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
 ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
 
 
+
     
     
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
