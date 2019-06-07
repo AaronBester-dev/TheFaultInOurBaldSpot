@@ -41,7 +41,7 @@ public class AlexForm extends javax.swing.JFrame {
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
             if (counter == 115) {
-                gameTimer.scheduleAtFixedRate(EnemyAnimation, 300, 300);
+                gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
             }
         }
     };
@@ -49,7 +49,9 @@ public class AlexForm extends javax.swing.JFrame {
         public void run() {
             //System.out.println("MOVE");
             try {
+                
                 for (JLabel item : bullets) {
+                    
                     item.setLocation(item.getLocation().x, item.getLocation().y - 5);
                 }
                 for (JLabel item : bullets) {
@@ -58,34 +60,40 @@ public class AlexForm extends javax.swing.JFrame {
                         System.out.println("REMOVED");
                     }
                 }
-               for( int i =0;  i < enemyLabels1.length-1; i++ ){
+               for( int i =0;  i < enemyLabels1.length; i++ ){
                    if (i == 0){
                        for (JLabel item: impLabels){
-                           item.setLocation(item.getLocation().x +5, item.getLocation().y);
+                            if(item.getLocation().x >=100 && item.getLocation().y == 100) {
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
+                           }                          
+                           if (item.getLocation().x == 700 && item.getLocation().y >= 100){
+                           item.setLocation(item.getLocation().x, item.getLocation().y+2);  
+                           }
+                           if (item.getLocation().x <= 700 && item.getLocation().y == 300){
+                           item.setLocation(item.getLocation().x-2, item.getLocation().y);  
+                           }
+                           if (item.getLocation().x == 100 && item.getLocation().y <= 300){
+                           item.setLocation(item.getLocation().x, item.getLocation().y-2);  
+                           }
+                          
                        }
                    }
                      if (i == 1){
                        for (JLabel item: demonLabels){
-                           item.setLocation(item.getLocation().x +5, item.getLocation().y);
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
                        }
                    }
                     if (i == 2){
                        for (JLabel item: beholderLabels){
-                           item.setLocation(item.getLocation().x +5, item.getLocation().y);
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
                        }
                    }
                       if (i == 3){
                        for (JLabel item: deathWishLabels){
-                           item.setLocation(item.getLocation().x +5, item.getLocation().y);
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
                        }
                    }
                }
-//                for (ArrayList<JLabel> item : enemyLabels1) {
-//                    for (JLabel otherItem: item){
-//                    otherItem.setLocation(otherItem.getLocation().x+5, otherItem.getLocation().y);
-//                    }
-//                        
-//                    }
                 
             }
         catch(Exception e) {}
@@ -393,7 +401,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
         impStats.add(imp1);
         JLabel imp = new JLabel();
         getContentPane().add(imp);
-        imp.setBounds(50,50, 40, 40);
+        imp.setBounds(100,imp1.getHeight()*50, 40, 40);
          try {
             imp.setIcon(new ImageIcon((ImageIO.read(new File("Impling.png"))).getScaledInstance(imp.getWidth(), imp.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -407,7 +415,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
         demonStats.add(demon1);
         JLabel demon = new JLabel();
         getContentPane().add(demon);
-        demon.setBounds(150,50, 120, 80);
+        demon.setBounds(20, demon1.getHeight()*50, 120, 80);
          try {
             demon.setIcon(new ImageIcon((ImageIO.read(new File("Dmon.png"))).getScaledInstance(demon.getWidth(), demon.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class  .getName()).log(Level.SEVERE, null, ex);
@@ -422,7 +430,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
         beholderStats.add(beholder1);
         JLabel beholder = new JLabel();
         getContentPane().add(beholder);
-        beholder.setBounds(250,50, 80, 80);
+        beholder.setBounds(20, beholder1.getHeight()*50, 80, 80);
          try {
             beholder.setIcon(new ImageIcon((ImageIO.read(new File("Beholder.png"))).getScaledInstance(beholder.getWidth(), beholder.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) { System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class  .getName()).log(Level.SEVERE, null, ex);}
@@ -435,7 +443,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
           deathWishStats.add(suicide1);
         JLabel suicide = new JLabel();
         getContentPane().add(suicide);
-        suicide.setBounds(400,50, 50, 50);
+        suicide.setBounds(20, suicide1.getHeight()*50, 50, 50);
          try {
             suicide.setIcon(new ImageIcon((ImageIO.read(new File("uicide.png"))).getScaledInstance(suicide.getWidth(), suicide.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
