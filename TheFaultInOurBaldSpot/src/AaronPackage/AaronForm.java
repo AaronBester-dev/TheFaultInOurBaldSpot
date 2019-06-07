@@ -56,9 +56,10 @@ public class AaronForm extends javax.swing.JFrame {
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
 ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
 ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
-
-
-
+ ArrayList<String> block1 = new ArrayList<String>(0);
+ArrayList<String> block2 = new ArrayList<String>(0);
+ArrayList<String> spike1 = new ArrayList<String>(0);
+ArrayList<String> spike2 = new ArrayList<String>(0);
     
     
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
@@ -83,33 +84,19 @@ ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
 
         myInitComponents();
     }
+//       public static boolean passageSearch(ArrayList numPsalms, String psalmNumber) {
+//        //For statement checks each item in the number psalm array
+//        for (k = 0; k < numPsalms.size(); k++) {
+//            //If statement checks if the item in the numPsalms array is equal to the number given by the user then returns true 
+//            if (numPsalms.get(k).equals(psalmNumber)) {
+//                return true;
+//            }
+//        }
+//        //Returns false if the user doesnt input a correct psalm number
+//        return false;
+//    }
    
-    public static void readLevelFile(ArrayList numPsalms, ArrayList wordPsalms) throws IOException {
-        //Initilizises a string varibable that stores the line the program is currently reading
-        String myLine;
-        BufferedReader readFile = new BufferedReader(new FileReader("AaronsLevelFile.txt"));
-        //Do statement ensures that the program only stops reading the file when it reaches a blank line
-        do {
-            //Stores the line that the program is currently looking at as the variable myLine
-            myLine = readFile.readLine();
-
-//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
-            if (myLine == null) {
-                numPsalms.remove(myLine);
-
-                break;
-            }
-            //Adds the psalm number to the number psalms array
-            numPsalms.add(myLine);
-            myLine = readFile.readLine();
-            //Adds the psalm words to the word psalms array
-            wordPsalms.add(myLine);
-
-            
-        } while (true);
-//Closez the file to ensure there is no complications
-        readFile.close();
-    }
+  
 
 
     /**
@@ -224,35 +211,13 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String args[])  {
+     
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+             
                 new AaronForm().setVisible(true);
-
+//    readLevelFile(block1);
             }
         });
     }
@@ -276,11 +241,33 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
         staplebullets.add(bullet1);
          
     }
+      public static void readLevelFile(ArrayList block1) throws IOException {
+        //Initilizises a string varibable that stores the line the program is currently reading
+        String myLine;
+        BufferedReader readFile = new BufferedReader(new FileReader("AaronsLevelFile.txt"));
+        //Do statement ensures that the program only stops reading the file when it reaches a blank line
+        do {
+            //Stores the line that the program is currently looking at as the variable myLine
+            myLine = readFile.readLine();
+ String substring = myLine;
+//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
+            if (myLine == ",") {
+substring = myLine.substring(0 ,myLine.length() -1 );
+
+block1.add(substring);
+             
+            }
+            if(myLine ==null){
+                break;
+            }
+   
     
-    public void spikeCreator(){
-        Spikes spike = new Spikes();
-        
+        } while (true);
+//Closez the file to ensure there is no complications
+        readFile.close();
     }
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
