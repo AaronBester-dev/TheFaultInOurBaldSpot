@@ -36,7 +36,9 @@ public class JohnF extends javax.swing.JFrame {
     boolean cutClick5 = false;
     boolean cutClick6 = false;
     int healthValue = 100;
-
+    int counter = 0;
+    int gameCounter = 120;
+    
     private void injured() {
         Timer injuredTimer = new Timer();
         TimerTask stopInjured = new TimerTask() {
@@ -53,6 +55,7 @@ public class JohnF extends javax.swing.JFrame {
     }
 
     private void success() {
+        counter++;
         Timer cutTimer = new Timer();
         TimerTask stopCut = new TimerTask() {
             public void run() {
@@ -61,7 +64,21 @@ public class JohnF extends javax.swing.JFrame {
         };
         cutTimer.schedule(stopCut, 500);
         cut.setVisible(true);
+        if (counter == 6) {
+            ribs.setVisible(false);
+        }
     }
+    public void gameCounter() {
+    Timer gameTimer = new Timer();
+    TimerTask stopGame = new TimerTask() {
+            public void run() {
+                time.setText(String.valueOf(gameCounter));
+            }
+        };
+    gameTimer.scheduleAtFixedRate(stopGame, 1000, ERROR);
+    gameCounter--;
+    }
+    
 
     public JohnF() {
         initComponents();
@@ -71,6 +88,7 @@ public class JohnF extends javax.swing.JFrame {
         myInitComponents(background);
         hurt.hide();
         cut.setVisible(false);
+        gameCounter();
     }
 
     /**
@@ -180,9 +198,11 @@ public class JohnF extends javax.swing.JFrame {
         getContentPane().add(hurt);
         hurt.setBounds(20, 80, 120, 130);
 
+        time.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        time.setForeground(new java.awt.Color(204, 0, 0));
         time.setText("Time");
         getContentPane().add(time);
-        time.setBounds(990, 10, 70, 90);
+        time.setBounds(920, 10, 140, 60);
         time.getAccessibleContext().setAccessibleName("wallLabel");
         time.getAccessibleContext().setAccessibleDescription("");
 
@@ -396,6 +416,8 @@ public class JohnF extends javax.swing.JFrame {
                 System.out.println("hello");
             } else if (mx > 676 & mx < 688 & my < 468 & my > 452) {
                 cutClick5 = true; 
+            } else if (mx > 646 & mx < 658 & my < 600 & my > 585) {
+                cutClick6 = true; 
             } else {
                 injured();
             }
@@ -455,6 +477,16 @@ public class JohnF extends javax.swing.JFrame {
                 injured();
             }
             cutClick5 = false;
+        } else if (cutClick6 == true) {
+                System.out.println("cutClick 6 is:" + cutClick6);
+            if (mx > 646 & mx < 658 & my > 690 & my < 704) {
+                System.out.println("Awesome");
+                success();
+                cutBox6.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick6 = false;
         }
     }//GEN-LAST:event_formMouseReleased
 
