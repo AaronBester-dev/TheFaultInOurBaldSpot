@@ -206,6 +206,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox2MouseMoved(evt);
             }
         });
+        cutBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox2MouseExited(evt);
+            }
+        });
         getContentPane().add(cutBox2);
         cutBox2.setBounds(410, 440, 10, 80);
 
@@ -216,6 +221,11 @@ public class JohnF extends javax.swing.JFrame {
             }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 cutBox3MouseMoved(evt);
+            }
+        });
+        cutBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox3MouseExited(evt);
             }
         });
         getContentPane().add(cutBox3);
@@ -374,13 +384,21 @@ public class JohnF extends javax.swing.JFrame {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        if (mx > 433 & mx < 449 & my < 340 & my > 320) {
-            cutClick = true;
-        } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
-            cutClick2 = true;
-            System.out.println("hello");
-        } else if (boneSawClick == true) {
-            injured();
+        if (boneSawClick == true) {
+            if (mx > 433 & mx < 449 & my < 340 & my > 320) {
+                cutClick = true;
+            } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
+                cutClick2 = true;
+            } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
+                cutClick3 = true;
+            } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
+                cutClick4 = true; 
+                System.out.println("hello");
+            } else if (mx > 676 & mx < 688 & my < 468 & my > 452) {
+                cutClick5 = true; 
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_formMousePressed
 
@@ -395,8 +413,8 @@ public class JohnF extends javax.swing.JFrame {
                 cutClick = false;
             } else {
                 injured();
-                cutClick = false;
             }
+             cutClick = false;
         } else if (cutClick2 == true) {
             System.out.println("cutClick 2 is:" + cutClick2);
             if (mx > 414 & mx < 426 & my > 550 & my < 567) {
@@ -405,8 +423,38 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox2.setVisible(false);
             } else {
                 injured();
-                cutClick = false;
             }
+             cutClick2 = false;
+        } else if (cutClick3 == true) {
+            System.out.println("cutClick 3 is:" + cutClick3);
+            if (mx > 464 & mx < 478 & my > 691 & my < 701) {
+                System.out.println("Awesome");
+                success();
+                cutBox3.setVisible(false);
+            } else {
+                injured();
+            }
+             cutClick3 = false;
+        } else if (cutClick4 == true) {
+                System.out.println("cutClick 4 is:" + cutClick4);
+            if (mx > 665 & mx < 678 & my > 411 & my < 424) {
+                System.out.println("Awesome");
+                success();
+                cutBox4.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick4 = false;
+        } else if (cutClick5 == true) {
+                System.out.println("cutClick 5 is:" + cutClick5);
+            if (mx > 677 & mx < 690 & my > 552 & my < 561) {
+                System.out.println("Awesome");
+                success();
+                cutBox5.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick5 = false;
         }
     }//GEN-LAST:event_formMouseReleased
 
@@ -469,6 +517,20 @@ public class JohnF extends javax.swing.JFrame {
     private void cutBox6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseMoved
         moveTool();
     }//GEN-LAST:event_cutBox6MouseMoved
+
+    private void cutBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseExited
+        System.out.println("Exited");
+        if (cutClick2 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox2MouseExited
+
+    private void cutBox3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseExited
+        System.out.println("Exited");
+        if (cutClick3 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox3MouseExited
 
     /**
      * Creates new form NewJFrame
