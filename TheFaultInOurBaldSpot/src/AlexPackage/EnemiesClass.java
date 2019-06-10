@@ -55,7 +55,10 @@ public class EnemiesClass {
     public void setDirection(boolean dT){
         direction =dT;
     }
-     public javax.swing.JLabel getLabel() {
+    public javax.swing.JLabel getLabel() {
         return enemyLabel;
+    }
+     public void setLabel(javax.swing.JLabel jL){
+        enemyLabel = jL;
     }
 }
