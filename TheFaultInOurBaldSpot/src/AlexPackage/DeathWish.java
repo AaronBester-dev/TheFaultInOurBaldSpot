@@ -15,5 +15,6 @@ public class DeathWish extends EnemiesClass {
         health = 1;
         speed = 3;
         strength = 3;
+        height = 1;
     }
 }

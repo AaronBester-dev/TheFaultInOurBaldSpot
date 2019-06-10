@@ -17,6 +17,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,8 +30,56 @@ public class JohnF extends javax.swing.JFrame {
     int mx, my;
     boolean boneSawClick = false;
     boolean cutClick = false;
+    boolean cutClick2 = false;
+    boolean cutClick3 = false;
+    boolean cutClick4 = false;
+    boolean cutClick5 = false;
+    boolean cutClick6 = false;
     int healthValue = 100;
+    int counter = 0;
+    int gameCounter = 120;
     
+    private void injured() {
+        Timer injuredTimer = new Timer();
+        TimerTask stopInjured = new TimerTask() {
+            public void run() {
+                hurt.setVisible(false);
+            }
+
+        };
+        injuredTimer.schedule(stopInjured, 500);
+        System.out.println("injured");
+        healthValue = healthValue - 5;
+        healthBar.setValue(healthValue);
+        hurt.show();
+    }
+
+    private void success() {
+        counter++;
+        Timer cutTimer = new Timer();
+        TimerTask stopCut = new TimerTask() {
+            public void run() {
+                cut.setVisible(false);
+            }
+        };
+        cutTimer.schedule(stopCut, 500);
+        cut.setVisible(true);
+        if (counter == 6) {
+            ribs.setVisible(false);
+        }
+    }
+    public void gameCounter() {
+    Timer gameTimer = new Timer();
+    TimerTask stopGame = new TimerTask() {
+            public void run() {
+                time.setText(String.valueOf(gameCounter));
+            }
+        };
+    gameTimer.scheduleAtFixedRate(stopGame, 1000, ERROR);
+    gameCounter--;
+    }
+    
+
     public JohnF() {
         initComponents();
         healthBar.setValue(100);
@@ -37,6 +87,8 @@ public class JohnF extends javax.swing.JFrame {
         //Initialize the label with the scaled image icon
         myInitComponents(background);
         hurt.hide();
+        cut.setVisible(false);
+        gameCounter();
     }
 
     /**
@@ -54,11 +106,19 @@ public class JohnF extends javax.swing.JFrame {
         hurt = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         lungs = new javax.swing.JLabel();
-        ribs = new javax.swing.JLabel();
         heart = new javax.swing.JLabel();
+        cutBox2 = new javax.swing.JLabel();
+        cutBox3 = new javax.swing.JLabel();
+        cutBox4 = new javax.swing.JLabel();
+        cutBox5 = new javax.swing.JLabel();
+        cutBox6 = new javax.swing.JLabel();
+        ribs = new javax.swing.JLabel();
+        cut = new javax.swing.JLabel();
+        boneSawLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 720));
         setName("mainFrame"); // NOI18N
         setSize(new java.awt.Dimension(1080, 720));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -138,9 +198,11 @@ public class JohnF extends javax.swing.JFrame {
         getContentPane().add(hurt);
         hurt.setBounds(20, 80, 120, 130);
 
+        time.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        time.setForeground(new java.awt.Color(204, 0, 0));
         time.setText("Time");
         getContentPane().add(time);
-        time.setBounds(990, 10, 70, 90);
+        time.setBounds(920, 10, 140, 60);
         time.getAccessibleContext().setAccessibleName("wallLabel");
         time.getAccessibleContext().setAccessibleDescription("");
 
@@ -148,13 +210,95 @@ public class JohnF extends javax.swing.JFrame {
         getContentPane().add(lungs);
         lungs.setBounds(990, 150, 50, 40);
 
-        ribs.setText("Ribs");
-        getContentPane().add(ribs);
-        ribs.setBounds(350, 280, 410, 400);
-
         heart.setText("heart");
         getContentPane().add(heart);
         heart.setBounds(990, 80, 70, 70);
+
+        cutBox2.setText("cutBox2");
+        cutBox2.setMaximumSize(new java.awt.Dimension(40, 16));
+        cutBox2.setMinimumSize(new java.awt.Dimension(40, 16));
+        cutBox2.setPreferredSize(new java.awt.Dimension(40, 16));
+        cutBox2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox2MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox2MouseMoved(evt);
+            }
+        });
+        cutBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox2MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox2);
+        cutBox2.setBounds(410, 440, 10, 80);
+
+        cutBox3.setText("jLabel1");
+        cutBox3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox3MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox3MouseMoved(evt);
+            }
+        });
+        cutBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox3MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox3);
+        cutBox3.setBounds(460, 570, 10, 90);
+
+        cutBox4.setText("cutBox4");
+        cutBox4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox4MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox4MouseMoved(evt);
+            }
+        });
+        getContentPane().add(cutBox4);
+        cutBox4.setBounds(660, 310, 10, 70);
+
+        cutBox5.setText("cutBox5");
+        cutBox5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox5MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox5MouseMoved(evt);
+            }
+        });
+        getContentPane().add(cutBox5);
+        cutBox5.setBounds(670, 440, 10, 80);
+
+        cutBox6.setText("CutBox6");
+        cutBox6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox6MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox6MouseMoved(evt);
+            }
+        });
+        getContentPane().add(cutBox6);
+        cutBox6.setBounds(640, 570, 10, 90);
+
+        ribs.setText("Ribs");
+        getContentPane().add(ribs);
+        ribs.setBounds(350, 270, 410, 400);
+
+        cut.setText("cut");
+        getContentPane().add(cut);
+        cut.setBounds(160, 90, 110, 110);
+
+        boneSawLabel.setForeground(new java.awt.Color(255, 0, 51));
+        boneSawLabel.setText("BONE SAW");
+        getContentPane().add(boneSawLabel);
+        boneSawLabel.setBounds(5, 580, 70, 16);
 
         background.setText("background");
         getContentPane().add(background);
@@ -217,20 +361,14 @@ public class JohnF extends javax.swing.JFrame {
         }
     }
 
-    private void injured() {
-        hurt.show();
-        System.out.println("injured");
-        healthValue = healthValue - 5;
-        healthBar.setValue(healthValue);
-    }
 
     private void boneSawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseClicked
 //        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 //                new ImageIcon("JSumBoneSaw.png").getImage(),
 //                new Point(0, 0), "custom cursor"));
         boneSawClick = true;
-        int counter = 0;
-        counter++;
+//        int counter = 0;
+//        counter++;
     }//GEN-LAST:event_boneSawMouseClicked
 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
@@ -250,10 +388,10 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_boneSawMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-       mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
-       my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        
-       System.out.println(mx + ", " + my);
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
+        System.out.println(mx + ", " + my);
     }//GEN-LAST:event_formMouseClicked
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
@@ -264,29 +402,91 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_cutBoxMouseExited
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
- mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-            System.out.println("Hello");
-        if (mx > 433 & mx < 449 & my < 340 & my > 320) {
-            cutClick = true;
-            System.out.println("Hellooooo");
-        }
-        else if (boneSawClick == true) {
-            injured();
+        if (boneSawClick == true) {
+            if (mx > 433 & mx < 449 & my < 340 & my > 320) {
+                cutClick = true;
+            } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
+                cutClick2 = true;
+            } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
+                cutClick3 = true;
+            } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
+                cutClick4 = true; 
+                System.out.println("hello");
+            } else if (mx > 676 & mx < 688 & my < 468 & my > 452) {
+                cutClick5 = true; 
+            } else if (mx > 646 & mx < 658 & my < 600 & my > 585) {
+                cutClick6 = true; 
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        System.out.println("Bone Saw released");
-        System.out.println(cutClick);
         if (cutClick == true) {
-            if (mx > 420 & mx < 440 & my > 410 & my < 430) {
+            if (mx > 433 & mx < 449 & my > 410 & my < 430) {
                 System.out.println("Awesome");
-                System.out.println("Release");
-                cutBox.hide();
+                success();
+                cutBox.setVisible(false);
+                cutClick = false;
+            } else {
+                injured();
             }
+             cutClick = false;
+        } else if (cutClick2 == true) {
+            System.out.println("cutClick 2 is:" + cutClick2);
+            if (mx > 414 & mx < 426 & my > 550 & my < 567) {
+                System.out.println("Awesome");
+                success();
+                cutBox2.setVisible(false);
+            } else {
+                injured();
+            }
+             cutClick2 = false;
+        } else if (cutClick3 == true) {
+            System.out.println("cutClick 3 is:" + cutClick3);
+            if (mx > 464 & mx < 478 & my > 691 & my < 701) {
+                System.out.println("Awesome");
+                success();
+                cutBox3.setVisible(false);
+            } else {
+                injured();
+            }
+             cutClick3 = false;
+        } else if (cutClick4 == true) {
+                System.out.println("cutClick 4 is:" + cutClick4);
+            if (mx > 665 & mx < 678 & my > 411 & my < 424) {
+                System.out.println("Awesome");
+                success();
+                cutBox4.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick4 = false;
+        } else if (cutClick5 == true) {
+                System.out.println("cutClick 5 is:" + cutClick5);
+            if (mx > 677 & mx < 690 & my > 552 & my < 561) {
+                System.out.println("Awesome");
+                success();
+                cutBox5.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick5 = false;
+        } else if (cutClick6 == true) {
+                System.out.println("cutClick 6 is:" + cutClick6);
+            if (mx > 646 & mx < 658 & my > 690 & my < 704) {
+                System.out.println("Awesome");
+                success();
+                cutBox6.setVisible(false);
+            } else {
+                injured();
+            }
+            cutClick6 = false;
         }
     }//GEN-LAST:event_formMouseReleased
 
@@ -295,11 +495,11 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_boneSawMousePressed
 
     private void boneSawMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseReleased
-        
+
     }//GEN-LAST:event_boneSawMouseReleased
 
     private void cutBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutBoxFocusLost
-     
+
     }//GEN-LAST:event_cutBoxFocusLost
 
     private void cutBoxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseMoved
@@ -309,6 +509,60 @@ public class JohnF extends javax.swing.JFrame {
     private void cutBoxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseDragged
         moveTool();
     }//GEN-LAST:event_cutBoxMouseDragged
+
+    private void cutBox2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseMoved
+        moveTool();
+    }//GEN-LAST:event_cutBox2MouseMoved
+
+    private void cutBox2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseDragged
+        moveTool();
+    }//GEN-LAST:event_cutBox2MouseDragged
+
+    private void cutBox3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseMoved
+        moveTool();
+    }//GEN-LAST:event_cutBox3MouseMoved
+
+    private void cutBox3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseDragged
+        moveTool();
+    }//GEN-LAST:event_cutBox3MouseDragged
+
+    private void cutBox4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseDragged
+        moveTool();
+    }//GEN-LAST:event_cutBox4MouseDragged
+
+    private void cutBox4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseMoved
+        moveTool();
+    }//GEN-LAST:event_cutBox4MouseMoved
+
+    private void cutBox5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseDragged
+        moveTool();
+    }//GEN-LAST:event_cutBox5MouseDragged
+
+    private void cutBox5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseMoved
+        moveTool();
+    }//GEN-LAST:event_cutBox5MouseMoved
+
+    private void cutBox6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseDragged
+        moveTool();
+    }//GEN-LAST:event_cutBox6MouseDragged
+
+    private void cutBox6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseMoved
+        moveTool();
+    }//GEN-LAST:event_cutBox6MouseMoved
+
+    private void cutBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseExited
+        System.out.println("Exited");
+        if (cutClick2 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox2MouseExited
+
+    private void cutBox3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseExited
+        System.out.println("Exited");
+        if (cutClick3 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox3MouseExited
 
     /**
      * Creates new form NewJFrame
@@ -324,8 +578,14 @@ public class JohnF extends javax.swing.JFrame {
             background.setIcon(new ImageIcon((ImageIO.read(new File("JSumBackground.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
             ribs.setIcon(new ImageIcon((ImageIO.read(new File("JSumRibs.png"))).getScaledInstance(ribs.getWidth(), ribs.getHeight(), Image.SCALE_SMOOTH)));
             cutBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox.getWidth(), cutBox.getHeight(), Image.SCALE_SMOOTH)));
+            cutBox2.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox2.getWidth(), cutBox2.getHeight(), Image.SCALE_SMOOTH)));
+            cutBox3.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox3.getWidth(), cutBox3.getHeight(), Image.SCALE_SMOOTH)));
+            cutBox4.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox4.getWidth(), cutBox4.getHeight(), Image.SCALE_SMOOTH)));
+            cutBox5.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox5.getWidth(), cutBox5.getHeight(), Image.SCALE_SMOOTH)));
+            cutBox6.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox6.getWidth(), cutBox6.getHeight(), Image.SCALE_SMOOTH)));
             boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
             hurt.setIcon(new ImageIcon((ImageIO.read(new File("blood.png"))).getScaledInstance(hurt.getWidth(), hurt.getHeight(), Image.SCALE_SMOOTH)));
+            cut.setIcon(new ImageIcon((ImageIO.read(new File("scissors.png"))).getScaledInstance(cut.getWidth(), cut.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -377,7 +637,14 @@ public class JohnF extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JLabel boneSaw;
+    private javax.swing.JLabel boneSawLabel;
+    private javax.swing.JLabel cut;
     private javax.swing.JLabel cutBox;
+    private javax.swing.JLabel cutBox2;
+    private javax.swing.JLabel cutBox3;
+    private javax.swing.JLabel cutBox4;
+    private javax.swing.JLabel cutBox5;
+    private javax.swing.JLabel cutBox6;
     private javax.swing.JProgressBar healthBar;
     private javax.swing.JLabel heart;
     private javax.swing.JLabel hurt;

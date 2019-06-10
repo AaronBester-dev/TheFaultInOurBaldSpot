@@ -35,41 +35,100 @@ public class AlexForm extends javax.swing.JFrame {
 
     public int counter = 120;
     Timer gameTimer = new Timer();
-    
-    
-    
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
-            System.out.println("Seconds Passed: " + counter);
+            // System.out.println("Seconds Passed: " + counter);
+            if (counter == 115) {
+                gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
+            }
         }
     };
     TimerTask Animate = new TimerTask() {
         public void run() {
             //System.out.println("MOVE");
-         try {
-            for(JLabel item:bullets)
-            {
-      
-                item.setLocation(item.getLocation().x, item.getLocation().y -2);
-            }
-            for (JLabel item:bullets){
-                if (item.getLocation().y <-20) {
-                    bullets.remove(item);
-                    System.out.println("REMOVED");
+            try {
+                
+                for (JLabel item : bullets) {
+                    
+                    item.setLocation(item.getLocation().x, item.getLocation().y - 5);
                 }
+                for (JLabel item : bullets) {
+                    if (item.getLocation().y < -20) {
+                        bullets.remove(item);
+                        System.out.println("REMOVED");
+                    }
+                }
+               for( int i =0;  i < enemyLabels1.length; i++ ){
+                   if (i == 0){
+                       for (JLabel item: impLabels){
+                            if(item.getLocation().x >=100 && item.getLocation().y == 100) {
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
+                           }                          
+                           if (item.getLocation().x == 700 && item.getLocation().y >= 100){
+                           item.setLocation(item.getLocation().x, item.getLocation().y+2);  
+                           }
+                           if (item.getLocation().x <= 700 && item.getLocation().y == 300){
+                           item.setLocation(item.getLocation().x-2, item.getLocation().y);  
+                           }
+                           if (item.getLocation().x == 100 && item.getLocation().y <= 300){
+                           item.setLocation(item.getLocation().x, item.getLocation().y-2);  
+                           }
+                          
+                       }
+                   }
+                     if (i == 1){
+                       for (JLabel item: demonLabels){
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
+                       }
+                   }
+                    if (i == 2){
+                       for (JLabel item: beholderLabels){
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
+                       }
+                   }
+                      if (i == 3){
+                       for (JLabel item: deathWishLabels){
+                           item.setLocation(item.getLocation().x +2, item.getLocation().y);
+                       }
+                   }
+               }
+                
             }
-         } catch(Exception e) {}
+        catch(Exception e) {}
+           // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
+        }
+    };
+    
+    TimerTask EnemyAnimation = new TimerTask() {
+        public void run() {
+            //System.out.println("MOVE");
+         int createEnemy = (int)(Math.random()*3 +1);
+         if (createEnemy == 3){
+             System.out.println("Enemy Spawning");
+             enemySpawning();
+         }
            // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
         }
     };
 
     
-    
-    static ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
-   static  ArrayList<JLabel> enemyLabels = new ArrayList<JLabel>(0);
-    ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
+   static ArrayList <JLabel> impLabels = new ArrayList <JLabel> (0);
+   static ArrayList <JLabel> beholderLabels = new ArrayList <JLabel> (0);
+   static ArrayList <JLabel> demonLabels = new ArrayList <JLabel> (0);
+   static ArrayList <JLabel> deathWishLabels = new ArrayList <JLabel> (0);
+   //static ArrayList<JLabel> enemyLabels = new ArrayList<JLabel>(0);
+   static ArrayList [] enemyLabels1 = new ArrayList [4];
+   
+   static ArrayList <EnemiesClass> impStats = new ArrayList <EnemiesClass> (0);
+   static ArrayList <EnemiesClass> beholderStats = new ArrayList <EnemiesClass> (0);
+   static ArrayList <EnemiesClass> demonStats = new ArrayList <EnemiesClass> (0);
+   static ArrayList <EnemiesClass> deathWishStats = new ArrayList <EnemiesClass> (0);
+   //static ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
+   static ArrayList[] enemyStats1 = new ArrayList[4];
+   
+   ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -99,10 +158,24 @@ public class AlexForm extends javax.swing.JFrame {
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
             hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
             // hellWallTop.setIcon(new ImageIcon((ImageIO.read(new File("hellWallTop.png"))).getScaledInstance(hellWallTop.getWidth(), hellWallTop.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+
+
+} catch (IOException ex) {
+            Logger.getLogger(AlexForm.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
-  
+    
+         enemyLabels1[0] = impLabels;
+         enemyLabels1[1] = demonLabels;
+         enemyLabels1[2] = beholderLabels;
+         enemyLabels1[3] = deathWishLabels;
+         
+         enemyStats1[0] = impStats;
+         enemyStats1[1] = demonStats;
+         enemyStats1[2] = beholderStats;
+         enemyStats1[3] = deathWishStats;
+    
     gameTimer.scheduleAtFixedRate(Animate,100, 10);
     
     
@@ -141,6 +214,9 @@ public class AlexForm extends javax.swing.JFrame {
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -199,24 +275,7 @@ public class AlexForm extends javax.swing.JFrame {
         
         //Try layeredPane layout instead of Null layout
         //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
-        if (evt.getKeyCode() == 75) {
-//            JLabel bullet = new JLabel();
-//
-//            System.out.println("Label Created");
-//            getContentPane().add(bullet);
-//            bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
-//
-//            System.out.println("Bounds Set");
-//            try {
-//                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
-//            } catch (IOException ex) {
-//                System.out.println("NO IMAGE");
-//                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            setComponentZOrder(bullet, 0);
-//            System.out.println("Try performed");
-            bullet();
-        }
+       
 
         if (evt.getKeyCode() == 38) {
             if (!checkCollision(tataPlane, 0, -15)) {
@@ -243,6 +302,28 @@ public class AlexForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == 88) {
+//            JLabel bullet = new JLabel();
+//
+//            System.out.println("Label Created");
+//            getContentPane().add(bullet);
+//            bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
+//
+//            System.out.println("Bounds Set");
+//            try {
+//                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
+//            } catch (IOException ex) {
+//                System.out.println("NO IMAGE");
+//                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            setComponentZOrder(bullet, 0);
+//            System.out.println("Try performed");
+            bullet();
+        }
+    }//GEN-LAST:event_formKeyReleased
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -255,16 +336,31 @@ public class AlexForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlexForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlexForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlexForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlexForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlexForm.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AlexForm.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AlexForm.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AlexForm.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
@@ -276,58 +372,99 @@ public class AlexForm extends javax.swing.JFrame {
       
     }
 
+    
+//    public void int impMovement(int x, int y) {
+//        
+//        
+//        return y;
+//    }
+    
     public void enemySpawning() {
         int spawn = (int) (Math.random() * 100 + 1);
-        if (spawn <= 30) {
-            impSpawn(enemyStats, enemyLabels);
+        if (spawn <= 40) {
+            impSpawn();
+        }
+        if (spawn > 40 && spawn <= 50){
+            demonSpawn();
+        }
+        if (spawn > 50 && spawn <= 80){
+            beholderSpawn();
+        }
+        if (spawn > 80 && spawn <= 100){
+            deathWishSpawn();
         }
     }
 
-    public  void impSpawn(ArrayList enemyStats, ArrayList enemyLabels) {
+    public  void impSpawn() {
+        System.out.println("IMP Coming");
         Imp imp1 = new Imp();
-        enemyStats.add(imp1);
+        impStats.add(imp1);
         JLabel imp = new JLabel();
         getContentPane().add(imp);
-        imp.setBounds(2,40, 40, 40);
+        imp.setBounds(100,imp1.getHeight()*50, 40, 40);
          try {
             imp.setIcon(new ImageIcon((ImageIO.read(new File("Impling.png"))).getScaledInstance(imp.getWidth(), imp.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        enemyLabels.add(imp);   
+        impLabels.add(imp);   
     }
 
-    public static void demonSpawn() {
+    public  void demonSpawn() {
+        System.out.println("Demon Coming");
         Demon demon1 = new Demon();
+        demonStats.add(demon1);
+        JLabel demon = new JLabel();
+        getContentPane().add(demon);
+        demon.setBounds(20, demon1.getHeight()*50, 120, 80);
+         try {
+            demon.setIcon(new ImageIcon((ImageIO.read(new File("Dmon.png"))).getScaledInstance(demon.getWidth(), demon.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class  .getName()).log(Level.SEVERE, null, ex);
+        }
+        demonLabels.add(demon);
+       
     }
 
-    public static void beholderSpawn() {
+    public  void beholderSpawn() {
+        System.out.println("Beholder Coming");
         Beholder beholder1 = new Beholder();
+        beholderStats.add(beholder1);
+        JLabel beholder = new JLabel();
+        getContentPane().add(beholder);
+        beholder.setBounds(20, beholder1.getHeight()*50, 80, 80);
+         try {
+            beholder.setIcon(new ImageIcon((ImageIO.read(new File("Beholder.png"))).getScaledInstance(beholder.getWidth(), beholder.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) { System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class  .getName()).log(Level.SEVERE, null, ex);}
+        beholderLabels.add(beholder);        
     }
 
-    public static void deathWishSpawn() {
-        DeathWish suicide1 = new DeathWish();
+    public void deathWishSpawn() {     
+        System.out.println("Beholder Coming");
+          DeathWish suicide1 = new DeathWish();
+          deathWishStats.add(suicide1);
+        JLabel suicide = new JLabel();
+        getContentPane().add(suicide);
+        suicide.setBounds(20, suicide1.getHeight()*50, 50, 50);
+         try {
+            suicide.setIcon(new ImageIcon((ImageIO.read(new File("uicide.png"))).getScaledInstance(suicide.getWidth(), suicide.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        deathWishLabels.add(suicide);      
     }
 
     public void bullet() {
         JLabel bullet = new JLabel();
-
         System.out.println("Label Created");
         getContentPane().add(bullet);
-        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 8, 12);
+        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2-2, tataPlane.getY() - 10, 8, 12);
         System.out.println("Bounds Set");
         try {
             bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {System.out.println("NO IMAGE");Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         //setComponentZOrder(bullet, 0);
        // getContentPane().repaint();
         bullets.add(bullet);
-        System.out.println("Try performed");
-        
+        System.out.println("Try performed");       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

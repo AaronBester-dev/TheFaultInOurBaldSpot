@@ -7,7 +7,9 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,6 +24,24 @@ public class AaronForm extends javax.swing.JFrame {
 
    Timer aaronGameTimer = new Timer();
    
+   TimerTask bulletMovement = new TimerTask(){
+     public void run(){
+           
+          try {
+            for(JLabel item:staplebullets)
+            {
+      
+                item.setLocation(item.getLocation().x + 20, item.getLocation().y);
+            }
+            for (JLabel item:staplebullets){
+                if (item.getLocation().y <-20) {
+                    staplebullets.remove(item);
+                    System.out.println("REMOVED");
+                }
+            }
+         } catch(Exception e) {}
+       }
+};
    TimerTask gravity = new TimerTask(){
        public void run(){
            
@@ -34,7 +54,14 @@ public class AaronForm extends javax.swing.JFrame {
    
    
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
-
+ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
+ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
+ ArrayList<String> block1 = new ArrayList<String>(0);
+ArrayList<String> block2 = new ArrayList<String>(0);
+ArrayList<String> spike1 = new ArrayList<String>(0);
+ArrayList<String> spike2 = new ArrayList<String>(0);
+    
+    
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -47,18 +74,30 @@ public class AaronForm extends javax.swing.JFrame {
             return false;
         }
     }
+    
+    
 
-    public void GravityTimer(){
-       
-        
     
-    }
-    
+   
     public AaronForm() {
         initComponents();
 
         myInitComponents();
     }
+//       public static boolean passageSearch(ArrayList numPsalms, String psalmNumber) {
+//        //For statement checks each item in the number psalm array
+//        for (k = 0; k < numPsalms.size(); k++) {
+//            //If statement checks if the item in the numPsalms array is equal to the number given by the user then returns true 
+//            if (numPsalms.get(k).equals(psalmNumber)) {
+//                return true;
+//            }
+//        }
+//        //Returns false if the user doesnt input a correct psalm number
+//        return false;
+//    }
+   
+  
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,10 +114,14 @@ public class AaronForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -126,11 +169,7 @@ public class AaronForm extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
-        if (evt.getKeyCode() == 88) {
-  
-            bullet();
-           
-        }
+      
 
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
@@ -160,38 +199,25 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
 
     }//GEN-LAST:event_formKeyPressed
 
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+         if (evt.getKeyCode() == 88) {
+  
+            bullet();
+            aaronGameTimer.scheduleAtFixedRate(bulletMovement,100,10);
+           
+        }
+    }//GEN-LAST:event_formKeyReleased
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AaronForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String args[])  {
+     
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+             
                 new AaronForm().setVisible(true);
-
+//    readLevelFile(block1);
             }
         });
     }
@@ -201,7 +227,7 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
 
         System.out.println("Label Created");
         getContentPane().add(bullet1);
-        bullet1.setBounds(player.getX() + 5, player.getWidth() + 30, 50, 100);
+        bullet1.setBounds(player.getX() + player.getWidth() + 10, player.getY(), 50, 100);
 
         System.out.println("Bounds Set");
         try {
@@ -215,6 +241,33 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
         staplebullets.add(bullet1);
          
     }
+      public static void readLevelFile(ArrayList block1) throws IOException {
+        //Initilizises a string varibable that stores the line the program is currently reading
+        String myLine;
+        BufferedReader readFile = new BufferedReader(new FileReader("AaronsLevelFile.txt"));
+        //Do statement ensures that the program only stops reading the file when it reaches a blank line
+        do {
+            //Stores the line that the program is currently looking at as the variable myLine
+            myLine = readFile.readLine();
+ String substring = myLine;
+//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
+            if (myLine == ",") {
+substring = myLine.substring(0 ,myLine.length() -1 );
+
+block1.add(substring);
+             
+            }
+            if(myLine ==null){
+                break;
+            }
+   
+    
+        } while (true);
+//Closez the file to ensure there is no complications
+        readFile.close();
+    }
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
