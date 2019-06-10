@@ -21,48 +21,43 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
- 
+
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
-ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
-ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
- ArrayList<String> blockType = new ArrayList<String>(0);
-ArrayList<String> blockX = new ArrayList<String>(0);
-ArrayList<String> blockY = new ArrayList<String>(0);
+    ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
+    ArrayList<String> blockType = new ArrayList<String>(0);
+    ArrayList<String> blockX = new ArrayList<String>(0);
+    ArrayList<String> blockY = new ArrayList<String>(0);
 
-   Timer aaronGameTimer = new Timer();
-   
-   TimerTask bulletMovement = new TimerTask(){
-     public void run(){
-           
-          try {
-            for(JLabel item:staplebullets)
-            {
-      
-                item.setLocation(item.getLocation().x + 20, item.getLocation().y);
-            }
-            for (JLabel item:staplebullets){
-                if (item.getLocation().y <-20) {
-                    staplebullets.remove(item);
-                    System.out.println("REMOVED");
+    Timer aaronGameTimer = new Timer();
+
+    TimerTask bulletMovement = new TimerTask() {
+        public void run() {
+
+            try {
+                for (JLabel item : staplebullets) {
+
+                    item.setLocation(item.getLocation().x + 20, item.getLocation().y);
                 }
+                for (JLabel item : staplebullets) {
+                    if (item.getLocation().y < -20) {
+                        staplebullets.remove(item);
+                        System.out.println("REMOVED");
+                    }
+                }
+            } catch (Exception e) {
             }
-         } catch(Exception e) {}
-       }
-};
-   TimerTask gravity = new TimerTask(){
-       public void run(){
-           
-         if ((!checkCollision(player, 0, +10))) {   
-          player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-       }
-       }
-   };
-  
-   
-   
+        }
+    };
+    TimerTask gravity = new TimerTask() {
+        public void run() {
 
+            if ((!checkCollision(player, 0, +10))) {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+            }
+        }
+    };
 
-    
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -75,11 +70,7 @@ ArrayList<String> blockY = new ArrayList<String>(0);
             return false;
         }
     }
-    
-    
 
-    
-   
     public AaronForm() throws IOException {
         initComponents();
 
@@ -96,9 +87,6 @@ ArrayList<String> blockY = new ArrayList<String>(0);
 //        //Returns false if the user doesnt input a correct psalm number
 //        return false;
 //    }
-   
-  
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,7 +140,7 @@ ArrayList<String> blockY = new ArrayList<String>(0);
 //        }
 //}
 
-    public void myInitComponents()  {
+    public void myInitComponents() {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
@@ -174,12 +162,10 @@ ArrayList<String> blockY = new ArrayList<String>(0);
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
-      
-
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 100);
-aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
+                aaronGameTimer.scheduleAtFixedRate(gravity, 100, 100);
             }
         }
         //down key pressed
@@ -205,22 +191,22 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
     }//GEN-LAST:event_formKeyPressed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-         if (evt.getKeyCode() == 88) {
-  
+        if (evt.getKeyCode() == 88) {
+
             bullet();
-            aaronGameTimer.scheduleAtFixedRate(bulletMovement,100,10);
-           
+            aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
+
         }
     }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])   {
-     
+    public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-             
+
                 try {
                     new AaronForm().setVisible(true);
 //    readLevelFile(block1);
@@ -245,66 +231,61 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
             System.out.println("NO IMAGE");
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-      //  setComponentZOrder(bullet1, 0);
+        //  setComponentZOrder(bullet1, 0);
         System.out.println("Try performed");
         staplebullets.add(bullet1);
-         
+
     }
-   
+
     public void readLevelFile() throws IOException {
         //Initilizises a string varibable that stores the line the program is currently reading
         String myLine = null;
         String blockAdd = myLine;
- String blockXAdd = null;
-  String blockYAdd = null;
+
         BufferedReader readFile = new BufferedReader(new FileReader("AaronLevelFile.txt"));
         //Do statement ensures that the program only stops reading the file when it reaches a blank line
         do {
             //Stores the line that the program is currently looking at as the variable myLine
             myLine = readFile.readLine();
-              if(myLine ==null){
+            if (myLine == null) {
                 break;
             }
- 
+
 //If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
-       
+         
+//TYPE 
 int index = myLine.indexOf(",");
 
-                blockAdd = myLine.substring(0 ,index );
-                System.out.println("BLOCK"+blockAdd);
-blockType.add(blockAdd);
- 
-myLine = myLine.substring(index+1, myLine.length()-1);
-System.out.println("NEW line "+myLine);
+            blockAdd = myLine.substring(0, index);
+            System.out.println("BLOCK" + blockAdd);
+            blockType.add(blockAdd);
 
- index = myLine.indexOf(",");
- 
- blockAdd = myLine.substring(0 ,index );
- 
- System.out.println(blockAdd);
- 
- blockX.add(blockAdd);
- 
- myLine = myLine.substring(index+1, myLine.length()-1);
- 
- index = myLine.indexOf(",");
- 
- blockAdd = myLine.substring(0 ,index );
- 
- System.out.println(blockAdd);
- 
- blockY.add(blockAdd);
- 
-myLine = myLine.substring(index+1, myLine.length()-1);
+            myLine = myLine.substring(index + 1, myLine.length());
+            System.out.println("NEW line " + myLine);
 
+            
+            //X- VALUE
+            index = myLine.indexOf(",");
+            blockAdd = myLine.substring(0, index);
+            System.out.println(blockAdd);
+            blockX.add(blockAdd);
+            myLine = myLine.substring(index + 1, myLine.length());
 
-    
+            
+            //Y=VALUE
+           
+            blockAdd = myLine;
+            System.out.println(blockAdd);
+
+            blockY.add(blockAdd);
+
+          
+
         } while (true);
 //Closez the file to ensure there is no complications
         readFile.close();
     }
-    
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
