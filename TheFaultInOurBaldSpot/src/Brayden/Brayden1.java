@@ -183,8 +183,13 @@ TimerTask task = new TimerTask(){
    }
      return false;  
     }
-        private void arrayMaker() { 
-        soup soupBoy[] = new soup[6];
+       
+    
+    
+     soup soupBoy[] = new soup[6];
+     
+     private void arrayMaker() { 
+       
         soupBoy[0] = new soup();
         soupBoy[1] = new soup();
         soupBoy[2] = new soup();
@@ -268,9 +273,29 @@ TimerTask task = new TimerTask(){
             sink.setIcon(new ImageIcon((ImageIO.read(new File("sink.png"))).getScaledInstance(sink.getWidth(), sink.getHeight(), Image.SCALE_SMOOTH)));
 
             dryRack.setIcon(new ImageIcon((ImageIO.read(new File("dish.png"))).getScaledInstance(dryRack.getWidth(), dryRack.getHeight(), Image.SCALE_SMOOTH)));
+             arrayMaker();
+         orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+         
+         orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+         
+         orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+         
+         orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+         
+         orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+         
+         orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                  
+         
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
+   
+        
+
+        
+        
+        
     }
 
     public static void main(String args[]) {

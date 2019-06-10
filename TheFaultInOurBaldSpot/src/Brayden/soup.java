@@ -40,6 +40,10 @@ public class soup {
     
 
 }
+
+public String getPhotoCode(){
+    return photoCode;
+}
     
     
 }
