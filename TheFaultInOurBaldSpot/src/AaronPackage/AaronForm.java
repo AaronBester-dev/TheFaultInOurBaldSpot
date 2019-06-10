@@ -21,6 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
+ 
+    ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
+ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
+ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
+ ArrayList<String> blockType = new ArrayList<String>(0);
+ArrayList<String> blockX = new ArrayList<String>(0);
+ArrayList<String> blockY = new ArrayList<String>(0);
 
    Timer aaronGameTimer = new Timer();
    
@@ -53,14 +60,8 @@ public class AaronForm extends javax.swing.JFrame {
   
    
    
-    ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
-ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
-ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
- ArrayList<String> block1 = new ArrayList<String>(0);
-ArrayList<String> block2 = new ArrayList<String>(0);
-ArrayList<String> spike1 = new ArrayList<String>(0);
-ArrayList<String> spike2 = new ArrayList<String>(0);
-    
+
+
     
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -79,7 +80,7 @@ ArrayList<String> spike2 = new ArrayList<String>(0);
 
     
    
-    public AaronForm() {
+    public AaronForm() throws IOException {
         initComponents();
 
         myInitComponents();
@@ -151,7 +152,7 @@ ArrayList<String> spike2 = new ArrayList<String>(0);
 //        }
 //}
 
-    public void myInitComponents() {
+    public void myInitComponents()  {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
@@ -163,7 +164,11 @@ ArrayList<String> spike2 = new ArrayList<String>(0);
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        try {
+            readLevelFile();
+        } catch (IOException ex) {
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
@@ -211,13 +216,17 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])  {
+    public static void main(String args[])   {
      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
              
-                new AaronForm().setVisible(true);
+                try {
+                    new AaronForm().setVisible(true);
 //    readLevelFile(block1);
+                } catch (IOException ex) {
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -241,26 +250,54 @@ aaronGameTimer.scheduleAtFixedRate(gravity,100,100);
         staplebullets.add(bullet1);
          
     }
-      public static void readLevelFile(ArrayList block1) throws IOException {
+   
+    public void readLevelFile() throws IOException {
         //Initilizises a string varibable that stores the line the program is currently reading
-        String myLine;
-        BufferedReader readFile = new BufferedReader(new FileReader("AaronsLevelFile.txt"));
+        String myLine = null;
+        String blockAdd = myLine;
+ String blockXAdd = null;
+  String blockYAdd = null;
+        BufferedReader readFile = new BufferedReader(new FileReader("AaronLevelFile.txt"));
         //Do statement ensures that the program only stops reading the file when it reaches a blank line
         do {
             //Stores the line that the program is currently looking at as the variable myLine
             myLine = readFile.readLine();
- String substring = myLine;
-//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
-            if (myLine == ",") {
-substring = myLine.substring(0 ,myLine.length() -1 );
-
-block1.add(substring);
-             
-            }
-            if(myLine ==null){
+              if(myLine ==null){
                 break;
             }
-   
+ 
+//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
+       
+int index = myLine.indexOf(",");
+
+                blockAdd = myLine.substring(0 ,index );
+                System.out.println("BLOCK"+blockAdd);
+blockType.add(blockAdd);
+ 
+myLine = myLine.substring(index+1, myLine.length()-1);
+System.out.println("NEW line "+myLine);
+
+ index = myLine.indexOf(",");
+ 
+ blockAdd = myLine.substring(0 ,index );
+ 
+ System.out.println(blockAdd);
+ 
+ blockX.add(blockAdd);
+ 
+ myLine = myLine.substring(index+1, myLine.length()-1);
+ 
+ index = myLine.indexOf(",");
+ 
+ blockAdd = myLine.substring(0 ,index );
+ 
+ System.out.println(blockAdd);
+ 
+ blockY.add(blockAdd);
+ 
+myLine = myLine.substring(index+1, myLine.length()-1);
+
+
     
         } while (true);
 //Closez the file to ensure there is no complications
