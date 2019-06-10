@@ -55,7 +55,8 @@ public class AlexForm extends javax.swing.JFrame {
                 }
                 for (JLabel item : impBullets) {
                     if ( checkBulletCollisionPlane(item,0,4) == true){
-                          impBullets.remove(item);
+                        remove(item); 
+                        impBullets.remove(item);
                 }
                     item.setLocation(item.getLocation().x, item.getLocation().y + 4);
                 }
