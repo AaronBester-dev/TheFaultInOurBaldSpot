@@ -11,26 +11,38 @@ package Brayden;
  */
 public class soup {
 
-private boolean potato, tomato, mushroom;
-private String photoCode;
+    private boolean potato, tomato, mushroom;
+    private String photoCode;
+
+    public soup() {
+        int numOne = (int) (Math.random() * 3 + 1);
+        do {
+            if (numOne == 1) {
+                potato = true;
+                photoCode = "potatoBox.png";
+                break;
+            }
+            if (numOne == 2) {
+                tomato = true;
+                photoCode = "tomatoBox.png";
+                break;
+            }
+            if (numOne == 3) {
+                mushroom = true;
+                photoCode = "mushroomBox.png";
+                break;
+            }
+
+        } while (true);
+
     
-public soup (String uPhotoCode){
-  potato  = randomB();
-  tomato = randomB();
-  mushroom = randomB();
-  photoCode = uPhotoCode;  
-}
-public boolean randomB(){
-int numOne = (int)(Math.random() * 2 + 1);
-    if (numOne == 1) {
-        return true;
-    } else {
-        return false;
-    
-}
     
     
 
+}
+
+public String getPhotoCode(){
+    return photoCode;
 }
     
     
