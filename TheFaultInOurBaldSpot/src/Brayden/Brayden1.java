@@ -183,6 +183,15 @@ TimerTask task = new TimerTask(){
    }
      return false;  
     }
+        private void arrayMaker() { 
+        soup soupBoy[] = new soup[6];
+        soupBoy[0] = new soup();
+        soupBoy[1] = new soup();
+        soupBoy[2] = new soup();
+        soupBoy[3] = new soup();
+        soupBoy[4] = new soup();
+        soupBoy[5] = new soup();
+        }
 
     //checks which key is pressed and moves image if no collision is detected
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
