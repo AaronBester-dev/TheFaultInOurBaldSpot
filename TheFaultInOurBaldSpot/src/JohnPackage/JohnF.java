@@ -29,6 +29,7 @@ public class JohnF extends javax.swing.JFrame {
 
     int mx, my;
     boolean boneSawClick = false;
+    boolean sewNeedleClick = false;
     boolean cutClick = false;
     boolean cutClick2 = false;
     boolean cutClick3 = false;
@@ -38,6 +39,8 @@ public class JohnF extends javax.swing.JFrame {
     int healthValue = 100;
     int counter = 0;
     int gameCounter = 120;
+    int leftCounter = 0;
+    int rightCounter = 0;
     
     private void injured() {
         Timer injuredTimer = new Timer();
@@ -66,6 +69,8 @@ public class JohnF extends javax.swing.JFrame {
         cut.setVisible(true);
         if (counter == 6) {
             ribs.setVisible(false);
+            sewBox.setVisible(true);
+            SewBoxTimer();
         }
     }
     public void gameCounter() {
@@ -73,12 +78,30 @@ public class JohnF extends javax.swing.JFrame {
     TimerTask stopGame = new TimerTask() {
             public void run() {
                 time.setText(String.valueOf(gameCounter));
+                gameCounter--;
             }
         };
-    gameTimer.scheduleAtFixedRate(stopGame, 1000, ERROR);
-    gameCounter--;
+    gameTimer.scheduleAtFixedRate(stopGame, 1000, 1000);
     }
-    
+    public void SewBoxTimer() {
+    Timer heartTimer = new Timer();
+    TimerTask moveBox = new TimerTask() {
+            public void run() {
+                leftCounter++;
+                System.out.println(leftCounter);
+                if (leftCounter <= 15) {
+                    sewBox.setLocation(sewBox.getLocation().x - 1, sewBox.getLocation().y);
+                } else if (leftCounter > 15 & leftCounter <= 45) {
+                    sewBox.setLocation(sewBox.getLocation().x + 1, sewBox.getLocation().y);
+                } else if (leftCounter > 25) {
+                    leftCounter = 0;
+                } else if (leftCounter > 25) {
+                    leftCounter = 0;
+                }
+            }
+        };
+    heartTimer.scheduleAtFixedRate(moveBox, 100, 100);
+    }
 
     public JohnF() {
         initComponents();
@@ -87,8 +110,14 @@ public class JohnF extends javax.swing.JFrame {
         //Initialize the label with the scaled image icon
         myInitComponents(background);
         hurt.hide();
+        sewBox.setVisible(false);
         cut.setVisible(false);
         gameCounter();
+        
+        
+        ribs.setVisible(false);
+        SewBoxTimer();
+        sewBox.setVisible(true);
     }
 
     /**
@@ -105,14 +134,15 @@ public class JohnF extends javax.swing.JFrame {
         cutBox = new javax.swing.JLabel();
         hurt = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
-        lungs = new javax.swing.JLabel();
-        heart = new javax.swing.JLabel();
+        sewNeedle = new javax.swing.JLabel();
         cutBox2 = new javax.swing.JLabel();
         cutBox3 = new javax.swing.JLabel();
         cutBox4 = new javax.swing.JLabel();
         cutBox5 = new javax.swing.JLabel();
         cutBox6 = new javax.swing.JLabel();
+        sewBox = new javax.swing.JLabel();
         ribs = new javax.swing.JLabel();
+        badHeart = new javax.swing.JLabel();
         cut = new javax.swing.JLabel();
         boneSawLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -200,19 +230,28 @@ public class JohnF extends javax.swing.JFrame {
 
         time.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         time.setForeground(new java.awt.Color(204, 0, 0));
-        time.setText("Time");
+        time.setText("120");
         getContentPane().add(time);
         time.setBounds(920, 10, 140, 60);
         time.getAccessibleContext().setAccessibleName("wallLabel");
         time.getAccessibleContext().setAccessibleDescription("");
 
-        lungs.setText("Lungs");
-        getContentPane().add(lungs);
-        lungs.setBounds(990, 150, 50, 40);
-
-        heart.setText("heart");
-        getContentPane().add(heart);
-        heart.setBounds(990, 80, 70, 70);
+        sewNeedle.setText("SewNeedle ");
+        sewNeedle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseMoved(evt);
+            }
+        });
+        sewNeedle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(sewNeedle);
+        sewNeedle.setBounds(980, 430, 80, 140);
 
         cutBox2.setText("cutBox2");
         cutBox2.setMaximumSize(new java.awt.Dimension(40, 16));
@@ -260,6 +299,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox4MouseMoved(evt);
             }
         });
+        cutBox4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox4MouseExited(evt);
+            }
+        });
         getContentPane().add(cutBox4);
         cutBox4.setBounds(660, 310, 10, 70);
 
@@ -270,6 +314,11 @@ public class JohnF extends javax.swing.JFrame {
             }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 cutBox5MouseMoved(evt);
+            }
+        });
+        cutBox5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox5MouseExited(evt);
             }
         });
         getContentPane().add(cutBox5);
@@ -284,12 +333,25 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox6MouseMoved(evt);
             }
         });
+        cutBox6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox6MouseExited(evt);
+            }
+        });
         getContentPane().add(cutBox6);
         cutBox6.setBounds(640, 570, 10, 90);
+
+        sewBox.setText("sewBox");
+        getContentPane().add(sewBox);
+        sewBox.setBounds(600, 400, 10, 90);
 
         ribs.setText("Ribs");
         getContentPane().add(ribs);
         ribs.setBounds(350, 270, 410, 400);
+
+        badHeart.setText("badHeart");
+        getContentPane().add(badHeart);
+        badHeart.setBounds(550, 390, 110, 110);
 
         cut.setText("cut");
         getContentPane().add(cut);
@@ -331,6 +393,9 @@ public class JohnF extends javax.swing.JFrame {
             if (boneSawClick == true) {
                 boneSawClick = false;
                 boneSaw.setLocation(10, 430);
+            } else if (sewNeedleClick == true) {
+                sewNeedleClick = false;
+                sewNeedle.setLocation(980, 430);
             }
         }
         //down key pressed
@@ -358,6 +423,8 @@ public class JohnF extends javax.swing.JFrame {
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
         if (boneSawClick == true) {
             boneSaw.setLocation((mx - 32), (my - 30));
+        } else if (sewNeedleClick == true) {
+            sewNeedle.setLocation((mx - 45), (my - 30));
         }
     }
 
@@ -564,6 +631,39 @@ public class JohnF extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cutBox3MouseExited
 
+    private void cutBox4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseExited
+        System.out.println("Exited");
+        if (cutClick4 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox4MouseExited
+
+    private void cutBox5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseExited
+         System.out.println("Exited");
+        if (cutClick5 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox5MouseExited
+
+    private void cutBox6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseExited
+         System.out.println("Exited");
+        if (cutClick6 == true & boneSawClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_cutBox6MouseExited
+
+    private void sewNeedleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseClicked
+        sewNeedleClick = true;
+    }//GEN-LAST:event_sewNeedleMouseClicked
+
+    private void sewNeedleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseDragged
+       moveTool();
+    }//GEN-LAST:event_sewNeedleMouseDragged
+
+    private void sewNeedleMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseMoved
+       moveTool();
+    }//GEN-LAST:event_sewNeedleMouseMoved
+
     /**
      * Creates new form NewJFrame
      */
@@ -586,6 +686,9 @@ public class JohnF extends javax.swing.JFrame {
             boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
             hurt.setIcon(new ImageIcon((ImageIO.read(new File("blood.png"))).getScaledInstance(hurt.getWidth(), hurt.getHeight(), Image.SCALE_SMOOTH)));
             cut.setIcon(new ImageIcon((ImageIO.read(new File("scissors.png"))).getScaledInstance(cut.getWidth(), cut.getHeight(), Image.SCALE_SMOOTH)));
+            badHeart.setIcon(new ImageIcon((ImageIO.read(new File("badHeart.png"))).getScaledInstance(badHeart.getWidth(), badHeart.getHeight(), Image.SCALE_SMOOTH)));
+            sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("SewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
+            sewBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(sewBox.getWidth(), sewBox.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -636,6 +739,7 @@ public class JohnF extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JLabel badHeart;
     private javax.swing.JLabel boneSaw;
     private javax.swing.JLabel boneSawLabel;
     private javax.swing.JLabel cut;
@@ -646,10 +750,10 @@ public class JohnF extends javax.swing.JFrame {
     private javax.swing.JLabel cutBox5;
     private javax.swing.JLabel cutBox6;
     private javax.swing.JProgressBar healthBar;
-    private javax.swing.JLabel heart;
     private javax.swing.JLabel hurt;
-    private javax.swing.JLabel lungs;
     private javax.swing.JLabel ribs;
+    private javax.swing.JLabel sewBox;
+    private javax.swing.JLabel sewNeedle;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
