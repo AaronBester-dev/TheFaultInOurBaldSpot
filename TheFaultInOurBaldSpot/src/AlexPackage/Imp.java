@@ -15,7 +15,7 @@ public class Imp extends EnemiesClass {
         health = 1;
         speed = 3;
         strength = 1; 
-        height =2;
+        height =4;
         picFile = "Impling";
     }
     
