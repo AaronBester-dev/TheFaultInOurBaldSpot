@@ -9,6 +9,11 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
-public class SecurityGuard {
-    
+public class SecurityGuard extends EnemyClass {
+       public SecurityGuard() {
+        health = 1;
+        speed = 3;
+        strength = 2;
+     
+    }
 }
