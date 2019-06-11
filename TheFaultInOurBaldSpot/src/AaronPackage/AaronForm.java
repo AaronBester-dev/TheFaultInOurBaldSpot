@@ -33,6 +33,7 @@ int numberOfObjects = 0;
      ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
        static ArrayList<EnemyClass> securityGuardStats = new ArrayList<EnemyClass>(0);
     static ArrayList<EnemyClass> officeWorkerStats = new ArrayList<EnemyClass>(0);
+      static ArrayList<EnemyClass> fatOfficeWorkerStats = new ArrayList<EnemyClass>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -129,7 +130,7 @@ int numberOfObjects = 0;
         player.setText(resourceMap.getString("player.text")); // NOI18N
         player.setName("player"); // NOI18N
         getContentPane().add(player);
-        player.setBounds(86, 338, 115, 198);
+        player.setBounds(240, 340, 115, 198);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +168,8 @@ int numberOfObjects = 0;
          spikeSpawner();
         floorSpawner();
          securityGuardSpawner();
+         officeWorkerSpawner();
+         fatAlbertSpawner();
        
     }
 
@@ -188,13 +191,14 @@ int numberOfObjects = 0;
         //left key pressed
         if (evt.getKeyCode() == 37) {
             if (!checkCollision(player, -10, 0)) {
-                player.setLocation(player.getLocation().x - 10, player.getLocation().y);
+               scrollEverythingRight();
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
             if (!checkCollision(player, 10, 0)) {
-                player.setLocation(player.getLocation().x + 10, player.getLocation().y);
+               
+                scrollEverythingLeft();
             }
         }
 
@@ -382,6 +386,110 @@ public void securityGuardSpawner(){
             
         }
 }
+public void officeWorkerSpawner(){
+     
+    for (int i = 0; i < numberOfObjects; i++) {
+           // System.out.println(i);
+            if (objectsArray[0][i].equals("worker")) {
+
+             System.out.println("Worker Coming");
+        OfficeWorker worker = new OfficeWorker();
+        officeWorkerStats.add(worker);
+        JLabel label = new JLabel();
+        worker.setLabel(label);
+        getContentPane().add(worker.getLabel());
+        worker.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+        try {
+            worker.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("officeWorker.png"))).getScaledInstance(worker.getLabel().getWidth(), worker.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
+            
+        }
+}
+public void fatAlbertSpawner(){
+     
+    for (int i = 0; i < numberOfObjects; i++) {
+           // System.out.println(i);
+            if (objectsArray[0][i].equals("fat")) {
+
+             System.out.println("FAT Coming");
+        FatOfficeWorker fat = new FatOfficeWorker();
+        fatOfficeWorkerStats.add(fat);
+        JLabel label = new JLabel();
+        fat.setLabel(label);
+        getContentPane().add(fat.getLabel());
+        fat.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+        try {
+            fat.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("aaronFatAlbert.png"))).getScaledInstance(fat.getLabel().getWidth(), fat.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
+            
+        }
+}
+
+public void scrollEverythingLeft(){
+       for (JLabel item : activeFloor) {
+                    item.setLocation(item.getLocation().x-10, item.getLocation().y);
+                 
+
+                }
+         for (JLabel item : activeSpike) {
+                    item.setLocation(item.getLocation().x-10, item.getLocation().y);
+                 
+
+                }
+           for (EnemyClass item : fatOfficeWorkerStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x-10, item.getLabel().getLocation().y);
+                 
+
+                }
+             for (EnemyClass item : officeWorkerStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x-10, item.getLabel().getLocation().y);
+                 
+
+                }
+              for (EnemyClass item : securityGuardStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x-10, item.getLabel().getLocation().y);
+                 
+
+                }
+}
+
+public void scrollEverythingRight(){
+       for (JLabel item : activeFloor) {
+                    item.setLocation(item.getLocation().x+10, item.getLocation().y);
+                 
+
+                }
+         for (JLabel item : activeSpike) {
+                    item.setLocation(item.getLocation().x+10, item.getLocation().y);
+                 
+
+                }
+   for (EnemyClass item : fatOfficeWorkerStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x+10, item.getLabel().getLocation().y);
+                 
+
+                }
+             for (EnemyClass item : officeWorkerStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x+10, item.getLabel().getLocation().y);
+                 
+
+                }
+              for (EnemyClass item : securityGuardStats) {
+                    item.getLabel().setLocation(item.getLabel().getLocation().x+10, item.getLabel().getLocation().y);
+                 
+
+                }
+}
+
+
 
 
 

@@ -9,6 +9,11 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
-public class FatOfficeWorker {
-    
+public class FatOfficeWorker extends EnemyClass {
+     public FatOfficeWorker() {
+        health = 1;
+        speed = 3;
+        strength = 3;
+        
+    }
 }
