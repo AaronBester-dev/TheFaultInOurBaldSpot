@@ -22,14 +22,68 @@ import java.util.TimerTask;
 public class Brayden1 extends javax.swing.JFrame {
 public int score = 0;
 public int counter = 150;
+public int counterO = 15;
+public int counterT = 15;
+public int counterTh = 15;
+public int counterF = 15;
+public int counterFi = 15;
+public int counterS = 15;
 //This makes the main timer
 Timer timer = new Timer();
-TimerTask task = new TimerTask(){
-        public void run(){
-        counter--;
-        timerBoy.setText(String.valueOf(counter));
+    TimerTask task = new TimerTask() {
+        public void run() {
+            counterO--;
+            // timerBoy.setText(String.valueOf(counterO));
         }
-        };
+    };
+
+    Timer timerO = new Timer();
+    TimerTask taskO = new TimerTask() {
+        public void run() {
+            counterT--;
+            //timerBoy.setText(String.valueOf(counterT));
+        }
+    };
+
+    Timer timerT = new Timer();
+    TimerTask taskT = new TimerTask() {
+        public void run() {
+            counterTh--;
+            //timerBoy.setText(String.valueOf(counterTh));
+        }
+    };
+
+    Timer timerTh = new Timer();
+    TimerTask taskTh = new TimerTask() {
+        public void run() {
+            counterF--;
+            // timerBoy.setText(String.valueOf(counterF));
+        }
+    };
+
+    Timer timerF = new Timer();
+    TimerTask taskF = new TimerTask() {
+        public void run() {
+            counterFi--;
+            // timerBoy.setText(String.valueOf(counterFi));
+        }
+    };
+
+    Timer timerFi = new Timer();
+    TimerTask taskFi = new TimerTask() {
+        public void run() {
+            counterS--;
+            //timerBoy.setText(String.valueOf(counterS));
+        }
+    };
+
+    Timer timerS = new Timer();
+    TimerTask taskS = new TimerTask() {
+        public void run() {
+            counter--;
+            //timerBoy.setText(String.valueOf(counter));
+        }
+    };
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -190,14 +244,29 @@ TimerTask task = new TimerTask(){
      soup soupBoy[] = new soup[6];
      
      private void arrayMaker() { 
-       
-        soupBoy[0] = new soup();
-        soupBoy[1] = new soup();
-        soupBoy[2] = new soup();
-        soupBoy[3] = new soup();
-        soupBoy[4] = new soup();
-        soupBoy[5] = new soup();
-        }
+
+         soupBoy[0] = new soup();
+
+         if (counterO == 0) {
+             soupBoy[0] = new soup();
+
+             counterO = 15;
+         }
+         soupBoy[1] = new soup();
+         timerT.scheduleAtFixedRate(task, 1000, 1000);
+
+         soupBoy[2] = new soup();
+         timerTh.scheduleAtFixedRate(task, 1000, 1000);
+         
+         soupBoy[3] = new soup();
+         timerF.scheduleAtFixedRate(task, 1000, 1000);
+         
+         soupBoy[4] = new soup();
+         timerFi.scheduleAtFixedRate(task, 1000, 1000);
+         
+         soupBoy[5] = new soup();
+         timerS.scheduleAtFixedRate(task, 1000, 1000);
+       }
 
     //checks which key is pressed and moves image if no collision is detected
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -245,6 +314,7 @@ TimerTask task = new TimerTask(){
         BufferedImage img = null;
         //starts timer
         timer.scheduleAtFixedRate(task, 1000, 1000 );
+        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
         //Set the jLables' icon to the image it needs
         try {
             user.setIcon(new ImageIcon((ImageIO.read(new File("braydenNude.png"))).getScaledInstance(user.getWidth(), user.getHeight(), Image.SCALE_SMOOTH)));

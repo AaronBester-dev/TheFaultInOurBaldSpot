@@ -10,5 +10,15 @@ package Brayden;
  * @author Brayd
  */
 public class character {
+private String iteam;
+private String skin;
+private int speed;
+
+public character(){
+ iteam = "";
+ skin = "braydenNude.png";
+ speed = 20;
+    
+}
     
 }
