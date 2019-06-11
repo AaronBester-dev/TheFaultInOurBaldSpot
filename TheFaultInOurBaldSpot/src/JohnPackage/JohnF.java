@@ -41,10 +41,11 @@ public class JohnF extends javax.swing.JFrame {
     boolean sewClick = false;
     int healthValue = 100;
     int counter = 0;
-    int gameCounter = 12;
+    int gameCounter = 120;
     int leftCounter = 0;
     int rightCounter = 0;
     int score = 0;
+    Tool needle, bonesaw ;
 
     private void injured() {
         Timer injuredTimer = new Timer();
@@ -66,6 +67,8 @@ public class JohnF extends javax.swing.JFrame {
 
     private void endGame() {
         if (gameCounter != 0) {
+            System.out.println(healthBar.getValue());
+             System.out.println(1/gameCounter);
               score = healthBar.getValue() * (1 / gameCounter);
         }
         System.out.println("Your score is: " + score);
@@ -461,10 +464,10 @@ public class JohnF extends javax.swing.JFrame {
     private void moveTool() {
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        if (boneSawClick == true) {
-            boneSaw.setLocation((mx - 32), (my - 30));
-        } else if (sewNeedleClick == true) {
-            sewNeedle.setLocation((mx - 45), (my - 30));
+       if (bonesaw.getClicked() == true) {
+            bonesaw.getLabel().setLocation((mx - 32), (my - 30));
+        } else if (needle.getClicked() == true) {
+            needle.getLabel().setLocation((mx - 45), (my - 30));
         }
     }
 
@@ -473,7 +476,7 @@ public class JohnF extends javax.swing.JFrame {
 //        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 //                new ImageIcon("JSumBoneSaw.png").getImage(),
 //                new Point(0, 0), "custom cursor"));
-        boneSawClick = true;
+        bonesaw.isClicked = true;
 //        int counter = 0;
 //        counter++;
     }//GEN-LAST:event_boneSawMouseClicked
@@ -503,7 +506,7 @@ public class JohnF extends javax.swing.JFrame {
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
         System.out.println("Exited");
-        if (cutClick == true & boneSawClick == true) {
+        if (cutClick == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBoxMouseExited
@@ -511,7 +514,7 @@ public class JohnF extends javax.swing.JFrame {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        if (boneSawClick == true) {
+        if (bonesaw.isClicked == true) {
             if (mx > 433 & mx < 449 & my < 340 & my > 320) {
                 cutClick = true;
             } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
@@ -528,7 +531,7 @@ public class JohnF extends javax.swing.JFrame {
             } else {
                 injured();
             }
-        } else if (sewNeedleClick == true) {
+        } else if (needle.isClicked == true) {
             if (mx > 594 & mx < 630 & my < 429 & my > 410) {
                 sewClick = true;
                 System.out.println("Reconginzed");
@@ -675,41 +678,41 @@ public class JohnF extends javax.swing.JFrame {
 
     private void cutBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseExited
         System.out.println("Exited");
-        if (cutClick2 == true & boneSawClick == true) {
+        if (cutClick2 == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox2MouseExited
 
     private void cutBox3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseExited
         System.out.println("Exited");
-        if (cutClick3 == true & boneSawClick == true) {
+        if (cutClick3 == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox3MouseExited
 
     private void cutBox4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseExited
         System.out.println("Exited");
-        if (cutClick4 == true & boneSawClick == true) {
+        if (cutClick4 == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox4MouseExited
 
     private void cutBox5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseExited
         System.out.println("Exited");
-        if (cutClick5 == true & boneSawClick == true) {
+        if (cutClick5 == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox5MouseExited
 
     private void cutBox6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseExited
         System.out.println("Exited");
-        if (cutClick6 == true & boneSawClick == true) {
+        if (cutClick6 == true & bonesaw.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox6MouseExited
 
     private void sewNeedleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseClicked
-        sewNeedleClick = true;
+        needle.setClicked(true);
     }//GEN-LAST:event_sewNeedleMouseClicked
 
     private void sewNeedleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseDragged
@@ -721,7 +724,7 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_sewNeedleMouseMoved
 
     private void sewBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseExited
-        if (sewClick == true & sewNeedleClick == true) {
+        if (sewClick == true & needle.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_sewBoxMouseExited
@@ -729,6 +732,14 @@ public class JohnF extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+
+
+
+
+
+
+ 
+
 //Initializes the labels with their images
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
@@ -745,12 +756,19 @@ public class JohnF extends javax.swing.JFrame {
             cutBox4.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox4.getWidth(), cutBox4.getHeight(), Image.SCALE_SMOOTH)));
             cutBox5.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox5.getWidth(), cutBox5.getHeight(), Image.SCALE_SMOOTH)));
             cutBox6.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox6.getWidth(), cutBox6.getHeight(), Image.SCALE_SMOOTH)));
-            boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
             hurt.setIcon(new ImageIcon((ImageIO.read(new File("blood.png"))).getScaledInstance(hurt.getWidth(), hurt.getHeight(), Image.SCALE_SMOOTH)));
             cut.setIcon(new ImageIcon((ImageIO.read(new File("scissors.png"))).getScaledInstance(cut.getWidth(), cut.getHeight(), Image.SCALE_SMOOTH)));
             badHeart.setIcon(new ImageIcon((ImageIO.read(new File("badHeart.png"))).getScaledInstance(badHeart.getWidth(), badHeart.getHeight(), Image.SCALE_SMOOTH)));
-            sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("SewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
             sewBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(sewBox.getWidth(), sewBox.getHeight(), Image.SCALE_SMOOTH)));
+       
+                  
+            
+            sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("SewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
+            
+            needle = new Tool(sewNeedle,3);
+            bonesaw = new Tool(boneSaw, 6);
+            boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
+
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);

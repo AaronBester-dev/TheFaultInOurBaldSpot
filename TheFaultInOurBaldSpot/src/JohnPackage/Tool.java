@@ -5,14 +5,38 @@
  */
 package JohnPackage;
 
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author john.diemert744
  */
 public class Tool {
-    private String boneSaw; 
+    javax.swing.JLabel toolLabel;
+    int damage;
+    boolean isClicked = false;
     
     public Tool() {
-        
     }
+    
+    public Tool(javax.swing.JLabel _toolLabel, int _damage) {
+        toolLabel = _toolLabel;
+        damage = _damage;
+    }
+    
+    public void setClicked (boolean _clicked){
+        isClicked = _clicked;
+    }
+    
+    public boolean getClicked (){
+        return isClicked;
+    }
+    
+    public javax.swing.JLabel getLabel() {
+        return toolLabel;
+    }
+    
 }
