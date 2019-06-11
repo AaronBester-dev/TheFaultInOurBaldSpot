@@ -20,6 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Brayden1 extends javax.swing.JFrame {
+public int score = 0;
 public int counter = 150;
 //This makes the main timer
 Timer timer = new Timer();
