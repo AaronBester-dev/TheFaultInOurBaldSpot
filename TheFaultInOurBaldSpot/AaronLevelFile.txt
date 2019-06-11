@@ -1,3 +1,4 @@
-floor,2,2
+floor,10,450
 floor,250,100
-spike,900,450
+spike,50,50
+guard,10,550

@@ -9,6 +9,6 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
-public class SecurityWorker {
+public class PlayerClass {
     
 }
