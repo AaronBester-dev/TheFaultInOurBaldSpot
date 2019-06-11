@@ -156,6 +156,10 @@ public class AlexForm extends javax.swing.JFrame {
                     if (i == 3) {
                         for (EnemiesClass item : deathWishStats) {
                             item.getLabel().setLocation(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 10);
+                            if (checkBulletCollisionEnemies(item.getLabel(), 0, -5) == true) {
+                           // remove(item);
+                            deathWishStats.remove(item);
+                    }
                         }
                     }
                 }
