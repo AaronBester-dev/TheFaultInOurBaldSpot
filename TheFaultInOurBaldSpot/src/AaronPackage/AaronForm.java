@@ -21,7 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
-int numberOfObjects = 0;
+
+    int numberOfObjects = 0;
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
     ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
     ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
@@ -30,7 +31,10 @@ int numberOfObjects = 0;
     ArrayList<String> blockY = new ArrayList<String>(0);
     String[][] objectsArray = new String[3][10];
     ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
-     ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
+    static ArrayList<EnemyClass> securityGuardStats = new ArrayList<EnemyClass>(0);
+    static ArrayList<EnemyClass> officeWorkerStats = new ArrayList<EnemyClass>(0);
+    static ArrayList<EnemyClass> fatOfficeWorkerStats = new ArrayList<EnemyClass>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -127,7 +131,7 @@ int numberOfObjects = 0;
         player.setText(resourceMap.getString("player.text")); // NOI18N
         player.setName("player"); // NOI18N
         getContentPane().add(player);
-        player.setBounds(86, 338, 115, 198);
+        player.setBounds(240, 340, 115, 198);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,9 +166,12 @@ int numberOfObjects = 0;
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         fillUpArray();
-         spikeSpawner();
+        spikeSpawner();
         floorSpawner();
-       
+        securityGuardSpawner();
+        officeWorkerSpawner();
+        fatAlbertSpawner();
+
     }
 
 
@@ -185,13 +192,14 @@ int numberOfObjects = 0;
         //left key pressed
         if (evt.getKeyCode() == 37) {
             if (!checkCollision(player, -10, 0)) {
-                player.setLocation(player.getLocation().x - 10, player.getLocation().y);
+                scrollEverythingRight();
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
             if (!checkCollision(player, 10, 0)) {
-                player.setLocation(player.getLocation().x + 10, player.getLocation().y);
+
+                scrollEverythingLeft();
             }
         }
 
@@ -262,7 +270,7 @@ int numberOfObjects = 0;
 //If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
 //TYPE 
             int index = myLine.indexOf(",");
-numberOfObjects++;
+            numberOfObjects++;
             blockAdd = myLine.substring(0, index);
             System.out.println("BLOCK" + blockAdd);
             blockType.add(blockAdd);
@@ -305,7 +313,7 @@ numberOfObjects++;
     public void floorSpawner() {
 
         for (int i = 0; i < numberOfObjects; i++) {
-           // System.out.println(i);
+            // System.out.println(i);
             if (objectsArray[0][i].equals("floor")) {
 
                 JLabel floor1 = new JLabel();
@@ -325,15 +333,15 @@ numberOfObjects++;
                 System.out.println("Try performed");
                 activeFloor.add(floor1);
             }
-         
-            
+
         }
 
     }
-public void spikeSpawner(){
-     
-    for (int i = 0; i < numberOfObjects; i++) {
-           // System.out.println(i);
+
+    public void spikeSpawner() {
+
+        for (int i = 0; i < numberOfObjects; i++) {
+            // System.out.println(i);
             if (objectsArray[0][i].equals("spike")) {
 
                 JLabel spike2 = new JLabel();
@@ -353,36 +361,127 @@ public void spikeSpawner(){
                 System.out.println("Try performed");
                 activeSpike.add(spike2);
             }
-            
+
         }
-}
-public void securityGuardSpawner(){
-     
-    for (int i = 0; i < numberOfObjects; i++) {
-           // System.out.println(i);
-            if (objectsArray[0][i].equals("spike")) {
+    }
 
-                JLabel spike2 = new JLabel();
+    public void securityGuardSpawner() {
 
-                System.out.println("Label Created");
-                getContentPane().add(spike2);
-                spike2.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
+        for (int i = 0; i < numberOfObjects; i++) {
+            // System.out.println(i);
+            if (objectsArray[0][i].equals("guard")) {
 
-                System.out.println("Bounds Set");
+                System.out.println("IMP Coming");
+                SecurityGuard guard = new SecurityGuard();
+                securityGuardStats.add(guard);
+                JLabel label = new JLabel();
+                guard.setLabel(label);
+                getContentPane().add(guard.getLabel());
+                guard.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
                 try {
-                    spike2.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(spike2.getWidth(), spike2.getHeight(), Image.SCALE_SMOOTH)));
+                    guard.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("AaronSecurityGuard.png"))).getScaledInstance(guard.getLabel().getWidth(), guard.getLabel().getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //  setComponentZOrder(bullet1, 0);
-                System.out.println("Try performed");
-                activeSpike.add(spike2);
             }
-            
-        }
-}
 
+        }
+    }
+
+    public void officeWorkerSpawner() {
+
+        for (int i = 0; i < numberOfObjects; i++) {
+            // System.out.println(i);
+            if (objectsArray[0][i].equals("worker")) {
+
+                System.out.println("Worker Coming");
+                OfficeWorker worker = new OfficeWorker();
+                officeWorkerStats.add(worker);
+                JLabel label = new JLabel();
+                worker.setLabel(label);
+                getContentPane().add(worker.getLabel());
+                worker.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+                try {
+                    worker.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("officeWorker.png"))).getScaledInstance(worker.getLabel().getWidth(), worker.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+    }
+
+    public void fatAlbertSpawner() {
+
+        for (int i = 0; i < numberOfObjects; i++) {
+            // System.out.println(i);
+            if (objectsArray[0][i].equals("fat")) {
+
+                System.out.println("FAT Coming");
+                FatOfficeWorker fat = new FatOfficeWorker();
+                fatOfficeWorkerStats.add(fat);
+                JLabel label = new JLabel();
+                fat.setLabel(label);
+                getContentPane().add(fat.getLabel());
+                fat.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+                try {
+                    fat.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("aaronFatAlbert.png"))).getScaledInstance(fat.getLabel().getWidth(), fat.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+    }
+
+    public void scrollEverythingLeft() {
+        for (JLabel item : activeFloor) {
+            item.setLocation(item.getLocation().x - 10, item.getLocation().y);
+
+        }
+        for (JLabel item : activeSpike) {
+            item.setLocation(item.getLocation().x - 10, item.getLocation().y);
+
+        }
+        for (EnemyClass item : fatOfficeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : officeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : securityGuardStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+
+        }
+    }
+
+    public void scrollEverythingRight() {
+        for (JLabel item : activeFloor) {
+            item.setLocation(item.getLocation().x + 10, item.getLocation().y);
+
+        }
+        for (JLabel item : activeSpike) {
+            item.setLocation(item.getLocation().x + 10, item.getLocation().y);
+
+        }
+        for (EnemyClass item : fatOfficeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : officeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : securityGuardStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

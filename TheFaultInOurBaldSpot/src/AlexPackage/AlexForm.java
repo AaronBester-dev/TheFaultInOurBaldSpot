@@ -33,7 +33,7 @@ import java.awt.Font;
  */
 public class AlexForm extends javax.swing.JFrame {
 
-    public int health = 3;
+    public int health = 4;
     public int counter = 120;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
@@ -57,10 +57,10 @@ public class AlexForm extends javax.swing.JFrame {
                         remove(item);
                         bullets.remove(item);
                     }
-
                 }
+
                 for (JLabel item : impBullets) {
-                    if (checkBulletCollisionPlane(item, 0, 4) == true) {
+                    if (checkBulletCollisionPlane(item, 0, 4, 1) == true) {
                         remove(item);
                         impBullets.remove(item);
                     } else {
@@ -69,11 +69,35 @@ public class AlexForm extends javax.swing.JFrame {
                 }
 
                 for (JLabel item : beholderBullets) {
-                    if (checkBulletCollisionPlane(item, 0, 3) == true) {
+                    if (checkBulletCollisionPlane(item, 0, 3, 2) == true) {
                         remove(item);
                         beholderBullets.remove(item);
                     } else {
                         item.setLocation(item.getLocation().x, item.getLocation().y + 3);
+                    }
+                }
+                for (JLabel item : demonBulletsRight) {
+                    if (checkBulletCollisionPlane(item, 1, 5, 1) == true) {
+                        remove(item);
+                        demonBulletsRight.remove(item);
+                    } else {
+                        item.setLocation(item.getLocation().x + 1, item.getLocation().y + 5);
+                    }
+                }
+                for (JLabel item : demonBulletsMid) {
+                    if (checkBulletCollisionPlane(item, 0, 5, 1) == true) {
+                        remove(item);
+                        demonBulletsMid.remove(item);
+                    } else {
+                        item.setLocation(item.getLocation().x, item.getLocation().y + 5);
+                    }
+                }
+                for (JLabel item : demonBulletsLeft) {
+                    if (checkBulletCollisionPlane(item, -1, 5, 1) == true) {
+                        remove(item);
+                        demonBulletsLeft.remove(item);
+                    } else {
+                        item.setLocation(item.getLocation().x - 1, item.getLocation().y + 5);
                     }
                 }
 
@@ -103,6 +127,10 @@ public class AlexForm extends javax.swing.JFrame {
                                 }
                                 impBullets.add(impBullet);
                             }
+                            if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
+                                getContentPane().remove(item.getLabel());
+                                impStats.remove(item);
+                            }
                             if (item.getLabel().getLocation().x >= 100 && item.getLabel().getLocation().y == 200) {
                                 item.getLabel().setLocation(item.getLabel().getLocation().x + 2, item.getLabel().getLocation().y);
                             }
@@ -116,18 +144,48 @@ public class AlexForm extends javax.swing.JFrame {
                                 item.getLabel().setLocation(item.getLabel().getLocation().x, item.getLabel().getLocation().y - 2);
                             }
                         }
+
                     }
                     if (i == 1) {
                         for (EnemiesClass item : demonStats) {
-                            if (item.getLabel().getLocation().y >= 250) {
+                            if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
+                                getContentPane().remove(item.getLabel());
+                                demonStats.remove(item);
+                            }
+                            int demonBall = (int) (Math.random() * 300 + 1);
+                            if (demonBall == 5) {
+                                JLabel demonBulletRight = new JLabel();
+                                JLabel demonBulletMid = new JLabel();
+                                JLabel demonBulletLeft = new JLabel();
+                                getContentPane().add(demonBulletRight);
+                                getContentPane().add(demonBulletMid);
+                                getContentPane().add(demonBulletLeft);
+
+                                demonBulletRight.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth(), item.getLabel().getLocation().y + 80, 40, 40);
+                                demonBulletMid.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth() / 2, item.getLabel().getLocation().y + 80, 30, 40);
+                                demonBulletLeft.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 80, 40, 40);
+                                try {
+                                    demonBulletRight.setIcon(new ImageIcon((ImageIO.read(new File("dmonBullRight.png"))).getScaledInstance(demonBulletRight.getWidth(), demonBulletRight.getHeight(), Image.SCALE_SMOOTH)));
+                                    demonBulletMid.setIcon(new ImageIcon((ImageIO.read(new File("beholderBall.png"))).getScaledInstance(demonBulletMid.getWidth(), demonBulletMid.getHeight(), Image.SCALE_SMOOTH)));
+                                    demonBulletLeft.setIcon(new ImageIcon((ImageIO.read(new File("dmonBullLeft.png"))).getScaledInstance(demonBulletLeft.getWidth(), demonBulletLeft.getHeight(), Image.SCALE_SMOOTH)));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                demonBulletsRight.add(demonBulletRight);
+                                demonBulletsMid.add(demonBulletMid);
+                                demonBulletsLeft.add(demonBulletLeft);
+                            }
+                            if (item.getLabel().getLocation().y >= 200) {
                             } else {
                                 item.getLabel().setLocation(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 2);
                             }
                         }
+
                     }
                     if (i == 2) {
                         for (EnemiesClass item : beholderStats) {
-                             int fireBall = (int) (Math.random() * 200 + 1);
+                            int fireBall = (int) (Math.random() * 200 + 1);
+                            //
                             if (fireBall == 5) {
                                 JLabel beholderBullet = new JLabel();
                                 getContentPane().add(beholderBullet);
@@ -137,7 +195,12 @@ public class AlexForm extends javax.swing.JFrame {
                                 } catch (IOException ex) {
                                     Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                impBullets.add(beholderBullet);
+                                beholderBullets.add(beholderBullet);
+                            }
+                            //
+                            if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
+                                getContentPane().remove(item.getLabel());
+                                beholderStats.remove(item);
                             }
                             if (item.getLabel().getLocation().x <= 80) {
                                 item.setDirection(true);
@@ -156,10 +219,14 @@ public class AlexForm extends javax.swing.JFrame {
                     if (i == 3) {
                         for (EnemiesClass item : deathWishStats) {
                             item.getLabel().setLocation(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 10);
-                            if (checkBulletCollisionEnemies(item.getLabel(), 0, -5) == true) {
-                           // remove(item);
-                            deathWishStats.remove(item);
-                    }
+                            if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
+                                getContentPane().remove(item.getLabel());
+                                deathWishStats.remove(item);
+                            }
+                            if (item.getLabel().getLocation().y >= 1000) {
+                                getContentPane().remove(item.getLabel());
+                                deathWishStats.remove(item);
+                            }
                         }
                     }
                 }
@@ -192,6 +259,9 @@ public class AlexForm extends javax.swing.JFrame {
     ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
     ArrayList<JLabel> impBullets = new ArrayList<JLabel>(0);
     ArrayList<JLabel> beholderBullets = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> demonBulletsRight = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> demonBulletsMid = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> demonBulletsLeft = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -267,14 +337,56 @@ public class AlexForm extends javax.swing.JFrame {
         return false;
     }
 
-    private boolean checkBulletCollisionPlane(javax.swing.JLabel _lbl, int _x, int _y) {
+    private boolean checkBulletCollisionPlane(javax.swing.JLabel _lbl, int _x, int _y, int damage) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //check if temporary rectangle intersect with wallLabel    
 
         if (rect.intersects(tataPlane.getBounds())) {
-            health--;
+            health -= damage;
+            healthLabel.setText(String.valueOf(health));
+            if (health == 3) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldMed.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 2) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldLow.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 1) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 0) {
+
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkBulletCollisionPhysical(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+//check if temporary rectangle intersect with wallLabel    
+
+        if (rect.intersects(tataPlane.getBounds())) {
+            health -= 3;
             healthLabel.setText(String.valueOf(health));
             return true;
         } else {
@@ -293,7 +405,7 @@ public class AlexForm extends javax.swing.JFrame {
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
         try {
             // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+            tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldHigh.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
             leftSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallLeft.png"))).getScaledInstance(leftSideWall.getWidth(), leftSideWall.getHeight(), Image.SCALE_SMOOTH)));
             rightSideWall.setIcon(new ImageIcon((ImageIO.read(new File("hellWallRight.png"))).getScaledInstance(rightSideWall.getWidth(), rightSideWall.getHeight(), Image.SCALE_SMOOTH)));
             hellWallBottom.setIcon(new ImageIcon((ImageIO.read(new File("hellWallBottom.png"))).getScaledInstance(hellWallBottom.getWidth(), hellWallBottom.getHeight(), Image.SCALE_SMOOTH)));
@@ -512,35 +624,43 @@ public class AlexForm extends javax.swing.JFrame {
         if (spawn <= 40) {
             impSpawn();
         }
-       if (spawn > 40 && spawn <= 50) {
+        if (spawn > 40 && spawn <= 50) {
             demonSpawn();
         }
-        if (spawn > 50 && spawn <= 80) {
+        if (spawn > 50 && spawn <= 70) {
             beholderSpawn();
         }
-        if (spawn > 80 && spawn <= 100) {
+        if (spawn > 70 && spawn <= 100) {
             deathWishSpawn();
         }
     }
 
     public void impSpawn() {
         System.out.println("IMP Coming");
-        Imp imp = new Imp();
-        impStats.add(imp);
-        JLabel label = new JLabel();
-        imp.setLabel(label);
-        getContentPane().add(imp.getLabel());
-        imp.getLabel().setBounds(100, imp.getHeight() * 50, 40, 40);
-        try {
-            imp.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Impling.png"))).getScaledInstance(imp.getLabel().getWidth(), imp.getLabel().getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (impStats.size() < 10) {
+            Imp imp = new Imp();
+            impStats.add(imp);
+
+            JLabel label = new JLabel();
+            imp.setLabel(label);
+            getContentPane().add(imp.getLabel());
+            imp.getLabel().setBounds(100, imp.getHeight() * 50, 40, 40);
+            try {
+                imp.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Impling.png"))).getScaledInstance(imp.getLabel().getWidth(), imp.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+
         }
+
     }
 
     public void demonSpawn() {
         System.out.println("Demon Coming");
+        if (demonStats.size() < 1){
         Demon demon = new Demon();
         demonStats.add(demon);
         JLabel label = new JLabel();
@@ -553,10 +673,13 @@ public class AlexForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        else{}
     }
 
     public void beholderSpawn() {
         System.out.println("Beholder Coming");
+        if (beholderStats.size() < 3){
         Beholder beholder = new Beholder();
         beholderStats.add(beholder);
         JLabel label = new JLabel();
@@ -569,6 +692,8 @@ public class AlexForm extends javax.swing.JFrame {
             System.out.println("NO IMAGE");
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        else{}
     }
 
     public void deathWishSpawn() {
