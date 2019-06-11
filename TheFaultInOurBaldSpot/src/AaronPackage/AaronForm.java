@@ -28,8 +28,9 @@ public class AaronForm extends javax.swing.JFrame {
     ArrayList<String> blockType = new ArrayList<String>(0);
     ArrayList<String> blockX = new ArrayList<String>(0);
     ArrayList<String> blockY = new ArrayList<String>(0);
-String [][] objectsArray = new String[3][10];
+    String[][] objectsArray = new String[3][10];
     ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
+     ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -103,7 +104,9 @@ String [][] objectsArray = new String[3][10];
         player = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 720));
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -159,7 +162,9 @@ String [][] objectsArray = new String[3][10];
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         fillUpArray();
+         spikeSpawner();
         floorSpawner();
+       
     }
 
 
@@ -255,9 +260,8 @@ String [][] objectsArray = new String[3][10];
             }
 
 //If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
-         
 //TYPE 
-int index = myLine.indexOf(",");
+            int index = myLine.indexOf(",");
 
             blockAdd = myLine.substring(0, index);
             System.out.println("BLOCK" + blockAdd);
@@ -266,7 +270,6 @@ int index = myLine.indexOf(",");
             myLine = myLine.substring(index + 1, myLine.length());
             System.out.println("NEW line " + myLine);
 
-            
             //X- VALUE
             index = myLine.indexOf(",");
             blockAdd = myLine.substring(0, index);
@@ -274,72 +277,85 @@ int index = myLine.indexOf(",");
             blockX.add(blockAdd);
             myLine = myLine.substring(index + 1, myLine.length());
 
-            
             //Y=VALUE
-           
             blockAdd = myLine;
             System.out.println(blockAdd);
 
             blockY.add(blockAdd);
 
-          
-
         } while (true);
 //Closez the file to ensure there is no complications
         readFile.close();
-        
 
     }
-    
-    public void fillUpArray(){
-           
-     
-        for(int i = 0; i<3; i++){
-              objectsArray[0][i]=blockType.get(i);
-              System.out.println(objectsArray[0][i]);
-                  objectsArray[1][i]=blockX.get(i);
-                     System.out.println(objectsArray[1][i]);
-                    objectsArray[2][i]=blockY.get(i);
-                       System.out.println(objectsArray[2][i]);
+
+    public void fillUpArray() {
+
+        for (int i = 0; i < 3; i++) {
+            objectsArray[0][i] = blockType.get(i);
+            System.out.println(objectsArray[0][i]);
+            objectsArray[1][i] = blockX.get(i);
+            System.out.println(objectsArray[1][i]);
+            objectsArray[2][i] = blockY.get(i);
+            System.out.println(objectsArray[2][i]);
         }
-        
-       
+
+    }
+
+    public void floorSpawner() {
+
+        for (int i = 0; i < 2; i++) {
+           // System.out.println(i);
+            if (objectsArray[0][i].equals("floor")) {
+
+                JLabel floor1 = new JLabel();
+
+                System.out.println("Label Created");
+                getContentPane().add(floor1);
+                floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+
+                System.out.println("Bounds Set");
+                try {
+                    floor1.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(floor1.getWidth(), floor1.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //  setComponentZOrder(bullet1, 0);
+                System.out.println("Try performed");
+                activeFloor.add(floor1);
+            }
+         
             
-        
-        
-      
-    
-       
-}
-     public void floorSpawner(){
-    
-         for(int i = 0; i<4; i++){
-             if(objectsArray[0][i] == "floor" ){
-                 System.out.println(objectsArray[0][i]);
-               JLabel floor1 = new JLabel();
-
-        System.out.println("Label Created");
-        getContentPane().add(floor1);
-        floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
-
-        System.out.println("Bounds Set");
-        try {
-            floor1.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(floor1.getWidth(), floor1.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //  setComponentZOrder(bullet1, 0);
-        System.out.println("Try performed");
-        activeFloor.add(floor1);
-         }
-         }
-         
-         
-         
-     }
 
+    }
+public void spikeSpawner(){
+     
+    for (int i = 0; i < 2; i++) {
+           // System.out.println(i);
+            if (objectsArray[0][i].equals("spike")) {
 
+                JLabel spike1 = new JLabel();
+
+                System.out.println("Label Created");
+                getContentPane().add(spike1);
+                spike1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 25, 25);
+
+                System.out.println("Bounds Set");
+                try {
+                    spike1.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(spike1.getWidth(), spike1.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //  setComponentZOrder(bullet1, 0);
+                System.out.println("Try performed");
+                activeSpike.add(spike1);
+            }
+            
+        }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
     javax.swing.ButtonGroup buttonGroup1;

@@ -19,6 +19,9 @@ import Brayden.Brayden1;
 import AaronPackage.AaronForm;
 import JohnPackage.JohnF;
 import AlexPackage.AlexForm;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The application's main frame.
@@ -224,7 +227,12 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_braydenActionPerformed
 
     private void aaronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaronActionPerformed
-     AaronForm aaronObject = new AaronForm();
+     AaronForm aaronObject=null;
+        try {
+            aaronObject = new AaronForm();
+        } catch (IOException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        }
      aaronObject.setVisible(true);
     }//GEN-LAST:event_aaronActionPerformed
 
