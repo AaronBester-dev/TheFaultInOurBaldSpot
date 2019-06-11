@@ -3,3 +3,5 @@ floor,250,100
 floor,50,25
 spike,50,50
 guard,2,50
+worker,2,100
+fat,60,45
