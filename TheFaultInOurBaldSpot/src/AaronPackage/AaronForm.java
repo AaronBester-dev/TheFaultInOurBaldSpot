@@ -30,6 +30,7 @@ public class AaronForm extends javax.swing.JFrame {
     ArrayList<String> blockY = new ArrayList<String>(0);
     String[][] objectsArray = new String[3][10];
     ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
+     ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -103,7 +104,9 @@ public class AaronForm extends javax.swing.JFrame {
         player = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 720));
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -159,7 +162,9 @@ public class AaronForm extends javax.swing.JFrame {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         fillUpArray();
+         spikeSpawner();
         floorSpawner();
+       
     }
 
 
@@ -320,11 +325,37 @@ public class AaronForm extends javax.swing.JFrame {
                 System.out.println("Try performed");
                 activeFloor.add(floor1);
             }
+         
+            
         }
 
     }
+public void spikeSpawner(){
+     
+    for (int i = 0; i < 2; i++) {
+           // System.out.println(i);
+            if (objectsArray[0][i].equals("spike")) {
 
+                JLabel spike1 = new JLabel();
 
+                System.out.println("Label Created");
+                getContentPane().add(spike1);
+                spike1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 25, 25);
+
+                System.out.println("Bounds Set");
+                try {
+                    spike1.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(spike1.getWidth(), spike1.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //  setComponentZOrder(bullet1, 0);
+                System.out.println("Try performed");
+                activeSpike.add(spike1);
+            }
+            
+        }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
     javax.swing.ButtonGroup buttonGroup1;
