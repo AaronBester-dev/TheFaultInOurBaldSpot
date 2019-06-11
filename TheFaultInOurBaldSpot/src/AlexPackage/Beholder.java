@@ -15,6 +15,8 @@ public class Beholder extends EnemiesClass {
         health = 2;
         speed = 2;
         strength = 2;
-        height =3;
+        height =2;
+        direction = true;
+        
     }
 }

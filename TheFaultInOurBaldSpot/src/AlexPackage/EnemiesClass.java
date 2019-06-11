@@ -12,7 +12,9 @@ package AlexPackage;
 public class EnemiesClass {
 
     int health, speed, strength, height;
-    String picFile, soundFile; 
+    String picFile, soundFile;
+    boolean direction;
+    javax.swing.JLabel enemyLabel;
 
     public int getHealth() {
         return health;
@@ -44,5 +46,19 @@ public class EnemiesClass {
 
     public void setHeight(int hT){
         height = hT;
-    }    
+    } 
+    
+     public boolean getDirection() {
+        return direction;
+    }
+
+    public void setDirection(boolean dT){
+        direction =dT;
+    }
+    public javax.swing.JLabel getLabel() {
+        return enemyLabel;
+    }
+     public void setLabel(javax.swing.JLabel jL){
+        enemyLabel = jL;
+    }
 }

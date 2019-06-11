@@ -28,7 +28,8 @@ public class AaronForm extends javax.swing.JFrame {
     ArrayList<String> blockType = new ArrayList<String>(0);
     ArrayList<String> blockX = new ArrayList<String>(0);
     ArrayList<String> blockY = new ArrayList<String>(0);
-
+String [][] objectsArray = new String[3][10];
+    ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -103,7 +104,6 @@ public class AaronForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1080, 720));
         setSize(new java.awt.Dimension(1080, 720));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -115,11 +115,12 @@ public class AaronForm extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
+        bottomFloor.setText(resourceMap.getString("bottomFloor.text")); // NOI18N
         bottomFloor.setName("bottomFloor"); // NOI18N
         getContentPane().add(bottomFloor);
-        bottomFloor.setBounds(0, 542, 772, 70);
+        bottomFloor.setBounds(0, 542, 1420, 70);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(AaronForm.class);
         player.setText(resourceMap.getString("player.text")); // NOI18N
         player.setName("player"); // NOI18N
         getContentPane().add(player);
@@ -157,6 +158,7 @@ public class AaronForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        fillUpArray();
     }
 
 
@@ -284,7 +286,57 @@ int index = myLine.indexOf(",");
         } while (true);
 //Closez the file to ensure there is no complications
         readFile.close();
+        
+
     }
+    
+    public void fillUpArray(){
+           
+     
+        for(int i = 0; i<3; i++){
+              objectsArray[0][i]=blockType.get(i);
+              System.out.println(objectsArray[0][i]);
+                  objectsArray[1][i]=blockX.get(i);
+                     System.out.println(objectsArray[1][i]);
+                    objectsArray[2][i]=blockY.get(i);
+                       System.out.println(objectsArray[2][i]);
+        }
+        
+       
+            
+        
+        
+      
+    
+       
+}
+     public void floorSpawner(){
+    
+         for(int i = 0; i<4; i++){
+             if(objectsArray[0][i] == "floor" ){
+                 
+               JLabel floor1 = new JLabel();
+
+        System.out.println("Label Created");
+        getContentPane().add(floor1);
+        floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+
+        System.out.println("Bounds Set");
+        try {
+            floor1.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(floor1.getWidth(), floor1.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //  setComponentZOrder(bullet1, 0);
+        System.out.println("Try performed");
+        activeFloor.add(floor1);
+         }
+         }
+         
+         
+         
+     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
