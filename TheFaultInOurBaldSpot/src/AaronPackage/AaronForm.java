@@ -31,6 +31,8 @@ int numberOfObjects = 0;
     String[][] objectsArray = new String[3][10];
     ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
      ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
+       static ArrayList<EnemyClass> securityGuardStats = new ArrayList<EnemyClass>(0);
+    static ArrayList<EnemyClass> officeWorkerStats = new ArrayList<EnemyClass>(0);
     Timer aaronGameTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
@@ -164,6 +166,7 @@ int numberOfObjects = 0;
         fillUpArray();
          spikeSpawner();
         floorSpawner();
+         securityGuardSpawner();
        
     }
 
@@ -360,24 +363,21 @@ public void securityGuardSpawner(){
      
     for (int i = 0; i < numberOfObjects; i++) {
            // System.out.println(i);
-            if (objectsArray[0][i].equals("spike")) {
+            if (objectsArray[0][i].equals("guard")) {
 
-                JLabel spike2 = new JLabel();
-
-                System.out.println("Label Created");
-                getContentPane().add(spike2);
-                spike2.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
-
-                System.out.println("Bounds Set");
-                try {
-                    spike2.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(spike2.getWidth(), spike2.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    System.out.println("NO IMAGE");
-                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //  setComponentZOrder(bullet1, 0);
-                System.out.println("Try performed");
-                activeSpike.add(spike2);
+             System.out.println("IMP Coming");
+        SecurityGuard guard = new SecurityGuard();
+        securityGuardStats.add(guard);
+        JLabel label = new JLabel();
+        guard.setLabel(label);
+        getContentPane().add(guard.getLabel());
+        guard.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+        try {
+            guard.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("AaronSecurityGuard.png"))).getScaledInstance(guard.getLabel().getWidth(), guard.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            System.out.println("NO IMAGE");
+            Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
             }
             
         }
