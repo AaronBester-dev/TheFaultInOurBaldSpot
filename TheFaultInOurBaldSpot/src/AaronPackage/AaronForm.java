@@ -159,6 +159,7 @@ String [][] objectsArray = new String[3][10];
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         fillUpArray();
+        floorSpawner();
     }
 
 
@@ -314,7 +315,7 @@ int index = myLine.indexOf(",");
     
          for(int i = 0; i<4; i++){
              if(objectsArray[0][i] == "floor" ){
-                 
+                 System.out.println(objectsArray[0][i]);
                JLabel floor1 = new JLabel();
 
         System.out.println("Label Created");
