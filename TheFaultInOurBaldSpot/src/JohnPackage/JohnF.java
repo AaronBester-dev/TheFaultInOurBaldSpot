@@ -16,7 +16,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -36,12 +38,14 @@ public class JohnF extends javax.swing.JFrame {
     boolean cutClick4 = false;
     boolean cutClick5 = false;
     boolean cutClick6 = false;
+    boolean sewClick = false;
     int healthValue = 100;
     int counter = 0;
-    int gameCounter = 120;
+    int gameCounter = 12;
     int leftCounter = 0;
     int rightCounter = 0;
-    
+    int score = 0;
+
     private void injured() {
         Timer injuredTimer = new Timer();
         TimerTask stopInjured = new TimerTask() {
@@ -54,7 +58,27 @@ public class JohnF extends javax.swing.JFrame {
         System.out.println("injured");
         healthValue = healthValue - 5;
         healthBar.setValue(healthValue);
+        if (healthBar.getValue() == 0) {
+            endGame();
+        }
         hurt.show();
+    }
+
+    private void endGame() {
+        if (gameCounter != 0) {
+              score = healthBar.getValue() * (1 / gameCounter);
+        }
+        System.out.println("Your score is: " + score);
+        try {
+             highScore();
+        } catch (IOException e) { 
+        } 
+    }
+    
+    private void highScore() throws IOException {
+         PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
+         fileOut.println(score);
+         fileOut.close();
     }
 
     private void success() {
@@ -71,36 +95,42 @@ public class JohnF extends javax.swing.JFrame {
             ribs.setVisible(false);
             sewBox.setVisible(true);
             SewBoxTimer();
+        } else if (counter == 7) {
+            endGame();
         }
     }
+
     public void gameCounter() {
-    Timer gameTimer = new Timer();
-    TimerTask stopGame = new TimerTask() {
+        Timer gameTimer = new Timer();
+        TimerTask stopGame = new TimerTask() {
             public void run() {
                 time.setText(String.valueOf(gameCounter));
                 gameCounter--;
+                if (gameCounter == 0) {
+                    endGame();
+                }
             }
         };
-    gameTimer.scheduleAtFixedRate(stopGame, 1000, 1000);
+        gameTimer.scheduleAtFixedRate(stopGame, 1000, 1000);
     }
+
     public void SewBoxTimer() {
-    Timer heartTimer = new Timer();
-    TimerTask moveBox = new TimerTask() {
+        Timer heartTimer = new Timer();
+        TimerTask moveBox = new TimerTask() {
             public void run() {
                 leftCounter++;
-                System.out.println(leftCounter);
                 if (leftCounter <= 15) {
                     sewBox.setLocation(sewBox.getLocation().x - 1, sewBox.getLocation().y);
                 } else if (leftCounter > 15 & leftCounter <= 45) {
                     sewBox.setLocation(sewBox.getLocation().x + 1, sewBox.getLocation().y);
-                } else if (leftCounter > 25) {
-                    leftCounter = 0;
-                } else if (leftCounter > 25) {
-                    leftCounter = 0;
+                } else if (leftCounter >= 45 & leftCounter < 76) {
+                    sewBox.setLocation(sewBox.getLocation().x - 1, sewBox.getLocation().y);
+                } else if (leftCounter > 75) {
+                    leftCounter = 15;
                 }
             }
         };
-    heartTimer.scheduleAtFixedRate(moveBox, 100, 100);
+        heartTimer.scheduleAtFixedRate(moveBox, 50, 50);
     }
 
     public JohnF() {
@@ -113,11 +143,10 @@ public class JohnF extends javax.swing.JFrame {
         sewBox.setVisible(false);
         cut.setVisible(false);
         gameCounter();
-        
-        
-        ribs.setVisible(false);
-        SewBoxTimer();
-        sewBox.setVisible(true);
+
+//        ribs.setVisible(false);
+//        SewBoxTimer();
+//        sewBox.setVisible(true);
     }
 
     /**
@@ -144,6 +173,7 @@ public class JohnF extends javax.swing.JFrame {
         ribs = new javax.swing.JLabel();
         badHeart = new javax.swing.JLabel();
         cut = new javax.swing.JLabel();
+        sewNeedleLabel = new javax.swing.JLabel();
         boneSawLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
@@ -342,6 +372,11 @@ public class JohnF extends javax.swing.JFrame {
         cutBox6.setBounds(640, 570, 10, 90);
 
         sewBox.setText("sewBox");
+        sewBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sewBoxMouseExited(evt);
+            }
+        });
         getContentPane().add(sewBox);
         sewBox.setBounds(600, 400, 10, 90);
 
@@ -356,6 +391,11 @@ public class JohnF extends javax.swing.JFrame {
         cut.setText("cut");
         getContentPane().add(cut);
         cut.setBounds(160, 90, 110, 110);
+
+        sewNeedleLabel.setForeground(new java.awt.Color(255, 0, 51));
+        sewNeedleLabel.setText("SEWING NEEDLE");
+        getContentPane().add(sewNeedleLabel);
+        sewNeedleLabel.setBounds(970, 580, 100, 16);
 
         boneSawLabel.setForeground(new java.awt.Color(255, 0, 51));
         boneSawLabel.setText("BONE SAW");
@@ -479,15 +519,22 @@ public class JohnF extends javax.swing.JFrame {
             } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
                 cutClick3 = true;
             } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
-                cutClick4 = true; 
+                cutClick4 = true;
                 System.out.println("hello");
             } else if (mx > 676 & mx < 688 & my < 468 & my > 452) {
-                cutClick5 = true; 
+                cutClick5 = true;
             } else if (mx > 646 & mx < 658 & my < 600 & my > 585) {
-                cutClick6 = true; 
+                cutClick6 = true;
             } else {
                 injured();
             }
+        } else if (sewNeedleClick == true) {
+            if (mx > 594 & mx < 630 & my < 429 & my > 410) {
+                sewClick = true;
+                System.out.println("Reconginzed");
+            }
+        } else {
+            injured();
         }
     }//GEN-LAST:event_formMousePressed
 
@@ -503,7 +550,7 @@ public class JohnF extends javax.swing.JFrame {
             } else {
                 injured();
             }
-             cutClick = false;
+            cutClick = false;
         } else if (cutClick2 == true) {
             System.out.println("cutClick 2 is:" + cutClick2);
             if (mx > 414 & mx < 426 & my > 550 & my < 567) {
@@ -513,7 +560,7 @@ public class JohnF extends javax.swing.JFrame {
             } else {
                 injured();
             }
-             cutClick2 = false;
+            cutClick2 = false;
         } else if (cutClick3 == true) {
             System.out.println("cutClick 3 is:" + cutClick3);
             if (mx > 464 & mx < 478 & my > 691 & my < 701) {
@@ -523,9 +570,9 @@ public class JohnF extends javax.swing.JFrame {
             } else {
                 injured();
             }
-             cutClick3 = false;
+            cutClick3 = false;
         } else if (cutClick4 == true) {
-                System.out.println("cutClick 4 is:" + cutClick4);
+            System.out.println("cutClick 4 is:" + cutClick4);
             if (mx > 665 & mx < 678 & my > 411 & my < 424) {
                 System.out.println("Awesome");
                 success();
@@ -535,7 +582,7 @@ public class JohnF extends javax.swing.JFrame {
             }
             cutClick4 = false;
         } else if (cutClick5 == true) {
-                System.out.println("cutClick 5 is:" + cutClick5);
+            System.out.println("cutClick 5 is:" + cutClick5);
             if (mx > 677 & mx < 690 & my > 552 & my < 561) {
                 System.out.println("Awesome");
                 success();
@@ -545,7 +592,7 @@ public class JohnF extends javax.swing.JFrame {
             }
             cutClick5 = false;
         } else if (cutClick6 == true) {
-                System.out.println("cutClick 6 is:" + cutClick6);
+            System.out.println("cutClick 6 is:" + cutClick6);
             if (mx > 646 & mx < 658 & my > 690 & my < 704) {
                 System.out.println("Awesome");
                 success();
@@ -554,6 +601,15 @@ public class JohnF extends javax.swing.JFrame {
                 injured();
             }
             cutClick6 = false;
+        } else if (sewClick == true) {
+            if (mx > 594 & mx < 630 & my > 522 & my < 538) {
+                System.out.println("Awesome");
+                success();
+                sewBox.setVisible(false);
+            } else {
+                injured();
+            }
+            sewClick = false;
         }
     }//GEN-LAST:event_formMouseReleased
 
@@ -639,14 +695,14 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_cutBox4MouseExited
 
     private void cutBox5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseExited
-         System.out.println("Exited");
+        System.out.println("Exited");
         if (cutClick5 == true & boneSawClick == true) {
             injured();
         }
     }//GEN-LAST:event_cutBox5MouseExited
 
     private void cutBox6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseExited
-         System.out.println("Exited");
+        System.out.println("Exited");
         if (cutClick6 == true & boneSawClick == true) {
             injured();
         }
@@ -657,12 +713,18 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_sewNeedleMouseClicked
 
     private void sewNeedleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseDragged
-       moveTool();
+        moveTool();
     }//GEN-LAST:event_sewNeedleMouseDragged
 
     private void sewNeedleMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseMoved
-       moveTool();
+        moveTool();
     }//GEN-LAST:event_sewNeedleMouseMoved
+
+    private void sewBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseExited
+        if (sewClick == true & sewNeedleClick == true) {
+            injured();
+        }
+    }//GEN-LAST:event_sewBoxMouseExited
 
     /**
      * Creates new form NewJFrame
@@ -754,6 +816,7 @@ public class JohnF extends javax.swing.JFrame {
     private javax.swing.JLabel ribs;
     private javax.swing.JLabel sewBox;
     private javax.swing.JLabel sewNeedle;
+    private javax.swing.JLabel sewNeedleLabel;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
