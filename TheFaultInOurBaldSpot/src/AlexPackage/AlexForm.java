@@ -32,6 +32,7 @@ import java.awt.Font;
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame {
+
     public int health = 3;
     public int counter = 120;
     Timer gameTimer = new Timer();
@@ -48,17 +49,32 @@ public class AlexForm extends javax.swing.JFrame {
     TimerTask Animate = new TimerTask() {
         public void run() {
             //System.out.println("MOVE");
-            
+
             try {
                 for (JLabel item : bullets) {
                     item.setLocation(item.getLocation().x, item.getLocation().y - 5);
+                    if (checkBulletCollisionEnemies(item, 0, -5) == true) {
+                        remove(item);
+                        bullets.remove(item);
+                    }
+
                 }
                 for (JLabel item : impBullets) {
-                    if ( checkBulletCollisionPlane(item,0,4) == true){
-                        remove(item); 
+                    if (checkBulletCollisionPlane(item, 0, 4) == true) {
+                        remove(item);
                         impBullets.remove(item);
+                    } else {
+                        item.setLocation(item.getLocation().x, item.getLocation().y + 4);
+                    }
                 }
-                    item.setLocation(item.getLocation().x, item.getLocation().y + 4);
+
+                for (JLabel item : beholderBullets) {
+                    if (checkBulletCollisionPlane(item, 0, 3) == true) {
+                        remove(item);
+                        beholderBullets.remove(item);
+                    } else {
+                        item.setLocation(item.getLocation().x, item.getLocation().y + 3);
+                    }
                 }
 
                 for (JLabel item : bullets) {
@@ -111,6 +127,18 @@ public class AlexForm extends javax.swing.JFrame {
                     }
                     if (i == 2) {
                         for (EnemiesClass item : beholderStats) {
+                             int fireBall = (int) (Math.random() * 200 + 1);
+                            if (fireBall == 5) {
+                                JLabel beholderBullet = new JLabel();
+                                getContentPane().add(beholderBullet);
+                                beholderBullet.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth() / 2, item.getLabel().getLocation().y + 40, 30, 40);
+                                try {
+                                    beholderBullet.setIcon(new ImageIcon((ImageIO.read(new File("beholderBall.png"))).getScaledInstance(beholderBullet.getWidth(), beholderBullet.getHeight(), Image.SCALE_SMOOTH)));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                impBullets.add(beholderBullet);
+                            }
                             if (item.getLabel().getLocation().x <= 80) {
                                 item.setDirection(true);
                             }
@@ -135,7 +163,7 @@ public class AlexForm extends javax.swing.JFrame {
             } catch (Exception e) {
             }
             // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
-        repaint();
+            repaint();
         }
     };
 
@@ -147,16 +175,9 @@ public class AlexForm extends javax.swing.JFrame {
                 System.out.println("Enemy Spawning");
                 enemySpawning();
             }
-            // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
         }
     };
 
-//    static ArrayList<JLabel> impLabels = new ArrayList<JLabel>(0);
-//    static ArrayList<JLabel> beholderLabels = new ArrayList<JLabel>(0);
-//    static ArrayList<JLabel> demonLabels = new ArrayList<JLabel>(0);
-//    static ArrayList<JLabel> deathWishLabels = new ArrayList<JLabel>(0);
-//    //static ArrayList<JLabel> enemyLabels = new ArrayList<JLabel>(0);
-//    static ArrayList[] enemyLabels1 = new ArrayList[4];
     static ArrayList<EnemiesClass> impStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> beholderStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> demonStats = new ArrayList<EnemiesClass>(0);
@@ -166,6 +187,7 @@ public class AlexForm extends javax.swing.JFrame {
 
     ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
     ArrayList<JLabel> impBullets = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> beholderBullets = new ArrayList<JLabel>(0);
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -179,19 +201,81 @@ public class AlexForm extends javax.swing.JFrame {
         }
     }
 
+    private boolean checkBulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+//check if temporary rectangle intersect with wallLabel  
+        try {
+            for (int i = 0; i < enemyStats1.length; i++) {
+                if (i == 0) {
+                    for (EnemiesClass item : impStats) {
+                        if (rect.intersects(item.getLabel().getBounds())) {
+                            item.setHealth(item.getHealth() - 1);
+                            if (item.getHealth() == 0) {
+                                impStats.remove(item);
+                                getContentPane().remove(item.getLabel());
+                            }
+                            return true;
+                        }
+                    }
+                }
+                if (i == 1) {
+                    for (EnemiesClass item : demonStats) {
+                        if (rect.intersects(item.getLabel().getBounds())) {
+                            item.setHealth(item.getHealth() - 1);
+                            if (item.getHealth() == 0) {
+                                demonStats.remove(item);
+                                getContentPane().remove(item.getLabel());
+                            }
+                            return true;
+                        }
+                    }
+                }
+                if (i == 2) {
+                    for (EnemiesClass item : beholderStats) {
+                        if (rect.intersects(item.getLabel().getBounds())) {
+                            item.setHealth(item.getHealth() - 1);
+                            if (item.getHealth() == 0) {
+                                beholderStats.remove(item);
+                                getContentPane().remove(item.getLabel());
+                            }
+                            return true;
+                        }
+                    }
+                }
+                if (i == 3) {
+                    for (EnemiesClass item : deathWishStats) {
+                        if (rect.intersects(item.getLabel().getBounds())) {
+                            item.setHealth(item.getHealth() - 1);
+                            if (item.getHealth() == 0) {
+                                deathWishStats.remove(item);
+                                getContentPane().remove(item.getLabel());
+                            }
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
     private boolean checkBulletCollisionPlane(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //check if temporary rectangle intersect with wallLabel    
-      
-            if (rect.intersects(tataPlane.getBounds())) {
-                health --;
-                healthLabel.setText(String.valueOf(health));
-                return true;
-            } else {
-              return false;
-            }
+
+        if (rect.intersects(tataPlane.getBounds())) {
+            health--;
+            healthLabel.setText(String.valueOf(health));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public AlexForm() {
@@ -216,17 +300,13 @@ public class AlexForm extends javax.swing.JFrame {
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
-//        enemyLabels1[0] = impLabels;
-//        enemyLabels1[1] = demonLabels;
-//        enemyLabels1[2] = beholderLabels;
-//        enemyLabels1[3] = deathWishLabels;
         enemyStats1[0] = impStats;
         enemyStats1[1] = demonStats;
         enemyStats1[2] = beholderStats;
         enemyStats1[3] = deathWishStats;
 
         gameTimer.scheduleAtFixedRate(Animate, 100, 10);
-        
+
     }
 
     /**
@@ -428,7 +508,7 @@ public class AlexForm extends javax.swing.JFrame {
         if (spawn <= 40) {
             impSpawn();
         }
-        if (spawn > 40 && spawn <= 50) {
+       if (spawn > 40 && spawn <= 50) {
             demonSpawn();
         }
         if (spawn > 50 && spawn <= 80) {
@@ -505,10 +585,8 @@ public class AlexForm extends javax.swing.JFrame {
 
     public void bullet() {
         JLabel bullet = new JLabel();
-        System.out.println("Label Created");
         getContentPane().add(bullet);
         bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2 - 2, tataPlane.getY() - 10, 8, 12);
-        System.out.println("Bounds Set");
         try {
             bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
@@ -518,7 +596,6 @@ public class AlexForm extends javax.swing.JFrame {
         //setComponentZOrder(bullet, 0);
         // getContentPane().repaint();
         bullets.add(bullet);
-        System.out.println("Try performed");
     }
 
     public void impBullet() {
