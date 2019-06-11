@@ -131,7 +131,7 @@ public class AlexForm extends javax.swing.JFrame {
                             if (fireBall == 5) {
                                 JLabel beholderBullet = new JLabel();
                                 getContentPane().add(beholderBullet);
-                                beholderBullet.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth() / 2, item.getLabel().getLocation().y + 40, 20, 28);
+                                beholderBullet.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth() / 2, item.getLabel().getLocation().y + 40, 30, 40);
                                 try {
                                     beholderBullet.setIcon(new ImageIcon((ImageIO.read(new File("beholderBall.png"))).getScaledInstance(beholderBullet.getWidth(), beholderBullet.getHeight(), Image.SCALE_SMOOTH)));
                                 } catch (IOException ex) {
