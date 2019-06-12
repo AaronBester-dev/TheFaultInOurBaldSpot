@@ -81,7 +81,7 @@ public class AlexForm extends javax.swing.JFrame {
                         remove(item);
                         demonBulletsRight.remove(item);
                     } else {
-                        item.setLocation(item.getLocation().x + 1, item.getLocation().y + 5);
+                        item.setLocation(item.getLocation().x + 2, item.getLocation().y + 5);
                     }
                 }
                 for (JLabel item : demonBulletsMid) {
@@ -97,7 +97,7 @@ public class AlexForm extends javax.swing.JFrame {
                         remove(item);
                         demonBulletsLeft.remove(item);
                     } else {
-                        item.setLocation(item.getLocation().x - 1, item.getLocation().y + 5);
+                        item.setLocation(item.getLocation().x - 2, item.getLocation().y + 5);
                     }
                 }
 
@@ -152,7 +152,7 @@ public class AlexForm extends javax.swing.JFrame {
                                 getContentPane().remove(item.getLabel());
                                 demonStats.remove(item);
                             }
-                            int demonBall = (int) (Math.random() * 300 + 1);
+                            int demonBall = (int) (Math.random() * 150 + 1);
                             if (demonBall == 5) {
                                 JLabel demonBulletRight = new JLabel();
                                 JLabel demonBulletMid = new JLabel();
@@ -371,7 +371,10 @@ public class AlexForm extends javax.swing.JFrame {
                 }
             }
             if (health == 0) {
-
+            Losser gameOver = new Losser();
+             this.setVisible(false);
+            gameOver.setVisible(true);
+           
             }
             return true;
         } else {
@@ -411,8 +414,10 @@ public class AlexForm extends javax.swing.JFrame {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (health == 0) {
-
+            if (health <= 0) {
+     Losser gameOver = new Losser();
+     gameOver.setVisible(true);
+     this.setVisible(false);
             }
             healthLabel.setText(String.valueOf(health));
             return true;
@@ -479,6 +484,7 @@ public class AlexForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
+        setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(900, 1000));
         setResizable(false);
