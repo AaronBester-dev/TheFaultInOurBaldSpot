@@ -70,11 +70,37 @@ public class AaronForm extends javax.swing.JFrame {
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
 //check if temporary rectangle intersect with wallLabel        
+
+
+        
+
         if (rect.intersects(bottomFloor.getBounds())) {
             return true;
         } else {
+            
+                for (JLabel item : activeFloor) {
+         
+  if (rect.intersects(item.getBounds())) {
+            return true;
+        } 
+        }
             return false;
         }
+      
+    
+      
+    }
+    
+       private boolean checkFloatingBlocks(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+//check if temporary rectangle intersect with wallLabel     
+
+      
+        
+        return false;
     }
 
     public AaronForm() throws IOException {
@@ -183,12 +209,7 @@ public class AaronForm extends javax.swing.JFrame {
                 aaronGameTimer.scheduleAtFixedRate(gravity, 100, 100);
             }
         }
-        //down key pressed
-        if (evt.getKeyCode() == 40) {
-            if (!checkCollision(player, 0, 10)) {
-                player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-            }
-        }
+     
         //left key pressed
         if (evt.getKeyCode() == 37) {
             if (!checkCollision(player, -10, 0)) {

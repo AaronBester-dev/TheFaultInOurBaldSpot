@@ -35,6 +35,14 @@ public class Tool {
         return isClicked;
     }
     
+    public void damage (int _damage){
+       damage = _damage;
+    }
+    
+    public int getDamage (){
+        return damage;
+    }
+    
     public javax.swing.JLabel getLabel() {
         return toolLabel;
     }
