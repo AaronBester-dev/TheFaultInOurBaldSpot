@@ -238,6 +238,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
      AlexForm alexObject = new AlexForm();
+   //  TheFaultInOurBaldSpotView.setVisible(false);
      alexObject.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_AlexActionPerformed
 
