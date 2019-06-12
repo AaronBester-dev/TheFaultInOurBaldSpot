@@ -214,6 +214,7 @@
         <Property name="text" type="java.lang.String" value="sewBox"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sewBoxMouseEntered"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sewBoxMouseExited"/>
       </Events>
       <Constraints>
