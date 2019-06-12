@@ -13,8 +13,7 @@ public class MegaAaron extends PlayerClass {
  
     public MegaAaron() {
         health = 10;
-        speed = 3;
-        strength = 3;
+      
         
     }
 }
