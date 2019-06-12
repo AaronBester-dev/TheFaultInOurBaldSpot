@@ -387,6 +387,33 @@ public class AlexForm extends javax.swing.JFrame {
 
         if (rect.intersects(tataPlane.getBounds())) {
             health -= 3;
+            if (health == 3) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldMed.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 2) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldLow.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 1) {
+                try {
+                    tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlane2.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (health == 0) {
+
+            }
             healthLabel.setText(String.valueOf(health));
             return true;
         } else {
@@ -637,7 +664,7 @@ public class AlexForm extends javax.swing.JFrame {
 
     public void impSpawn() {
         System.out.println("IMP Coming");
-        
+
         if (impStats.size() < 10) {
             Imp imp = new Imp();
             impStats.add(imp);
@@ -660,40 +687,40 @@ public class AlexForm extends javax.swing.JFrame {
 
     public void demonSpawn() {
         System.out.println("Demon Coming");
-        if (demonStats.size() < 1){
-        Demon demon = new Demon();
-        demonStats.add(demon);
-        JLabel label = new JLabel();
-        demon.setLabel(label);
-        getContentPane().add(demon.getLabel());
-        demon.getLabel().setBounds(390, -100, 120, 80);
-        try {
-            demon.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Dmon.png"))).getScaledInstance(demon.getLabel().getWidth(), demon.getLabel().getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (demonStats.size() < 1) {
+            Demon demon = new Demon();
+            demonStats.add(demon);
+            JLabel label = new JLabel();
+            demon.setLabel(label);
+            getContentPane().add(demon.getLabel());
+            demon.getLabel().setBounds(390, -100, 120, 80);
+            try {
+                demon.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Dmon.png"))).getScaledInstance(demon.getLabel().getWidth(), demon.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
         }
-        }
-        else{}
     }
 
     public void beholderSpawn() {
         System.out.println("Beholder Coming");
-        if (beholderStats.size() < 3){
-        Beholder beholder = new Beholder();
-        beholderStats.add(beholder);
-        JLabel label = new JLabel();
-        beholder.setLabel(label);
-        getContentPane().add(beholder.getLabel());
-        beholder.getLabel().setBounds(80, beholder.getHeight() * 50, 80, 80);
-        try {
-            beholder.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Beholder.png"))).getScaledInstance(beholder.getLabel().getWidth(), beholder.getLabel().getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (beholderStats.size() < 3) {
+            Beholder beholder = new Beholder();
+            beholderStats.add(beholder);
+            JLabel label = new JLabel();
+            beholder.setLabel(label);
+            getContentPane().add(beholder.getLabel());
+            beholder.getLabel().setBounds(80, beholder.getHeight() * 50, 80, 80);
+            try {
+                beholder.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("Beholder.png"))).getScaledInstance(beholder.getLabel().getWidth(), beholder.getLabel().getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
         }
-        }
-        else{}
     }
 
     public void deathWishSpawn() {
@@ -714,17 +741,19 @@ public class AlexForm extends javax.swing.JFrame {
 
     public void bullet() {
         JLabel bullet = new JLabel();
-        getContentPane().add(bullet);
-        bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2 - 2, tataPlane.getY() - 10, 8, 12);
-        try {
-            bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            System.out.println("NO IMAGE");
-            Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (bullets.size() < 5) {
+            getContentPane().add(bullet);
+            bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2 - 2, tataPlane.getY() - 10, 8, 12);
+            try {
+                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //setComponentZOrder(bullet, 0);
+            // getContentPane().repaint();
+            bullets.add(bullet);
         }
-        //setComponentZOrder(bullet, 0);
-        // getContentPane().repaint();
-        bullets.add(bullet);
     }
 
     public void impBullet() {
