@@ -29,118 +29,121 @@ public int counterF = 30;
 public int counterFi = 35;
 public int counterS = 40;
 //This makes the main timer
-Timer timer = new Timer();
+    Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
-           timerBoy.setText(String.valueOf(counter));
+            timerBoy.setText(String.valueOf(counter));
         }
     };
 
     Timer timerO = new Timer();
     TimerTask taskO = new TimerTask() {
         public void run() {
+            int hBoy = 0;
             counterO--;
-            
-         if (counterO == 0) {
-             soupBoy[0] = new soup();
-             try{
-         orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterO = 15;
-         }
+            hBoy = +9;
+            timerBoy1.setSize(orderOne.getWidth(), hBoy);
+
+            if (counterO == 0) {
+                soupBoy[0] = new soup();
+                try {
+                    orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterO = 15;
+            }
 
         }
     };
-    
-        Timer timerT = new Timer();
+
+    Timer timerT = new Timer();
     TimerTask taskT = new TimerTask() {
         public void run() {
             counterT--;
-            
-         if (counterT == 0) {
-             soupBoy[1] = new soup();
-             try{
-         orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderTwo.getWidth(), orderTwo.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterT = 15;
-         }
+
+            if (counterT == 0) {
+                soupBoy[1] = new soup();
+                try {
+                    orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderTwo.getWidth(), orderTwo.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterT = 15;
+            }
 
         }
     };
-    
-        Timer timerTh = new Timer();
+
+    Timer timerTh = new Timer();
     TimerTask taskTh = new TimerTask() {
         public void run() {
             counterTh--;
-            
-         if (counterTh == 0) {
-             soupBoy[2] = new soup();
-             try{
-         orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderThree.getWidth(), orderThree.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterTh = 15;
-         }
+
+            if (counterTh == 0) {
+                soupBoy[2] = new soup();
+                try {
+                    orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderThree.getWidth(), orderThree.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterTh = 15;
+            }
 
         }
     };
-    
-        Timer timerF = new Timer();
+
+    Timer timerF = new Timer();
     TimerTask taskF = new TimerTask() {
         public void run() {
             counterF--;
-            
-         if (counterF == 0) {
-             soupBoy[3] = new soup();
-             try{
-         orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderFour.getWidth(), orderFour.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterF = 15;
-         }
+
+            if (counterF == 0) {
+                soupBoy[3] = new soup();
+                try {
+                    orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderFour.getWidth(), orderFour.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterF = 15;
+            }
 
         }
     };
-    
-        Timer timerFi = new Timer();
+
+    Timer timerFi = new Timer();
     TimerTask taskFi = new TimerTask() {
         public void run() {
             counterFi--;
-            
-         if (counterFi == 0) {
-             soupBoy[4] = new soup();
-             try{
-         orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderFive.getWidth(), orderFive.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterFi = 15;
-         }
+
+            if (counterFi == 0) {
+                soupBoy[4] = new soup();
+                try {
+                    orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderFive.getWidth(), orderFive.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterFi = 15;
+            }
 
         }
     };
-    
-        Timer timerS = new Timer();
+
+    Timer timerS = new Timer();
     TimerTask taskS = new TimerTask() {
         public void run() {
             counterS--;
-            
-         if (counterS == 0) {
-             soupBoy[5] = new soup();
-             try{
-         orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderSix.getWidth(), orderSix.getHeight(), Image.SCALE_SMOOTH)));
-        } catch (IOException ex) {
-            Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-             counterS = 15;
-         }
+
+            if (counterS == 0) {
+                soupBoy[5] = new soup();
+                try {
+                    orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderSix.getWidth(), orderSix.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterS = 15;
+            }
 
         }
     };
@@ -150,6 +153,7 @@ Timer timer = new Timer();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        timerBoy1 = new javax.swing.JLabel();
         orderOne = new javax.swing.JLabel();
         orderTwo = new javax.swing.JLabel();
         orderThree = new javax.swing.JLabel();
@@ -186,9 +190,16 @@ Timer timer = new Timer();
         });
         getContentPane().setLayout(null);
 
+        timerBoy1.setBackground(new java.awt.Color(255, 51, 51));
+        timerBoy1.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
+        timerBoy1.setForeground(new java.awt.Color(255, 0, 51));
+        timerBoy1.setText("15");
+        getContentPane().add(timerBoy1);
+        timerBoy1.setBounds(530, 10, 70, 70);
+
         orderOne.setText("orderOne");
         getContentPane().add(orderOne);
-        orderOne.setBounds(550, 10, 60, 60);
+        orderOne.setBounds(540, 10, 60, 60);
         orderOne.getAccessibleContext().setAccessibleName("order1");
 
         orderTwo.setText("orderTwo");
@@ -216,7 +227,7 @@ Timer timer = new Timer();
         timerBoy.setForeground(new java.awt.Color(255, 0, 51));
         timerBoy.setText("120");
         getContentPane().add(timerBoy);
-        timerBoy.setBounds(100, 20, 70, 70);
+        timerBoy.setBounds(100, 10, 70, 70);
 
         user.setText("User");
         getContentPane().add(user);
@@ -283,51 +294,65 @@ Timer timer = new Timer();
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
-    Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-        
-    //creates an array to tell the collision what the user cant run into    
-    javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
-    blocks[0] = wallLabel;
-    blocks[1] = wallLabel1;
-    blocks[2] = table;
+        //creates an array to tell the collision what the user cant run into    
+        javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
+        blocks[0] = wallLabel;
+        blocks[1] = wallLabel1;
+        blocks[2] = table;
 //cheacks the collision and returns teu or false
-   for(javax.swing.JLabel item :blocks){
-           if (rect.intersects(item.getBounds())) {
-          return true;
-      }     
-   }
-     return false;  
+        for (javax.swing.JLabel item : blocks) {
+            if (rect.intersects(item.getBounds())) {
+                return true;
+            }
+        }
+        return false;
     }
-       
     
-    
-     soup soupBoy[] = new soup[6];
+    //check if a collision between images is occurring
+    private boolean checkCollisionItem(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        //creates an array to tell the collision what the user cant run into    
+        javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
+        blocks[0] = wallLabel;
+        blocks[1] = wallLabel1;
+        blocks[2] = table;
+//cheacks the collision and returns teu or false
+        for (javax.swing.JLabel item : blocks) {
+            if (rect.intersects(item.getBounds())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    soup soupBoy[] = new soup[6];
      
-     private void arrayMaker() { 
+    private void arrayMaker() {
 
-         soupBoy[0] = new soup();
+        soupBoy[0] = new soup();
 
-         timerO.scheduleAtFixedRate(taskO, 1000, 1000);
-         
-         
-         
+        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
 
-         soupBoy[1] = new soup();
-         timerT.scheduleAtFixedRate(taskT, 1000, 1000);
+        soupBoy[1] = new soup();
+        timerT.scheduleAtFixedRate(taskT, 1000, 1000);
 
-         soupBoy[2] = new soup();
-         timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
-         
-         soupBoy[3] = new soup();
-         timerF.scheduleAtFixedRate(taskF, 1000, 1000);
-         
-         soupBoy[4] = new soup();
-         timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
-         
-         soupBoy[5] = new soup();
-         timerS.scheduleAtFixedRate(taskS, 1000, 1000);
-       }
+        soupBoy[2] = new soup();
+        timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
+
+        soupBoy[3] = new soup();
+        timerF.scheduleAtFixedRate(taskF, 1000, 1000);
+
+        soupBoy[4] = new soup();
+        timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
+
+        soupBoy[5] = new soup();
+        timerS.scheduleAtFixedRate(taskS, 1000, 1000);
+    }
 
     //checks which key is pressed and moves image if no collision is detected
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -355,6 +380,11 @@ Timer timer = new Timer();
         //right key pressed(d)
         if (evt.getKeyCode() == 68) {
             if (!checkCollision(user, 30, 0)) {
+                user.setLocation(user.getLocation().x + 30, user.getLocation().y);
+            }
+        }
+        if (evt.getKeyCode() == 69) {
+         if (!checkCollisionItem(user, 30, 0)) {
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
@@ -418,7 +448,8 @@ Timer timer = new Timer();
          
          orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
                   
-         
+         timerBoy1.setIcon(new ImageIcon((ImageIO.read(new File("redBoy.png"))).getScaledInstance(orderOne.getWidth(), 1 , Image.SCALE_SMOOTH)));
+
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -490,6 +521,7 @@ Timer timer = new Timer();
     private javax.swing.JLabel sink;
     private javax.swing.JLabel table;
     private javax.swing.JLabel timerBoy;
+    private javax.swing.JLabel timerBoy1;
     private javax.swing.JLabel tomato;
     private javax.swing.JLabel user;
     private javax.swing.JLabel wallLabel;
