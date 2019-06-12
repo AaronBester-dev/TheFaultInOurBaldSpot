@@ -38,6 +38,12 @@ public class JohnF extends javax.swing.JFrame {
     boolean cutClick4 = false;
     boolean cutClick5 = false;
     boolean cutClick6 = false;
+    boolean boxEntered = false;
+    boolean boxEntered6 = false;
+    boolean boxEntered2 = false;
+    boolean boxEntered3 = false;
+    boolean boxEntered4 = false;
+    boolean boxEntered5 = false;
     boolean sewClick = false;
     int healthValue = 100;
     int counter = 0;
@@ -72,15 +78,19 @@ public class JohnF extends javax.swing.JFrame {
     }
 
     private void endGame() {
-        if (gameCounter != 0) {
-            System.out.println(healthBar.getValue());
-            System.out.println(1 / gameCounter);
-            score = healthBar.getValue() * (1 / gameCounter);
-        }
+        score = fact(healthBar.getValue() * gameCounter);
         System.out.println("Your score is: " + score);
         try {
             highScore();
         } catch (IOException e) {
+        }
+    }
+
+    public static int fact(int n) {
+        if ((n == 0) || (n == 1)) {
+            return 1;
+        } else {
+            return n * fact(n - 1);
         }
     }
 
@@ -153,9 +163,9 @@ public class JohnF extends javax.swing.JFrame {
         cut.setVisible(false);
         gameCounter();
 
-//        ribs.setVisible(false);
-//        SewBoxTimer();
-//        sewBox.setVisible(true);
+        ribs.setVisible(false);
+        SewBoxTimer();
+        sewBox.setVisible(true);
     }
 
     /**
@@ -167,18 +177,18 @@ public class JohnF extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        boneSaw = new javax.swing.JLabel();
         healthBar = new javax.swing.JProgressBar();
         cutBox = new javax.swing.JLabel();
         hurt = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
-        sewNeedle = new javax.swing.JLabel();
         cutBox2 = new javax.swing.JLabel();
         cutBox3 = new javax.swing.JLabel();
         cutBox4 = new javax.swing.JLabel();
         cutBox5 = new javax.swing.JLabel();
         cutBox6 = new javax.swing.JLabel();
         sewBox = new javax.swing.JLabel();
+        sewNeedle = new javax.swing.JLabel();
+        boneSaw = new javax.swing.JLabel();
         ribs = new javax.swing.JLabel();
         badHeart = new javax.swing.JLabel();
         cut = new javax.swing.JLabel();
@@ -215,6 +225,185 @@ public class JohnF extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
+        getContentPane().add(healthBar);
+        healthBar.setBounds(20, 10, 148, 14);
+
+        cutBox.setText("cutBox");
+        cutBox.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBoxMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBoxMouseMoved(evt);
+            }
+        });
+        cutBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cutBoxFocusLost(evt);
+            }
+        });
+        cutBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBoxMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBoxMouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox);
+        cutBox.setBounds(430, 310, 10, 70);
+
+        hurt.setText("hurt");
+        getContentPane().add(hurt);
+        hurt.setBounds(20, 80, 120, 130);
+
+        time.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        time.setForeground(new java.awt.Color(204, 0, 0));
+        time.setText("120");
+        getContentPane().add(time);
+        time.setBounds(920, 10, 140, 60);
+        time.getAccessibleContext().setAccessibleName("wallLabel");
+        time.getAccessibleContext().setAccessibleDescription("");
+
+        cutBox2.setText("cutBox2");
+        cutBox2.setMaximumSize(new java.awt.Dimension(40, 16));
+        cutBox2.setMinimumSize(new java.awt.Dimension(40, 16));
+        cutBox2.setPreferredSize(new java.awt.Dimension(40, 16));
+        cutBox2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox2MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox2MouseMoved(evt);
+            }
+        });
+        cutBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBox2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox2MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox2);
+        cutBox2.setBounds(410, 440, 10, 80);
+
+        cutBox3.setText("jLabel1");
+        cutBox3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox3MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox3MouseMoved(evt);
+            }
+        });
+        cutBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBox3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox3MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox3);
+        cutBox3.setBounds(460, 570, 10, 90);
+
+        cutBox4.setText("cutBox4");
+        cutBox4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox4MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox4MouseMoved(evt);
+            }
+        });
+        cutBox4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBox4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox4MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox4);
+        cutBox4.setBounds(660, 310, 10, 70);
+
+        cutBox5.setText("cutBox5");
+        cutBox5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox5MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox5MouseMoved(evt);
+            }
+        });
+        cutBox5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBox5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox5MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox5);
+        cutBox5.setBounds(670, 440, 10, 80);
+
+        cutBox6.setText("CutBox6");
+        cutBox6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cutBox6MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cutBox6MouseMoved(evt);
+            }
+        });
+        cutBox6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cutBox6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cutBox6MouseExited(evt);
+            }
+        });
+        getContentPane().add(cutBox6);
+        cutBox6.setBounds(640, 570, 10, 90);
+
+        sewBox.setText("sewBox");
+        sewBox.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sewBoxMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                sewBoxMouseMoved(evt);
+            }
+        });
+        sewBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sewBoxMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sewBoxMouseExited(evt);
+            }
+        });
+        getContentPane().add(sewBox);
+        sewBox.setBounds(600, 400, 10, 90);
+
+        sewNeedle.setText("SewNeedle ");
+        sewNeedle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseMoved(evt);
+            }
+        });
+        sewNeedle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sewNeedleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(sewNeedle);
+        sewNeedle.setBounds(980, 430, 80, 140);
 
         boneSaw.setText("boneSaw");
         boneSaw.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -238,159 +427,6 @@ public class JohnF extends javax.swing.JFrame {
         });
         getContentPane().add(boneSaw);
         boneSaw.setBounds(10, 430, 50, 150);
-        getContentPane().add(healthBar);
-        healthBar.setBounds(20, 10, 148, 14);
-
-        cutBox.setText("cutBox");
-        cutBox.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBoxMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBoxMouseMoved(evt);
-            }
-        });
-        cutBox.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cutBoxFocusLost(evt);
-            }
-        });
-        cutBox.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBoxMouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox);
-        cutBox.setBounds(430, 310, 10, 70);
-
-        hurt.setText("hurt");
-        getContentPane().add(hurt);
-        hurt.setBounds(20, 80, 120, 130);
-
-        time.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        time.setForeground(new java.awt.Color(204, 0, 0));
-        time.setText("120");
-        getContentPane().add(time);
-        time.setBounds(920, 10, 140, 60);
-        time.getAccessibleContext().setAccessibleName("wallLabel");
-        time.getAccessibleContext().setAccessibleDescription("");
-
-        sewNeedle.setText("SewNeedle ");
-        sewNeedle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sewNeedleMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                sewNeedleMouseMoved(evt);
-            }
-        });
-        sewNeedle.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sewNeedleMouseClicked(evt);
-            }
-        });
-        getContentPane().add(sewNeedle);
-        sewNeedle.setBounds(980, 430, 80, 140);
-
-        cutBox2.setText("cutBox2");
-        cutBox2.setMaximumSize(new java.awt.Dimension(40, 16));
-        cutBox2.setMinimumSize(new java.awt.Dimension(40, 16));
-        cutBox2.setPreferredSize(new java.awt.Dimension(40, 16));
-        cutBox2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBox2MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBox2MouseMoved(evt);
-            }
-        });
-        cutBox2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBox2MouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox2);
-        cutBox2.setBounds(410, 440, 10, 80);
-
-        cutBox3.setText("jLabel1");
-        cutBox3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBox3MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBox3MouseMoved(evt);
-            }
-        });
-        cutBox3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBox3MouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox3);
-        cutBox3.setBounds(460, 570, 10, 90);
-
-        cutBox4.setText("cutBox4");
-        cutBox4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBox4MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBox4MouseMoved(evt);
-            }
-        });
-        cutBox4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBox4MouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox4);
-        cutBox4.setBounds(660, 310, 10, 70);
-
-        cutBox5.setText("cutBox5");
-        cutBox5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBox5MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBox5MouseMoved(evt);
-            }
-        });
-        cutBox5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBox5MouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox5);
-        cutBox5.setBounds(670, 440, 10, 80);
-
-        cutBox6.setText("CutBox6");
-        cutBox6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                cutBox6MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cutBox6MouseMoved(evt);
-            }
-        });
-        cutBox6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cutBox6MouseExited(evt);
-            }
-        });
-        getContentPane().add(cutBox6);
-        cutBox6.setBounds(640, 570, 10, 90);
-
-        sewBox.setText("sewBox");
-        sewBox.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sewBoxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                sewBoxMouseExited(evt);
-            }
-        });
-        getContentPane().add(sewBox);
-        sewBox.setBounds(600, 400, 10, 90);
 
         ribs.setText("Ribs");
         getContentPane().add(ribs);
@@ -407,12 +443,12 @@ public class JohnF extends javax.swing.JFrame {
         sewNeedleLabel.setForeground(new java.awt.Color(255, 0, 51));
         sewNeedleLabel.setText("SEWING NEEDLE");
         getContentPane().add(sewNeedleLabel);
-        sewNeedleLabel.setBounds(970, 580, 100, 16);
+        sewNeedleLabel.setBounds(970, 580, 100, 15);
 
         boneSawLabel.setForeground(new java.awt.Color(255, 0, 51));
         boneSawLabel.setText("BONE SAW");
         getContentPane().add(boneSawLabel);
-        boneSawLabel.setBounds(5, 580, 70, 16);
+        boneSawLabel.setBounds(5, 580, 70, 15);
 
         background.setText("background");
         getContentPane().add(background);
@@ -494,6 +530,8 @@ public class JohnF extends javax.swing.JFrame {
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
 
         System.out.println(mx + ", " + my);
+
+
     }//GEN-LAST:event_formMouseClicked
 
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
@@ -509,8 +547,10 @@ public class JohnF extends javax.swing.JFrame {
         if (bonesaw.isClicked == true) {
             if (mx > 433 & mx < 449 & my < 340 & my > 320) {
                 cutClick = true;
+                System.out.println("cutClick is: " + cutClick);
             } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
                 cutClick2 = true;
+                 System.out.println("cutClick2 is: " + cutClick2);
             } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
                 cutClick3 = true;
             } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
@@ -538,7 +578,7 @@ public class JohnF extends javax.swing.JFrame {
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-        if (cutClick == true) {
+        if (cutClick == true & boxEntered == true) {
             if (mx > 433 & mx < 449 & my > 410 & my < 430) {
                 System.out.println("Awesome");
                 success();
@@ -546,9 +586,13 @@ public class JohnF extends javax.swing.JFrame {
                 cutClick = false;
             } else {
                 injured();
+                System.out.println("hello");
+                boxEntered = false;
+                cutClick = false;
+                System.out.println(cutClick);
             }
             cutClick = false;
-        } else if (cutClick2 == true) {
+        } else if (cutClick2 == true & boxEntered2 == true) {
             System.out.println("cutClick 2 is:" + cutClick2);
             if (mx > 414 & mx < 426 & my > 550 & my < 567) {
                 System.out.println("Awesome");
@@ -556,9 +600,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox2.setVisible(false);
             } else {
                 injured();
+                boxEntered2 = false;
+                cutClick2 = false;
             }
             cutClick2 = false;
-        } else if (cutClick3 == true) {
+        } else if (cutClick3 == true & boxEntered3 == true) {
             System.out.println("cutClick 3 is:" + cutClick3);
             if (mx > 464 & mx < 478 & my > 691 & my < 701) {
                 System.out.println("Awesome");
@@ -566,9 +612,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox3.setVisible(false);
             } else {
                 injured();
+                boxEntered3 = false;
+                cutClick3 = false;
             }
             cutClick3 = false;
-        } else if (cutClick4 == true) {
+        } else if (cutClick4 == true & boxEntered4 == true) {
             System.out.println("cutClick 4 is:" + cutClick4);
             if (mx > 665 & mx < 678 & my > 411 & my < 424) {
                 System.out.println("Awesome");
@@ -576,9 +624,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox4.setVisible(false);
             } else {
                 injured();
+                boxEntered4 = false;
+                cutClick4 = false;
             }
             cutClick4 = false;
-        } else if (cutClick5 == true) {
+        } else if (cutClick5 == true & boxEntered5 == true) {
             System.out.println("cutClick 5 is:" + cutClick5);
             if (mx > 677 & mx < 690 & my > 552 & my < 561) {
                 System.out.println("Awesome");
@@ -586,9 +636,11 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox5.setVisible(false);
             } else {
                 injured();
+                boxEntered5 = false;
+                cutClick5 = false;
             }
             cutClick5 = false;
-        } else if (cutClick6 == true) {
+        } else if (cutClick6 == true & boxEntered6 == true) {
             System.out.println("cutClick 6 is:" + cutClick6);
             if (mx > 646 & mx < 658 & my > 690 & my < 704) {
                 System.out.println("Awesome");
@@ -596,6 +648,8 @@ public class JohnF extends javax.swing.JFrame {
                 cutBox6.setVisible(false);
             } else {
                 injured();
+                boxEntered6 = false;
+                cutClick6 = false;
             }
             cutClick6 = false;
         } else if (sewClick == true & sewBoxEntered == true) {
@@ -605,8 +659,17 @@ public class JohnF extends javax.swing.JFrame {
                 sewBox.setVisible(false);
             } else {
                 injured();
+                sewClick = false;
             }
             sewClick = false;
+        } else {
+            cutClick = false;
+            cutClick2 = false;
+            cutClick3 = false;
+            cutClick4 = false;
+            cutClick5 = false;
+            cutClick6 = false;
+            sewClick = false;              
         }
     }//GEN-LAST:event_formMouseReleased
 
@@ -718,16 +781,62 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_sewNeedleMouseMoved
 
     private void sewBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseExited
-        if (sewClick == true & needle.isClicked == true) {
+        if (sewClick == true && needle.isClicked == true) {
             injured();
         }
     }//GEN-LAST:event_sewBoxMouseExited
 
     private void sewBoxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseEntered
-       if (needle.isClicked == true & sewClick == true) {
-           sewBoxEntered = true;
-       }
+        if (needle.isClicked == true && sewClick == true) {
+            sewBoxEntered = true;
+        }
     }//GEN-LAST:event_sewBoxMouseEntered
+
+    private void cutBoxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseEntered
+        if (bonesaw.isClicked == true && cutClick == true) {
+            boxEntered = true;
+            System.out.println("boxEntered is: " + boxEntered);
+        }
+    }//GEN-LAST:event_cutBoxMouseEntered
+
+    private void cutBox2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseEntered
+        if (bonesaw.isClicked == true && cutClick2 == true) {
+            boxEntered2 = true;
+            System.out.println("boxEntered2 is: " + boxEntered2);
+        }
+    }//GEN-LAST:event_cutBox2MouseEntered
+
+    private void cutBox3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseEntered
+        if (bonesaw.isClicked == true && cutClick3 == true) {
+            boxEntered3 = true;
+        }
+    }//GEN-LAST:event_cutBox3MouseEntered
+
+    private void cutBox4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseEntered
+        if (bonesaw.isClicked == true && cutClick4 == true) {
+            boxEntered4 = true;
+        }
+    }//GEN-LAST:event_cutBox4MouseEntered
+
+    private void cutBox5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseEntered
+        if (bonesaw.isClicked == true && cutClick5 == true) {
+            boxEntered5 = true;
+        }
+    }//GEN-LAST:event_cutBox5MouseEntered
+
+    private void cutBox6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseEntered
+        if (bonesaw.isClicked == true && cutClick6 == true) {
+            boxEntered6 = true;
+        }
+    }//GEN-LAST:event_cutBox6MouseEntered
+
+    private void sewBoxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseDragged
+       moveTool();
+    }//GEN-LAST:event_sewBoxMouseDragged
+
+    private void sewBoxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseMoved
+       moveTool();
+    }//GEN-LAST:event_sewBoxMouseMoved
 
     /**
      * Creates new form NewJFrame
