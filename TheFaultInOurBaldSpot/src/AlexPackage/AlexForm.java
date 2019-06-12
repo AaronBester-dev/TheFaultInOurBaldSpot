@@ -102,7 +102,7 @@ public class AlexForm extends javax.swing.JFrame {
                 }
 
                 for (JLabel item : bullets) {
-                    if (item.getLocation().y < -20) {
+                    if (item.getLocation().y < -50) {
                         bullets.remove(item);
                     }
                 }
@@ -741,7 +741,7 @@ public class AlexForm extends javax.swing.JFrame {
 
     public void bullet() {
         JLabel bullet = new JLabel();
-        if (bullets.size() < 5) {
+        if (bullets.size() < 3) {
             getContentPane().add(bullet);
             bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2 - 2, tataPlane.getY() - 10, 8, 12);
             try {
