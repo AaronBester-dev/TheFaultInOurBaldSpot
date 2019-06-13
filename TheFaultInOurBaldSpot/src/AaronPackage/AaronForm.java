@@ -23,7 +23,10 @@ import javax.swing.SwingWorker;
 public class AaronForm extends javax.swing.JFrame {
 
     int numberOfObjects = 0;
+    MegaAaron playerCharacter;
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> guardbullets = new ArrayList<JLabel>(0);
+    ArrayList<JLabel> fatbullets = new ArrayList<JLabel>(0);
     ArrayList<JLabel> spikelist = new ArrayList<JLabel>(0);
     ArrayList<JLabel> floorlist = new ArrayList<JLabel>(0);
     ArrayList<String> blockType = new ArrayList<String>(0);
@@ -41,14 +44,17 @@ public class AaronForm extends javax.swing.JFrame {
         public void run() {
 
             try {
-                for (JLabel item : staplebullets) {
 
-                    item.setLocation(item.getLocation().x + 20, item.getLocation().y);
-                }
                 for (JLabel item : staplebullets) {
-                    if (item.getLocation().y < -20) {
+                    item.setLocation(item.getLocation().x + 20, item.getLocation().y);
+
+                    if (bulletCollisionEnemies(item, +20, 0) == true) {
+                        remove(item);
+
                         staplebullets.remove(item);
-                        System.out.println("REMOVED");
+                        if (item.getLocation().x > 1080) {
+                            staplebullets.remove(item);
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -63,6 +69,40 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    TimerTask createEnemyBullets = new TimerTask() {
+        public void run() {
+            securityGuardBullets();
+            fatOfficeWorkerBullets();
+        }
+    };
+    TimerTask guardBulletMovement = new TimerTask() {
+        public void run() {
+
+            for (JLabel item : guardbullets) {
+
+                item.setLocation(item.getLocation().x - 20, item.getLocation().y);
+    if (bulletCollisionPlayer(item, +20, 0) == true) {
+                        remove(item);
+    }
+            }
+
+        }
+
+    };
+    TimerTask fatBulletMovement = new TimerTask() {
+        public void run() {
+
+            for (JLabel item : fatbullets) {
+
+                item.setLocation(item.getLocation().x - 20, item.getLocation().y);
+  if (bulletCollisionPlayer(item, +20, 0) == true) {
+                        remove(item);
+    }
+            }
+
+        }
+
+    };
 
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -70,37 +110,27 @@ public class AaronForm extends javax.swing.JFrame {
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
 //check if temporary rectangle intersect with wallLabel        
-
-
-        
-
         if (rect.intersects(bottomFloor.getBounds())) {
             return true;
         } else {
-            
-                for (JLabel item : activeFloor) {
-         
-  if (rect.intersects(item.getBounds())) {
-            return true;
-        } 
-        }
+
+            for (JLabel item : activeFloor) {
+
+                if (rect.intersects(item.getBounds())) {
+                    return true;
+                }
+            }
+            for (JLabel item : activeSpike) {
+
+                if (rect.intersects(item.getBounds())) {
+                    takeDamage();
+                    return true;
+                }
+            }
+
             return false;
         }
-      
-    
-      
-    }
-    
-       private boolean checkFloatingBlocks(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-//check if temporary rectangle intersect with wallLabel     
-
-      
-        
-        return false;
     }
 
     public AaronForm() throws IOException {
@@ -132,6 +162,7 @@ public class AaronForm extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         bottomFloor = new javax.swing.JLabel();
         player = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 720));
@@ -159,6 +190,10 @@ public class AaronForm extends javax.swing.JFrame {
         getContentPane().add(player);
         player.setBounds(240, 340, 115, 198);
 
+        jProgressBar1.setName("jProgressBar1"); // NOI18N
+        getContentPane().add(jProgressBar1);
+        jProgressBar1.setBounds(50, 40, 148, 14);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 // public boolean checkGround(javax.swing.JLabel _lbl, int _x, int _y){
@@ -174,14 +209,14 @@ public class AaronForm extends javax.swing.JFrame {
 //        }
 //}
 
-    public void myInitComponents() {
+    public void myInitComponents() throws IOException {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
 
 //        same as above, but in a condensed version
         try {
-            player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+
             bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,6 +226,9 @@ public class AaronForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        playerSpawner();
+        jProgressBar1.setMaximum(playerCharacter.getHealth());
+        jProgressBar1.setValue(playerCharacter.getHealth());
         fillUpArray();
         spikeSpawner();
         floorSpawner();
@@ -209,7 +247,7 @@ public class AaronForm extends javax.swing.JFrame {
                 aaronGameTimer.scheduleAtFixedRate(gravity, 100, 100);
             }
         }
-     
+
         //left key pressed
         if (evt.getKeyCode() == 37) {
             if (!checkCollision(player, -10, 0)) {
@@ -331,6 +369,21 @@ public class AaronForm extends javax.swing.JFrame {
 
     }
 
+    public void playerSpawner() throws IOException {
+        playerCharacter = new MegaAaron();
+        playerCharacter.setLabel(player);
+        player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+    }
+
+    public void takeDamage() {
+        playerCharacter.setHealth(playerCharacter.getHealth() - 1);
+
+        jProgressBar1.setValue(playerCharacter.getHealth() - 1);
+        if (playerCharacter.getHealth() == 0){
+            
+        }
+    }
+
     public void floorSpawner() {
 
         for (int i = 0; i < numberOfObjects; i++) {
@@ -404,7 +457,10 @@ public class AaronForm extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
+                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
+                aaronGameTimer.scheduleAtFixedRate(guardBulletMovement, 100, 100);
             }
 
         }
@@ -422,7 +478,7 @@ public class AaronForm extends javax.swing.JFrame {
                 JLabel label = new JLabel();
                 worker.setLabel(label);
                 getContentPane().add(worker.getLabel());
-                worker.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 100);
+                worker.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 200);
                 try {
                     worker.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("officeWorker.png"))).getScaledInstance(worker.getLabel().getWidth(), worker.getLabel().getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -453,6 +509,8 @@ public class AaronForm extends javax.swing.JFrame {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
+                aaronGameTimer.scheduleAtFixedRate(fatBulletMovement, 100, 100);
             }
 
         }
@@ -504,10 +562,120 @@ public class AaronForm extends javax.swing.JFrame {
         }
     }
 
+    public void securityGuardBullets() {
+
+        for (EnemyClass item : securityGuardStats) {
+
+            JLabel guardbullet = new JLabel();
+
+            System.out.println("Label Created");
+            getContentPane().add(guardbullet);
+            guardbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y, 50, 50);
+
+            System.out.println("Bounds Set");
+            try {
+                guardbullet.setIcon(new ImageIcon((ImageIO.read(new File("SecurityGuardBullet.png"))).getScaledInstance(guardbullet.getWidth(), guardbullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //  setComponentZOrder(bullet1, 0);
+            System.out.println("Try performed");
+            guardbullets.add(guardbullet);
+        }
+    }
+
+    public void fatOfficeWorkerBullets() {
+        for (EnemyClass item : fatOfficeWorkerStats) {
+
+            JLabel fatbullet = new JLabel();
+
+            System.out.println("Label Created");
+            getContentPane().add(fatbullet);
+            fatbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y, 50, 50);
+
+            System.out.println("Bounds Set");
+            try {
+                fatbullet.setIcon(new ImageIcon((ImageIO.read(new File("AaronHamburger.png"))).getScaledInstance(fatbullet.getWidth(), fatbullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //  setComponentZOrder(bullet1, 0);
+            System.out.println("Try performed");
+            fatbullets.add(fatbullet);
+        }
+    }
+
+    public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
+
+       Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        for (EnemyClass item : officeWorkerStats) {
+            if (rect.intersects(item.getLabel().getBounds())) {
+                item.setHealth(item.getHealth() - 1);
+                System.out.println("Enenmy Hit" + item.getHealth());
+                if (item.getHealth() == 0) {
+                    officeWorkerStats.remove(item);
+                    getContentPane().remove(item.getLabel());
+                    repaint();
+                }
+                return true;
+            }
+        }
+        for (EnemyClass item : fatOfficeWorkerStats) {
+            if (rect.intersects(item.getLabel().getBounds())) {
+                item.setHealth(item.getHealth() - 1);
+                System.out.println("Enenmy Hit" + item.getHealth());
+                if (item.getHealth() == 0) {
+                    fatOfficeWorkerStats.remove(item);
+                    getContentPane().remove(item.getLabel());
+                    repaint();
+                }
+                return true;
+            }
+        }
+        for (EnemyClass item : securityGuardStats) {
+            if (rect.intersects(item.getLabel().getBounds())) {
+                item.setHealth(item.getHealth() - 1);
+                System.out.println("Enenmy Hit" + item.getHealth());
+                if (item.getHealth() == 0) {
+                    securityGuardStats.remove(item);
+                    getContentPane().remove(item.getLabel());
+                    repaint();
+                }
+                return true;
+            }
+        }
+        return false;
+       
+        
+    }
+     public boolean bulletCollisionPlayer(javax.swing.JLabel _lbl, int _x, int _y) {
+
+     
+
+      
+         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+       
+            if (rect.intersects(playerCharacter.getLabel().getBounds())) {
+                takeDamage();
+                System.out.println("Enenmy Hit" + playerCharacter.getHealth());
+               
+                return true;
+            }
+        
+      
+       
+        return false;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel bottomFloor;
     javax.swing.ButtonGroup buttonGroup1;
+    javax.swing.JProgressBar jProgressBar1;
     javax.swing.JLabel player;
     // End of variables declaration//GEN-END:variables
 
