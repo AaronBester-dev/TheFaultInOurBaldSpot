@@ -30,14 +30,32 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.net.URL;
+import java.io.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author alexander.rejep819
  */
-public class AlexForm extends javax.swing.JFrame {
-URL url = AlexForm.class.getResource("back.wav");
-AudioClip clip = Applet.newAudioClip(url);
+public class AlexForm extends javax.swing.JFrame  {
+
+    //URL url = AlexForm.class.getResource("PewPew.wav");
+    
+
+
+
+
+
+
+
+//Sound clip = new Sound(url);
+//AudioClip clip = Applet.newAudioClip(url);
     public int health = 4;
     public int counter = 120;
     Timer gameTimer = new Timer();
@@ -61,6 +79,7 @@ AudioClip clip = Applet.newAudioClip(url);
 
             try {
                 for (JLabel item : bullets) {
+                    sound();
                     item.setLocation(item.getLocation().x, item.getLocation().y - 5);
                     if (checkBulletCollisionEnemies(item, 0, -5) == true) {
                         remove(item);
@@ -614,7 +633,36 @@ AudioClip clip = Applet.newAudioClip(url);
 //            }
 //            setComponentZOrder(bullet, 0);
 //            System.out.println("Try performed");
+
             bullet();
+            ///////////////////////////////////
+            try {
+         // Open an audio input stream.
+        // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
+         
+         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("PewPew.wav"));
+         // Get a sound clip resource.
+         Clip clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+         clip.open(audioIn);
+         clip.start();
+      } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+            catch(Exception e){
+                System.out.println(e);
+            }
+          
+
+            
+            
+         ////////////////////////////////   
+            
+            
         }
     }//GEN-LAST:event_formKeyReleased
 
@@ -779,6 +827,34 @@ AudioClip clip = Applet.newAudioClip(url);
         winner.setVisible(true);
 
 dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
+    }
+    
+    public void sound (){
+             
+//File fileIn = new File( "PewPew.wav");
+//  try{
+//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileIn);
+//        audioInputStream.
+//}catch(Exception e){}
+//  URL file = AlexForm.class.getResource("PewPewPew.mp3");
+//    final Media media = new Media(file.toString());
+//    final MediaPlayer mediaPlayer = new MediaPlayer(media);
+//    mediaPlayer.play();
+
+//try {
+//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("PewPew.wav"));
+//        Clip clip = AudioSystem.getClip();
+//        clip.open(audioInputStream);
+//        clip.start();
+//    } catch(Exception ex) {
+//    }
+
+//String bip = "PewPewPew.mp3";
+//Media hit = new Media(new File(bip).toURI().toString());
+//MediaPlayer mediaPlayer = new MediaPlayer(hit);
+//mediaPlayer.play();
+
+
     }
 
 
