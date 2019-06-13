@@ -5,6 +5,15 @@
  */
 package AlexPackage;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author alexander.rejep819
@@ -16,8 +25,24 @@ public class Victory extends javax.swing.JFrame {
      */
     public Victory() {
         initComponents();
+        myInitComponents();
     }
+    
+    public void myInitComponents() {
+        BufferedImage img = null;
+        //same as above, but in a condensed version
+     
+        try {
+            // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+            backGround.setIcon(new ImageIcon((ImageIO.read(new File("sunnyBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
+              winPlane.setIcon(new ImageIcon((ImageIO.read(new File("planeFlying.png"))).getScaledInstance(winPlane.getWidth(), winPlane.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(AlexForm.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
 
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +52,36 @@ public class Victory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("Form"); // NOI18N
+        victoryLabel = new javax.swing.JLabel();
+        winPlane = new javax.swing.JLabel();
+        backGround = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(500, 500));
+        getContentPane().setLayout(null);
+
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(Victory.class);
+        victoryLabel.setFont(resourceMap.getFont("victoryLabel.font")); // NOI18N
+        victoryLabel.setForeground(resourceMap.getColor("victoryLabel.foreground")); // NOI18N
+        victoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        victoryLabel.setText(resourceMap.getString("victoryLabel.text")); // NOI18N
+        victoryLabel.setName("victoryLabel"); // NOI18N
+        getContentPane().add(victoryLabel);
+        victoryLabel.setBounds(0, 0, 500, 90);
+
+        winPlane.setText(resourceMap.getString("winPlane.text")); // NOI18N
+        winPlane.setName("winPlane"); // NOI18N
+        getContentPane().add(winPlane);
+        winPlane.setBounds(240, 180, 210, 140);
+
+        backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        backGround.setText(resourceMap.getString("backGround.text")); // NOI18N
+        backGround.setName("backGround"); // NOI18N
+        getContentPane().add(backGround);
+        backGround.setBounds(0, 0, 500, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -80,5 +122,8 @@ public class Victory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backGround;
+    private javax.swing.JLabel victoryLabel;
+    private javax.swing.JLabel winPlane;
     // End of variables declaration//GEN-END:variables
 }
