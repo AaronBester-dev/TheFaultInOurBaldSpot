@@ -31,7 +31,8 @@ public class Victory extends javax.swing.JFrame {
     public void myInitComponents() {
         BufferedImage img = null;
         //same as above, but in a condensed version
-     
+        
+
         try {
             // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             backGround.setIcon(new ImageIcon((ImageIO.read(new File("sunnyBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
@@ -112,7 +113,7 @@ public class Victory extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Victory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

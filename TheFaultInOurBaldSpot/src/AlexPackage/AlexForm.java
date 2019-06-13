@@ -7,6 +7,8 @@ package AlexPackage;
  */
 import AlexPackage.EnemiesClass.*;
 import AlexPackage.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Component;
@@ -26,35 +28,33 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+import java.net.URL;
 
 /**
  *
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame {
-
+URL url = AlexForm.class.getResource("back.wav");
+AudioClip clip = Applet.newAudioClip(url);
     public int health = 4;
-    public int counter = 20;
+    public int counter = 120;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
-            if (counter == 15) {
+            if (counter == 115) {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
             }
-            if (counter == 0){
-            Victory winner = new Victory();
-       
-            setVisible(false);
-          
-            winner.setVisible(true);
-              dispose();
-                 System.exit(0);
+            if (counter == 0) {
+                //closeForm();
             }
         }
     };
+
     TimerTask Animate = new TimerTask() {
         public void run() {
             //System.out.println("MOVE");
@@ -380,10 +380,10 @@ public class AlexForm extends javax.swing.JFrame {
                 }
             }
             if (health <= 0) {
-            Losser gameOver = new Losser();
-            
-            gameOver.setVisible(true); 
-             this.setVisible(false);
+                Losser gameOver = new Losser();
+
+                gameOver.setVisible(true);
+                this.setVisible(false);
             }
             return true;
         } else {
@@ -424,9 +424,9 @@ public class AlexForm extends javax.swing.JFrame {
                 }
             }
             if (health <= 0) {
-     Losser gameOver = new Losser();
-     gameOver.setVisible(true);
-     this.setVisible(false);
+                Losser gameOver = new Losser();
+                gameOver.setVisible(true);
+                this.setVisible(false);
             }
             healthLabel.setText(String.valueOf(health));
             return true;
@@ -771,8 +771,14 @@ public class AlexForm extends javax.swing.JFrame {
         }
     }
 
-    public void impBullet() {
+    public void closeForm(JFrame AlexForm) {
+        Victory winner = new Victory();
 
+        setVisible(false);
+
+        winner.setVisible(true);
+
+dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     }
 
 
