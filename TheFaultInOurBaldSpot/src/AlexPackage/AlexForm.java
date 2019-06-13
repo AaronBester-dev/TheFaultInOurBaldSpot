@@ -34,15 +34,20 @@ import java.awt.Font;
 public class AlexForm extends javax.swing.JFrame {
 
     public int health = 4;
-    public int counter = 120;
+    public int counter = 60;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
-            if (counter == 115) {
+            if (counter == 55) {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
+            }
+            if (counter == 0){
+            Victory winner = new Victory();
+            //this.setVisible(false);
+            winner.setVisible(true);  
             }
         }
     };
@@ -373,8 +378,7 @@ public class AlexForm extends javax.swing.JFrame {
             if (health == 0) {
             Losser gameOver = new Losser();
              this.setVisible(false);
-            gameOver.setVisible(true);
-           
+            gameOver.setVisible(true);  
             }
             return true;
         } else {
