@@ -23,6 +23,7 @@ import javax.swing.SwingWorker;
 public class AaronForm extends javax.swing.JFrame {
 
     int numberOfObjects = 0;
+         MegaAaron playerCharacter;
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
       ArrayList<JLabel> guardbullets = new ArrayList<JLabel>(0);
         ArrayList<JLabel> fatbullets = new ArrayList<JLabel>(0);
@@ -69,12 +70,26 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    TimerTask createEnemyBullets = new TimerTask(){
+     public void run(){
+         securityGuardBullets();
+          fatOfficeWorkerBullets();
+     }   
+    };
       TimerTask enemyBulletMovement = new TimerTask() {
         public void run() {
 
-            if ((!checkCollision(player, 0, +10))) {
-                player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-            }
+       
+                    for (JLabel item : guardbullets)  {
+                          for (JLabel item2 : guardbullets)  {
+                              
+                          
+                          item.setLocation(item.getLocation().x - 20, item.getLocation().y);
+                    item2.setLocation(item2.getLocation().x - 20, item2.getLocation().y);
+                          }
+                     
+                }
+            
         }
     };
 
@@ -97,10 +112,7 @@ public class AaronForm extends javax.swing.JFrame {
             for (JLabel item : activeSpike) {
 
                 if (rect.intersects(item.getBounds())) {
-                     MegaAaron playerCharacter = new MegaAaron();
-                      playerCharacter.setLabel(player);
-playerCharacter.setHealth(playerCharacter.getHealth()-1);
-System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
+                  takeDamage();
                     return true;
                 }
             }
@@ -186,7 +198,7 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
 //        }
 //}
 
-    public void myInitComponents() {
+    public void myInitComponents() throws IOException {
         //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
@@ -194,7 +206,7 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
 //        same as above, but in a condensed version
         try {
                     
-            player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+          
    
             bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
@@ -205,6 +217,9 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        playerSpawner();
+           jProgressBar1.setMaximum(playerCharacter.getHealth());
+          jProgressBar1.setValue(playerCharacter.getHealth());
         fillUpArray();
         spikeSpawner();
         floorSpawner();
@@ -344,6 +359,20 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
         }
 
     }
+    
+
+    
+    public void playerSpawner()throws IOException{
+           playerCharacter = new MegaAaron();
+                      playerCharacter.setLabel(player);
+          player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+    }
+    
+    public void takeDamage(){
+        playerCharacter.setHealth(playerCharacter.getHealth()-1);
+          
+             jProgressBar1.setValue(playerCharacter.getHealth()-1);
+    }
 
     public void floorSpawner() {
 
@@ -418,7 +447,10 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
+                 aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
+                        aaronGameTimer.scheduleAtFixedRate(enemyBulletMovement, 100, 100);
             }
 
         }
@@ -467,6 +499,8 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                   aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
+                        aaronGameTimer.scheduleAtFixedRate(enemyBulletMovement, 100, 100);
             }
 
         }
@@ -530,7 +564,7 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
 
                 System.out.println("Bounds Set");
                 try {
-                    guardbullet.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(guardbullet.getWidth(), guardbullet.getHeight(), Image.SCALE_SMOOTH)));
+                    guardbullet.setIcon(new ImageIcon((ImageIO.read(new File("SecurityGuardBullet.png"))).getScaledInstance(guardbullet.getWidth(), guardbullet.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -542,8 +576,28 @@ System.out.println("Oooocchchhchchc" + playerCharacter.getHealth());
     }
     
     public void fatOfficeWorkerBullets(){
-        
+        for (EnemyClass item : fatOfficeWorkerStats) {
+          
+          JLabel fatbullet= new JLabel();
+
+                System.out.println("Label Created");
+                getContentPane().add(fatbullet);
+                fatbullet.setBounds( item.getLabel().getLocation().x, item.getLabel().getLocation().y, 50, 50);
+
+                System.out.println("Bounds Set");
+                try {
+                    fatbullet.setIcon(new ImageIcon((ImageIO.read(new File("AaronHamburger.png"))).getScaledInstance(fatbullet.getWidth(), fatbullet.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    System.out.println("NO IMAGE");
+                    Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //  setComponentZOrder(bullet1, 0);
+                System.out.println("Try performed");
+                fatbullets.add(fatbullet);
+                  }
     }
+    
+   
 
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
         
