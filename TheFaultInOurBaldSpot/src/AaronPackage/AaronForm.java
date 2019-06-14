@@ -41,7 +41,7 @@ public class AaronForm extends javax.swing.JFrame {
     static ArrayList<EnemyClass> officeWorkerStats = new ArrayList<EnemyClass>(0);
     static ArrayList<EnemyClass> fatOfficeWorkerStats = new ArrayList<EnemyClass>(0);
     Timer aaronGameTimer = new Timer();
-    Timer aaronJumpTimer;//= new Timer();
+    Timer aaronJumpTimer= new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
         public void run() {
@@ -111,24 +111,29 @@ public class AaronForm extends javax.swing.JFrame {
 //            }
 //        }
 //    };
+      
+      boolean jumping = false;
     TimerTask jumpGravity = new TimerTask() {
         public void run() {
-            System.out.println("Running jumpy");
+            System.out.println("Running jumpy "+jumping);
 
+            if (jumping){
             jumpTimer++;
             if (jumpTimer <= 20) {
                 player.setLocation(player.getLocation().x, player.getLocation().y - 10);
             }
-
-            if (jumpTimer > 20) {
-                if ((!checkCollision(player, 0, +10))) {
-                    player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-                }
-                if (jumpTimer >= 40) {
+            else if (jumpTimer > 20) {
+                if (jumpTimer >= 41) {
                     jumpTimer=0;
-                   jumpGravity.cancel();
+                    jumping = false;
+                  // jumpGravity.cancel();
                              System.out.println("Stop Running jumpy");
                 }
+                else 
+                    if ((!checkCollision(player, 0, +10))) {
+                    player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+            }
+            }
 
 //jumpTimer = 0;
                 //aaronJumpTimer.scheduleAtFixedRate(gravity, 20, 20);
@@ -264,7 +269,7 @@ public class AaronForm extends javax.swing.JFrame {
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(50, 40, 148, 14);
+        jProgressBar1.setBounds(50, 40, 146, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -307,7 +312,10 @@ public class AaronForm extends javax.swing.JFrame {
         securityGuardSpawner();
         officeWorkerSpawner();
         fatAlbertSpawner();
+        exitSpawner();
 
+        
+     aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);   
     }
 
 
@@ -315,15 +323,25 @@ public class AaronForm extends javax.swing.JFrame {
 
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
+
                // aaronJumpTimer = new Timer();
-Timer newTimer = new Timer();
-newTimer.purge();
+//Timer newTimer = new Timer();
+//newTimer.purge();
                 //aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
                
                 
-                try{
-                newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
-                }catch(Exception e){}
+                
+              //  newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
+
+//           // aaronJumpTimer = new Timer();
+//Timer newTimer = new Timer();
+//newTimer.purge();
+//            //aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
+//
+//
+//            newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
+              jumping = true;
+
                 
             }
         }
@@ -349,7 +367,7 @@ newTimer.purge();
         if (evt.getKeyCode() == 88) {
 
             bullet();
-            aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
+         aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
 
         }
     }//GEN-LAST:event_formKeyReleased
@@ -538,7 +556,7 @@ newTimer.purge();
 
                 System.out.println("Bounds Set");
                 try {
-                    door.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(door.getWidth(), door.getHeight(), Image.SCALE_SMOOTH)));
+                    door.setIcon(new ImageIcon((ImageIO.read(new File("Door.png"))).getScaledInstance(door.getWidth(), door.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -729,7 +747,7 @@ newTimer.purge();
         for (EnemyClass item : officeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                System.out.println("Enenmy Hit" + item.getHealth());
+              //  System.out.println("Enenmy Hit" + item.getHealth());
                 if (item.getHealth() == 0) {
                     officeWorkerStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -741,7 +759,7 @@ newTimer.purge();
         for (EnemyClass item : fatOfficeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                System.out.println("Enenmy Hit" + item.getHealth());
+              //  System.out.println("Enenmy Hit" + item.getHealth());
                 if (item.getHealth() == 0) {
                     fatOfficeWorkerStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -753,7 +771,7 @@ newTimer.purge();
         for (EnemyClass item : securityGuardStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                System.out.println("Enenmy Hit" + item.getHealth());
+             //   System.out.println("Enenmy Hit" + item.getHealth());
                 if (item.getHealth() == 0) {
                     securityGuardStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -772,7 +790,7 @@ newTimer.purge();
 
         if (rect.intersects(playerCharacter.getLabel().getBounds())) {
             takeDamage();
-            System.out.println("Enenmy Hit" + playerCharacter.getHealth());
+         //  System.out.println("Enenmy Hit" + playerCharacter.getHealth());
 
             return true;
         }
