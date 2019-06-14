@@ -822,23 +822,23 @@ public class AlexForm extends javax.swing.JFrame  {
 dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     }
     
- private void endGame() {
-        score = (points * health);
-        System.out.println("Your score is: " + score);
-        try {
-            highScore();
-        } catch (IOException e) {
-        }
-    }
-
-   private void highScore() throws IOException {
-        PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
-        fileOut.println(score);
-        fileOut.close();
-        
-         scores highScorePage = new scores();   
-         highScorePage.setVisible(true);
-    }
+// private void endGame() {
+//        score = (points * health);
+//        System.out.println("Your score is: " + score);
+//        try {
+//            highScores();
+//        } catch (IOException e) {
+//        }
+//    }
+//
+//   private void highScores() throws IOException {
+//        PrintWriter fileOut = new PrintWriter(new FileWriter("HighScoresAlex.txt", true));
+//        fileOut.println(score);
+//        fileOut.close();
+//        
+//         scores highScorePage = new scores();   
+//         highScorePage.setVisible(true);
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
