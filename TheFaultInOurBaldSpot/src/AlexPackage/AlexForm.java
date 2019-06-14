@@ -460,6 +460,23 @@ public class AlexForm extends javax.swing.JFrame  {
     }
 
     public void myInitComponents() {
+        try {
+ AudioInputStream audio = AudioSystem.getAudioInputStream(new File("NyanCat.wav"));
+         // Get a sound clip resource.
+         Clip clip1 = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+         clip1.open(audio);
+         clip1.start();
+             } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+            catch(Exception e){
+                System.out.println(e);
+            }  
         BufferedImage img = null;
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
@@ -618,21 +635,6 @@ public class AlexForm extends javax.swing.JFrame  {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == 88) {
-//            JLabel bullet = new JLabel();
-//
-//            System.out.println("Label Created");
-//            getContentPane().add(bullet);
-//            bullet.setBounds(tataPlane.getX() + tataPlane.getWidth() / 2, tataPlane.getY() - 10, 5, 10);
-//
-//            System.out.println("Bounds Set");
-//            try {
-//                bullet.setIcon(new ImageIcon((ImageIO.read(new File("bullet.png"))).getScaledInstance(bullet.getWidth(), bullet.getHeight(), Image.SCALE_SMOOTH)));
-//            } catch (IOException ex) {
-//                System.out.println("NO IMAGE");
-//                Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            setComponentZOrder(bullet, 0);
-//            System.out.println("Try performed");
 
             bullet();
             ///////////////////////////////////
@@ -640,7 +642,7 @@ public class AlexForm extends javax.swing.JFrame  {
          // Open an audio input stream.
         // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
          
-         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("PewPew.wav"));
+         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("PewPewGood.wav"));
          // Get a sound clip resource.
          Clip clip = AudioSystem.getClip();
          // Open audio clip and load samples from the audio input stream.
@@ -655,18 +657,14 @@ public class AlexForm extends javax.swing.JFrame  {
       }
             catch(Exception e){
                 System.out.println(e);
-            }
-          
-
-            
-            
+            }            
          ////////////////////////////////   
             
             
         }
     }//GEN-LAST:event_formKeyReleased
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -696,13 +694,16 @@ public class AlexForm extends javax.swing.JFrame  {
         }
         //</editor-fold>
         /* Create and display the form */
+     
+      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AlexForm().setVisible(true);
             }
-        });
-
+        }); 
+        
     }
+    
 
 //    public void int impMovement(int x, int y) {
 //        

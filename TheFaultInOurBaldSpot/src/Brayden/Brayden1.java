@@ -325,7 +325,9 @@ public character me = new character();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(potato.getBounds()) ) {
+            me.setMushroom(false);
             me.setPotato(true);
+            me.setTomato(false);
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -343,6 +345,8 @@ public character me = new character();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(tomato.getBounds()) ) {
+            me.setMushroom(false);
+            me.setPotato(false);
             me.setTomato(true);
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
@@ -362,6 +366,27 @@ public character me = new character();
 
         if (rect.intersects(onion.getBounds()) ) {
             me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -372,6 +397,45 @@ public character me = new character();
         return false;
     }
     
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot1.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot2(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot2.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
     
     
     
@@ -444,18 +508,18 @@ public character me = new character();
         }
         //right key pressed(d)
         if (evt.getKeyCode() == 68) {
-            if (!checkCollision(user, 30, 0)) {
+            if (!checkCollision(user, 10, 0)) {
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
         if (evt.getKeyCode() == 69) {
-         if (checkCollisionPotato(user, 30, 0)) {
+         if (checkCollisionPotato(user, 10, 0)) {
              System.out.println("work");
             }
-         if (checkCollisionTomato(user, 30, 0)) {
+         if (checkCollisionTomato(user, 10, 0)) {
              System.out.println("work");
             }
-         if (checkCollisionMushroom(user, 30, 0)) {
+         if (checkCollisionMushroom(user, 10, 0)) {
              System.out.println("work");
             }
         }
