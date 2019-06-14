@@ -29,6 +29,7 @@ public int counterF = 30;
 public int counterFi = 35;
 public int counterS = 40;
 public character me = new character();
+public Pot potOne = new Pot();
 //This makes the main timer
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
@@ -154,6 +155,9 @@ public character me = new character();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        potV2 = new javax.swing.JLabel();
+        potV1 = new javax.swing.JLabel();
+        potV = new javax.swing.JLabel();
         itemV = new javax.swing.JLabel();
         timerBoy1 = new javax.swing.JLabel();
         orderOne = new javax.swing.JLabel();
@@ -191,6 +195,18 @@ public character me = new character();
             }
         });
         getContentPane().setLayout(null);
+
+        potV2.setText("V");
+        getContentPane().add(potV2);
+        potV2.setBounds(360, 120, 30, 30);
+
+        potV1.setText("V");
+        getContentPane().add(potV1);
+        potV1.setBounds(310, 120, 30, 30);
+
+        potV.setText("V");
+        getContentPane().add(potV);
+        potV.setBounds(240, 120, 30, 30);
 
         itemV.setBackground(new java.awt.Color(255, 51, 51));
         itemV.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
@@ -384,14 +400,43 @@ public character me = new character();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(pot.getBounds()) ) {
-            me.setMushroom(true);
-            me.setPotato(false);
-            me.setTomato(false);
+           if(me.getTomato()){
+             potOne.setTomato(true);
+             potOne.setMushroom(false);
+             potOne.setPotato(false);
+             me.setTomato(false);
                 try {
-  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+  potV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
+             cooker();}
+           if(me.getMushroom()){
+             potOne.setTomato(false);
+             potOne.setMushroom(true);
+             potOne.setPotato(false);
+             me.setMushroom(false);
+             cooker();
+                try {
+  potV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+
+           if(me.getPotato()){
+             potOne.setTomato(false);
+             potOne.setMushroom(false);
+             potOne.setPotato(true);
+             me.setPotato(false);
+             cooker();
+               try {
+  potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+ 
                 return true;
         }
         return false;
@@ -437,7 +482,9 @@ public character me = new character();
         return false;
     }
     
-    
+    private void cooker(){
+        
+    }
     
     
     
@@ -520,6 +567,9 @@ public character me = new character();
              System.out.println("work");
             }
          if (checkCollisionMushroom(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionPot(user, 10, 0)) {
              System.out.println("work");
             }
         }
@@ -653,6 +703,9 @@ public character me = new character();
     private javax.swing.JLabel pot;
     private javax.swing.JLabel pot1;
     private javax.swing.JLabel pot2;
+    private javax.swing.JLabel potV;
+    private javax.swing.JLabel potV1;
+    private javax.swing.JLabel potV2;
     private javax.swing.JLabel potato;
     private javax.swing.JLabel sink;
     private javax.swing.JLabel table;
