@@ -325,13 +325,13 @@ public class AaronForm extends javax.swing.JFrame {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
 
                // aaronJumpTimer = new Timer();
-Timer newTimer = new Timer();
-newTimer.purge();
+//Timer newTimer = new Timer();
+//newTimer.purge();
                 //aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
                
                 
                 
-                newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
+              //  newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
 
 //           // aaronJumpTimer = new Timer();
 //Timer newTimer = new Timer();
