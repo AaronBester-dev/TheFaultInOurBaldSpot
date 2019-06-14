@@ -7,10 +7,47 @@ package Brayden;
 
 
 public class Pot {
-private boolean potato;
-private boolean tomato;
-private boolean mushroom;
+private boolean potatoI;
+private boolean tomatoI;
+private boolean mushroomI;
 private boolean potatoS;
 private boolean tomatoS;
 private boolean mushroomS;
+
+public Pot(){
+ potatoI = false;
+ tomatoI = false;
+ mushroomI = false;
+ potatoS = false;
+ tomatoS = false;
+ mushroomS = false; 
+    
 }
+
+public void setPotato(boolean input){
+    potatoI= input;   
+} 
+
+public boolean getPotato(){
+    return potatoI;
+}
+public void setTomato(boolean input){
+    tomatoI= input;   
+} 
+
+public boolean getTomato(){
+    return tomatoI;
+}
+
+public void setMushroom(boolean input){
+    mushroomI= input;   
+} 
+
+public boolean getMushroom(){
+    return mushroomI;
+}
+
+
+}
+
+
