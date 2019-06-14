@@ -307,6 +307,7 @@ public class AaronForm extends javax.swing.JFrame {
         securityGuardSpawner();
         officeWorkerSpawner();
         fatAlbertSpawner();
+        exitSpawner();
 
     }
 
@@ -321,9 +322,8 @@ newTimer.purge();
                 //aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
                
                 
-                try{
+                
                 newTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
-                }catch(Exception e){}
                 
             }
         }
@@ -538,7 +538,7 @@ newTimer.purge();
 
                 System.out.println("Bounds Set");
                 try {
-                    door.setIcon(new ImageIcon((ImageIO.read(new File("AaronSpikes.png"))).getScaledInstance(door.getWidth(), door.getHeight(), Image.SCALE_SMOOTH)));
+                    door.setIcon(new ImageIcon((ImageIO.read(new File("Door.png"))).getScaledInstance(door.getWidth(), door.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
