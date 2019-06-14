@@ -83,6 +83,8 @@ public class AaronForm extends javax.swing.JFrame {
 
     TimerTask securityGuardMovement = new TimerTask() {
         public void run() {
+            try{
+          
             for (EnemyClass item : securityGuardStats) {
 
                 item.getLabel().setLocation(item.getLabel().getLocation().x, (item.getLabel().getLocation().y + 10));
@@ -92,14 +94,17 @@ public class AaronForm extends javax.swing.JFrame {
                     securityGuardStats.remove(item);
                 }
             }
-
+      
+            }catch(Exception e){
+                
+            }
         }
 
     };
 
     TimerTask gravity = new TimerTask() {
         public void run() {
-         //   jumpTimer++;
+ 
 
             if ((!checkCollision(player, 0, +10) && (jumping == false))) {
 
@@ -118,15 +123,11 @@ public class AaronForm extends javax.swing.JFrame {
                 if (jumpTimer <= 20) {
                     player.setLocation(player.getLocation().x, player.getLocation().y - 10);
                 } else if (jumpTimer > 20) {
-//
-//                    if ((!checkCollision(player, 0, +10))) {
-//                        player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-//                    }
-//                    if (jumpTimer >= 41) {
+          
                         jumpTimer = 0;
                         jumping = false;
                         System.out.println("Stop Running jumpy");
-//                    }
+             
                 }
             }
         }
