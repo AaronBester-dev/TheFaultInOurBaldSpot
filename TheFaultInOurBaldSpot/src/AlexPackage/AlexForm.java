@@ -7,8 +7,6 @@ package AlexPackage;
  */
 import AlexPackage.EnemiesClass.*;
 import AlexPackage.*;
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Component;
@@ -44,31 +42,22 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame  {
-
-    //URL url = AlexForm.class.getResource("PewPew.wav");
-    
-
-
-
-
-
-
-
-//Sound clip = new Sound(url);
-//AudioClip clip = Applet.newAudioClip(url);
+    public int score;
+    public int points =0;
     public int health = 4;
-    public int counter = 120;
+    public int counter = 20;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
-            if (counter == 115) {
+            if (counter == 15) {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
             }
             if (counter == 0) {
                 //closeForm();
+                //endGame();
             }
         }
     };
@@ -79,7 +68,6 @@ public class AlexForm extends javax.swing.JFrame  {
 
             try {
                 for (JLabel item : bullets) {
-                    sound();
                     item.setLocation(item.getLocation().x, item.getLocation().y - 5);
                     if (checkBulletCollisionEnemies(item, 0, -5) == true) {
                         remove(item);
@@ -315,6 +303,7 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
+                                points ++;
                                 impStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -327,6 +316,7 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
+                                points+=3;
                                 demonStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -339,6 +329,7 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
+                                points +=2;
                                 beholderStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -351,6 +342,7 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
+                                points+=2;
                                 deathWishStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -461,7 +453,7 @@ public class AlexForm extends javax.swing.JFrame  {
 
     public void myInitComponents() {
         try {
- AudioInputStream audio = AudioSystem.getAudioInputStream(new File("NyanCat.wav"));
+ AudioInputStream audio = AudioSystem.getAudioInputStream(new File("CrazyFrog.wav"));
          // Get a sound clip resource.
          Clip clip1 = AudioSystem.getClip();
          // Open audio clip and load samples from the audio input stream.
@@ -830,32 +822,22 @@ public class AlexForm extends javax.swing.JFrame  {
 dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     }
     
-    public void sound (){
-             
-//File fileIn = new File( "PewPew.wav");
-//  try{
-//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileIn);
-//        audioInputStream.
-//}catch(Exception e){}
-//  URL file = AlexForm.class.getResource("PewPewPew.mp3");
-//    final Media media = new Media(file.toString());
-//    final MediaPlayer mediaPlayer = new MediaPlayer(media);
-//    mediaPlayer.play();
+ private void endGame() {
+        score = (points * health);
+        System.out.println("Your score is: " + score);
+        try {
+            highScore();
+        } catch (IOException e) {
+        }
+    }
 
-//try {
-//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("PewPew.wav"));
-//        Clip clip = AudioSystem.getClip();
-//        clip.open(audioInputStream);
-//        clip.start();
-//    } catch(Exception ex) {
-//    }
-
-//String bip = "PewPewPew.mp3";
-//Media hit = new Media(new File(bip).toURI().toString());
-//MediaPlayer mediaPlayer = new MediaPlayer(hit);
-//mediaPlayer.play();
-
-
+   private void highScore() throws IOException {
+        PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
+        fileOut.println(score);
+        fileOut.close();
+        
+         scores highScorePage = new scores();   
+         highScorePage.setVisible(true);
     }
 
 
