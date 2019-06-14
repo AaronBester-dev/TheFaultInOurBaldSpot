@@ -1,4 +1,4 @@
 floor,50,25
 floor,50,90
 spike,150,450
-fat,350,300
+worker,350,300

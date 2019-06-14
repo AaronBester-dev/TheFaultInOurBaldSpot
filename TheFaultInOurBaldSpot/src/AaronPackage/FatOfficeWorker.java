@@ -11,9 +11,7 @@ package AaronPackage;
  */
 public class FatOfficeWorker extends EnemyClass {
      public FatOfficeWorker() {
-        health = 1;
-        speed = 3;
-        strength = 3;
-        
+        health = 10;
+      
     }
 }

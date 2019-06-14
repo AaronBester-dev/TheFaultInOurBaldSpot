@@ -63,6 +63,21 @@ int jumpTimer = 0;
             }
         }
     };
+    
+    TimerTask officeWorkerMovement = new TimerTask(){
+        public void run(){
+                for (EnemyClass item : officeWorkerStats) {
+    item.getLabel().setLocation(item.getLabel().getLocation().x - 10, (item.getLabel().getLocation().y));
+    
+             
+              
+            
+            }
+               
+        }
+         
+    };
+    
     TimerTask gravity = new TimerTask() {
         public void run() {
 jumpTimer ++;
@@ -516,6 +531,7 @@ aaronJumpTimer.scheduleAtFixedRate(jumpGravity,20,20 );
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                  aaronGameTimer.scheduleAtFixedRate(officeWorkerMovement, 100, 10);
             }
 
         }

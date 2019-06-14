@@ -11,9 +11,8 @@ package AaronPackage;
  */
 public class SecurityGuard extends EnemyClass {
        public SecurityGuard() {
-        health = 1;
-        speed = 3;
-        strength = 2;
+        health = 6;
+     
      
     }
 }
