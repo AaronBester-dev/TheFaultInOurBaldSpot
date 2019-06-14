@@ -12,7 +12,7 @@ package AaronPackage;
 public class MegaAaron extends PlayerClass {
  
     public MegaAaron() {
-        health = 10;
+        health = 11;
       
         
     }
