@@ -30,6 +30,8 @@ public int counterFi = 35;
 public int counterS = 40;
 public character me = new character();
 public Pot potOne = new Pot();
+public Pot potTwo = new Pot();
+public Pot potThree = new Pot();
 //This makes the main timer
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
@@ -198,15 +200,15 @@ public Pot potOne = new Pot();
 
         potV2.setText("V");
         getContentPane().add(potV2);
-        potV2.setBounds(360, 120, 30, 30);
+        potV2.setBounds(470, 110, 30, 30);
 
         potV1.setText("V");
         getContentPane().add(potV1);
-        potV1.setBounds(310, 120, 30, 30);
+        potV1.setBounds(330, 120, 30, 30);
 
         potV.setText("V");
         getContentPane().add(potV);
-        potV.setBounds(240, 120, 30, 30);
+        potV.setBounds(180, 120, 30, 30);
 
         itemV.setBackground(new java.awt.Color(255, 51, 51));
         itemV.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
@@ -269,15 +271,15 @@ public Pot potOne = new Pot();
 
         pot.setText("Pot1");
         getContentPane().add(pot);
-        pot.setBounds(212, 119, 60, 60);
+        pot.setBounds(160, 120, 60, 60);
 
         potato.setText("Potato");
         getContentPane().add(potato);
-        potato.setBounds(212, 765, 60, 60);
+        potato.setBounds(130, 760, 60, 60);
 
         tomato.setText("Tomato");
         getContentPane().add(tomato);
-        tomato.setBounds(290, 765, 60, 60);
+        tomato.setBounds(290, 760, 60, 60);
 
         bar.setText("jLabel1");
         getContentPane().add(bar);
@@ -293,15 +295,15 @@ public Pot potOne = new Pot();
 
         onion.setText("onion");
         getContentPane().add(onion);
-        onion.setBounds(368, 770, 60, 60);
+        onion.setBounds(470, 760, 60, 60);
 
         pot1.setText("Pot2");
         getContentPane().add(pot1);
-        pot1.setBounds(282, 119, 60, 60);
+        pot1.setBounds(290, 120, 60, 60);
 
         pot2.setText("Pot3");
         getContentPane().add(pot2);
-        pot2.setBounds(352, 119, 60, 60);
+        pot2.setBounds(430, 110, 60, 60);
 
         table.setText("table");
         getContentPane().add(table);
@@ -410,7 +412,13 @@ public Pot potOne = new Pot();
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
              cooker();}
+           
            if(me.getMushroom()){
              potOne.setTomato(false);
              potOne.setMushroom(true);
@@ -418,7 +426,76 @@ public Pot potOne = new Pot();
              me.setMushroom(false);
              cooker();
                 try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
   potV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+           }
+
+           if(me.getPotato()){
+             potOne.setTomato(false);
+             potOne.setMushroom(false);
+             potOne.setPotato(true);
+             me.setPotato(false);
+             cooker();
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               try {
+  potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+ 
+                return true;
+        }
+        return false;
+    }
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot1.getBounds()) ) {
+           if(me.getTomato()){
+             potTwo.setTomato(true);
+             potTwo.setMushroom(false);
+             potTwo.setPotato(false);
+             me.setTomato(false);
+                try {
+  potV1.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             cooker();}
+           if(me.getMushroom()){
+             potTwo.setTomato(false);
+             potTwo.setMushroom(true);
+             potTwo.setPotato(false);
+             me.setMushroom(false);
+             cooker();
+                try {
+  potV1.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -431,7 +508,12 @@ public Pot potOne = new Pot();
              me.setPotato(false);
              cooker();
                try {
-  potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+  potV1.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -441,47 +523,69 @@ public Pot potOne = new Pot();
         }
         return false;
     }
-    
-    //check if a collision between images is occurring
-    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
-        if (rect.intersects(pot1.getBounds()) ) {
-            me.setMushroom(true);
-            me.setPotato(false);
-            me.setTomato(false);
-                try {
-  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return true;
-        }
-        return false;
-    }
-    
-    //check if a collision between images is occurring
+        //check if a collision between images is occurring
     private boolean checkCollisionPot2(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(pot2.getBounds()) ) {
-            me.setMushroom(true);
-            me.setPotato(false);
-            me.setTomato(false);
+           if(me.getTomato()){
+             potThree.setTomato(true);
+             potThree.setMushroom(false);
+             potThree.setPotato(false);
+             me.setTomato(false);
                 try {
-  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+  potV2.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             cooker();}
+           if(me.getMushroom()){
+             potThree.setTomato(false);
+             potThree.setMushroom(true);
+             potThree.setPotato(false);
+             me.setMushroom(false);
+             cooker();
+                try {
+  potV2.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+
+           if(me.getPotato()){
+             potOne.setTomato(false);
+             potOne.setMushroom(false);
+             potOne.setPotato(true);
+             me.setPotato(false);
+             cooker();
+               try {
+  potV2.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+ 
                 return true;
         }
         return false;
     }
-    
     private void cooker(){
         
     }
@@ -570,6 +674,12 @@ public Pot potOne = new Pot();
              System.out.println("work");
             }
          if (checkCollisionPot(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionPot1(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionPot2(user, 10, 0)) {
              System.out.println("work");
             }
         }
