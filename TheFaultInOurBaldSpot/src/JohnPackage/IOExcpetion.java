@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AaronPackage;
+package JohnPackage;
 
 /**
  *
- * @author aaron.bester708
+ * @author john.diemert744
  */
-public class Floor extends BlockClass {
+class IOExcpetion {
     
 }

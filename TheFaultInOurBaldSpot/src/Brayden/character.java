@@ -50,5 +50,34 @@ iteam = "potatoBox.png";
 iteam = "potatoBox.png";
     }
 }
-    
+public String getItemCode(){
+    return iteam;
 }
+public void setPotato(boolean input){
+    potatoI= input;   
+} 
+
+public boolean getPotato(){
+    return potatoI;
+}
+public void setTomato(boolean input){
+    tomatoI= input;   
+} 
+
+public boolean getTomato(){
+    return tomatoI;
+}
+
+public void setMushroom(boolean input){
+    mushroomI= input;   
+} 
+
+public boolean getMushroom(){
+    return mushroomI;
+}
+}    
+
+
+
+
+

@@ -22,6 +22,7 @@ import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
 
+int jumpTimer = 0;
     int numberOfObjects = 0;
     MegaAaron playerCharacter;
     ArrayList<JLabel> staplebullets = new ArrayList<JLabel>(0);
@@ -39,6 +40,7 @@ public class AaronForm extends javax.swing.JFrame {
     static ArrayList<EnemyClass> officeWorkerStats = new ArrayList<EnemyClass>(0);
     static ArrayList<EnemyClass> fatOfficeWorkerStats = new ArrayList<EnemyClass>(0);
     Timer aaronGameTimer = new Timer();
+   Timer aaronJumpTimer = new Timer();
 
     TimerTask bulletMovement = new TimerTask() {
         public void run() {
@@ -61,12 +63,47 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    
+    TimerTask officeWorkerMovement = new TimerTask(){
+        public void run(){
+                for (EnemyClass item : officeWorkerStats) {
+    item.getLabel().setLocation(item.getLabel().getLocation().x - 10, (item.getLabel().getLocation().y));
+    
+             
+              
+            
+            }
+               
+        }
+         
+    };
+    
     TimerTask gravity = new TimerTask() {
         public void run() {
+jumpTimer ++;
+        
+            if ((!checkCollision(player, 0, +10)))  {
 
-            if ((!checkCollision(player, 0, +10))) {
                 player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+                if (jumpTimer ==20){
+                    gravity.cancel();
+                }
+              
             }
+        }
+    };
+    TimerTask jumpGravity = new TimerTask() {
+        public void run() {
+    
+            player.setLocation(player.getLocation().x, player.getLocation().y -10);
+jumpTimer++;
+
+if (jumpTimer ==20){
+    jumpTimer = 0;
+    aaronGameTimer.scheduleAtFixedRate(gravity, 20, 20);
+    jumpGravity.cancel();
+}
+
         }
     };
     TimerTask createEnemyBullets = new TimerTask() {
@@ -81,9 +118,9 @@ public class AaronForm extends javax.swing.JFrame {
             for (JLabel item : guardbullets) {
 
                 item.setLocation(item.getLocation().x - 20, item.getLocation().y);
-    if (bulletCollisionPlayer(item, +20, 0) == true) {
-                        remove(item);
-    }
+                if (bulletCollisionPlayer(item, +20, 0) == true) {
+                    remove(item);
+                }
             }
 
         }
@@ -95,9 +132,9 @@ public class AaronForm extends javax.swing.JFrame {
             for (JLabel item : fatbullets) {
 
                 item.setLocation(item.getLocation().x - 20, item.getLocation().y);
-  if (bulletCollisionPlayer(item, +20, 0) == true) {
-                        remove(item);
-    }
+                if (bulletCollisionPlayer(item, +20, 0) == true) {
+                    remove(item);
+                }
             }
 
         }
@@ -176,6 +213,9 @@ public class AaronForm extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
         });
         getContentPane().setLayout(null);
 
@@ -243,8 +283,10 @@ public class AaronForm extends javax.swing.JFrame {
 
         if (evt.getKeyCode() == 90) {
             if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
-                player.setLocation(player.getLocation().x, player.getLocation().y - 150);
-                aaronGameTimer.scheduleAtFixedRate(gravity, 100, 100);
+            jumpGravity.run();
+aaronJumpTimer.scheduleAtFixedRate(jumpGravity,20,20 );
+
+                
             }
         }
 
@@ -255,7 +297,7 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
         //right key pressed
-        if (evt.getKeyCode() == 39) {
+       if (evt.getKeyCode() == 39) {
             if (!checkCollision(player, 10, 0)) {
 
                 scrollEverythingLeft();
@@ -273,6 +315,10 @@ public class AaronForm extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_formKeyReleased
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+       
+    }//GEN-LAST:event_formKeyTyped
 
     /**
      * @param args the command line arguments
@@ -379,8 +425,8 @@ public class AaronForm extends javax.swing.JFrame {
         playerCharacter.setHealth(playerCharacter.getHealth() - 1);
 
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
-        if (playerCharacter.getHealth() == 0){
-            
+        if (playerCharacter.getHealth() == 0) {
+
         }
     }
 
@@ -485,6 +531,7 @@ public class AaronForm extends javax.swing.JFrame {
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                  aaronGameTimer.scheduleAtFixedRate(officeWorkerMovement, 100, 10);
             }
 
         }
@@ -609,7 +656,7 @@ public class AaronForm extends javax.swing.JFrame {
 
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
 
-       Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         for (EnemyClass item : officeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
@@ -648,26 +695,20 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
         return false;
-       
-        
+
     }
-     public boolean bulletCollisionPlayer(javax.swing.JLabel _lbl, int _x, int _y) {
 
-     
+    public boolean bulletCollisionPlayer(javax.swing.JLabel _lbl, int _x, int _y) {
 
-      
-         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-       
-            if (rect.intersects(playerCharacter.getLabel().getBounds())) {
-                takeDamage();
-                System.out.println("Enenmy Hit" + playerCharacter.getHealth());
-               
-                return true;
-            }
-        
-      
-       
+        if (rect.intersects(playerCharacter.getLabel().getBounds())) {
+            takeDamage();
+            System.out.println("Enenmy Hit" + playerCharacter.getHealth());
+
+            return true;
+        }
+
         return false;
     }
 

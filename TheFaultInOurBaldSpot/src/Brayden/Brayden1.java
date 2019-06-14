@@ -28,6 +28,7 @@ public int counterTh = 25;
 public int counterF = 30;
 public int counterFi = 35;
 public int counterS = 40;
+public character me = new character();
 //This makes the main timer
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
@@ -153,6 +154,7 @@ public int counterS = 40;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        itemV = new javax.swing.JLabel();
         timerBoy1 = new javax.swing.JLabel();
         orderOne = new javax.swing.JLabel();
         orderTwo = new javax.swing.JLabel();
@@ -189,6 +191,12 @@ public int counterS = 40;
             }
         });
         getContentPane().setLayout(null);
+
+        itemV.setBackground(new java.awt.Color(255, 51, 51));
+        itemV.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
+        itemV.setForeground(new java.awt.Color(255, 0, 51));
+        getContentPane().add(itemV);
+        itemV.setBounds(310, 10, 70, 70);
 
         timerBoy1.setBackground(new java.awt.Color(255, 51, 51));
         timerBoy1.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
@@ -311,24 +319,145 @@ public int counterS = 40;
     }
     
     //check if a collision between images is occurring
-    private boolean checkCollisionItem(javax.swing.JLabel _lbl, int _x, int _y) {
+    private boolean checkCollisionPotato(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-        //creates an array to tell the collision what the user cant run into    
-        javax.swing.JLabel blocks[] = new javax.swing.JLabel[3];
-        blocks[0] = wallLabel;
-        blocks[1] = wallLabel1;
-        blocks[2] = table;
-//cheacks the collision and returns teu or false
-        for (javax.swing.JLabel item : blocks) {
-            if (rect.intersects(item.getBounds())) {
+        if (rect.intersects(potato.getBounds()) ) {
+            me.setMushroom(false);
+            me.setPotato(true);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 return true;
-            }
         }
         return false;
     }
+    
+    //check if a collision between images is occurring
+    private boolean checkCollisionTomato(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(tomato.getBounds()) ) {
+            me.setMushroom(false);
+            me.setPotato(false);
+            me.setTomato(true);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    
+    //check if a collision between images is occurring
+    private boolean checkCollisionMushroom(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(onion.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot1.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    
+    //check if a collision between images is occurring
+    private boolean checkCollisionPot2(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot2.getBounds()) ) {
+            me.setMushroom(true);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     soup soupBoy[] = new soup[6];
      
@@ -379,13 +508,19 @@ public int counterS = 40;
         }
         //right key pressed(d)
         if (evt.getKeyCode() == 68) {
-            if (!checkCollision(user, 30, 0)) {
+            if (!checkCollision(user, 10, 0)) {
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
         if (evt.getKeyCode() == 69) {
-         if (!checkCollisionItem(user, 30, 0)) {
-                user.setLocation(user.getLocation().x + 30, user.getLocation().y);
+         if (checkCollisionPotato(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionTomato(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionMushroom(user, 10, 0)) {
+             System.out.println("work");
             }
         }
     }//GEN-LAST:event_formKeyPressed
@@ -507,6 +642,7 @@ public int counterS = 40;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bar;
     private javax.swing.JLabel dryRack;
+    private javax.swing.JLabel itemV;
     private javax.swing.JLabel onion;
     private javax.swing.JLabel orderFive;
     private javax.swing.JLabel orderFour;
