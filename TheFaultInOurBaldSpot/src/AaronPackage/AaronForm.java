@@ -99,7 +99,7 @@ public class AaronForm extends javax.swing.JFrame {
 
     TimerTask gravity = new TimerTask() {
         public void run() {
-            jumpTimer++;
+         //   jumpTimer++;
 
             if ((!checkCollision(player, 0, +10) && (jumping == false))) {
 
@@ -118,15 +118,15 @@ public class AaronForm extends javax.swing.JFrame {
                 if (jumpTimer <= 20) {
                     player.setLocation(player.getLocation().x, player.getLocation().y - 10);
                 } else if (jumpTimer > 20) {
-
-                    if ((!checkCollision(player, 0, +10))) {
-                        player.setLocation(player.getLocation().x, player.getLocation().y + 10);
-                    }
-                    if (jumpTimer >= 41) {
+//
+//                    if ((!checkCollision(player, 0, +10))) {
+//                        player.setLocation(player.getLocation().x, player.getLocation().y + 10);
+//                    }
+//                    if (jumpTimer >= 41) {
                         jumpTimer = 0;
                         jumping = false;
                         System.out.println("Stop Running jumpy");
-                    }
+//                    }
                 }
             }
         }
