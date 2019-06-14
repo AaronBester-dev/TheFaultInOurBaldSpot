@@ -24,6 +24,11 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -75,10 +80,28 @@ public class JohnF extends javax.swing.JFrame {
             endGame();
         }
         hurt.show();
+
+        try {
+            AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AHHH2.wav"));
+            // Get a sound clip resource.
+            Clip clip1 = AudioSystem.getClip();
+            // Open audio clip and load samples from the audio input stream.
+            clip1.open(audio);
+            clip1.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     private void endGame() {
-        score = fact(healthBar.getValue() * gameCounter);
+        score = healthBar.getValue() * gameCounter;
         System.out.println("Your score is: " + score);
         try {
             highScore();
@@ -86,21 +109,12 @@ public class JohnF extends javax.swing.JFrame {
         }
     }
 
-    public static int fact(int n) {
-        if ((n == 0) || (n == 1)) {
-            return 1;
-        } else {
-            return n * fact(n - 1);
-        }
-    }
-
     private void highScore() throws IOException {
         PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
         fileOut.println(score);
         fileOut.close();
-        
-         scoreFrame johnObject = new scoreFrame();   
-         johnObject.setVisible(true);
+        scoreFrame johnObject = new scoreFrame();
+        johnObject.setVisible(true);
     }
 
     private void success() {
@@ -166,9 +180,9 @@ public class JohnF extends javax.swing.JFrame {
         cut.setVisible(false);
         gameCounter();
 
-        ribs.setVisible(false);
-        SewBoxTimer();
-        sewBox.setVisible(true);
+//        ribs.setVisible(false);
+//        SewBoxTimer();
+//        sewBox.setVisible(true);
     }
 
     /**
@@ -540,7 +554,11 @@ public class JohnF extends javax.swing.JFrame {
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
         System.out.println("Exited");
         if (cutClick == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 433 & mx < 449 & my > 400 & my < 430) {
+                System.out.println("adasdasd");
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBoxMouseExited
 
@@ -553,7 +571,7 @@ public class JohnF extends javax.swing.JFrame {
                 System.out.println("cutClick is: " + cutClick);
             } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
                 cutClick2 = true;
-                 System.out.println("cutClick2 is: " + cutClick2);
+                System.out.println("cutClick2 is: " + cutClick2);
             } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
                 cutClick3 = true;
             } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
@@ -672,7 +690,7 @@ public class JohnF extends javax.swing.JFrame {
             cutClick4 = false;
             cutClick5 = false;
             cutClick6 = false;
-            sewClick = false;              
+            sewClick = false;
         }
     }//GEN-LAST:event_formMouseReleased
 
@@ -746,11 +764,18 @@ public class JohnF extends javax.swing.JFrame {
     private void cutBox3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseExited
         System.out.println("Exited");
         if (cutClick3 == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 433 & mx < 449 & my > 410 & my < 430) {
+
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBox3MouseExited
 
     private void cutBox4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseExited
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
         System.out.println("Exited");
         if (cutClick4 == true & bonesaw.isClicked == true) {
             injured();
@@ -834,11 +859,11 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_cutBox6MouseEntered
 
     private void sewBoxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseDragged
-       moveTool();
+        moveTool();
     }//GEN-LAST:event_sewBoxMouseDragged
 
     private void sewBoxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseMoved
-       moveTool();
+        moveTool();
     }//GEN-LAST:event_sewBoxMouseMoved
 
     /**
