@@ -25,6 +25,7 @@ public class scoreFrame extends javax.swing.JFrame {
      */
     public scoreFrame() throws IOException {
         initComponents();
+        jLabel1.setText("Game High Scores");
          //dummy varible
         BufferedReader readFile = null;
         String reading = "";
@@ -42,10 +43,13 @@ public class scoreFrame extends javax.swing.JFrame {
         do {
             //sets the line of the external file to the dummy varible
             reading = readFile.readLine();
-            intReading = Integer.parseInt(reading);
             //if statment to not get a "null" line when printing the array 
             if (reading != null) {
                 //adds line to array
+                try {
+                intReading = Integer.parseInt(reading);
+                }catch (NumberFormatException e){
+                        }
                 myArrayList.add(intReading);
             }
         } while (reading != null);
@@ -57,6 +61,9 @@ public class scoreFrame extends javax.swing.JFrame {
         }
          selectionSort(myArrayList);
          System.out.println("These numbers in a sorted list are: " + myArrayList);
+         highScore1.setText(String.valueOf(myArrayList.get(0)));
+         highScore2.setText(String.valueOf(myArrayList.get(1))); 
+         highScore3.setText(String.valueOf(myArrayList.get(2))); 
     }
 
     public static void selectionSort(ArrayList myArrayList) {
@@ -89,29 +96,53 @@ public class scoreFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        highScore1 = new javax.swing.JLabel();
+        highScore2 = new javax.swing.JLabel();
+        highScore3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(scoreFrame.class);
+        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+
+        highScore1.setText(resourceMap.getString("highScore1.text")); // NOI18N
+        highScore1.setName("highScore1"); // NOI18N
+
+        highScore2.setText(resourceMap.getString("highScore2.text")); // NOI18N
+        highScore2.setName("highScore2"); // NOI18N
+
+        highScore3.setText(resourceMap.getString("highScore3.text")); // NOI18N
+        highScore3.setName("highScore3"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(221, 221, 221)
-                .addComponent(jLabel1)
-                .addContainerGap(795, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(highScore3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(highScore2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(highScore1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(733, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jLabel1)
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(highScore1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(highScore2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(highScore3)
+                .addContainerGap(529, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +188,9 @@ public class scoreFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel highScore1;
+    private javax.swing.JLabel highScore2;
+    private javax.swing.JLabel highScore3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
