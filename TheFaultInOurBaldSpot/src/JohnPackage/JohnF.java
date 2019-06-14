@@ -98,6 +98,9 @@ public class JohnF extends javax.swing.JFrame {
         PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
         fileOut.println(score);
         fileOut.close();
+        
+         scoreFrame johnObject = new scoreFrame();   
+         johnObject.setVisible(true);
     }
 
     private void success() {
