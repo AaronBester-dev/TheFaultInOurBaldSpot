@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -380,7 +385,26 @@ try{
 //}
 
     public void myInitComponents() throws IOException {
-        //Initialize a Buffered Image
+      
+  try {
+ AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AaronLevelMusic.wav"));
+         // Get a sound clip resource.
+         Clip clip1 = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+         clip1.open(audio);
+         clip1.start();
+             } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+            catch(Exception e){
+                System.out.println(e);
+            }          
+
+//Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
 
@@ -410,8 +434,8 @@ try{
         aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
         aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
           aaronGameTimer.scheduleAtFixedRate(gravity, 20, 20);
-           aaronGameTimer.scheduleAtFixedRate(moveRight, 1, 1);
-           aaronGameTimer.scheduleAtFixedRate(moveLeft, 1, 1);
+           aaronGameTimer.scheduleAtFixedRate(moveRight, 2, 2);
+           aaronGameTimer.scheduleAtFixedRate(moveLeft, 2, 2);
     }
 
 
@@ -448,7 +472,26 @@ movingRight = true;
         if (evt.getKeyCode() == 88) {
 
             bullet();
+             try {
+         // Open an audio input stream.
+        // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
          
+         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("AaronShoot.wav"));
+         // Get a sound clip resource.
+         Clip clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+         clip.open(audioIn);
+         clip.start();
+      } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+            catch(Exception e){
+                System.out.println(e);
+            }            
 
         }
           if (evt.getKeyCode() == 37) {
