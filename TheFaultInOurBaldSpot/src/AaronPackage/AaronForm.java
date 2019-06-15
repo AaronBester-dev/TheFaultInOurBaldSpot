@@ -63,10 +63,12 @@ int movementSpeed = 1;
                     if (bulletCollisionEnemies(item, +20, 0) == true) {
                         remove(item);
                         staplebullets.remove(item);
+                    }
                         if (item.getLocation().x > 1080) {
+                           remove(item);
                             staplebullets.remove(item);
                         }
-                    }
+                    
                 }
             } catch (Exception e) {
             }
@@ -213,9 +215,9 @@ int movementSpeed = 1;
             System.out.println("Running jumpy " + jumping);
             if (jumping) {
                 jumpTimer++;
-                if (jumpTimer <= 20) {
+                if (jumpTimer <= 22) {
                     player.setLocation(player.getLocation().x, player.getLocation().y - 10);
-                } else if (jumpTimer > 20) {
+                } else if (jumpTimer > 22) {
           
                         jumpTimer = 0;
                         jumping = false;
@@ -243,9 +245,12 @@ int movementSpeed = 1;
                     guardbullets.remove(item);
                     remove(item);
            
-                   
                 }
-             
+                 if (item.getLocation().x > 1080 &&(item.getLocation().x<0)) {
+                           remove(item);
+                            guardbullets.remove(item);
+                        }
+                
             }
                 }catch(Exception e){} 
         }
@@ -262,6 +267,10 @@ try{
                     remove(item);
   
                 }
+                 if (item.getLocation().x > 1080 &&(item.getLocation().x<0)) {
+                           remove(item);
+                            fatbullets.remove(item);
+                        }
             }
 
         }catch(Exception e){
@@ -339,8 +348,8 @@ try{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 720));
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1080, 720));
-        setSize(new java.awt.Dimension(1080, 720));
+        setPreferredSize(new java.awt.Dimension(1080, 617));
+        setSize(new java.awt.Dimension(1080, 617));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -432,8 +441,8 @@ try{
         exitSpawner();
 
         aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
-        aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
-          aaronGameTimer.scheduleAtFixedRate(gravity, 20, 20);
+        aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 25);
+          aaronGameTimer.scheduleAtFixedRate(gravity, 20, 25);
            aaronGameTimer.scheduleAtFixedRate(moveRight, 2, 2);
            aaronGameTimer.scheduleAtFixedRate(moveLeft, 2, 2);
     }
@@ -470,8 +479,9 @@ movingRight = true;
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         if (evt.getKeyCode() == 88) {
-
+if(staplebullets.size()<3){
             bullet();
+
              try {
          // Open an audio input stream.
         // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
@@ -493,6 +503,7 @@ movingRight = true;
                 System.out.println(e);
             }            
 
+        }
         }
           if (evt.getKeyCode() == 37) {
             if (!checkCollision(player, 0, 0)) {
@@ -728,7 +739,7 @@ movingRight = false;
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
 
                 }
-                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
+                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 2000);
                 aaronGameTimer.scheduleAtFixedRate(guardBulletMovement, 100, 100);
                 aaronGameTimer.scheduleAtFixedRate(securityGuardMovement, 100, 1000);
             }
@@ -787,62 +798,6 @@ movingRight = false;
         }
     }
 
-//    public void scrollEverythingLeft() {
-//        for (JLabel item : activeFloor) {
-//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-//
-//        }
-//        for (JLabel item : activeSpike) {
-//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-//
-//        }
-//
-//        for (JLabel item : activeDoor) {
-//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-//
-//        }
-//
-//        for (EnemyClass item : fatOfficeWorkerStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//        for (EnemyClass item : officeWorkerStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//        for (EnemyClass item : securityGuardStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//    }
-
-//    public void scrollEverythingRight() {
-//        for (JLabel item : activeFloor) {
-//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-//
-//        }
-//        for (JLabel item : activeSpike) {
-//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-//
-//        }
-//        for (JLabel item : activeDoor) {
-//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-//
-//        }
-//        for (EnemyClass item : fatOfficeWorkerStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//        for (EnemyClass item : officeWorkerStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//        for (EnemyClass item : securityGuardStats) {
-//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-//
-//        }
-//    }
-
     public void securityGuardBullets() {
 
         for (EnemyClass item : securityGuardStats) {
@@ -851,7 +806,7 @@ movingRight = false;
 
             System.out.println("Label Created");
             getContentPane().add(guardbullet);
-            guardbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y, 50, 50);
+            guardbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y+100, 50, 50);
 
             System.out.println("Bounds Set");
             try {
@@ -873,7 +828,7 @@ movingRight = false;
 
             System.out.println("Label Created");
             getContentPane().add(fatbullet);
-            fatbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y, 50, 50);
+            fatbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y+100, 50, 50);
 
             System.out.println("Bounds Set");
             try {

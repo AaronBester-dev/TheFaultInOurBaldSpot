@@ -1,5 +1,8 @@
-floor,50,25
-floor,50,90
-spike,150,450
-guard,550,300
-door,650,300
+spike,650,500
+spike,700,500
+spike,750,500
+spike,800,500
+spike,850,500
+spike,900,500
+guard,2000,300
+door,5000,300
