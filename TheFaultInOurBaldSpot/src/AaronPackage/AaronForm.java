@@ -21,8 +21,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
-int movementSpeed = 20;
+int movementSpeed = 1;
     boolean jumping = false;
+    boolean movingRight = false;
+    boolean movingLeft = false;
     int jumpTimer = 0;
     int numberOfObjects = 0;
     MegaAaron playerCharacter;
@@ -81,6 +83,92 @@ int movementSpeed = 20;
 
     };
 
+    TimerTask moveRight = new TimerTask(){
+       public void run(){
+          if(movingRight){
+                if (!checkCollision(player, -movementSpeed, 0)) {
+          
+           for (JLabel item : activeFloor) {
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+
+        }
+        for (JLabel item : activeSpike) {
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+
+        }
+
+        for (JLabel item : activeDoor) {
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+
+        }
+          for (JLabel item : guardbullets) {
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+
+        }
+         for (JLabel item : fatbullets) {
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+
+        }
+
+        for (EnemyClass item : fatOfficeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : officeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : securityGuardStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+
+        }
+        }
+          }
+       }
+    };
+    
+    TimerTask moveLeft = new TimerTask(){
+       public void run(){
+           if(movingLeft){
+                if (!checkCollision(player, +movementSpeed, 0)) {
+             for (JLabel item : activeFloor) {
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+
+        }
+        for (JLabel item : activeSpike) {
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+
+        }
+        for (JLabel item : activeDoor) {
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+
+        }
+        for (JLabel item : guardbullets) {
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+
+        }
+         for (JLabel item : fatbullets) {
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+
+        }
+        for (EnemyClass item : fatOfficeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : officeWorkerStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+
+        }
+        for (EnemyClass item : securityGuardStats) {
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+
+        }
+           }
+           }
+       }
+    };
+    
+    
     TimerTask securityGuardMovement = new TimerTask() {
         public void run() {
             try{
@@ -322,6 +410,8 @@ try{
         aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
         aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 20);
           aaronGameTimer.scheduleAtFixedRate(gravity, 20, 20);
+           aaronGameTimer.scheduleAtFixedRate(moveRight, 1, 1);
+           aaronGameTimer.scheduleAtFixedRate(moveLeft, 1, 1);
     }
 
 
@@ -337,16 +427,18 @@ try{
 
         //left key pressed
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(player, -movementSpeed, 0)) {
-                scrollEverythingRight();
-            }
+//           
+             movingLeft = true;
+              System.out.println("moving Left" + movingLeft);
+//            
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(player, movementSpeed, 0)) {
-
-                scrollEverythingLeft();
-            }
+//          
+movingRight = true;
+  System.out.println("moving Left" + movingRight);
+               
+//           
         }
 
 
@@ -356,8 +448,21 @@ try{
         if (evt.getKeyCode() == 88) {
 
             bullet();
-            //     aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
+         
 
+        }
+          if (evt.getKeyCode() == 37) {
+            if (!checkCollision(player, 0, 0)) {
+             movingLeft = false;
+              System.out.println("stopped moving Left" + movingLeft);
+            }
+        }
+        //right key pressed
+        if (evt.getKeyCode() == 39) {
+            if (!checkCollision(player, 0, 0)) {
+movingRight = false;
+                  System.out.println("stopped moving right" + movingRight);
+            }
         }
     }//GEN-LAST:event_formKeyReleased
 
@@ -639,61 +744,61 @@ try{
         }
     }
 
-    public void scrollEverythingLeft() {
-        for (JLabel item : activeFloor) {
-            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+//    public void scrollEverythingLeft() {
+//        for (JLabel item : activeFloor) {
+//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+//
+//        }
+//        for (JLabel item : activeSpike) {
+//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+//
+//        }
+//
+//        for (JLabel item : activeDoor) {
+//            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
+//
+//        }
+//
+//        for (EnemyClass item : fatOfficeWorkerStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//        for (EnemyClass item : officeWorkerStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//        for (EnemyClass item : securityGuardStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//    }
 
-        }
-        for (JLabel item : activeSpike) {
-            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-
-        }
-
-        for (JLabel item : activeDoor) {
-            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-
-        }
-
-        for (EnemyClass item : fatOfficeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-
-        }
-        for (EnemyClass item : officeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-
-        }
-        for (EnemyClass item : securityGuardStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
-
-        }
-    }
-
-    public void scrollEverythingRight() {
-        for (JLabel item : activeFloor) {
-            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-
-        }
-        for (JLabel item : activeSpike) {
-            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-
-        }
-        for (JLabel item : activeDoor) {
-            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
-
-        }
-        for (EnemyClass item : fatOfficeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-
-        }
-        for (EnemyClass item : officeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-
-        }
-        for (EnemyClass item : securityGuardStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-
-        }
-    }
+//    public void scrollEverythingRight() {
+//        for (JLabel item : activeFloor) {
+//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+//
+//        }
+//        for (JLabel item : activeSpike) {
+//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+//
+//        }
+//        for (JLabel item : activeDoor) {
+//            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
+//
+//        }
+//        for (EnemyClass item : fatOfficeWorkerStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//        for (EnemyClass item : officeWorkerStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//        for (EnemyClass item : securityGuardStats) {
+//            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
+//
+//        }
+//    }
 
     public void securityGuardBullets() {
 
