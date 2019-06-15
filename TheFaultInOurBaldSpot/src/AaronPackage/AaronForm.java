@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 public class AaronForm extends javax.swing.JFrame {
-
+int movementSpeed = 20;
     boolean jumping = false;
     int jumpTimer = 0;
     int numberOfObjects = 0;
@@ -337,13 +337,13 @@ try{
 
         //left key pressed
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(player, -10, 0)) {
+            if (!checkCollision(player, -movementSpeed, 0)) {
                 scrollEverythingRight();
             }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(player, 10, 0)) {
+            if (!checkCollision(player, movementSpeed, 0)) {
 
                 scrollEverythingLeft();
             }
@@ -641,56 +641,56 @@ try{
 
     public void scrollEverythingLeft() {
         for (JLabel item : activeFloor) {
-            item.setLocation(item.getLocation().x - 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
 
         }
         for (JLabel item : activeSpike) {
-            item.setLocation(item.getLocation().x - 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
 
         }
 
         for (JLabel item : activeDoor) {
-            item.setLocation(item.getLocation().x - 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
 
         }
 
         for (EnemyClass item : fatOfficeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
 
         }
         for (EnemyClass item : officeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
 
         }
         for (EnemyClass item : securityGuardStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x - 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x - movementSpeed, item.getLabel().getLocation().y);
 
         }
     }
 
     public void scrollEverythingRight() {
         for (JLabel item : activeFloor) {
-            item.setLocation(item.getLocation().x + 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
 
         }
         for (JLabel item : activeSpike) {
-            item.setLocation(item.getLocation().x + 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
 
         }
         for (JLabel item : activeDoor) {
-            item.setLocation(item.getLocation().x + 10, item.getLocation().y);
+            item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
 
         }
         for (EnemyClass item : fatOfficeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
 
         }
         for (EnemyClass item : officeWorkerStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
 
         }
         for (EnemyClass item : securityGuardStats) {
-            item.getLabel().setLocation(item.getLabel().getLocation().x + 10, item.getLabel().getLocation().y);
+            item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
 
         }
     }
