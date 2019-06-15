@@ -30,6 +30,7 @@ int movementSpeed = 1;
     boolean jumping = false;
     boolean movingRight = false;
     boolean movingLeft = false;
+   
     int jumpTimer = 0;
     int numberOfObjects = 0;
     MegaAaron playerCharacter;
@@ -41,7 +42,7 @@ int movementSpeed = 1;
     ArrayList<String> blockType = new ArrayList<String>(0);
     ArrayList<String> blockX = new ArrayList<String>(0);
     ArrayList<String> blockY = new ArrayList<String>(0);
-    String[][] objectsArray = new String[3][10];
+    String[][] objectsArray = new String[3][99];
     ArrayList<JLabel> activeFloor = new ArrayList<JLabel>(0);
     ArrayList<JLabel> activeSpike = new ArrayList<JLabel>(0);
     ArrayList<JLabel> activeDoor = new ArrayList<JLabel>(0);
@@ -59,7 +60,7 @@ int movementSpeed = 1;
 
                 for (JLabel item : staplebullets) {
                     item.setLocation(item.getLocation().x + 20, item.getLocation().y);
-
+repaint();
                     if (bulletCollisionEnemies(item, +20, 0) == true) {
                         remove(item);
                         staplebullets.remove(item);
@@ -89,7 +90,6 @@ int movementSpeed = 1;
         }
 
     };
-
     TimerTask moveRight = new TimerTask(){
        public void run(){
           if(movingRight){
@@ -97,7 +97,7 @@ int movementSpeed = 1;
           
            for (JLabel item : activeFloor) {
             item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
-
+         
         }
         for (JLabel item : activeSpike) {
             item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
@@ -168,34 +168,88 @@ int movementSpeed = 1;
         }
         for (EnemyClass item : securityGuardStats) {
             item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
-
         }
            }
            }
        }
     };
-    
-    
-    TimerTask securityGuardMovement = new TimerTask() {
-        public void run() {
-            try{
-          
-            for (EnemyClass item : securityGuardStats) {
-
-                item.getLabel().setLocation(item.getLabel().getLocation().x, (item.getLabel().getLocation().y + 10));
-                item.getLabel().setLocation(item.getLabel().getLocation().x, (item.getLabel().getLocation().y - 10));
-                if (bulletCollisionPlayer(item.getLabel(), -10, 0) == true) {
-                    remove(item.getLabel());
-                    securityGuardStats.remove(item);
-                }
-            }
-      
-            }catch(Exception e){
-                
-            }
+     TimerTask checkVisible = new TimerTask(){
+       public void run(){
+         
+              
+             for (JLabel item : activeFloor) {
+             if (item.getLocation().x > 0 && item.getLocation().x< 1080) {
+                             getContentPane().add(item);
+                        }
         }
+        for (JLabel item : activeSpike) {
+             if (item.getLocation().x > 0 && item.getLocation().x< 1080) {
+                             getContentPane().add(item);
+                        }
 
+        }
+        for (JLabel item : activeDoor) {
+            if (item.getLocation().x > 0 && item.getLocation().x< 1080) {
+                             getContentPane().add(item);
+                        }
+
+        }
+        for (JLabel item : guardbullets) {
+            if (item.getLocation().x > 0 && item.getLocation().x< 1080) {
+                             getContentPane().add(item);
+                        }
+
+        }
+         for (JLabel item : fatbullets) {
+           
+  if (item.getLocation().x > 0 && item.getLocation().x< 1080) {
+                             getContentPane().add(item);
+                        }
+        }
+        for (EnemyClass item : fatOfficeWorkerStats) {
+           if (item.getLabel().getBounds().getX()> 0 && item.getLabel().getBounds().getX()< 1080) {
+                             getContentPane().add(item.getLabel());
+                        }
+
+        }
+        for (EnemyClass item : officeWorkerStats) {
+           if (item.getLabel().getBounds().getX()> 0 && item.getLabel().getBounds().getX()< 1080) {
+                             getContentPane().add(item.getLabel());
+                        }
+
+
+        }
+        for (EnemyClass item : securityGuardStats) {
+             if (item.getLabel().getBounds().getX()> 0 && item.getLabel().getBounds().getX()< 1080) {
+                             getContentPane().add(item.getLabel());
+                        }
+
+        }
+           }
+           
+       
     };
+//    
+//    TimerTask securityGuardMovement = new TimerTask() {
+//        public void run() {
+//            try{
+//          
+//            for (EnemyClass item : securityGuardStats) {
+//
+//                item.getLabel().setLocation(item.getLabel().getLocation().x, (item.getLabel().getLocation().y + 10));
+//                item.getLabel().setLocation(item.getLabel().getLocation().x, (item.getLabel().getLocation().y - 10));
+//                if (bulletCollisionPlayer(item.getLabel(), -10, 0) == true) {
+//                    remove(item.getLabel());
+//                    securityGuardStats.remove(item);
+//                }
+//            }
+//      
+//            }catch(Exception e){
+//                
+//            }
+//        }
+//
+//    };
 
     TimerTask gravity = new TimerTask() {
         public void run() {
@@ -228,10 +282,19 @@ int movementSpeed = 1;
         }
     };
     
-    TimerTask createEnemyBullets = new TimerTask() {
+    TimerTask createFatBullets = new TimerTask() {
         public void run() {
-            securityGuardBullets();
+          
             fatOfficeWorkerBullets();
+           
+        }
+    };
+     TimerTask createGuardBullets = new TimerTask() {
+        public void run() {
+          
+            securityGuardBullets();
+            
+         
         }
     };
     TimerTask guardBulletMovement = new TimerTask() {
@@ -246,7 +309,7 @@ int movementSpeed = 1;
                     remove(item);
            
                 }
-                 if (item.getLocation().x > 1080 &&(item.getLocation().x<0)) {
+                 if (item.getLocation().x > 1300 ||(item.getLocation().x< 0)) {
                            remove(item);
                             guardbullets.remove(item);
                         }
@@ -260,14 +323,14 @@ int movementSpeed = 1;
 try{
             for (JLabel item : fatbullets) {
 
-                item.setLocation(item.getLocation().x - 5, item.getLocation().y);
+                item.setLocation(item.getLocation().x - 15, item.getLocation().y);
                 if (bulletCollisionPlayer(item, -5, 0) == true) {
                     takeDamage();
                        fatbullets.remove(item);
                     remove(item);
   
                 }
-                 if (item.getLocation().x > 1080 &&(item.getLocation().x<0)) {
+                 if (item.getLocation().x > 1300 ||(item.getLocation().x<0)) {
                            remove(item);
                             fatbullets.remove(item);
                         }
@@ -319,17 +382,7 @@ try{
 
         myInitComponents();
     }
-//       public static boolean passageSearch(ArrayList numPsalms, String psalmNumber) {
-//        //For statement checks each item in the number psalm array
-//        for (k = 0; k < numPsalms.size(); k++) {
-//            //If statement checks if the item in the numPsalms array is equal to the number given by the user then returns true 
-//            if (numPsalms.get(k).equals(psalmNumber)) {
-//                return true;
-//            }
-//        }
-//        //Returns false if the user doesnt input a correct psalm number
-//        return false;
-//    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -380,18 +433,7 @@ try{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// public boolean checkGround(javax.swing.JLabel _lbl, int _x, int _y){
-//    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-////also same width and height as original
-//        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-//
-////check if temporary rectangle intersect with wallLabel        
-//        if (rect.intersects(bottomFloor.getBounds())) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//}
+
 
     public void myInitComponents() throws IOException {
       
@@ -445,6 +487,11 @@ try{
           aaronGameTimer.scheduleAtFixedRate(gravity, 20, 25);
            aaronGameTimer.scheduleAtFixedRate(moveRight, 2, 2);
            aaronGameTimer.scheduleAtFixedRate(moveLeft, 2, 2);
+            aaronGameTimer.scheduleAtFixedRate(createFatBullets, 10, 2000);
+           aaronGameTimer.scheduleAtFixedRate(createGuardBullets, 10, 2000);
+                aaronGameTimer.scheduleAtFixedRate(guardBulletMovement, 100, 100);
+                  aaronGameTimer.scheduleAtFixedRate(fatBulletMovement, 100, 100);
+                   aaronGameTimer.scheduleAtFixedRate(checkVisible, 10, 10);
     }
 
 
@@ -479,7 +526,7 @@ movingRight = true;
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         if (evt.getKeyCode() == 88) {
-if(staplebullets.size()<3){
+if(staplebullets.size()<1){
             bullet();
 
              try {
@@ -646,7 +693,7 @@ movingRight = false;
                 JLabel floor1 = new JLabel();
 
                 System.out.println("Label Created");
-                getContentPane().add(floor1);
+    
                 floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
 
                 System.out.println("Bounds Set");
@@ -674,7 +721,7 @@ movingRight = false;
                 JLabel spike2 = new JLabel();
 
                 System.out.println("Label Created");
-                getContentPane().add(spike2);
+//                getContentPane().add(spike2);
                 spike2.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
 
                 System.out.println("Bounds Set");
@@ -700,7 +747,7 @@ movingRight = false;
 
                 System.out.println("door Coming");
                 JLabel door = new JLabel();
-                getContentPane().add(door);
+//                getContentPane().add(door);
                 door.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 250);
 
                 System.out.println("Bounds Set");
@@ -730,7 +777,7 @@ movingRight = false;
                 securityGuardStats.add(guard);
                 JLabel label = new JLabel();
                 guard.setLabel(label);
-                getContentPane().add(guard.getLabel());
+//                getContentPane().add(guard.getLabel());
                 guard.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 250);
                 try {
                     guard.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("AaronSecurityGuard.png"))).getScaledInstance(guard.getLabel().getWidth(), guard.getLabel().getHeight(), Image.SCALE_SMOOTH)));
@@ -739,9 +786,9 @@ movingRight = false;
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
 
                 }
-                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 2000);
-                aaronGameTimer.scheduleAtFixedRate(guardBulletMovement, 100, 100);
-                aaronGameTimer.scheduleAtFixedRate(securityGuardMovement, 100, 1000);
+
+           
+
             }
 
         }
@@ -758,7 +805,7 @@ movingRight = false;
                 officeWorkerStats.add(worker);
                 JLabel label = new JLabel();
                 worker.setLabel(label);
-                getContentPane().add(worker.getLabel());
+//                getContentPane().add(worker.getLabel());
                 worker.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 200);
                 try {
                     worker.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("officeWorker.png"))).getScaledInstance(worker.getLabel().getWidth(), worker.getLabel().getHeight(), Image.SCALE_SMOOTH)));
@@ -783,7 +830,7 @@ movingRight = false;
                 fatOfficeWorkerStats.add(fat);
                 JLabel label = new JLabel();
                 fat.setLabel(label);
-                getContentPane().add(fat.getLabel());
+//                getContentPane().add(fat.getLabel());
                 fat.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 250);
                 try {
                     fat.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("aaronFatAlbert.png"))).getScaledInstance(fat.getLabel().getWidth(), fat.getLabel().getHeight(), Image.SCALE_SMOOTH)));
@@ -791,8 +838,8 @@ movingRight = false;
                     System.out.println("NO IMAGE");
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                aaronGameTimer.scheduleAtFixedRate(createEnemyBullets, 100, 1000);
-                aaronGameTimer.scheduleAtFixedRate(fatBulletMovement, 100, 100);
+
+              
             }
 
         }
