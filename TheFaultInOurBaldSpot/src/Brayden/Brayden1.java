@@ -305,7 +305,6 @@ public Pot potThree = new Pot();
         potato = new javax.swing.JLabel();
         tomato = new javax.swing.JLabel();
         bar = new javax.swing.JLabel();
-        sink = new javax.swing.JLabel();
         dryRack = new javax.swing.JLabel();
         onion = new javax.swing.JLabel();
         pot1 = new javax.swing.JLabel();
@@ -414,13 +413,9 @@ public Pot potThree = new Pot();
         getContentPane().add(bar);
         bar.setBounds(0, 0, 1080, 85);
 
-        sink.setText("Sink");
-        getContentPane().add(sink);
-        sink.setBounds(667, 749, 60, 60);
-
         dryRack.setText("DishRack");
         getContentPane().add(dryRack);
-        dryRack.setBounds(745, 741, 60, 60);
+        dryRack.setBounds(1000, 250, 60, 60);
 
         onion.setText("onion");
         getContentPane().add(onion);
@@ -1035,8 +1030,6 @@ counterC3 = 3;
 
             background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
 
-            sink.setIcon(new ImageIcon((ImageIO.read(new File("sink.png"))).getScaledInstance(sink.getWidth(), sink.getHeight(), Image.SCALE_SMOOTH)));
-
             dryRack.setIcon(new ImageIcon((ImageIO.read(new File("dish.png"))).getScaledInstance(dryRack.getWidth(), dryRack.getHeight(), Image.SCALE_SMOOTH)));
              arrayMaker();
          orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
@@ -1125,7 +1118,6 @@ counterC3 = 3;
     private javax.swing.JLabel potV1;
     private javax.swing.JLabel potV2;
     private javax.swing.JLabel potato;
-    private javax.swing.JLabel sink;
     private javax.swing.JLabel table;
     private javax.swing.JLabel timerBoy;
     private javax.swing.JLabel timerBoy1;

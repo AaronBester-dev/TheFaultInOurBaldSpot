@@ -420,7 +420,7 @@ TimerTask createFatBullets = new TimerTask() {
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(50, 40, 146, 14);
+        jProgressBar1.setBounds(50, 40, 146, 7);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
