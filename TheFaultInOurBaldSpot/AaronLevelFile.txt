@@ -40,5 +40,5 @@ floor,3200,250
 guard,3600,300
 floor,3750,250
 fat,3750,0
-worker,1000,300
+worker,4750,300
 door,5000,300

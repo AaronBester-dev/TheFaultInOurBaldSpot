@@ -88,6 +88,7 @@ public class AaronForm extends javax.swing.JFrame {
                         item.getLabel().setLocation(item.getLabel().getLocation().x - 15, (item.getLabel().getLocation().y));
 
                         if (bulletCollisionPlayer(item.getLabel(), -15, 0) == true) {
+                           takeDamage();
                             remove(item.getLabel());
                             officeWorkerStats.remove(item);
                         }
@@ -355,6 +356,7 @@ public class AaronForm extends javax.swing.JFrame {
                     AaronWinScreen winScreen = new AaronWinScreen();
                     winScreen.setVisible(true);
                     this.setVisible(false);
+                     this.dispose();
                 }
             }
             return false;
@@ -654,7 +656,10 @@ public class AaronForm extends javax.swing.JFrame {
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 
         if (playerCharacter.getHealth() == 0) {
-
+  DeathScreen deathScreen1 = new DeathScreen();
+                    deathScreen1.setVisible(true);
+                    this.setVisible(false);
+                     this.dispose();
         }
 
     }
