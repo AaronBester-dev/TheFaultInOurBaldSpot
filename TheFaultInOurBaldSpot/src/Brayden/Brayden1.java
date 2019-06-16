@@ -773,7 +773,7 @@ public Pot potThree = new Pot();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(pot2.getBounds()) ) {
-          if(potThree.getTomatoS()){
+           if(potThree.getTomatoS()){
              potThree.setTomatoS(false);
              me.setMushroom(false);
              me.setPotato(false);
@@ -865,9 +865,9 @@ public Pot potThree = new Pot();
            }
 
            if(me.getPotato()){
-             potOne.setTomato(false);
-             potOne.setMushroom(false);
-             potOne.setPotato(true);
+             potThree.setTomato(false);
+             potThree.setMushroom(false);
+             potThree.setPotato(true);
              me.setPotato(false);
              cooker3();
                try {
@@ -885,7 +885,8 @@ public Pot potThree = new Pot();
                 return true;
         }
         return false;
-    }
+    };
+
     private void cooker1(){
 counterC = 3;
         timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
