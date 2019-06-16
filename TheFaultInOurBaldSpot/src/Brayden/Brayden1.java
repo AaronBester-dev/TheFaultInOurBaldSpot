@@ -519,6 +519,25 @@ public Pot potThree = new Pot();
         }
         return false;
     }
+        //check if a collision between images is occurring
+    private boolean checkCollisionDish(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(dryRack.getBounds()) ) {
+            me.setMushroom(false);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
     //check if a collision between images is occurring
     private boolean checkCollisionPot(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -985,6 +1004,9 @@ counterC3 = 3;
          if (checkCollisionPot2(user, 10, 0)) {
              System.out.println("work");
             }
+         if(checkCollisionDish(user,10,0)){
+             
+         }
         }
     }//GEN-LAST:event_formKeyPressed
 
