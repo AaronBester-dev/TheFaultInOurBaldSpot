@@ -29,19 +29,21 @@ import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.io.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author alexander.rejep819
  */
 public class AlexForm extends javax.swing.JFrame  {
+   String input;
     public int score;
     public int points =0;
     public int health = 4;
@@ -57,7 +59,7 @@ public class AlexForm extends javax.swing.JFrame  {
             }
             if (counter == 0) {
                 //closeForm();
-                //endGame();
+                endGame();
             }
         }
     };
@@ -822,23 +824,29 @@ public class AlexForm extends javax.swing.JFrame  {
 dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     }
     
-// private void endGame() {
-//        score = (points * health);
-//        System.out.println("Your score is: " + score);
-//        try {
-//            highScores();
-//        } catch (IOException e) {
-//        }
-//    }
-//
-//   private void highScores() throws IOException {
-//        PrintWriter fileOut = new PrintWriter(new FileWriter("HighScoresAlex.txt", true));
-//        fileOut.println(score);
-//        fileOut.close();
-//        
-//         scores highScorePage = new scores();   
-//         highScorePage.setVisible(true);
-//    }
+ private void endGame() {
+       score = (points * health);
+       System.out.println("Your score is: " + score);
+       input = JOptionPane.showInputDialog("Please enter your Initals");
+         try {
+            highScores();
+        } catch (IOException e) {
+        }
+    }
+
+   private void highScores() throws IOException {
+        PrintWriter fileOut = new PrintWriter(new FileWriter("HighScoresAlex.txt", true));
+        
+        fileOut.println(input);
+        
+        fileOut.println(score);
+        
+        fileOut.close();
+      
+        
+         scores highScorePage = new scores();   
+         highScorePage.setVisible(true);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
