@@ -28,6 +28,9 @@ public int counterTh = 25;
 public int counterF = 30;
 public int counterFi = 35;
 public int counterS = 40;
+public int counterC = 4;
+public int counterC2 = 4;
+public int counterC3 = 4;
 public character me = new character();
 public Pot potOne = new Pot();
 public Pot potTwo = new Pot();
@@ -151,8 +154,132 @@ public Pot potThree = new Pot();
 
         }
     };
+    Timer timerCook = new Timer();
+    TimerTask taskC = new TimerTask() {
 
+        public void run() {
+            counterC--;
 
+            if (counterC == 0) {
+                System.out.println("boob");
+                if (potOne.getMushroom()) {
+                    potOne.setMushroom(false);
+                    potOne.setMushroomS(true);
+
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potOne.getPotato()) {
+                    potOne.setPotato(false);
+                    potOne.setPotatoS(true);
+
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potOne.getTomato()) {
+                    potOne.setTomato(false);
+                    potOne.setTomatoS(true);
+
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+        }
+    };
+    Timer timerCook2 = new Timer();
+    TimerTask taskC2 = new TimerTask() {
+
+        public void run() {
+            counterC2--;
+
+            if (counterC2 == 0) {
+                System.out.println("boob");
+                if (potTwo.getMushroom()) {
+                    potTwo.setMushroom(false);
+                    potTwo.setMushroomS(true);
+
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potTwo.getPotato()) {
+                    potTwo.setPotato(false);
+                    potTwo.setPotatoS(true);
+
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potTwo.getTomato()) {
+                    potTwo.setTomato(false);
+                    potTwo.setTomatoS(true);
+
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+        }
+    };
+    Timer timerCook3 = new Timer();
+    TimerTask taskC3 = new TimerTask() {
+
+        public void run() {
+            counterC3--;
+
+            if (counterC3 == 0) {
+                System.out.println("boob");
+                if (potThree.getMushroom()) {
+                    potThree.setMushroom(false);
+                    potThree.setMushroomS(true);
+
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potThree.getPotato()) {
+                    potThree.setPotato(false);
+                    potThree.setPotatoS(true);
+
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potOne.getTomato()) {
+                    potThree.setTomato(false);
+                    potThree.setTomatoS(true);
+
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+        }
+    };
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -417,14 +544,14 @@ public Pot potThree = new Pot();
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             cooker();}
+             cooker1();}
            
            if(me.getMushroom()){
              potOne.setTomato(false);
              potOne.setMushroom(true);
              potOne.setPotato(false);
              me.setMushroom(false);
-             cooker();
+             cooker1();
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -443,7 +570,7 @@ public Pot potThree = new Pot();
              potOne.setMushroom(false);
              potOne.setPotato(true);
              me.setPotato(false);
-             cooker();
+             cooker1();
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -482,13 +609,13 @@ public Pot potThree = new Pot();
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             cooker();}
+             cooker2();}
            if(me.getMushroom()){
              potTwo.setTomato(false);
              potTwo.setMushroom(true);
              potTwo.setPotato(false);
              me.setMushroom(false);
-             cooker();
+             cooker2();
                 try {
   potV1.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -506,7 +633,7 @@ public Pot potThree = new Pot();
              potOne.setMushroom(false);
              potOne.setPotato(true);
              me.setPotato(false);
-             cooker();
+             cooker2();
                try {
   potV1.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -545,13 +672,13 @@ public Pot potThree = new Pot();
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             cooker();}
+             cooker3();}
            if(me.getMushroom()){
              potThree.setTomato(false);
              potThree.setMushroom(true);
              potThree.setPotato(false);
              me.setMushroom(false);
-             cooker();
+             cooker3();
                 try {
   potV2.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -569,7 +696,7 @@ public Pot potThree = new Pot();
              potOne.setMushroom(false);
              potOne.setPotato(true);
              me.setPotato(false);
-             cooker();
+             cooker3();
                try {
   potV2.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -586,13 +713,20 @@ public Pot potThree = new Pot();
         }
         return false;
     }
-    private void cooker(){
-        
-    }
+    private void cooker1(){
+counterC = 3;
+        timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
+            }
     
+    private void cooker2(){
+counterC2 = 3;
+        timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
+            }
     
-    
-    
+    private void cooker3(){
+counterC3 = 3;
+        timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
+            }
     
     
     

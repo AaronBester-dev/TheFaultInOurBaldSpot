@@ -75,6 +75,7 @@ public void setMushroom(boolean input){
 public boolean getMushroom(){
     return mushroomI;
 }
+
 }    
 
 
