@@ -106,6 +106,7 @@ public class LoseScreen extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
        
+        //Sets the main screen to be visible and then disposes of this form
         try {
             
             AaronForm retry = new AaronForm();
