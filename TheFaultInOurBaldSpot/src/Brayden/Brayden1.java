@@ -639,6 +639,7 @@ soup soupBoy[] = new soup[6];
                 potOne.setMushroom(false);
                 potOne.setPotato(false);
                 me.setTomato(false);
+                
                 try {
                     potV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
@@ -794,9 +795,9 @@ soup soupBoy[] = new soup[6];
             }
 
             if (me.getPotato()) {
-                potOne.setTomato(false);
-                potOne.setMushroom(false);
-                potOne.setPotato(true);
+                potTwo.setTomato(false);
+                potTwo.setMushroom(false);
+                potTwo.setPotato(true);
                 me.setPotato(false);
                 cooker2();
                 try {
@@ -941,17 +942,17 @@ soup soupBoy[] = new soup[6];
 
     private void cooker1(){
 counterC = 3;
-        timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
+       // timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
             }
     
     private void cooker2(){
 counterC2 = 3;
-        timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
+        //timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
             }
     
     private void cooker3(){
 counterC3 = 3;
-        timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
+      //  timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
             }
 //generates each soup and starts their timer
     private void arrayMaker() {
@@ -1005,6 +1006,8 @@ counterC3 = 3;
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
+        
+        
         if (evt.getKeyCode() == 69) {
          if (checkCollisionPotato(user, 10, 0)) {
              System.out.println("work");
@@ -1093,7 +1096,9 @@ counterC3 = 3;
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
    
-        
+        timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
+        timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
+        timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
 
         
         
