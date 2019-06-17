@@ -4,21 +4,20 @@
  * and open the template in the editor.
  */
 package AlexPackage;
-
+//importing packages
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexander.rejep819
- */
+
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the HighScores Screen
 public class scores extends javax.swing.JFrame {
 
     /**

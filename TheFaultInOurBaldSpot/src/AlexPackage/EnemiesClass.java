@@ -5,11 +5,10 @@
  */
 package AlexPackage;
 
-/**
- *
- *
- */
-//
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the constructors
 public class EnemiesClass {
     // declaring enemies variables
     int health, speed, strength, height;

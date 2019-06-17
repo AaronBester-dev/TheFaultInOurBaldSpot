@@ -16,10 +16,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import thefaultinourbaldspot.TheFaultInOurBaldSpotView;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the victory screen
 public class Victory extends javax.swing.JFrame {
 
     /**
