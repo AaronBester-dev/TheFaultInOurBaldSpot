@@ -99,6 +99,7 @@ public class AaronWinScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+           //Sets the main screen to be visible and then disposes of this form
         try {
             
             AaronForm retry = new AaronForm();
