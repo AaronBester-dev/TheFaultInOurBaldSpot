@@ -29,22 +29,17 @@ public class Victory extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
     }
-    
+    //initializes components
     public void myInitComponents() {
         BufferedImage img = null;
-        //same as above, but in a condensed version
-        
-
+        //same as above, but in a condensed version        
         try {
-            // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             backGround.setIcon(new ImageIcon((ImageIO.read(new File("sunnyBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-              winPlane.setIcon(new ImageIcon((ImageIO.read(new File("planeFlying.png"))).getScaledInstance(winPlane.getWidth(), winPlane.getHeight(), Image.SCALE_SMOOTH)));
+            winPlane.setIcon(new ImageIcon((ImageIO.read(new File("planeFlying.png"))).getScaledInstance(winPlane.getWidth(), winPlane.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,7 +104,8 @@ public class Victory extends javax.swing.JFrame {
 
     private void returnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnMainActionPerformed
         // TODO add your handling code here:
-dispose();
+        //allows playing other games
+        dispose();
         
     }//GEN-LAST:event_returnMainActionPerformed
 

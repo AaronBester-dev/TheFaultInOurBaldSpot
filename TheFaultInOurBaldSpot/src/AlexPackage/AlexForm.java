@@ -5,11 +5,8 @@ package AlexPackage;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import AlexPackage.EnemiesClass.*;
-import AlexPackage.*;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -22,15 +19,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.WindowEvent;
-import java.net.URL;
 import java.io.*;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -42,41 +32,44 @@ import javax.swing.JOptionPane;
  *
  * @author alexander.rejep819
  */
-public class AlexForm extends javax.swing.JFrame  {
-   String input;
+public class AlexForm extends javax.swing.JFrame {
+    // declaring public variables
+
+    String input;
     public int score;
-    public int points =0;
+    public int points = 0;
     public int health = 4;
     public int counter = 100;
-     
     AudioInputStream audio;
-    // Get a sound clip resource.
-         Clip clip1;
+    Clip clip1;
+    //creating timer and timertasks
     Timer gameTimer = new Timer();
+    //main timer task
     TimerTask task = new TimerTask() {
         public void run() {
+            // counts down the timer by one tick every second
             counter--;
             timerLabel.setText(String.valueOf(counter));
-            // System.out.println("Seconds Passed: " + counter);
             if (counter == 80) {
+                // upon 20 seconds passing, starts spawning enemies, removes instructions and begins playing music
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
                 Instructions.setVisible(false);
                 try {
 
-         // Open audio clip and load samples from the audio input stream.
-         clip1.open(audio);
-         clip1.start();
-            
-      } catch (IOException e) {
-         e.printStackTrace();
-      }catch (LineUnavailableException e) {
-         e.printStackTrace();
-      }
-            catch(Exception e){
-                System.out.println(e);
-            } 
+                    // Open audio clip and load samples from the audio input stream.
+                    clip1.open(audio);
+                    clip1.start();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
             if (counter == 0) {
+                //once timer reaches zero, stops music, ends timer and opens the victory game
                 clip1.stop();
                 gameTimer.cancel();
                 endGame();
@@ -84,77 +77,120 @@ public class AlexForm extends javax.swing.JFrame  {
         }
     };
 
+    //Animation timer task
     TimerTask Animate = new TimerTask() {
         public void run() {
-            //System.out.println("MOVE");
-
             try {
+                //for every bullet
                 for (JLabel item : bullets) {
+                    //moves bullet up 5
                     item.setLocation(item.getLocation().x, item.getLocation().y - 5);
+                    //if bullet collides with an item, removes the bullet from screen and removes it from the arraylist
                     if (checkBulletCollisionEnemies(item, 0, -5) == true) {
                         remove(item);
                         bullets.remove(item);
                     }
                 }
-
+                 //for every imp bullet
                 for (JLabel item : impBullets) {
+                    // checks if bullet will collide with plane and if it does, removes bullet from screen and array
                     if (checkBulletCollisionPlane(item, 0, 4, 1) == true) {
                         remove(item);
                         impBullets.remove(item);
                     } else {
+                        //moves bullet down 4
                         item.setLocation(item.getLocation().x, item.getLocation().y + 4);
                     }
                 }
-
+                //for every beholder bullet
                 for (JLabel item : beholderBullets) {
+                     // checks if bullet will collide with plane and if it does, removes bullet from screen and array
                     if (checkBulletCollisionPlane(item, 0, 3, 2) == true) {
                         remove(item);
                         beholderBullets.remove(item);
                     } else {
+                        //moves bullet down 3
                         item.setLocation(item.getLocation().x, item.getLocation().y + 3);
                     }
                 }
+                //for every demon bullet on the right
                 for (JLabel item : demonBulletsRight) {
+                    // checks if bullet will collide with plane and if it does, removes bullet from screen and array
                     if (checkBulletCollisionPlane(item, 1, 5, 1) == true) {
                         remove(item);
                         demonBulletsRight.remove(item);
                     } else {
+                        //moves bullet down 5, right 2
                         item.setLocation(item.getLocation().x + 2, item.getLocation().y + 5);
                     }
                 }
+                 //for every demon bullet middle
                 for (JLabel item : demonBulletsMid) {
+                     // checks if bullet will collide with plane and if it does, removes bullet from screen and array
                     if (checkBulletCollisionPlane(item, 0, 5, 1) == true) {
                         remove(item);
                         demonBulletsMid.remove(item);
                     } else {
+                        //moves bullet down 5
                         item.setLocation(item.getLocation().x, item.getLocation().y + 5);
                     }
                 }
+                //for every demon bullet middle
                 for (JLabel item : demonBulletsLeft) {
+                    // checks if bullet will collide with plane and if it does, removes bullet from screen and array
                     if (checkBulletCollisionPlane(item, -1, 5, 1) == true) {
                         remove(item);
                         demonBulletsLeft.remove(item);
                     } else {
+                        //moves bullet down 5, left 2
                         item.setLocation(item.getLocation().x - 2, item.getLocation().y + 5);
                     }
                 }
-
+                //checks if bullets go off the screen and removes them if so
                 for (JLabel item : bullets) {
                     if (item.getLocation().y < -50) {
                         bullets.remove(item);
                     }
                 }
-
+                //ditto
                 for (JLabel item : impBullets) {
                     if (item.getLocation().y > 980) {
                         impBullets.remove(item);
                     }
                 }
+                //ditto
+                for (JLabel item : beholderBullets) {
+                    if (item.getLocation().y > 980) {
+                        impBullets.remove(item);
+                    }
+                }
+                //ditto
+                for (JLabel item : demonBulletsRight) {
+                    if (item.getLocation().y > 980) {
+                        impBullets.remove(item);
+                    }
+                }
+                //ditto
+                for (JLabel item : demonBulletsMid) {
+                    if (item.getLocation().y > 980) {
+                        impBullets.remove(item);
+                    }
+                }
+                //ditto
+                for (JLabel item : demonBulletsLeft) {
+                    if (item.getLocation().y > 980) {
+                        impBullets.remove(item);
+                    }
+                }
+                // checks each arraylist of enemies stored with an array
                 for (int i = 0; i < enemyStats1.length; i++) {
                     if (i == 0) {
+                        //looking at imp arraylist
                         for (EnemiesClass item : impStats) {
+                            //creates a random num and then if num is equal to five, fires a bullet
                             int fireBullet = (int) (Math.random() * 400 + 1);
                             if (fireBullet == 5) {
+                                //creating impbullet
                                 JLabel impBullet = new JLabel();
                                 getContentPane().add(impBullet);
                                 impBullet.setBounds(item.getLabel().getLocation().x + item.getLabel().getWidth() / 2, item.getLabel().getLocation().y + 40, 14, 20);
@@ -163,12 +199,15 @@ public class AlexForm extends javax.swing.JFrame  {
                                 } catch (IOException ex) {
                                     Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+                                //adds impbullet to array
                                 impBullets.add(impBullet);
                             }
+                            //if imp collides with plane, removes imo
                             if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
                                 getContentPane().remove(item.getLabel());
                                 impStats.remove(item);
                             }
+                            //all the below code moves the imp in a square pattern
                             if (item.getLabel().getLocation().x >= 100 && item.getLabel().getLocation().y == 200) {
                                 item.getLabel().setLocation(item.getLabel().getLocation().x + 2, item.getLabel().getLocation().y);
                             }
@@ -185,13 +224,17 @@ public class AlexForm extends javax.swing.JFrame  {
 
                     }
                     if (i == 1) {
+                        //looking at demon array
                         for (EnemiesClass item : demonStats) {
+                             //if demon collides with plane, removes demon
                             if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
                                 getContentPane().remove(item.getLabel());
                                 demonStats.remove(item);
                             }
+                             //creates a random num and then if num is equal to five, fires a bullet
                             int demonBall = (int) (Math.random() * 150 + 1);
                             if (demonBall == 5) {
+                                //creates the demon bullets
                                 JLabel demonBulletRight = new JLabel();
                                 JLabel demonBulletMid = new JLabel();
                                 JLabel demonBulletLeft = new JLabel();
@@ -209,6 +252,7 @@ public class AlexForm extends javax.swing.JFrame  {
                                 } catch (IOException ex) {
                                     Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+                                // adds bullets to demon array
                                 demonBulletsRight.add(demonBulletRight);
                                 demonBulletsMid.add(demonBulletMid);
                                 demonBulletsLeft.add(demonBulletLeft);
@@ -221,9 +265,10 @@ public class AlexForm extends javax.swing.JFrame  {
 
                     }
                     if (i == 2) {
+                        //looking at beholders
                         for (EnemiesClass item : beholderStats) {
                             int fireBall = (int) (Math.random() * 200 + 1);
-                            //
+                            //creates ran number and if number equals five, fires a bullet
                             if (fireBall == 5) {
                                 JLabel beholderBullet = new JLabel();
                                 getContentPane().add(beholderBullet);
@@ -235,7 +280,7 @@ public class AlexForm extends javax.swing.JFrame  {
                                 }
                                 beholderBullets.add(beholderBullet);
                             }
-                            //
+                            //checks if beholder collides with plane, then removes beholder
                             if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
                                 getContentPane().remove(item.getLabel());
                                 beholderStats.remove(item);
@@ -255,7 +300,9 @@ public class AlexForm extends javax.swing.JFrame  {
                         }
                     }
                     if (i == 3) {
+                        // looking at deathwish array
                         for (EnemiesClass item : deathWishStats) {
+                            //moves deathwish down 10, checks if collides with plane
                             item.getLabel().setLocation(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 10);
                             if (checkBulletCollisionPhysical(item.getLabel(), 0, 10) == true) {
                                 getContentPane().remove(item.getLabel());
@@ -271,22 +318,20 @@ public class AlexForm extends javax.swing.JFrame  {
 
             } catch (Exception e) {
             }
-            // bullets.forEach((bullet) ->System.out.println("BULLET") );//bullet.setLocation(bullet.getLocation().x, bullet.getLocation().y -10));
             repaint();
         }
     };
 
     TimerTask EnemyAnimation = new TimerTask() {
         public void run() {
-            //System.out.println("MOVE");
+            // creates a random number and if it equal 3, spawns an enemy
             int createEnemy = (int) (Math.random() * 3 + 1);
             if (createEnemy == 3) {
-                System.out.println("Enemy Spawning");
                 enemySpawning();
             }
         }
     };
-
+    // declaring arrays
     static ArrayList<EnemiesClass> impStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> beholderStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> demonStats = new ArrayList<EnemiesClass>(0);
@@ -300,31 +345,34 @@ public class AlexForm extends javax.swing.JFrame  {
     ArrayList<JLabel> demonBulletsMid = new ArrayList<JLabel>(0);
     ArrayList<JLabel> demonBulletsLeft = new ArrayList<JLabel>(0);
 
+    //checks collisions
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
+    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+    //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-//check if temporary rectangle intersect with wallLabel        
+    //check if temporary rectangle intersect with wallLabel        
         if (rect.intersects(rightSideWall.getBounds()) || rect.intersects(leftSideWall.getBounds()) || rect.intersects(hellWallBottom.getBounds()) || rect.intersects(hellWallTop.getBounds())) {
             return true;
         } else {
             return false;
         }
     }
-
+    //checks collision with enemies
     private boolean checkBulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
+    //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+    //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-//check if temporary rectangle intersect with wallLabel  
+    //check if temporary rectangle intersect with wallLabel  
         try {
+            // checks if plane bullets collide with enemies, then remove 1 health from enemies
             for (int i = 0; i < enemyStats1.length; i++) {
                 if (i == 0) {
                     for (EnemiesClass item : impStats) {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
-                                points ++;
+                                //removes imp and gives points upon killing it
+                                points++;
                                 impStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -337,7 +385,8 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
-                                points+=3;
+                                //removes demon and gives points upon killing it
+                                points += 3;
                                 demonStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -350,7 +399,8 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
-                                points +=2;
+                                //removes beholder and gives points upon killing it
+                                points += 2;
                                 beholderStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -363,7 +413,8 @@ public class AlexForm extends javax.swing.JFrame  {
                         if (rect.intersects(item.getLabel().getBounds())) {
                             item.setHealth(item.getHealth() - 1);
                             if (item.getHealth() == 0) {
-                                points+=2;
+                                //removes deathWish and gives points upon killing it
+                                points += 2;
                                 deathWishStats.remove(item);
                                 getContentPane().remove(item.getLabel());
                             }
@@ -378,6 +429,7 @@ public class AlexForm extends javax.swing.JFrame  {
         return false;
     }
 
+    // checks if enemy bullets collide with plane
     private boolean checkBulletCollisionPlane(javax.swing.JLabel _lbl, int _x, int _y, int damage) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -387,6 +439,7 @@ public class AlexForm extends javax.swing.JFrame  {
         if (rect.intersects(tataPlane.getBounds())) {
             health -= damage;
             healthLabel.setText(String.valueOf(health));
+            //changes shield colour based off of health
             if (health == 3) {
                 try {
                     tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldMed.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
@@ -412,8 +465,9 @@ public class AlexForm extends javax.swing.JFrame  {
                 }
             }
             if (health <= 0) {
+                // closes game, stops sound, ends timer, brings up GameOver screen
                 JFrame gameOver = new Losser();
-                 clip1.stop();
+                clip1.stop();
                 gameTimer.cancel();
                 gameOver.setVisible(true);
                 dispose();
@@ -424,6 +478,7 @@ public class AlexForm extends javax.swing.JFrame  {
         }
     }
 
+    //checks if enemies collide with plane
     private boolean checkBulletCollisionPhysical(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
@@ -432,6 +487,7 @@ public class AlexForm extends javax.swing.JFrame  {
 
         if (rect.intersects(tataPlane.getBounds())) {
             health -= 3;
+          //changes shield colour based off of health
             if (health == 3) {
                 try {
                     tataPlane.setIcon(new ImageIcon((ImageIO.read(new File("tataPlaneShieldMed.png"))).getScaledInstance(tataPlane.getWidth(), tataPlane.getHeight(), Image.SCALE_SMOOTH)));
@@ -457,10 +513,11 @@ public class AlexForm extends javax.swing.JFrame  {
                 }
             }
             if (health <= 0) {
+                // closes game, stops sound, ends timer, brings up GameOver screen
                 JFrame gameOver = new Losser();
-                 clip1.stop();
+                clip1.stop();
                 gameOver.setVisible(true);
-               gameTimer.cancel();
+                gameTimer.cancel();
                 dispose();
             }
             healthLabel.setText(String.valueOf(health));
@@ -471,6 +528,7 @@ public class AlexForm extends javax.swing.JFrame  {
     }
 
     public AlexForm() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+       //sets clip1 and audio equal to something, along with initializing form
         this.clip1 = AudioSystem.getClip();
         this.audio = AudioSystem.getAudioInputStream(new File("CrazyFrog.wav"));
         initComponents();
@@ -478,7 +536,7 @@ public class AlexForm extends javax.swing.JFrame  {
     }
 
     public void myInitComponents() {
-         
+
         BufferedImage img = null;
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
@@ -494,12 +552,12 @@ public class AlexForm extends javax.swing.JFrame  {
             Logger.getLogger(AlexForm.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-
+        // placing each array list within enemy array
         enemyStats1[0] = impStats;
         enemyStats1[1] = demonStats;
         enemyStats1[2] = beholderStats;
         enemyStats1[3] = deathWishStats;
-
+        // starting gameTimer task
         gameTimer.scheduleAtFixedRate(Animate, 100, 10);
 
     }
@@ -614,10 +672,7 @@ public class AlexForm extends javax.swing.JFrame  {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         //up key pressed
-//this.repaint();
 
-        //Try layeredPane layout instead of Null layout
-        //https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html#depth
         if (evt.getKeyCode() == 38) {
             if (!checkCollision(tataPlane, 0, -15)) {
                 tataPlane.setLocation(tataPlane.getLocation().x, tataPlane.getLocation().y - 15);
@@ -646,32 +701,28 @@ public class AlexForm extends javax.swing.JFrame  {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == 88) {
-
+            //calls bullet function
             bullet();
             ///////////////////////////////////
+           //makes pew sound everytime a bullet is fired
             try {
-         // Open an audio input stream.
-        // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
-         
-         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("PewPewGood.wav"));
-         // Get a sound clip resource.
-         Clip clip = AudioSystem.getClip();
-         // Open audio clip and load samples from the audio input stream.
-         clip.open(audioIn);
-         clip.start();
-      } catch (UnsupportedAudioFileException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }catch (LineUnavailableException e) {
-         e.printStackTrace();
-      }
-            catch(Exception e){
+                AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("PewPewGood.wav"));
+                // Get a sound clip resource.
+                Clip clip = AudioSystem.getClip();
+                // Open audio clip and load samples from the audio input stream.
+                clip.open(audioIn);
+                clip.start();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 System.out.println(e);
-            }            
-         ////////////////////////////////   
-            
-            
+            }
+            ////////////////////////////////   
+
         }
     }//GEN-LAST:event_formKeyReleased
 
@@ -705,8 +756,7 @@ public class AlexForm extends javax.swing.JFrame  {
         }
         //</editor-fold>
         /* Create and display the form */
-     
-      
+        //Just a bunch of trys and catches
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -721,10 +771,10 @@ public class AlexForm extends javax.swing.JFrame  {
                     Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }); 
-        
-    }
+        });
 
+    }
+// spawns an enemy based off of random number
     public void enemySpawning() {
         int spawn = (int) (Math.random() * 100 + 1);
         if (spawn <= 40) {
@@ -740,14 +790,11 @@ public class AlexForm extends javax.swing.JFrame  {
             deathWishSpawn();
         }
     }
-
+// spawns an imp, sets its size and creates a label
     public void impSpawn() {
-        System.out.println("IMP Coming");
-
         if (impStats.size() < 10) {
             Imp imp = new Imp();
             impStats.add(imp);
-
             JLabel label = new JLabel();
             imp.setLabel(label);
             getContentPane().add(imp.getLabel());
@@ -759,13 +806,10 @@ public class AlexForm extends javax.swing.JFrame  {
                 Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-
         }
-
     }
-
+// spawns an demon, sets its size and creates a label
     public void demonSpawn() {
-        System.out.println("Demon Coming");
         if (demonStats.size() < 1) {
             Demon demon = new Demon();
             demonStats.add(demon);
@@ -782,9 +826,8 @@ public class AlexForm extends javax.swing.JFrame  {
         } else {
         }
     }
-
+// spawns an beholder, sets its size and creates a label
     public void beholderSpawn() {
-        System.out.println("Beholder Coming");
         if (beholderStats.size() < 3) {
             Beholder beholder = new Beholder();
             beholderStats.add(beholder);
@@ -801,9 +844,8 @@ public class AlexForm extends javax.swing.JFrame  {
         } else {
         }
     }
-
+// spawns an deathwish, sets its size and creates a label
     public void deathWishSpawn() {
-        System.out.println("deathWish Coming");
         DeathWish suicide = new DeathWish();
         deathWishStats.add(suicide);
         JLabel label = new JLabel();
@@ -817,7 +859,7 @@ public class AlexForm extends javax.swing.JFrame  {
             Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// spawns a bullet, sets its size and creates a label
     public void bullet() {
         JLabel bullet = new JLabel();
         if (bullets.size() < 3) {
@@ -829,41 +871,33 @@ public class AlexForm extends javax.swing.JFrame  {
                 System.out.println("NO IMAGE");
                 Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //setComponentZOrder(bullet, 0);
-            // getContentPane().repaint();
             bullets.add(bullet);
         }
     }
-
-    public void closeForm(JFrame AlexForm) {
-        Victory winner = new Victory();
-        setVisible(false);
-        winner.setVisible(true);
-dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
-    }
-    
- private void endGame() {
-       score = (points * health);
-       System.out.println("Your score is: " + score);
-       input = JOptionPane.showInputDialog("Please enter your Initals");
-         try {
+// calculates the score
+    private void endGame() {
+        score = (points * health);
+        System.out.println("Your score is: " + score);
+        //takes users initials
+        input = JOptionPane.showInputDialog("Please enter your Initals");
+        try {
             highScores();
         } catch (IOException e) {
         }
     }
-
-   private void highScores() throws IOException {
+// opens the highscore frame, and sends initials and score data to a text file
+    private void highScores() throws IOException {
         PrintWriter fileOut = new PrintWriter(new FileWriter("HighScoresAlex.txt", true));
-        
+
         fileOut.println(input);
-        
+
         fileOut.println(score);
-        
+
         fileOut.close();
-      
-         JFrame highScorePage = new scores();   
-         highScorePage.setVisible(true);
-         dispose();
+
+        JFrame highScorePage = new scores();
+        highScorePage.setVisible(true);
+        dispose();
     }
 
 
