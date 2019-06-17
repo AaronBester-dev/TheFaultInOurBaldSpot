@@ -56,5 +56,10 @@ public boolean getMushroom(){
             return mushroom;
 
 } 
+
+public String toString(){
+    return photoCode;
+            }
+
     
 }

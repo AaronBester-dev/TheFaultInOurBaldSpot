@@ -167,7 +167,7 @@ soup soupBoy[] = new soup[6];
             counterC--;
 
             if (counterC == 0) {
-                System.out.println("boob");
+             //   System.out.println("boob");
                 if (potOne.getMushroom()) {
                     potOne.setMushroom(false);
                     potOne.setMushroomS(true);
@@ -209,7 +209,7 @@ soup soupBoy[] = new soup[6];
             counterC2--;
 
             if (counterC2 == 0) {
-                System.out.println("boob");
+               // System.out.println("boob");
                 if (potTwo.getMushroom()) {
                     potTwo.setMushroom(false);
                     potTwo.setMushroomS(true);
@@ -251,9 +251,9 @@ soup soupBoy[] = new soup[6];
             counterC3--;
 
             if (counterC3 == 0) {
-                System.out.println("boob");
+              //  System.out.println("boob");
                 if (potThree.getMushroom()) {
-                    System.out.println("boob");
+                //    System.out.println("boob");
                     potThree.setMushroom(false);
                     potThree.setMushroomS(true);
 
@@ -264,7 +264,7 @@ soup soupBoy[] = new soup[6];
                     }
                 }
                 if (potThree.getPotato()) {
-                    System.out.println("boob");
+               //     System.out.println("boob");
                     potThree.setPotato(false);
                     potThree.setPotatoS(true);
 
@@ -530,7 +530,7 @@ soup soupBoy[] = new soup[6];
         if (rect.intersects(onion.getBounds())) {
             me.setMushroom(true);
             me.setPotato(false);
-            me.setTomato(false);
+//            me.setTomato(false);
             me.setMushroomS(false);
             me.setPotatoS(false);
             me.setTomatoS(false);
@@ -552,11 +552,31 @@ soup soupBoy[] = new soup[6];
 //this looks at the soupBoy array and checks each order and then what the user is trying to give. If the user is giving a correct order it gives 10 points
         if (rect.intersects(dryRack.getBounds())) {
             for (soup item : soupBoy) {
+//                System.out.println("SOUP!!");
+//                System.out.println(item.getPotato());
+//                System.out.println(item.getTomato());
+//                System.out.println(item.getMushroom());
                 if (item.getPotato()) {
                     if (me.getPotatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
+                        System.out.println("PRE "+item.getPhotoCode());
+                      
+                         for(int i= 0;i<soupBoy.length;i++){
+            System.out.println(soupBoy[i]);
+        }
+                        
+                        
+                        
                         item = new soup();
+                       
+                        
+                        
+                        System.out.println("POST "+item.getPhotoCode());
+                        
+                      for(int i= 0;i<soupBoy.length;i++){
+            System.out.println(soupBoy[i]);
+        }
  
                         break;
                     }
@@ -566,6 +586,9 @@ soup soupBoy[] = new soup[6];
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
                         item = new soup();
+                        
+                       
+                        
                         break;
                         
                     }
@@ -575,10 +598,20 @@ soup soupBoy[] = new soup[6];
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
                         item = new soup();
+                        
+                      
+                        
                         break;
                     }
                 }
             }
+//            
+//            for(int i= 0;i<soupBoy.length-1;i++){
+//            System.out.println(soupBoy[i]);
+//        }
+//            
+            
+            
             try {
                 orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
@@ -609,6 +642,7 @@ soup soupBoy[] = new soup[6];
             } catch (IOException ex) {
                 Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
             }
+            repaint();
             me.setMushroom(false);
             me.setPotato(false);
             me.setTomato(false);
@@ -736,13 +770,13 @@ counterC3 = 3;
         
         if (evt.getKeyCode() == 69) {
          if (checkCollisionPotato(user, 10, 0)) {
-             System.out.println("work");
+          //   System.out.println("work");
             }
          if (checkCollisionTomato(user, 10, 0)) {
-             System.out.println("work");
+        //     System.out.println("work");
             }
          if (checkCollisionMushroom(user, 10, 0)) {
-             System.out.println("work");
+        //     System.out.println("work");
             }
          if (checkCollisionPot(user, 10, 0)) {
             if (potOne.getTomatoS()) {
@@ -1086,12 +1120,12 @@ counterC3 = 3;
          if(checkCollisionDish(user,10,0)){
 
          }
-                   System.out.println(me.getMushroom()); 
-                    System.out.println(me.getPotato());
-                              System.out.println(me.getTomato());
-                                        System.out.println(me.getMushroomS());
-                     System.out.println(me.getPotatoS());
-                              System.out.println(me.getTomatoS());
+//                   System.out.println(me.getMushroom()); 
+//                    System.out.println(me.getPotato());
+//                              System.out.println(me.getTomato());
+//                                        System.out.println(me.getMushroomS());
+//                     System.out.println(me.getPotatoS());
+//                              System.out.println(me.getTomatoS());
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -1173,13 +1207,13 @@ counterC3 = 3;
 // potatoS = false;
 // tomatoS = false;
 // mushroomS = false; 
-        System.out.println("INITIALIZED");
-        System.out.println(me.getMushroom());
-        System.out.println(me.getPotato());
-        System.out.println(me.getTomato());
-        System.out.println(me.getMushroomS());
-        System.out.println(me.getPotatoS());
-        System.out.println(me.getTomatoS());
+//        System.out.println("INITIALIZED");
+//        System.out.println(me.getMushroom());
+//        System.out.println(me.getPotato());
+//        System.out.println(me.getTomato());
+//        System.out.println(me.getMushroomS());
+//        System.out.println(me.getPotatoS());
+//        System.out.println(me.getTomatoS());
         
         
     }
