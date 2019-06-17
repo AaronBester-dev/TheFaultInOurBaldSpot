@@ -551,67 +551,45 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //this looks at the soupBoy array and checks each order and then what the user is trying to give. If the user is giving a correct order it gives 10 points
         if (rect.intersects(dryRack.getBounds())) {
-            for (soup item : soupBoy) {
+for(int i= 0;i<soupBoy.length;i++){
 //                System.out.println("SOUP!!");
 //                System.out.println(item.getPotato());
 //                System.out.println(item.getTomato());
 //                System.out.println(item.getMushroom());
-                if (item.getPotato()) {
+
+   
+              
+                      
+
+                if (soupBoy[i].getPotato()) {
                     if (me.getPotatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
-                        System.out.println("PRE "+item.getPhotoCode());
-                      
-                         for(int i= 0;i<soupBoy.length;i++){
-            System.out.println(soupBoy[i]);
-        }
-                        
-                        
-                        
-                        item = new soup();
-                       
-                        
-                        
-                        System.out.println("POST "+item.getPhotoCode());
-                        
-                      for(int i= 0;i<soupBoy.length;i++){
-            System.out.println(soupBoy[i]);
-        }
- 
-                        break;
+                                                soupBoy[i] = new soup();
                     }
-                }
-                if (item.getTomato()) {
+                if (soupBoy[i].getTomato()) {
                     if (me.getTomatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
-                        item = new soup();
-                        
-                       
-                        
-                        break;
-                        
+                        soupBoy[i] = new soup();
+  
                     }
                 }
-                if (item.getMushroom()) {
+                if (soupBoy[i].getMushroom()) {
                     if (me.getMushroomS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
-                        item = new soup();
+                        soupBoy[i] = new soup();
                         
-                      
-                        
-                        break;
                     }
                 }
-            }
-//            
-//            for(int i= 0;i<soupBoy.length-1;i++){
-//            System.out.println(soupBoy[i]);
-//        }
-//            
-            
-            
+                    
+                }
+}
+                        
+                     
+                    
+         
             try {
                 orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
