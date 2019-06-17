@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 //Main class of the form
 public class AaronForm extends javax.swing.JFrame {
 //Declaring all the different variables 
+    Clip clip1;
 int animateTimer = 0;
 boolean animateOn = false;
     int movementSpeed = 1;
@@ -502,15 +503,22 @@ TimerTask createFatBullets = new TimerTask() {
             for (JLabel item : activeDoor) {
                 //Checks if temporary rectangle intersects with the door block
                 if (rect.intersects(item.getBounds())) {
+                    //Stops the music
+                     clip1.stop();
+                    
+                    //Cancels all game timers
+                    aaronGameTimer.cancel();
+     aaronJumpTimer.cancel();
+       aaronAnimateTimer.cancel();
+       
                     //Opens the AaronWin Screen
                     AaronWinScreen winScreen = new AaronWinScreen();
                     //Makes the win screen visible to the user
                     winScreen.setVisible(true);
                     //Makes the current form invisible
                     this.setVisible(false);
-                    //Turns off movement so you don't constantly run into it
-                    movingRight=false;
-                    movingLeft=false;
+               
+                
                   
                 }
             }
@@ -585,10 +593,11 @@ TimerTask createFatBullets = new TimerTask() {
             //Imports the audio for the game
             AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AaronLevelMusic.wav"));
             // Get a sound clip resource.
-            Clip clip1 = AudioSystem.getClip();
+             clip1 = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
             clip1.open(audio);
             clip1.start();
+            
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -645,10 +654,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
           aaronAnimateTimer.scheduleAtFixedRate(animatePlayer, 200, 200);
           
           
-          for (int i = 0; i<3;i++){
-              for(int j = 0;j<44;j++){
-                  System.out.println(objectsArray[i][j]);
-              }}
+      
           
           
           
@@ -804,7 +810,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
             index = myLine.indexOf(",");
             //Makes the block add equal to the x value of the block
             blockAdd = myLine.substring(0, index);
-            System.out.println(blockAdd);
+          
             //Adds the X value contained in the block add to the blockX array
             blockX.add(blockAdd);
             //Cuts off the data that has already been read and reads the next stretch of data
@@ -813,7 +819,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
             //Y=VALUE
             //Adds the data that contains the Y value to the block add variable
             blockAdd = myLine;
-            System.out.println(blockAdd);
+          
 //Adds the Y value to the block Y array
             blockY.add(blockAdd);
 
@@ -828,13 +834,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (int i = 0; i < numberOfObjects; i++) {
             //Adds the name of the block to the first column of the array
             objectsArray[0][i] = blockType.get(i);
-            System.out.println(objectsArray[0][i]);
+            
             //Adds the x value of the block to the second column of the array
             objectsArray[1][i] = blockX.get(i);
-            System.out.println(objectsArray[1][i]);
+          
             //Adds the y value of the block to the third column of the array
             objectsArray[2][i] = blockY.get(i);
-            System.out.println(objectsArray[2][i]);
+          
         }
 
     }
@@ -1060,7 +1066,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (EnemyClass item : fatOfficeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                //  System.out.println("Enenmy Hit" + item.getHealth());
+            
                 if (item.getHealth() == 0) {
                     fatOfficeWorkerStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -1073,7 +1079,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (EnemyClass item : securityGuardStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                //   System.out.println("Enenmy Hit" + item.getHealth());
+
                 if (item.getHealth() == 0) {
                     securityGuardStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -1098,7 +1104,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         return false;
     }
   
-//Void that takes one points off the player's helth
+//Void that takes one points off the player's health
     public void takeDamage() {
  //Taktes the current player's health and subtracts it by 1    
         playerCharacter.setHealth(playerCharacter.getHealth() - 1);
@@ -1106,15 +1112,22 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 //Checks if the players health become 0
         if (playerCharacter.getHealth() == 0) {
+        //Stops the music
+           clip1.stop();
             
-            this.dispose();
+            //Cancels all the game timers to ensure they don't conflict with anything
+   aaronGameTimer.cancel();
+     aaronJumpTimer.cancel();
+       aaronAnimateTimer.cancel();
+            //Creates the new death screen
             LoseScreen loser = new LoseScreen();
-                    //Makes the win screen visible to the user
-                    loser.setVisible(true);
-                    //Makes the current form invisible
-                //    this.setVisible(false);
+                    //Makes the death screen visible to the user
+                    loser.setVisible(true);   
+//Disposes the form but it doesn't work
+                 this.setVisible(false);
+        
                    
-                   System.out.println(this.toString());
+                
                    
         }
 

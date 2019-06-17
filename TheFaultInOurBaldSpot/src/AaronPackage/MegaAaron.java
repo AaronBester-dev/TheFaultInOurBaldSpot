@@ -9,10 +9,11 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
+//Class that deals with the health of the player character
 public class MegaAaron extends PlayerClass {
- 
     public MegaAaron() {
-        health = 11;
+        //Sets the player character's health to 10
+        health = 10;
       
         
     }

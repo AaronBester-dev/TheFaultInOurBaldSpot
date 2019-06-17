@@ -238,7 +238,7 @@ public class intro extends javax.swing.JFrame {
        JohnF johnObject = new JohnF();
        johnObject.setVisible(true);
     }//GEN-LAST:event_playMouseClicked
-    //if quit button is clicked
+
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
         
     }//GEN-LAST:event_quitMouseClicked
@@ -252,6 +252,7 @@ public class intro extends javax.swing.JFrame {
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         //closes game
         this.dispose();
+        //stops song
     }//GEN-LAST:event_quitActionPerformed
 
     /**

@@ -249,10 +249,8 @@ public class scoreFrame extends javax.swing.JFrame {
         miniGame johnObject = new miniGame();
         johnObject.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
-        //go to intro screen 
+        //go to intro screen by closing form
     private void goToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToMouseClicked
-        intro johnObject = new intro();
-        johnObject.setVisible(true);
         //closes form 
         this.dispose();
     }//GEN-LAST:event_goToMouseClicked

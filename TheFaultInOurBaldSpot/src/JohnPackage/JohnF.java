@@ -141,11 +141,11 @@ public class JohnF extends javax.swing.JFrame {
         fileOut.close();
         //if the score is greater than 0 call the win game frame 
         if (score > 0) {
+             //closes form
+            this.dispose();
             //calls the win frame
             scoreFrame johnObject = new scoreFrame();
             johnObject.setVisible(true);
-            //closes form
-            this.dispose();
         //if the score is zero meaning they bleed out ot time runs out call the lose game frame
         } else {
             lost johnObject = new lost();

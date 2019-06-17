@@ -17,6 +17,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import Brayden.Brayden1;
 import AaronPackage.AaronForm;
+import AaronPackage.AaronInstructions;
+import AaronPackage.LoseScreen;
 import JohnPackage.JohnF;
 import AlexPackage.AlexForm;
 import JohnPackage.intro;
@@ -143,7 +145,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(brayden);
-        brayden.setBounds(140, 220, 200, 50);
+        brayden.setBounds(140, 230, 200, 50);
 
         aaron.setText(resourceMap.getString("aaron.text")); // NOI18N
         aaron.setName("aaron"); // NOI18N
@@ -153,7 +155,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(aaron);
-        aaron.setBounds(130, 610, 200, 50);
+        aaron.setBounds(140, 630, 200, 50);
 
         Alex.setText(resourceMap.getString("Alex.text")); // NOI18N
         Alex.setName("Alex"); // NOI18N
@@ -163,7 +165,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(Alex);
-        Alex.setBounds(730, 220, 200, 50);
+        Alex.setBounds(760, 230, 200, 50);
 
         john.setText(resourceMap.getString("john.text")); // NOI18N
         john.setName("john"); // NOI18N
@@ -173,7 +175,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(john);
-        john.setBounds(740, 610, 200, 50);
+        john.setBounds(760, 630, 200, 50);
 
         background.setName("background"); // NOI18N
         background.setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -227,13 +229,12 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_braydenActionPerformed
 
     private void aaronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaronActionPerformed
-     AaronForm aaronObject=null;
-        try {
-            aaronObject = new AaronForm();
-        } catch (IOException ex) {
-            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     aaronObject.setVisible(true);
+    
+            AaronInstructions aaronObject = new AaronInstructions();
+            aaronObject.setVisible(true);
+         
+      
+      
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
