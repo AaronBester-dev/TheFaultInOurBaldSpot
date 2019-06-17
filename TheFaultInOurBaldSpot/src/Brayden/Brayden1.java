@@ -305,7 +305,6 @@ public Pot potThree = new Pot();
         potato = new javax.swing.JLabel();
         tomato = new javax.swing.JLabel();
         bar = new javax.swing.JLabel();
-        sink = new javax.swing.JLabel();
         dryRack = new javax.swing.JLabel();
         onion = new javax.swing.JLabel();
         pot1 = new javax.swing.JLabel();
@@ -414,13 +413,9 @@ public Pot potThree = new Pot();
         getContentPane().add(bar);
         bar.setBounds(0, 0, 1080, 85);
 
-        sink.setText("Sink");
-        getContentPane().add(sink);
-        sink.setBounds(667, 749, 60, 60);
-
         dryRack.setText("DishRack");
         getContentPane().add(dryRack);
-        dryRack.setBounds(745, 741, 60, 60);
+        dryRack.setBounds(1000, 250, 60, 60);
 
         onion.setText("onion");
         getContentPane().add(onion);
@@ -517,6 +512,25 @@ public Pot potThree = new Pot();
             me.setTomato(false);
                 try {
   itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+        }
+        return false;
+    }
+        //check if a collision between images is occurring
+    private boolean checkCollisionDish(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(dryRack.getBounds()) ) {
+            me.setMushroom(false);
+            me.setPotato(false);
+            me.setTomato(false);
+                try {
+  itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -773,7 +787,7 @@ public Pot potThree = new Pot();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(pot2.getBounds()) ) {
-          if(potThree.getTomatoS()){
+           if(potThree.getTomatoS()){
              potThree.setTomatoS(false);
              me.setMushroom(false);
              me.setPotato(false);
@@ -865,9 +879,9 @@ public Pot potThree = new Pot();
            }
 
            if(me.getPotato()){
-             potOne.setTomato(false);
-             potOne.setMushroom(false);
-             potOne.setPotato(true);
+             potThree.setTomato(false);
+             potThree.setMushroom(false);
+             potThree.setPotato(true);
              me.setPotato(false);
              cooker3();
                try {
@@ -885,7 +899,8 @@ public Pot potThree = new Pot();
                 return true;
         }
         return false;
-    }
+    };
+
     private void cooker1(){
 counterC = 3;
         timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
@@ -989,6 +1004,9 @@ counterC3 = 3;
          if (checkCollisionPot2(user, 10, 0)) {
              System.out.println("work");
             }
+         if(checkCollisionDish(user,10,0)){
+             
+         }
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -1033,8 +1051,6 @@ counterC3 = 3;
             onion.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(onion.getWidth(), onion.getHeight(), Image.SCALE_SMOOTH)));
 
             background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
-
-            sink.setIcon(new ImageIcon((ImageIO.read(new File("sink.png"))).getScaledInstance(sink.getWidth(), sink.getHeight(), Image.SCALE_SMOOTH)));
 
             dryRack.setIcon(new ImageIcon((ImageIO.read(new File("dish.png"))).getScaledInstance(dryRack.getWidth(), dryRack.getHeight(), Image.SCALE_SMOOTH)));
              arrayMaker();
@@ -1124,7 +1140,6 @@ counterC3 = 3;
     private javax.swing.JLabel potV1;
     private javax.swing.JLabel potV2;
     private javax.swing.JLabel potato;
-    private javax.swing.JLabel sink;
     private javax.swing.JLabel table;
     private javax.swing.JLabel timerBoy;
     private javax.swing.JLabel timerBoy1;
