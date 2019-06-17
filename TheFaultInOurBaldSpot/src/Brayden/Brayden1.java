@@ -57,109 +57,109 @@ soup soupBoy[] = new soup[6];
             }
         }
     };
-//    Timer timerO = new Timer();
-//    TimerTask taskO = new TimerTask() {
-//        public void run() {
-//
-//            counterO--;
-//
-//            if (counterO == 0) {
-//                soupBoy[0] = new soup();
-//                try {
-//                    orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterO = 15;
-//            }
-//
-//        }
-//    };
-//    Timer timerT = new Timer();
-//    TimerTask taskT = new TimerTask() {
-//        public void run() {
-//            counterT--;
-//
-//            if (counterT == 0) {
-//                soupBoy[1] = new soup();
-//                try {
-//                    orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderTwo.getWidth(), orderTwo.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterT = 15;
-//            }
-//
-//        }
-//    };
-//    Timer timerTh = new Timer();
-//    TimerTask taskTh = new TimerTask() {
-//        public void run() {
-//            counterTh--;
-//
-//            if (counterTh == 0) {
-//                soupBoy[2] = new soup();
-//                try {
-//                    orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderThree.getWidth(), orderThree.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterTh = 15;
-//            }
-//
-//        }
-//    };
-//    Timer timerF = new Timer();
-//    TimerTask taskF = new TimerTask() {
-//        public void run() {
-//            counterF--;
-//
-//            if (counterF == 0) {
-//                soupBoy[3] = new soup();
-//                try {
-//                    orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderFour.getWidth(), orderFour.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterF = 15;
-//            }
-//
-//        }
-//    };
-//    Timer timerFi = new Timer();
-//    TimerTask taskFi = new TimerTask() {
-//        public void run() {
-//            counterFi--;
-//
-//            if (counterFi == 0) {
-//                soupBoy[4] = new soup();
-//                try {
-//                    orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderFive.getWidth(), orderFive.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterFi = 15;
-//            }
-//
-//        }
-//    };
-//    Timer timerS = new Timer();
-//    TimerTask taskS = new TimerTask() {
-//        public void run() {
-//            counterS--;
-//
-//            if (counterS == 0) {
-//                soupBoy[5] = new soup();
-//                try {
-//                    orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderSix.getWidth(), orderSix.getHeight(), Image.SCALE_SMOOTH)));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                counterS = 15;
-//            }
-//
-//        }
-//    };
+    Timer timerO = new Timer();
+    TimerTask taskO = new TimerTask() {
+        public void run() {
+
+            counterO--;
+
+            if (counterO == 0) {
+                soupBoy[0] = new soup();
+                try {
+                    orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterO = 15;
+            }
+
+        }
+    };
+    Timer timerT = new Timer();
+    TimerTask taskT = new TimerTask() {
+        public void run() {
+            counterT--;
+
+            if (counterT == 0) {
+                soupBoy[1] = new soup();
+                try {
+                    orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderTwo.getWidth(), orderTwo.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterT = 15;
+            }
+
+        }
+    };
+    Timer timerTh = new Timer();
+    TimerTask taskTh = new TimerTask() {
+        public void run() {
+            counterTh--;
+
+            if (counterTh == 0) {
+                soupBoy[2] = new soup();
+                try {
+                    orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderThree.getWidth(), orderThree.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterTh = 15;
+            }
+
+        }
+    };
+    Timer timerF = new Timer();
+    TimerTask taskF = new TimerTask() {
+        public void run() {
+            counterF--;
+
+            if (counterF == 0) {
+                soupBoy[3] = new soup();
+                try {
+                    orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderFour.getWidth(), orderFour.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterF = 15;
+            }
+
+        }
+    };
+    Timer timerFi = new Timer();
+    TimerTask taskFi = new TimerTask() {
+        public void run() {
+            counterFi--;
+
+            if (counterFi == 0) {
+                soupBoy[4] = new soup();
+                try {
+                    orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderFive.getWidth(), orderFive.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterFi = 15;
+            }
+
+        }
+    };
+    Timer timerS = new Timer();
+    TimerTask taskS = new TimerTask() {
+        public void run() {
+            counterS--;
+
+            if (counterS == 0) {
+                soupBoy[5] = new soup();
+                try {
+                    orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderSix.getWidth(), orderSix.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                counterS = 15;
+            }
+
+        }
+    };
     Timer timerCook = new Timer();
     TimerTask taskC = new TimerTask() {
 
@@ -690,22 +690,22 @@ counterC3 = 3;
 
         soupBoy[0] = new soup();
 
-//        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
+        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
 
         soupBoy[1] = new soup();
-//        timerT.scheduleAtFixedRate(taskT, 1000, 1000);
+        timerT.scheduleAtFixedRate(taskT, 1000, 1000);
 
         soupBoy[2] = new soup();
-//        timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
+        timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
 
         soupBoy[3] = new soup();
-//        timerF.scheduleAtFixedRate(taskF, 1000, 1000);
+        timerF.scheduleAtFixedRate(taskF, 1000, 1000);
 
         soupBoy[4] = new soup();
-//        timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
+        timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
 
         soupBoy[5] = new soup();
-//        timerS.scheduleAtFixedRate(taskS, 1000, 1000);
+        timerS.scheduleAtFixedRate(taskS, 1000, 1000);
     }
 
     //checks which key is pressed
