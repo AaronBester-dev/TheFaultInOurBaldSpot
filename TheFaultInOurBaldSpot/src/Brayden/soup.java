@@ -32,13 +32,7 @@ public class soup {
                 photoCode = "mushroomBox.png";
                 break;
             }
-
         } while (true);
-
-    
-    
-    
-
 }
 
 public String getPhotoCode(){
@@ -46,20 +40,14 @@ public String getPhotoCode(){
 }
 public boolean getPotato(){
             return potato;
-
 }    
 public boolean getTomato(){
             return tomato;
-
 } 
 public boolean getMushroom(){
             return mushroom;
-
 } 
-
 public String toString(){
     return photoCode;
             }
-
-    
 }

@@ -83,7 +83,6 @@ public void setPotatoS(boolean input){
      potatoS = input;
 }
 public void setTomatoS(boolean input){
-    System.out.println("TOMATO");
     tomatoS= input;   
 } 
 
@@ -92,7 +91,6 @@ public boolean getTomatoS(){
 }
 
 public void setMushroomS(boolean input){
-    System.out.println("MUSHROOM");
     mushroomS= input;   
 } 
 
