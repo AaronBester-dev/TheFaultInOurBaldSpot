@@ -141,10 +141,12 @@ public class instructions extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+       //plays game if button is clicked
     private void playMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseClicked
        JohnF johnObject = new JohnF();
        johnObject.setVisible(true);
+       //closes form
+       this.dispose();
     }//GEN-LAST:event_playMouseClicked
 
     /**

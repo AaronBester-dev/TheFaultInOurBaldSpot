@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -151,6 +152,7 @@ public class scoreFrame extends javax.swing.JFrame {
         aaron = new javax.swing.JLabel();
         alex = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        differentGame = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 713));
@@ -167,17 +169,17 @@ public class scoreFrame extends javax.swing.JFrame {
         highScore1.setText(resourceMap.getString("highScore1.text")); // NOI18N
         highScore1.setName("highScore1"); // NOI18N
         getContentPane().add(highScore1);
-        highScore1.setBounds(10, 80, 61, 20);
+        highScore1.setBounds(10, 80, 72, 20);
 
         highScore2.setText(resourceMap.getString("highScore2.text")); // NOI18N
         highScore2.setName("highScore2"); // NOI18N
         getContentPane().add(highScore2);
-        highScore2.setBounds(10, 110, 61, 20);
+        highScore2.setBounds(10, 110, 72, 20);
 
         highScore3.setText(resourceMap.getString("highScore3.text")); // NOI18N
         highScore3.setName("highScore3"); // NOI18N
         getContentPane().add(highScore3);
-        highScore3.setBounds(10, 140, 61, 20);
+        highScore3.setBounds(10, 140, 72, 20);
 
         yourScoreLabel.setText(resourceMap.getString("yourScoreLabel.text")); // NOI18N
         yourScoreLabel.setName("yourScoreLabel"); // NOI18N
@@ -229,6 +231,16 @@ public class scoreFrame extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(880, 300, 120, 40);
 
+        differentGame.setLabel(resourceMap.getString("differentGame.label")); // NOI18N
+        differentGame.setName("differentGame"); // NOI18N
+        differentGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                differentGameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(differentGame);
+        differentGame.setBounds(880, 580, 120, 40);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,6 +248,11 @@ public class scoreFrame extends javax.swing.JFrame {
         miniGame johnObject = new miniGame();
         johnObject.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void differentGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differentGameActionPerformed
+//       JFrame main = new TheFaultInOurBaldSpotView();
+//       main.setVisible(true);
+    }//GEN-LAST:event_differentGameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,6 +297,7 @@ public class scoreFrame extends javax.swing.JFrame {
     private javax.swing.JLabel aaron;
     private javax.swing.JLabel alex;
     private javax.swing.JLabel brayden;
+    private java.awt.Button differentGame;
     private javax.swing.JLabel highScore1;
     private javax.swing.JLabel highScore2;
     private javax.swing.JLabel highScore3;
