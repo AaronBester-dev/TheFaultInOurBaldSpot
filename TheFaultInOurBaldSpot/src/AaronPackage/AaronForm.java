@@ -26,7 +26,6 @@ import javax.swing.JLabel;
 public class AaronForm extends javax.swing.JFrame {
 //Declaring all the different variables 
     Clip clip1;
-int animateTimer = 0;
 boolean animateOn = false;
     int movementSpeed = 1;
     boolean jumping = false;
@@ -208,7 +207,7 @@ boolean animateOn = false;
     
     TimerTask animatePlayer = new TimerTask(){
         public void run(){
-           animateTimer++;
+      
            if(animateOn){
                repaint();
           
@@ -217,23 +216,7 @@ boolean animateOn = false;
             } catch (IOException ex) {
                 Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(animateTimer>100){
-                 try {
-                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning2.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
-              if(animateTimer>200){
-                 try {
-                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning3.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
-              if(animateTimer>300){
-                  animateTimer = 0;
-              }
+
                }
         }
     };
