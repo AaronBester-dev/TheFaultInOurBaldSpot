@@ -25,7 +25,8 @@ import javax.swing.JLabel;
 //Main class of the form
 public class AaronForm extends javax.swing.JFrame {
 //Declaring all the different variables 
-
+int animateTimer = 0;
+boolean animateOn = false;
     int movementSpeed = 1;
     boolean jumping = false;
     boolean movingRight = false;
@@ -57,6 +58,7 @@ public class AaronForm extends javax.swing.JFrame {
 //Declared the two timers that I use for the timer tasks
     Timer aaronGameTimer = new Timer();
     Timer aaronJumpTimer = new Timer();
+    Timer aaronAnimateTimer = new Timer();
 //Moves all objects except the player to the character right
     TimerTask moveRight = new TimerTask() {
         public void run() {
@@ -198,6 +200,39 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    
+    TimerTask animatePlayer = new TimerTask(){
+        public void run(){
+           animateTimer++;
+           if(animateOn){
+               repaint();
+          
+            try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning1.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(animateTimer>100){
+                 try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning2.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+              if(animateTimer>200){
+                 try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning3.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+              if(animateTimer>300){
+                  animateTimer = 0;
+              }
+               }
+        }
+    };
+    
     //TimerTask checks every object and enemy label and sees if its in the user's field of view then sets makes the labels visible if it's visible
   TimerTask checkVisible = new TimerTask() {
         public void run() {
@@ -598,6 +633,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         aaronGameTimer.scheduleAtFixedRate(fatBulletMovement, 100, 100);
         aaronGameTimer.scheduleAtFixedRate(checkVisible, 10, 10);
         aaronGameTimer.scheduleAtFixedRate(officeWorkerMovement, 100, 10);
+          aaronAnimateTimer.scheduleAtFixedRate(animatePlayer, 200, 200);
     }
 
 //Void that deals with all of the key presses
@@ -629,6 +665,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
              try{
             //Sets moving left to right which starts the moveRight timer task
             movingRight = true;
+            animateOn=true;
             System.out.println("moving Left" + movingRight);
     }catch(Exception e){
                 
@@ -678,6 +715,12 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         if (evt.getKeyCode() == 39) {
            //Changes moving right to false when the right key is released
                 movingRight = false;
+                animateOn=false;
+            try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 System.out.println("stopped moving right" + movingRight);
             
         }
