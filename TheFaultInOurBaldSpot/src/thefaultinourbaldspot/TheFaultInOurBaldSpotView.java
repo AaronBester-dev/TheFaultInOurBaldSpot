@@ -171,7 +171,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(john);
-        john.setBounds(730, 590, 200, 50);
+        john.setBounds(760, 610, 200, 50);
 
         background.setName("background"); // NOI18N
         background.setPreferredSize(new java.awt.Dimension(1080, 720));
