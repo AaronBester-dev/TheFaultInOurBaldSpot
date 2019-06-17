@@ -576,6 +576,119 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //checks if the pot has a soup ready for the user
         if (rect.intersects(pot.getBounds())) {
+
+
+            return true;
+        }
+        return false;
+    }
+
+//check if user is near potTwo
+    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot1.getBounds())) {
+
+            return true;
+        }
+        return false;
+    }
+
+//check if user is near potThree
+    private boolean checkCollisionPot2(javax.swing.JLabel _lbl, int _x, int _y) {
+//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
+//also same width and height as original
+        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
+
+        if (rect.intersects(pot2.getBounds())) {
+
+            return true;
+        }
+        return false;
+    }
+    ;
+
+    private void cooker1(){
+counterC = 3;
+       // timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
+            }
+    
+    private void cooker2(){
+counterC2 = 3;
+        //timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
+            }
+    
+    private void cooker3(){
+counterC3 = 3;
+      //  timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
+            }
+//generates each soup and starts their timer
+    private void arrayMaker() {
+
+        soupBoy[0] = new soup();
+
+        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
+
+        soupBoy[1] = new soup();
+        timerT.scheduleAtFixedRate(taskT, 1000, 1000);
+
+        soupBoy[2] = new soup();
+        timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
+
+        soupBoy[3] = new soup();
+        timerF.scheduleAtFixedRate(taskF, 1000, 1000);
+
+        soupBoy[4] = new soup();
+        timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
+
+        soupBoy[5] = new soup();
+        timerS.scheduleAtFixedRate(taskS, 1000, 1000);
+    }
+
+    //checks which key is pressed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        //prints KeyCode for the key pressed
+        //System.out.println(evt.getKeyCode());
+
+        //up key pressed (w)
+        if (evt.getKeyCode() == 87) {
+            if (!checkCollision(user, 0, -30)) {
+                user.setLocation(user.getLocation().x, user.getLocation().y - 30);
+            }
+        }
+        //down key pressed(s)
+        if (evt.getKeyCode() == 83) {
+            if (!checkCollision(user, 0, 30)) {
+                user.setLocation(user.getLocation().x, user.getLocation().y + 30);
+            }
+        }
+        //left key pressed(a)
+        if (evt.getKeyCode() == 65) {
+            if (!checkCollision(user, -30, 0)) {
+                user.setLocation(user.getLocation().x - 30, user.getLocation().y);
+            }
+        }
+        //right key pressed(d)
+        if (evt.getKeyCode() == 68) {
+            if (!checkCollision(user, 10, 0)) {
+                user.setLocation(user.getLocation().x + 30, user.getLocation().y);
+            }
+        }
+        
+        
+        if (evt.getKeyCode() == 69) {
+         if (checkCollisionPotato(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionTomato(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionMushroom(user, 10, 0)) {
+             System.out.println("work");
+            }
+         if (checkCollisionPot(user, 10, 0)) {
             if (potOne.getTomatoS()) {
                 potOne.setTomatoS(false);
                 me.setMushroom(false);
@@ -689,19 +802,8 @@ soup soupBoy[] = new soup[6];
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
-            return true;
-        }
-        return false;
-    }
-
-//check if user is near potTwo
-    private boolean checkCollisionPot1(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
-        if (rect.intersects(pot1.getBounds())) {
+            }
+         if (checkCollisionPot1(user, 10, 0)) {
             if (potTwo.getTomatoS()) {
                 potTwo.setTomatoS(false);
                 me.setMushroom(false);
@@ -812,18 +914,8 @@ soup soupBoy[] = new soup[6];
                 }
             }
 
-            return true;
-        }
-        return false;
-    }
-
-//check if user is near potThree
-    private boolean checkCollisionPot2(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
-        if (rect.intersects(pot2.getBounds())) {
+            }
+         if (checkCollisionPot2(user, 10, 0)) {
             if (potThree.getTomatoS()) {
                 potThree.setTomatoS(false);
                 me.setMushroom(false);
@@ -934,102 +1026,16 @@ soup soupBoy[] = new soup[6];
                 }
             }
 
-            return true;
-        }
-        return false;
-    }
-    ;
-
-    private void cooker1(){
-counterC = 3;
-       // timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
-            }
-    
-    private void cooker2(){
-counterC2 = 3;
-        //timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
-            }
-    
-    private void cooker3(){
-counterC3 = 3;
-      //  timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
-            }
-//generates each soup and starts their timer
-    private void arrayMaker() {
-
-        soupBoy[0] = new soup();
-
-        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
-
-        soupBoy[1] = new soup();
-        timerT.scheduleAtFixedRate(taskT, 1000, 1000);
-
-        soupBoy[2] = new soup();
-        timerTh.scheduleAtFixedRate(taskTh, 1000, 1000);
-
-        soupBoy[3] = new soup();
-        timerF.scheduleAtFixedRate(taskF, 1000, 1000);
-
-        soupBoy[4] = new soup();
-        timerFi.scheduleAtFixedRate(taskFi, 1000, 1000);
-
-        soupBoy[5] = new soup();
-        timerS.scheduleAtFixedRate(taskS, 1000, 1000);
-    }
-
-    //checks which key is pressed
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        //prints KeyCode for the key pressed
-        //System.out.println(evt.getKeyCode());
-
-        //up key pressed (w)
-        if (evt.getKeyCode() == 87) {
-            if (!checkCollision(user, 0, -30)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y - 30);
-            }
-        }
-        //down key pressed(s)
-        if (evt.getKeyCode() == 83) {
-            if (!checkCollision(user, 0, 30)) {
-                user.setLocation(user.getLocation().x, user.getLocation().y + 30);
-            }
-        }
-        //left key pressed(a)
-        if (evt.getKeyCode() == 65) {
-            if (!checkCollision(user, -30, 0)) {
-                user.setLocation(user.getLocation().x - 30, user.getLocation().y);
-            }
-        }
-        //right key pressed(d)
-        if (evt.getKeyCode() == 68) {
-            if (!checkCollision(user, 10, 0)) {
-                user.setLocation(user.getLocation().x + 30, user.getLocation().y);
-            }
-        }
-        
-        
-        if (evt.getKeyCode() == 69) {
-         if (checkCollisionPotato(user, 10, 0)) {
-             System.out.println("work");
-            }
-         if (checkCollisionTomato(user, 10, 0)) {
-             System.out.println("work");
-            }
-         if (checkCollisionMushroom(user, 10, 0)) {
-             System.out.println("work");
-            }
-         if (checkCollisionPot(user, 10, 0)) {
-             System.out.println("work");
-            }
-         if (checkCollisionPot1(user, 10, 0)) {
-             System.out.println("work");
-            }
-         if (checkCollisionPot2(user, 10, 0)) {
-             System.out.println("work");
             }
          if(checkCollisionDish(user,10,0)){
-             
+
          }
+                   System.out.println(me.getMushroom()); 
+                    System.out.println(me.getPotato());
+                              System.out.println(me.getTomato());
+                                        System.out.println(me.getMushroomS());
+                     System.out.println(me.getPotatoS());
+                              System.out.println(me.getTomatoS());
         }
     }//GEN-LAST:event_formKeyPressed
 
