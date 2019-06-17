@@ -565,7 +565,7 @@ TimerTask createFatBullets = new TimerTask() {
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(50, 40, 146, 7);
+        jProgressBar1.setBounds(50, 40, 146, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1070,10 +1070,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 
         if (playerCharacter.getHealth() == 0) {
-            DeathScreen deathScreen1 = new DeathScreen();
-            deathScreen1.setVisible(true);
-            this.setVisible(false);
-            this.dispose();
+           LoseScreen loser = new LoseScreen();
+                    //Makes the win screen visible to the user
+                    loser.setVisible(true);
+                    //Makes the current form invisible
+                    this.setVisible(false);
+                    this.dispose();
+                   
         }
 
     }
