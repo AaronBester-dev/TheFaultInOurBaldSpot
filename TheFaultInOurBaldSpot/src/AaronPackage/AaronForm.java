@@ -25,7 +25,8 @@ import javax.swing.JLabel;
 //Main class of the form
 public class AaronForm extends javax.swing.JFrame {
 //Declaring all the different variables 
-
+int animateTimer = 0;
+boolean animateOn = false;
     int movementSpeed = 1;
     boolean jumping = false;
     boolean movingRight = false;
@@ -57,13 +58,18 @@ public class AaronForm extends javax.swing.JFrame {
 //Declared the two timers that I use for the timer tasks
     Timer aaronGameTimer = new Timer();
     Timer aaronJumpTimer = new Timer();
+    Timer aaronAnimateTimer = new Timer();
 //Moves all objects except the player to the character right
     TimerTask moveRight = new TimerTask() {
         public void run() {
+              try{
+                  
+             
             //Checks to see if moving right is true
             if (movingRight) {
                 //Checks to see if there is any object in the way of the player
-                if (!checkCollision(player, -movementSpeed, 0)) {
+                if (!checkCollision(player, +1, 0)) {
+                     repaint();
 //Finds the location for every single object and enemy JLabel and moves it to the left by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
@@ -100,15 +106,24 @@ public class AaronForm extends javax.swing.JFrame {
 
                     }
                 }
+                
             }
+             }catch(Exception e){
+                  
+              }
         }
     };
 //Timer task responsible for moving every block and enemy left when the user wants to move right
     TimerTask moveLeft = new TimerTask() {
+      
         public void run() {
+      try{
+          
+    
             //Checks to see if moving left is true
             if (movingLeft) {
-                if (!checkCollision(player, +movementSpeed, 0)) {
+                if (!checkCollision(player, -1, 0)) {
+                    repaint();
   //Finds the location for every single object and enemy JLabel and moves it to the right by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
@@ -141,8 +156,12 @@ public class AaronForm extends javax.swing.JFrame {
                     for (EnemyClass item : securityGuardStats) {
                         item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
                     }
+                     
                 }
             }
+              }catch(Exception e){
+          
+      }
         }
     };
 //Timer task that is responsible for moving the player down when they aren't on solid ground or jumping
@@ -181,6 +200,39 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    
+    TimerTask animatePlayer = new TimerTask(){
+        public void run(){
+           animateTimer++;
+           if(animateOn){
+               repaint();
+          
+            try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning1.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(animateTimer>100){
+                 try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning2.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+              if(animateTimer>200){
+                 try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaronRunning3.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+              if(animateTimer>300){
+                  animateTimer = 0;
+              }
+               }
+        }
+    };
+    
     //TimerTask checks every object and enemy label and sees if its in the user's field of view then sets makes the labels visible if it's visible
   TimerTask checkVisible = new TimerTask() {
         public void run() {
@@ -513,7 +565,7 @@ TimerTask createFatBullets = new TimerTask() {
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(50, 40, 146, 7);
+        jProgressBar1.setBounds(50, 40, 146, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -581,6 +633,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         aaronGameTimer.scheduleAtFixedRate(fatBulletMovement, 100, 100);
         aaronGameTimer.scheduleAtFixedRate(checkVisible, 10, 10);
         aaronGameTimer.scheduleAtFixedRate(officeWorkerMovement, 100, 10);
+          aaronAnimateTimer.scheduleAtFixedRate(animatePlayer, 200, 200);
     }
 
 //Void that deals with all of the key presses
@@ -588,25 +641,35 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         //Z key pressed
         if (evt.getKeyCode() == 90) {
+            
             //Checks if the player is standing on top of a block and that the player has run above his head
-            if (!checkCollision(player, 0, -10) && (checkCollision(player, 0, +10))) {
+            if (!checkCollision(player, 0, -1) && (checkCollision(player, 0, +10))) {
                 //Sets jumping to true which starts the jumpGravity timer task
                 jumping = true;
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
+            try{
+                
+          
 //          //Sets moving left to true which starts the moveLeft timer task
             movingLeft = true;
             System.out.println("moving Left" + movingLeft);
-//            
+       }catch(Exception e){
+                
+            }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
+             try{
             //Sets moving left to right which starts the moveRight timer task
             movingRight = true;
+            animateOn=true;
             System.out.println("moving Left" + movingRight);
-  
+    }catch(Exception e){
+                
+            }
         }
 
 
@@ -652,6 +715,12 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         if (evt.getKeyCode() == 39) {
            //Changes moving right to false when the right key is released
                 movingRight = false;
+                animateOn=false;
+            try {
+                player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 System.out.println("stopped moving right" + movingRight);
             
         }
@@ -748,25 +817,30 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
     
   //Void that spawns in the player character
     public void playerSpawner() throws IOException {
+        //Makes the player character object that is apart of the megaaaron class
         playerCharacter = new MegaAaron();
+        //Sets the label of the object to the player label
         playerCharacter.setLabel(player);
+        //Sets the player label icon to be the megaaaron png
         player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
     }
-
+//Void that spawns the floor lablels
     public void floorSpawner() {
-
+//For statement ensures that the program runs the floor spawner for each floor label 
         for (int i = 0; i < numberOfObjects; i++) {
-
+//Checks if the name of the object that the program is looking at is equal to floor
             if (objectsArray[0][i].equals("floor")) {
-
+                //Creates a new floor JLabel
                 JLabel floor1 = new JLabel();
 
                 System.out.println("Label Created");
-
+//Sets the bounds of the new floor JLabel
                 floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
 
                 System.out.println("Bounds Set");
+                //Tray catch catches any IO Exceptions
                 try {
+                    //Sets the icon of the floor label to be the floor png
                     floor1.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(floor1.getWidth(), floor1.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
@@ -774,15 +848,16 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
                 }
 
                 System.out.println("Try performed");
+                //Adds the floor label to the active floor array
                 activeFloor.add(floor1);
             }
 
         }
 
     }
-
+//Spawns all the spike objects
     public void spikeSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates spike labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("spike")) {
@@ -807,9 +882,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Spawns the exit
     public void exitSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates door labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("door")) {
@@ -834,9 +909,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in the security guard enemies
     public void securityGuardSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates security guard labels
         for (int i = 0; i < numberOfObjects; i++) {
             if (objectsArray[0][i].equals("guard")) {
 
@@ -845,7 +920,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
                 securityGuardStats.add(guard);
                 JLabel label = new JLabel();
                 guard.setLabel(label);
-//           
+
                 guard.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 250);
                 try {
                     guard.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("AaronSecurityGuard.png"))).getScaledInstance(guard.getLabel().getWidth(), guard.getLabel().getHeight(), Image.SCALE_SMOOTH)));
@@ -859,9 +934,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in office worker enemies
     public void officeWorkerSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates office worker labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("worker")) {
@@ -884,9 +959,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in fat office worker enemies
     public void fatAlbertSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates fat office worker labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("fat")) {
@@ -910,16 +985,20 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         }
     }
 
-  
+  //Void creates player bullet labels
     public void bullet() {
+        //Creates a new bullet label
         JLabel bullet1 = new JLabel();
 
         System.out.println("Label Created");
+        //Makes the new bullet label visible
         getContentPane().add(bullet1);
+        //Sets the bounds of the label
         bullet1.setBounds(player.getX() + player.getWidth() + 10, player.getY(), 50, 100);
 
         System.out.println("Bounds Set");
         try {
+            //Sets the bullet label to be the staple bullet png
             bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             System.out.println("NO IMAGE");
@@ -927,12 +1006,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         }
 
         System.out.println("Try performed");
+        //Adds the bullet label to the staple bullets array
         staplebullets.add(bullet1);
 
     }
-
+//Void checks if the player's bullets collides with the enemies
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
-
+//Creates a temp rectangle with the same bounds as the bullets
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         for (EnemyClass item : officeWorkerStats) {
@@ -995,10 +1075,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 
         if (playerCharacter.getHealth() == 0) {
-            DeathScreen deathScreen1 = new DeathScreen();
-            deathScreen1.setVisible(true);
-            this.setVisible(false);
-            this.dispose();
+           LoseScreen loser = new LoseScreen();
+                    //Makes the win screen visible to the user
+                    loser.setVisible(true);
+                    //Makes the current form invisible
+                    this.setVisible(false);
+                    this.dispose();
+                   
         }
 
     }
