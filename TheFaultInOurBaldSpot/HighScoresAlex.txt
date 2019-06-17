@@ -1,5 +1,5 @@
 ALEX
-196
+19
 JOHN
 22
 JAMES
@@ -9,14 +9,11 @@ AARON
 MEGAN
 17
 AGR
-<<<<<<< HEAD
-=======
 10
 OLD
 10
 ILS
-24
-=======
+2
 bm
 42
 xx
@@ -27,7 +24,9 @@ JD
 24
 xx
 21
->>>>>>> 99839d1c8259722fe4e13b267a446aa68b850403
 JD
->>>>>>> d187f17c59bafa3e118ff780e272a8610ab16453
 0
+ALEX
+70
+ALEX
+49

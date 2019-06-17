@@ -55,13 +55,14 @@ public class Losser extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        Retry = new javax.swing.JButton();
         backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(500, 500));
+        setMinimumSize(new java.awt.Dimension(500, 600));
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(500, 500));
-        setSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 600));
+        setSize(new java.awt.Dimension(500, 600));
         getContentPane().setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(Losser.class);
@@ -82,17 +83,32 @@ public class Losser extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(110, 510, 280, 80);
+        jScrollPane1.setBounds(110, 490, 280, 80);
+
+        Retry.setText(resourceMap.getString("Retry.text")); // NOI18N
+        Retry.setName("Retry"); // NOI18N
+        Retry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RetryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Retry);
+        Retry.setBounds(410, 490, 59, 23);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("backGround.text")); // NOI18N
         backGround.setToolTipText(resourceMap.getString("backGround.toolTipText")); // NOI18N
         backGround.setName("backGround"); // NOI18N
         getContentPane().add(backGround);
-        backGround.setBounds(0, 0, 500, 500);
+        backGround.setBounds(0, 0, 500, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RetryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetryActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_RetryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +146,7 @@ public class Losser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Retry;
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

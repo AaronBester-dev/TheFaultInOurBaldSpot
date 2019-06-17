@@ -47,17 +47,37 @@ public class AlexForm extends javax.swing.JFrame  {
     public int score;
     public int points =0;
     public int health = 4;
-    public int counter = 60;
+    public int counter = 100;
+     
+    AudioInputStream audio;
+    // Get a sound clip resource.
+         Clip clip1;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
-            if (counter == 55) {
+            if (counter == 80) {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
+                Instructions.setVisible(false);
+                try {
+
+         // Open audio clip and load samples from the audio input stream.
+         clip1.open(audio);
+         clip1.start();
+            
+      } catch (IOException e) {
+         e.printStackTrace();
+      }catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+            catch(Exception e){
+                System.out.println(e);
+            } 
             }
             if (counter == 0) {
+                clip1.stop();
                 gameTimer.cancel();
                 endGame();
             }
@@ -393,6 +413,7 @@ public class AlexForm extends javax.swing.JFrame  {
             }
             if (health <= 0) {
                 JFrame gameOver = new Losser();
+                 clip1.stop();
                 gameTimer.cancel();
                 gameOver.setVisible(true);
                 dispose();
@@ -437,6 +458,7 @@ public class AlexForm extends javax.swing.JFrame  {
             }
             if (health <= 0) {
                 JFrame gameOver = new Losser();
+                 clip1.stop();
                 gameOver.setVisible(true);
                gameTimer.cancel();
                 dispose();
@@ -448,29 +470,15 @@ public class AlexForm extends javax.swing.JFrame  {
         }
     }
 
-    public AlexForm() {
+    public AlexForm() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        this.clip1 = AudioSystem.getClip();
+        this.audio = AudioSystem.getAudioInputStream(new File("CrazyFrog.wav"));
         initComponents();
         myInitComponents();
     }
 
     public void myInitComponents() {
-        try {
- AudioInputStream audio = AudioSystem.getAudioInputStream(new File("CrazyFrog.wav"));
-         // Get a sound clip resource.
-         Clip clip1 = AudioSystem.getClip();
-         // Open audio clip and load samples from the audio input stream.
-         clip1.open(audio);
-         clip1.start();
-             } catch (UnsupportedAudioFileException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }catch (LineUnavailableException e) {
-         e.printStackTrace();
-      }
-            catch(Exception e){
-                System.out.println(e);
-            }  
+         
         BufferedImage img = null;
         //same as above, but in a condensed version
         gameTimer.scheduleAtFixedRate(task, 1000, 1000);
@@ -513,6 +521,7 @@ public class AlexForm extends javax.swing.JFrame  {
         leftSideWall = new javax.swing.JLabel();
         hellWallTop = new javax.swing.JLabel();
         hellWallBottom = new javax.swing.JLabel();
+        Instructions = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
 
         hellWallTop1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -584,6 +593,14 @@ public class AlexForm extends javax.swing.JFrame  {
         hellWallBottom.setName("hellWallBottom"); // NOI18N
         getContentPane().add(hellWallBottom);
         hellWallBottom.setBounds(0, 920, 900, 80);
+
+        Instructions.setFont(resourceMap.getFont("Instructions.font")); // NOI18N
+        Instructions.setForeground(resourceMap.getColor("Instructions.foreground")); // NOI18N
+        Instructions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions.setText(resourceMap.getString("Instructions.text")); // NOI18N
+        Instructions.setName("Instructions"); // NOI18N
+        getContentPane().add(Instructions);
+        Instructions.setBounds(250, 40, 410, 150);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("Background.text")); // NOI18N
@@ -692,7 +709,17 @@ public class AlexForm extends javax.swing.JFrame  {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlexForm().setVisible(true);
+                try {
+                    try {
+                        new AlexForm().setVisible(true);
+                    } catch (LineUnavailableException ex) {
+                        Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AlexForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
         
@@ -841,6 +868,7 @@ dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Instructions;
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel healthLabel;
     private javax.swing.JLabel hellWallBottom;
