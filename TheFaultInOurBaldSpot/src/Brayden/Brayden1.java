@@ -1028,8 +1028,14 @@ counterC3 = 3;
              System.out.println("work");
             }
          if(checkCollisionDish(user,10,0)){
-             
+
          }
+                   System.out.println(me.getMushroom()); 
+                    System.out.println(me.getPotato());
+                              System.out.println(me.getTomato());
+                                        System.out.println(me.getMushroomS());
+                     System.out.println(me.getPotatoS());
+                              System.out.println(me.getTomatoS());
         }
     }//GEN-LAST:event_formKeyPressed
 
