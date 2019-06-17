@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.util.Timer;
 import java.util.TimerTask;
+import Brayden.EndBrayden;
+import Brayden.EndBraydenBad;
 //delcaring variables
 public class Brayden1 extends javax.swing.JFrame {
 public int score = 0;
@@ -44,15 +46,22 @@ soup soupBoy[] = new soup[6];
         public void run() {
             counter--;
             timerBoy.setText(String.valueOf(counter));
+            if (counter == 0) {
+                if(score>120){
+     EndBrayden braydenObject = new EndBrayden();
+     braydenObject.setVisible(true);
+                }else{
+     EndBraydenBad braydenBObject = new EndBraydenBad();
+     braydenBObject.setVisible(true);   
+                }
+            }
         }
     };
     Timer timerO = new Timer();
     TimerTask taskO = new TimerTask() {
         public void run() {
-            int hBoy = 0;
+
             counterO--;
-            hBoy = +9;
-            timerBoy1.setSize(orderOne.getWidth(), hBoy);
 
             if (counterO == 0) {
                 soupBoy[0] = new soup();
@@ -476,6 +485,9 @@ soup soupBoy[] = new soup[6];
             me.setMushroom(false);
             me.setPotato(true);
             me.setTomato(false);
+            me.setMushroomS(false);
+            me.setPotatoS(false);
+            me.setTomatoS(false);
             try {
                 itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
@@ -496,6 +508,9 @@ soup soupBoy[] = new soup[6];
             me.setMushroom(false);
             me.setPotato(false);
             me.setTomato(true);
+            me.setMushroomS(false);
+            me.setPotatoS(false);
+            me.setTomatoS(false);
             try {
                 itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
@@ -516,6 +531,9 @@ soup soupBoy[] = new soup[6];
             me.setMushroom(true);
             me.setPotato(false);
             me.setTomato(false);
+            me.setMushroomS(false);
+            me.setPotatoS(false);
+            me.setTomatoS(false);
             try {
                 itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
@@ -538,6 +556,8 @@ soup soupBoy[] = new soup[6];
                     if (me.getPotatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
+                        item = new soup();
+ 
                         break;
                     }
                 }
@@ -545,20 +565,56 @@ soup soupBoy[] = new soup[6];
                     if (me.getTomatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
+                        item = new soup();
                         break;
+                        
                     }
                 }
                 if (item.getMushroom()) {
                     if (me.getMushroomS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
+                        item = new soup();
                         break;
                     }
                 }
             }
+            try {
+                orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+            }
             me.setMushroom(false);
             me.setPotato(false);
             me.setTomato(false);
+            me.setMushroomS(false);
+            me.setPotatoS(false);
+            me.setTomatoS(false);
             try {
                 itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException ex) {
