@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author alexander.rejep819
@@ -22,86 +23,81 @@ public class scores extends javax.swing.JFrame {
     /**
      * Creates new form scores
      */
-    public scores() throws IOException{
+    public scores() throws IOException {
         initComponents();
-         jLabel1.setText("Game High Scores");
-         //dummy varible
+        jLabel1.setText("Game High Scores");
+        //dummy varible
         BufferedReader readFile;
 
         //array list to store the data from the file 
-        ArrayList ScoreArrayList= new ArrayList<Integer>();
-        ArrayList InitialsArrayList= new ArrayList<String>();
+        ArrayList ScoreArrayList = new ArrayList<Integer>();
+        ArrayList InitialsArrayList = new ArrayList<String>();
         //OptionPane to ask the reader what local file they would like the program to read
         //NO SAFE GAURD FOR THE NULL POINTER EXCEPTION, THIS HAS BEEN APPROVED BY MR.V
-       
+
         //Opens the text file and attaches a BufferedReader
         readFile = new BufferedReader(new FileReader("HighScoresAlex.txt"));
-               
+
         //do loop to continue to get data until theres no more lines to read
-    String myLine;
+        String myLine;
         do {
             //myLine is equal to line being read
             myLine = readFile.readLine();
             if (myLine == null) {
-               // if nothing is there to be read, the loop is exited
+                // if nothing is there to be read, the loop is exited
                 break;
             } else {
                 //adds the number to its arraylist
                 InitialsArrayList.add(myLine);
                 //reads the next line
-                myLine = readFile.readLine();
+                //  myLine =;
                 // adds that line to the psalm arraylist
-                ScoreArrayList.add(myLine);
+                ScoreArrayList.add(Integer.parseInt(readFile.readLine()));
             }
-        } while (myLine != null);   
+        } while (myLine != null);
         System.out.println("");
-    
-        
-        
+
         //prints the text, uses for loop to print each line on its own line
         for (int i = 0; i < ScoreArrayList.size(); i++) {
             System.out.println(ScoreArrayList.get(i));
         }
-         selectionSort(ScoreArrayList, InitialsArrayList);
-         System.out.println("These numbers in a sorted list are: " + ScoreArrayList);
-         highScore1.setText(String.valueOf(ScoreArrayList.get(0)));
-         highScore2.setText(String.valueOf(ScoreArrayList.get(1))); 
-         highScore3.setText(String.valueOf(ScoreArrayList.get(2)));
-         highScore4.setText(String.valueOf(ScoreArrayList.get(3)));
-         highScore5.setText(String.valueOf(ScoreArrayList.get(4)));
-         
-         Initial1.setText(String.valueOf(InitialsArrayList.get(0)));
-         Initial2.setText(String.valueOf(InitialsArrayList.get(1))); 
-         Initial3.setText(String.valueOf(InitialsArrayList.get(2)));
-         Initial4.setText(String.valueOf(InitialsArrayList.get(3)));
-         Initial5.setText(String.valueOf(InitialsArrayList.get(4)));
-//         
-         
+        selectionSort(ScoreArrayList, InitialsArrayList);
+        System.out.println("These numbers in a sorted list are: " + ScoreArrayList);
+        highScore1.setText(String.valueOf(ScoreArrayList.get(0)));
+        highScore2.setText(String.valueOf(ScoreArrayList.get(1)));
+        highScore3.setText(String.valueOf(ScoreArrayList.get(2)));
+        highScore4.setText(String.valueOf(ScoreArrayList.get(3)));
+        highScore5.setText(String.valueOf(ScoreArrayList.get(4)));
+
+        Initial1.setText(String.valueOf(InitialsArrayList.get(0)));
+        Initial2.setText(String.valueOf(InitialsArrayList.get(1)));
+        Initial3.setText(String.valueOf(InitialsArrayList.get(2)));
+        Initial4.setText(String.valueOf(InitialsArrayList.get(3)));
+        Initial5.setText(String.valueOf(InitialsArrayList.get(4)));
+
     }
 
-    public static void selectionSort(ArrayList <Integer> myArrayList, ArrayList <String> TextArray) {
+    public static void selectionSort(ArrayList<Integer> myArrayList, ArrayList<String> TextArray) {
         int smallest;
-         for (int i = 0; i < myArrayList.size() - 1; i++) {
-                smallest = i;
-                //see if there is a smaller number further in the array
-                for (int index = i + 1; index < myArrayList.size(); index++) {
-                    //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
-if(5<10){                    
-//if ( myArrayList.get(smallest) <  myArrayList.get(index)) {
-                        swap(myArrayList, TextArray,smallest, index);
-                    }
+        for (int i = 0; i < myArrayList.size() - 1; i++) {
+            smallest = i;
+            //see if there is a smaller number further in the array
+            for (int index = i + 1; index < myArrayList.size(); index++) {
+                //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
+                if (myArrayList.get(smallest) < myArrayList.get(index)) {
+                    swap(myArrayList, TextArray, smallest, index);
                 }
+            }
         }
     }
-    //TextArray,
-    //ArrayList array3,
+
     public static void swap(ArrayList<Integer> array2, ArrayList<String> array3, int first, int second) {
-        Integer hold = (Integer) array2.get(first);
+        int hold = array2.get(first);
         array2.set(first, array2.get(second));
         array2.set(second, hold);
-        String hold2 =  array3.get(first);
+        String hold2 = array3.get(first);
         array3.set(first, array3.get(second));
-        array3.set(second,hold2);
+        array3.set(second, hold2);
     }
 
     /**
@@ -218,7 +214,7 @@ if(5<10){
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -246,8 +242,8 @@ if(5<10){
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                new scores().setVisible(true);
-                 } catch (IOException ex) {
+                    new scores().setVisible(true);
+                } catch (IOException ex) {
                     Logger.getLogger(scores.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

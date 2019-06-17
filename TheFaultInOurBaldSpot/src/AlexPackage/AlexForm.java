@@ -58,7 +58,7 @@ public class AlexForm extends javax.swing.JFrame  {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
             }
             if (counter == 0) {
-                //closeForm();
+                gameTimer.cancel();
                 endGame();
             }
         }
@@ -509,6 +509,7 @@ public class AlexForm extends javax.swing.JFrame  {
         tataPlane = new javax.swing.JLabel();
         healthLabel = new javax.swing.JLabel();
         timerLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         rightSideWall = new javax.swing.JLabel();
         leftSideWall = new javax.swing.JLabel();
         hellWallTop = new javax.swing.JLabel();
@@ -560,6 +561,11 @@ public class AlexForm extends javax.swing.JFrame  {
         timerLabel.setName("timerLabel"); // NOI18N
         getContentPane().add(timerLabel);
         timerLabel.setBounds(820, 0, 80, 50);
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        getContentPane().add(jButton1);
+        jButton1.setBounds(800, 950, 90, 30);
 
         rightSideWall.setIcon(resourceMap.getIcon("rightSideWall.icon")); // NOI18N
         rightSideWall.setText(resourceMap.getString("rightSideWall.text")); // NOI18N
@@ -844,8 +850,9 @@ dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
         fileOut.close();
       
         
-         scores highScorePage = new scores();   
+         JFrame highScorePage = new scores();   
          highScorePage.setVisible(true);
+         dispose();
     }
 
 
@@ -855,6 +862,7 @@ dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     private javax.swing.JLabel hellWallBottom;
     private javax.swing.JLabel hellWallTop;
     private javax.swing.JLabel hellWallTop1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel leftSideWall;
     private javax.swing.JLabel rightSideWall;
     private javax.swing.JLabel tataPlane;
