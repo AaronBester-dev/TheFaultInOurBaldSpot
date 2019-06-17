@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 /**
@@ -235,8 +237,17 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
-     JFrame alexObject = new AlexForm();
-   //  TheFaultInOurBaldSpotView.setVisible(false);
+     JFrame alexObject = null;
+        try {
+            alexObject = new AlexForm();
+            //  TheFaultInOurBaldSpotView.setVisible(false);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        }
    
      alexObject.setVisible(true); 
      // TODO add your handling code here:
