@@ -60,7 +60,7 @@ public class Victory extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(500, 500));
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(500, 500));
-        setSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(500, 600));
         getContentPane().setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(Victory.class);
@@ -85,7 +85,7 @@ public class Victory extends javax.swing.JFrame {
             }
         });
         getContentPane().add(returnMain);
-        returnMain.setBounds(200, 460, 103, 23);
+        returnMain.setBounds(200, 430, 130, 23);
 
         Winner.setFont(resourceMap.getFont("Winner.font")); // NOI18N
         Winner.setText(resourceMap.getString("Winner.text")); // NOI18N

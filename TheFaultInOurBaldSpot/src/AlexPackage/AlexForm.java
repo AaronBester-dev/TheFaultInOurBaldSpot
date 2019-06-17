@@ -28,10 +28,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: AlexForm
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This program plays a variant of 1942, where the user has to pilot a plane out of hell, while dodging demons and other monsters
 public class AlexForm extends javax.swing.JFrame {
     // declaring public variables
 

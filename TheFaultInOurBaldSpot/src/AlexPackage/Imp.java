@@ -10,7 +10,7 @@ package AlexPackage;
  * @author alexander.rejep819
  */
 public class Imp extends EnemiesClass {
-
+//Imp Constructor
     public Imp() {
         health = 1;
         speed = 3;

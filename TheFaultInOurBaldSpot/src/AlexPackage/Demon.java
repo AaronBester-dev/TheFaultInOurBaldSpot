@@ -10,7 +10,7 @@ package AlexPackage;
  * @author alexander.rejep819
  */
 public class Demon extends EnemiesClass {
-
+//Demob Constructor
     public Demon (){
         health = 3;
         speed = 1;

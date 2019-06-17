@@ -10,7 +10,7 @@ package AlexPackage;
  * @author alexander.rejep819
  */
 public class DeathWish extends EnemiesClass {
-
+//deathwish Constructor
     public DeathWish() {
         health = 1;
         speed = 3;

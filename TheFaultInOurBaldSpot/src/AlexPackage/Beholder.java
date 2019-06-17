@@ -10,7 +10,7 @@ package AlexPackage;
  * @author alexander.rejep819
  */
 public class Beholder extends EnemiesClass {
-
+//beholder constructor
     public Beholder() {
         health = 2;
         speed = 2;
