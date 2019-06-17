@@ -9,8 +9,10 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
+//Class that deals with the health of the fat office worker
 public class FatOfficeWorker extends EnemyClass {
      public FatOfficeWorker() {
+         //Sets the health of the fat office worker to 10
         health = 10;
       
     }
