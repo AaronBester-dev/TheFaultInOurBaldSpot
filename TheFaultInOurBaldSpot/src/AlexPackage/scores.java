@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -120,6 +121,7 @@ public class scores extends javax.swing.JFrame {
         Initial3 = new javax.swing.JLabel();
         Initial4 = new javax.swing.JLabel();
         Initial5 = new javax.swing.JLabel();
+        Victory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 600));
@@ -208,8 +210,25 @@ public class scores extends javax.swing.JFrame {
         getContentPane().add(Initial5);
         Initial5.setBounds(200, 500, 100, 40);
 
+        Victory.setText(resourceMap.getString("Victory.text")); // NOI18N
+        Victory.setName("Victory"); // NOI18N
+        Victory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VictoryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Victory);
+        Victory.setBounds(270, 540, 73, 23);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VictoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VictoryActionPerformed
+        // TODO add your handling code here:
+        JFrame Victory1 = new Victory();
+        Victory1.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_VictoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,6 +275,7 @@ public class scores extends javax.swing.JFrame {
     private javax.swing.JLabel Initial3;
     private javax.swing.JLabel Initial4;
     private javax.swing.JLabel Initial5;
+    private javax.swing.JButton Victory;
     private javax.swing.JLabel highScore1;
     private javax.swing.JLabel highScore2;
     private javax.swing.JLabel highScore3;

@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import thefaultinourbaldspot.TheFaultInOurBaldSpotView;
 
 /**
  *
@@ -55,6 +57,8 @@ public class Victory extends javax.swing.JFrame {
 
         victoryLabel = new javax.swing.JLabel();
         winPlane = new javax.swing.JLabel();
+        Winner = new javax.swing.JLabel();
+        returnMain = new javax.swing.JButton();
         backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,7 +80,24 @@ public class Victory extends javax.swing.JFrame {
         winPlane.setText(resourceMap.getString("winPlane.text")); // NOI18N
         winPlane.setName("winPlane"); // NOI18N
         getContentPane().add(winPlane);
-        winPlane.setBounds(240, 180, 210, 140);
+        winPlane.setBounds(120, 140, 210, 140);
+
+        Winner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Winner.setText(resourceMap.getString("Winner.text")); // NOI18N
+        Winner.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Winner.setName("Winner"); // NOI18N
+        getContentPane().add(Winner);
+        Winner.setBounds(0, 330, 480, 120);
+
+        returnMain.setText(resourceMap.getString("returnMain.text")); // NOI18N
+        returnMain.setName("returnMain"); // NOI18N
+        returnMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnMainActionPerformed(evt);
+            }
+        });
+        getContentPane().add(returnMain);
+        returnMain.setBounds(200, 460, 103, 23);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("backGround.text")); // NOI18N
@@ -86,6 +107,13 @@ public class Victory extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void returnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnMainActionPerformed
+        // TODO add your handling code here:
+//        JFrame main = new TheFaultInOurBaldSpotView();
+        //TheFaultInOurBaldSpotView.display();
+        
+    }//GEN-LAST:event_returnMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +151,9 @@ public class Victory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Winner;
     private javax.swing.JLabel backGround;
+    private javax.swing.JButton returnMain;
     private javax.swing.JLabel victoryLabel;
     private javax.swing.JLabel winPlane;
     // End of variables declaration//GEN-END:variables
