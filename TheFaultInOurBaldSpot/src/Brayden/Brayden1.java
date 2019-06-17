@@ -286,6 +286,7 @@ public Pot potThree = new Pot();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scoreV = new javax.swing.JLabel();
         potV2 = new javax.swing.JLabel();
         potV1 = new javax.swing.JLabel();
         potV = new javax.swing.JLabel();
@@ -325,6 +326,13 @@ public Pot potThree = new Pot();
             }
         });
         getContentPane().setLayout(null);
+
+        scoreV.setBackground(new java.awt.Color(255, 51, 51));
+        scoreV.setFont(new java.awt.Font("Sylfaen", 1, 36)); // NOI18N
+        scoreV.setForeground(new java.awt.Color(255, 0, 51));
+        scoreV.setText("0");
+        getContentPane().add(scoreV);
+        scoreV.setBounds(410, 10, 70, 70);
 
         potV2.setText("V");
         getContentPane().add(potV2);
@@ -526,6 +534,29 @@ public Pot potThree = new Pot();
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         if (rect.intersects(dryRack.getBounds()) ) {
+            for(soup item: soupBoy){
+            if(item.getPotato()){
+            if(me.getPotatoS()){
+            score = score +10;
+         scoreV.setText(String.valueOf(score));
+         break;
+            }   
+            }
+            if(item.getTomato()){
+            if(me.getTomatoS()){
+            score = score +10;
+         scoreV.setText(String.valueOf(score));
+         break;
+            }   
+            }
+            if(item.getMushroom()){
+            if(me.getMushroomS()){
+            score = score +10;
+         scoreV.setText(String.valueOf(score));
+         break;
+            }   
+            }
+            }
             me.setMushroom(false);
             me.setPotato(false);
             me.setTomato(false);
@@ -1067,7 +1098,8 @@ counterC3 = 3;
          orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
                   
          timerBoy1.setIcon(new ImageIcon((ImageIO.read(new File("redBoy.png"))).getScaledInstance(orderOne.getWidth(), 1 , Image.SCALE_SMOOTH)));
-
+         
+         scoreV.setText(String.valueOf(score));
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1140,6 +1172,7 @@ counterC3 = 3;
     private javax.swing.JLabel potV1;
     private javax.swing.JLabel potV2;
     private javax.swing.JLabel potato;
+    private javax.swing.JLabel scoreV;
     private javax.swing.JLabel table;
     private javax.swing.JLabel timerBoy;
     private javax.swing.JLabel timerBoy1;
