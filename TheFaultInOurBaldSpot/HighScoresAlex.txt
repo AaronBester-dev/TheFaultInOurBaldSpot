@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ALEX
 19
 JOHN
@@ -7,17 +8,57 @@ JAMES
 AARON
 12
 MEGAN
-17
+=======
 AGR
+20
+ALB
+>>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519
+17
+YEW
+12
+VIA
+12
+EXR
+14
+AGR
+<<<<<<< HEAD
 10
 OLD
 10
 ILS
 2
+=======
+8
+lax
+24
+hsafh
+54
+xsd
+52
+sax
+6
+xxx
+56
+asf
+52
+ASDDSDA
+36
+xsd
+51
+xasd
+40
+asdx
+52
+asd
+14
+xxxx
+24
+>>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519
 bm
 42
 xx
 20
+<<<<<<< HEAD
 JD
 30
 JD
@@ -30,3 +71,7 @@ ALEX
 70
 ALEX
 49
+=======
+x
+33
+>>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519

@@ -176,17 +176,17 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="java.awt.Button" name="differentGame">
+    <Component class="javax.swing.JButton" name="goTo">
       <Properties>
-        <Property name="label" type="java.lang.String" resourceKey="differentGame.label"/>
-        <Property name="name" type="java.lang.String" value="differentGame" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="goTo.text"/>
+        <Property name="name" type="java.lang.String" value="goTo" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="differentGameActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goToMouseClicked"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="880" y="580" width="120" height="40"/>
+          <AbsoluteConstraints x="880" y="360" width="120" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

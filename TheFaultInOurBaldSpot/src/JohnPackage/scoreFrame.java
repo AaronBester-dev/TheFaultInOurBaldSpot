@@ -48,6 +48,7 @@ public class scoreFrame extends javax.swing.JFrame {
         Font font2 = new Font("SansSerif", Font.BOLD, 20);
         //sets text and font to various labels and buttons
         jButton1.setText("MINIGAME?");
+        goTo.setText("GO TO INTRO");
         jLabel1.setText("Game High Scores");
         jLabel1.setFont(font1);
         yourScoreLabel.setText("Your Score:");
@@ -152,7 +153,7 @@ public class scoreFrame extends javax.swing.JFrame {
         aaron = new javax.swing.JLabel();
         alex = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        differentGame = new java.awt.Button();
+        goTo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1080, 713));
@@ -231,28 +232,30 @@ public class scoreFrame extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(880, 300, 120, 40);
 
-        differentGame.setLabel(resourceMap.getString("differentGame.label")); // NOI18N
-        differentGame.setName("differentGame"); // NOI18N
-        differentGame.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                differentGameActionPerformed(evt);
+        goTo.setText(resourceMap.getString("goTo.text")); // NOI18N
+        goTo.setName("goTo"); // NOI18N
+        goTo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToMouseClicked(evt);
             }
         });
-        getContentPane().add(differentGame);
-        differentGame.setBounds(880, 580, 120, 40);
+        getContentPane().add(goTo);
+        goTo.setBounds(880, 360, 120, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        //opens mini game
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         miniGame johnObject = new miniGame();
         johnObject.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void differentGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differentGameActionPerformed
-//       JFrame main = new TheFaultInOurBaldSpotView();
-//       main.setVisible(true);
-    }//GEN-LAST:event_differentGameActionPerformed
+        //go to intro screen 
+    private void goToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToMouseClicked
+        intro johnObject = new intro();
+        johnObject.setVisible(true);
+        //closes form 
+        this.dispose();
+    }//GEN-LAST:event_goToMouseClicked
 
     /**
      * @param args the command line arguments
@@ -297,7 +300,7 @@ public class scoreFrame extends javax.swing.JFrame {
     private javax.swing.JLabel aaron;
     private javax.swing.JLabel alex;
     private javax.swing.JLabel brayden;
-    private java.awt.Button differentGame;
+    private javax.swing.JButton goTo;
     private javax.swing.JLabel highScore1;
     private javax.swing.JLabel highScore2;
     private javax.swing.JLabel highScore3;
