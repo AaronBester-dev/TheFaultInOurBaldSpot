@@ -22,37 +22,40 @@ import java.util.TimerTask;
 import Brayden.EndBrayden;
 import Brayden.EndBraydenBad;
 //delcaring variables
+
 public class Brayden1 extends javax.swing.JFrame {
-public int score = 0;
-public int counter = 150;
-public int counterO = 15;
-public int counterT = 20;
-public int counterTh = 25;
-public int counterF = 30;
-public int counterFi = 35;
-public int counterS = 40;
-public int counterC = 4;
-public int counterC2 = 4;
-public int counterC3 = 4;
-public character me;// = new character();
-public Pot potOne = new Pot();
-public Pot potTwo = new Pot();
-public Pot potThree = new Pot();
+
+    public int score = 0;
+    public int counter = 150;
+    public int counterO = 15;
+    public int counterT = 20;
+    public int counterTh = 25;
+    public int counterF = 30;
+    public int counterFi = 35;
+    public int counterS = 40;
+    public int counterC = 4;
+    public int counterC2 = 4;
+    public int counterC3 = 4;
+    public character me;// = new character();
+    public Pot potOne = new Pot();
+    public Pot potTwo = new Pot();
+    public Pot potThree = new Pot();
 //makes array of soups
-soup soupBoy[] = new soup[6];
+    soup soupBoy[] = new soup[6];
 //This makes all of the timers used in the game
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerBoy.setText(String.valueOf(counter));
+            //if time runs out checks scroe and have the win or lose screen apear
             if (counter == 0) {
-                if(score>120){
-     EndBrayden braydenObject = new EndBrayden();
-     braydenObject.setVisible(true);
-                }else{
-     EndBraydenBad braydenBObject = new EndBraydenBad();
-     braydenBObject.setVisible(true);   
+                if (score > 120) {
+                    EndBrayden braydenObject = new EndBrayden();
+                    braydenObject.setVisible(true);
+                } else {
+                    EndBraydenBad braydenBObject = new EndBraydenBad();
+                    braydenBObject.setVisible(true);
                 }
             }
         }
@@ -167,7 +170,7 @@ soup soupBoy[] = new soup[6];
             counterC--;
 
             if (counterC == 0) {
-             //   System.out.println("boob");
+                //   System.out.println("boob");
                 if (potOne.getMushroom()) {
                     potOne.setMushroom(false);
                     potOne.setMushroomS(true);
@@ -209,7 +212,7 @@ soup soupBoy[] = new soup[6];
             counterC2--;
 
             if (counterC2 == 0) {
-               // System.out.println("boob");
+                // System.out.println("boob");
                 if (potTwo.getMushroom()) {
                     potTwo.setMushroom(false);
                     potTwo.setMushroomS(true);
@@ -251,9 +254,9 @@ soup soupBoy[] = new soup[6];
             counterC3--;
 
             if (counterC3 == 0) {
-              //  System.out.println("boob");
+                //  System.out.println("boob");
                 if (potThree.getMushroom()) {
-                //    System.out.println("boob");
+                    //    System.out.println("boob");
                     potThree.setMushroom(false);
                     potThree.setMushroomS(true);
 
@@ -264,7 +267,7 @@ soup soupBoy[] = new soup[6];
                     }
                 }
                 if (potThree.getPotato()) {
-               //     System.out.println("boob");
+                    //     System.out.println("boob");
                     potThree.setPotato(false);
                     potThree.setPotatoS(true);
 
@@ -474,17 +477,7 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //sets the users potato inventory to true and changes image on the item veiw
         if (rect.intersects(potato.getBounds())) {
-            me.setMushroom(false);
-            me.setPotato(true);
-            me.setTomato(false);
-            me.setMushroomS(false);
-            me.setPotatoS(false);
-            me.setTomatoS(false);
-            try {
-                itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             return true;
         }
         return false;
@@ -497,17 +490,7 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //sets the users tomato inventory to true and changes image on the item veiw
         if (rect.intersects(tomato.getBounds())) {
-            me.setMushroom(false);
-            me.setPotato(false);
-            me.setTomato(true);
-            me.setMushroomS(false);
-            me.setPotatoS(false);
-            me.setTomatoS(false);
-            try {
-                itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             return true;
         }
         return false;
@@ -520,22 +503,12 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //sets the users mushroom inventory to true and changes image on the item veiw
         if (rect.intersects(onion.getBounds())) {
-            me.setMushroom(true);
-            me.setPotato(false);
-//            me.setTomato(false);
-            me.setMushroomS(false);
-            me.setPotatoS(false);
-            me.setTomatoS(false);
-            try {
-                itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             return true;
         }
         return false;
     }
-       
+
 //checks if user is near dish rack
     private boolean checkCollisionDish(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -543,93 +516,12 @@ soup soupBoy[] = new soup[6];
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //this looks at the soupBoy array and checks each order and then what the user is trying to give. If the user is giving a correct order it gives 10 points
         if (rect.intersects(dryRack.getBounds())) {
-for(int i= 0;i<soupBoy.length;i++){
-//                System.out.println("SOUP!!");
-//                System.out.println(item.getPotato());
-//                System.out.println(item.getTomato());
-//                System.out.println(item.getMushroom());
-         
-                      
 
-                if (soupBoy[i].getPotato()) {
-                    if (me.getPotatoS()) {
-                        score = score + 10;
-                        scoreV.setText(String.valueOf(score));
-                                                soupBoy[i] = new soup();
-                                                break;
-                    }
-                }
-                if (soupBoy[i].getTomato()) {
-                    if (me.getTomatoS()) {
-                        score = score + 10;
-                        scoreV.setText(String.valueOf(score));
-                        soupBoy[i] = new soup();
-                        break;
-  
-                    }
-                }
-                if (soupBoy[i].getMushroom()) {
-                    if (me.getMushroomS()) {
-                        score = score + 10;
-                        scoreV.setText(String.valueOf(score));
-                        soupBoy[i] = new soup();
-                        break;
-                    }
-                }
-                    
-                
-}
-                        
-                     
-                    
-         
-            try {
-                orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            repaint();
-            me.setMushroom(false);
-            me.setPotato(false);
-            me.setTomato(false);
-            me.setMushroomS(false);
-            me.setPotatoS(false);
-            me.setTomatoS(false);
-            try {
-                itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-            }
             return true;
         }
         return false;
     }
-    
+
 //check if user is near potOne
     private boolean checkCollisionPot(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
@@ -637,7 +529,6 @@ for(int i= 0;i<soupBoy.length;i++){
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 //checks if the pot has a soup ready for the user
         if (rect.intersects(pot.getBounds())) {
-
 
             return true;
         }
@@ -669,23 +560,25 @@ for(int i= 0;i<soupBoy.length;i++){
         }
         return false;
     }
+
     ;
 
-    private void cooker1(){
-counterC = 3;
-       // timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
-            }
-    
-    private void cooker2(){
-counterC2 = 3;
+    private void cooker1() {
+        counterC = 3;
+        // timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
+    }
+
+    private void cooker2() {
+        counterC2 = 3;
         //timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
-            }
-    
-    private void cooker3(){
-counterC3 = 3;
-      //  timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
-            }
+    }
+
+    private void cooker3() {
+        counterC3 = 3;
+        //  timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
+    }
 //generates each soup and starts their timer
+
     private void arrayMaker() {
 
         soupBoy[0] = new soup();
@@ -737,360 +630,459 @@ counterC3 = 3;
                 user.setLocation(user.getLocation().x + 30, user.getLocation().y);
             }
         }
-        
-        
+
         if (evt.getKeyCode() == 69) {
-         if (checkCollisionPotato(user, 10, 0)) {
-          //   System.out.println("work");
-            }
-         if (checkCollisionTomato(user, 10, 0)) {
-        //     System.out.println("work");
-            }
-         if (checkCollisionMushroom(user, 10, 0)) {
-        //     System.out.println("work");
-            }
-         if (checkCollisionPot(user, 10, 0)) {
-            if (potOne.getTomatoS()) {
-                potOne.setTomatoS(false);
+            if (checkCollisionPotato(user, 10, 0)) {
                 me.setMushroom(false);
-                me.setPotato(false);
+                me.setPotato(true);
                 me.setTomato(false);
                 me.setMushroomS(false);
                 me.setPotatoS(false);
-                me.setTomatoS(true);
-                try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (potOne.getPotatoS()) {
-                potOne.setPotatoS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(false);
-                me.setPotatoS(true);
                 me.setTomatoS(false);
                 try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (potOne.getMushroomS()) {
-                potOne.setMushroomS(false);
+            if (checkCollisionTomato(user, 10, 0)) {
                 me.setMushroom(false);
                 me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(true);
+                me.setTomato(true);
+                me.setMushroomS(false);
                 me.setPotatoS(false);
                 me.setTomatoS(false);
                 try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            if (checkCollisionMushroom(user, 10, 0)) {
+                me.setMushroom(true);
+                me.setPotato(false);
+                me.setMushroomS(false);
+                me.setPotatoS(false);
+                me.setTomatoS(false);
+                try {
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (checkCollisionPot(user, 10, 0)) {
+                if (potOne.getTomatoS()) {
+                    potOne.setTomatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(false);
+                    me.setTomatoS(true);
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potOne.getPotatoS()) {
+                    potOne.setPotatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(true);
+                    me.setTomatoS(false);
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potOne.getMushroomS()) {
+                    potOne.setMushroomS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(true);
+                    me.setPotatoS(false);
+                    me.setTomatoS(false);
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
 //checks if the user is trying to give the pot something
-            if (me.getTomato()) {
-                potOne.setTomato(true);
-                potOne.setMushroom(false);
-                potOne.setPotato(false);
-                me.setTomato(false);
-                
-                try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                cooker1();
-            }
+                if (me.getTomato()) {
+                    potOne.setTomato(true);
+                    potOne.setMushroom(false);
+                    potOne.setPotato(false);
+                    me.setTomato(false);
 
-            if (me.getMushroom()) {
-                potOne.setTomato(false);
-                potOne.setMushroom(true);
-                potOne.setPotato(false);
-                me.setMushroom(false);
-                cooker1();
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    cooker1();
                 }
 
-            }
+                if (me.getMushroom()) {
+                    potOne.setTomato(false);
+                    potOne.setMushroom(true);
+                    potOne.setPotato(false);
+                    me.setMushroom(false);
+                    cooker1();
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-            if (me.getPotato()) {
-                potOne.setTomato(false);
-                potOne.setMushroom(false);
-                potOne.setPotato(true);
-                me.setPotato(false);
-                cooker1();
+                }
+
+                if (me.getPotato()) {
+                    potOne.setTomato(false);
+                    potOne.setMushroom(false);
+                    potOne.setPotato(true);
+                    me.setPotato(false);
+                    cooker1();
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            if (checkCollisionPot1(user, 10, 0)) {
+                if (potTwo.getTomatoS()) {
+                    potTwo.setTomatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(false);
+                    me.setTomatoS(true);
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potTwo.getPotatoS()) {
+                    potTwo.setPotatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(true);
+                    me.setTomatoS(false);
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potTwo.getMushroomS()) {
+                    potTwo.setMushroomS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(true);
+                    me.setPotatoS(false);
+                    me.setTomatoS(false);
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (me.getTomato()) {
+                    potTwo.setTomato(true);
+                    potTwo.setMushroom(false);
+                    potTwo.setPotato(false);
+                    me.setTomato(false);
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    cooker2();
+                }
+                if (me.getMushroom()) {
+                    potTwo.setTomato(false);
+                    potTwo.setMushroom(true);
+                    potTwo.setPotato(false);
+                    me.setMushroom(false);
+                    cooker2();
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                if (me.getPotato()) {
+                    potTwo.setTomato(false);
+                    potTwo.setMushroom(false);
+                    potTwo.setPotato(true);
+                    me.setPotato(false);
+                    cooker2();
+                    try {
+                        potV1.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+            if (checkCollisionPot2(user, 10, 0)) {
+                if (potThree.getTomatoS()) {
+                    potThree.setTomatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(false);
+                    me.setTomatoS(true);
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potThree.getPotatoS()) {
+                    potThree.setPotatoS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(false);
+                    me.setPotatoS(true);
+                    me.setTomatoS(false);
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (potThree.getMushroomS()) {
+                    potThree.setMushroomS(false);
+                    me.setMushroom(false);
+                    me.setPotato(false);
+                    me.setTomato(false);
+                    me.setMushroomS(true);
+                    me.setPotatoS(false);
+                    me.setTomatoS(false);
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (me.getTomato()) {
+                    potThree.setTomato(true);
+                    potThree.setMushroom(false);
+                    potThree.setPotato(false);
+                    me.setTomato(false);
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    cooker3();
+                }
+                if (me.getMushroom()) {
+                    potThree.setTomato(false);
+                    potThree.setMushroom(true);
+                    potThree.setPotato(false);
+                    me.setMushroom(false);
+                    cooker3();
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                if (me.getPotato()) {
+                    potThree.setTomato(false);
+                    potThree.setMushroom(false);
+                    potThree.setPotato(true);
+                    me.setPotato(false);
+                    cooker3();
+                    try {
+                        potV2.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+            if (checkCollisionDish(user, 10, 0)) {
+                for (int i = 0; i < soupBoy.length; i++) {
+
+                    if (soupBoy[i].getPotato()) {
+                        if (me.getPotatoS()) {
+                            score = score + 10;
+                            scoreV.setText(String.valueOf(score));
+                            soupBoy[i] = new soup();
+                            break;
+                        }
+                    }
+                    if (soupBoy[i].getTomato()) {
+                        if (me.getTomatoS()) {
+                            score = score + 10;
+                            scoreV.setText(String.valueOf(score));
+                            soupBoy[i] = new soup();
+                            break;
+
+                        }
+                    }
+                    if (soupBoy[i].getMushroom()) {
+                        if (me.getMushroomS()) {
+                            score = score + 10;
+                            scoreV.setText(String.valueOf(score));
+                            soupBoy[i] = new soup();
+                            break;
+                        }
+                    }
+
+                }
+
                 try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
-                    potV.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
+                    orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            }
-         if (checkCollisionPot1(user, 10, 0)) {
-            if (potTwo.getTomatoS()) {
-                potTwo.setTomatoS(false);
+                try {
+                    orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                repaint();
                 me.setMushroom(false);
                 me.setPotato(false);
                 me.setTomato(false);
                 me.setMushroomS(false);
                 me.setPotatoS(false);
-                me.setTomatoS(true);
-                try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (potTwo.getPotatoS()) {
-                potTwo.setPotatoS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(false);
-                me.setPotatoS(true);
                 me.setTomatoS(false);
                 try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (potTwo.getMushroomS()) {
-                potTwo.setMushroomS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(true);
-                me.setPotatoS(false);
-                me.setTomatoS(false);
-                try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (me.getTomato()) {
-                potTwo.setTomato(true);
-                potTwo.setMushroom(false);
-                potTwo.setPotato(false);
-                me.setTomato(false);
-                try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                cooker2();
-            }
-            if (me.getMushroom()) {
-                potTwo.setTomato(false);
-                potTwo.setMushroom(true);
-                potTwo.setPotato(false);
-                me.setMushroom(false);
-                cooker2();
-                try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
                     itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
-            if (me.getPotato()) {
-                potTwo.setTomato(false);
-                potTwo.setMushroom(false);
-                potTwo.setPotato(true);
-                me.setPotato(false);
-                cooker2();
-                try {
-                    potV1.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            }
-         if (checkCollisionPot2(user, 10, 0)) {
-            if (potThree.getTomatoS()) {
-                potThree.setTomatoS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(false);
-                me.setPotatoS(false);
-                me.setTomatoS(true);
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("tomatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (potThree.getPotatoS()) {
-                potThree.setPotatoS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(false);
-                me.setPotatoS(true);
-                me.setTomatoS(false);
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("potatoSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (potThree.getMushroomS()) {
-                potThree.setMushroomS(false);
-                me.setMushroom(false);
-                me.setPotato(false);
-                me.setTomato(false);
-                me.setMushroomS(true);
-                me.setPotatoS(false);
-                me.setTomatoS(false);
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (me.getTomato()) {
-                potThree.setTomato(true);
-                potThree.setMushroom(false);
-                potThree.setPotato(false);
-                me.setTomato(false);
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("tomatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                cooker3();
-            }
-            if (me.getMushroom()) {
-                potThree.setTomato(false);
-                potThree.setMushroom(true);
-                potThree.setPotato(false);
-                me.setMushroom(false);
-                cooker3();
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("mushroomBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            if (me.getPotato()) {
-                potThree.setTomato(false);
-                potThree.setMushroom(false);
-                potThree.setPotato(true);
-                me.setPotato(false);
-                cooker3();
-                try {
-                    potV2.setIcon(new ImageIcon((ImageIO.read(new File("potatoBox.png"))).getScaledInstance(potV.getWidth(), potV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("clear.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            }
-         if(checkCollisionDish(user,10,0)){
-
-         }
 //                   System.out.println(me.getMushroom()); 
 //                    System.out.println(me.getPotato());
 //                              System.out.println(me.getTomato());
@@ -1114,12 +1106,12 @@ counterC3 = 3;
         //Initialize a Buffered Image
         BufferedImage img = null;
         //starts timer
-        timer.scheduleAtFixedRate(task, 1000, 1000 );
+        timer.scheduleAtFixedRate(task, 1000, 1000);
 //        timerO.scheduleAtFixedRate(taskO, 1000, 1000);
         //Set the jLables' icon to the image it needs
         try {
             user.setIcon(new ImageIcon((ImageIO.read(new File("braydenNude.png"))).getScaledInstance(user.getWidth(), user.getHeight(), Image.SCALE_SMOOTH)));
-         
+
             wallLabel.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel.getWidth(), wallLabel.getHeight(), Image.SCALE_SMOOTH)));
 
             wallLabel1.setIcon(new ImageIcon((ImageIO.read(new File("red.jpg"))).getScaledInstance(wallLabel1.getWidth(), wallLabel1.getHeight(), Image.SCALE_SMOOTH)));
@@ -1143,35 +1135,35 @@ counterC3 = 3;
             background.setIcon(new ImageIcon((ImageIO.read(new File("floor.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
 
             dryRack.setIcon(new ImageIcon((ImageIO.read(new File("dish.png"))).getScaledInstance(dryRack.getWidth(), dryRack.getHeight(), Image.SCALE_SMOOTH)));
-             arrayMaker();
-         orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-         
-         orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-         
-         orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-         
-         orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-         
-         orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-         
-         orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
-                           
-         scoreV.setText(String.valueOf(score));
+            arrayMaker();
+            orderOne.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[0].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            orderTwo.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[1].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            orderThree.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[2].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            orderFour.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[3].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            orderFive.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[4].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            orderSix.setIcon(new ImageIcon((ImageIO.read(new File(soupBoy[5].getPhotoCode()))).getScaledInstance(orderOne.getWidth(), orderOne.getHeight(), Image.SCALE_SMOOTH)));
+
+            scoreV.setText(String.valueOf(score));
         } catch (IOException ex) {
             Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
         timerCook.scheduleAtFixedRate(taskC, 1000, 1000);
         timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
         timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
 
         me = new character();
-         me.setPotato(false);
- me.setTomato(false);
- me.setMushroom(false);
-         me.setPotatoS(false);
- me.setTomatoS(false);
- me.setMushroomS(false);
+        me.setPotato(false);
+        me.setTomato(false);
+        me.setMushroom(false);
+        me.setPotatoS(false);
+        me.setTomatoS(false);
+        me.setMushroomS(false);
 // mushroomI = false;
 // potatoS = false;
 // tomatoS = false;
@@ -1183,8 +1175,7 @@ counterC3 = 3;
 //        System.out.println(me.getMushroomS());
 //        System.out.println(me.getPotatoS());
 //        System.out.println(me.getTomatoS());
-        
-        
+
     }
 
     public static void main(String args[]) {
@@ -1225,8 +1216,6 @@ counterC3 = 3;
             }
         });
     }
-    
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
