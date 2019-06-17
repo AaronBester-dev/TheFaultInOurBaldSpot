@@ -144,10 +144,14 @@ public class JohnF extends javax.swing.JFrame {
             //calls the win frame
             scoreFrame johnObject = new scoreFrame();
             johnObject.setVisible(true);
+            //closes form
+            this.dispose();
         //if the score is zero meaning they bleed out ot time runs out call the lose game frame
         } else {
             lost johnObject = new lost();
             johnObject.setVisible(true);
+            //closes form
+            this.dispose();
         }
     }
     //funtion that is called every time the player sucsesffuly cuts a box

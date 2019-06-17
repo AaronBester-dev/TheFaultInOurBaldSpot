@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 /**
@@ -141,7 +143,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(brayden);
-        brayden.setBounds(140, 220, 200, 50);
+        brayden.setBounds(140, 230, 200, 50);
 
         aaron.setText(resourceMap.getString("aaron.text")); // NOI18N
         aaron.setName("aaron"); // NOI18N
@@ -151,7 +153,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(aaron);
-        aaron.setBounds(130, 610, 200, 50);
+        aaron.setBounds(140, 630, 200, 50);
 
         Alex.setText(resourceMap.getString("Alex.text")); // NOI18N
         Alex.setName("Alex"); // NOI18N
@@ -161,7 +163,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(Alex);
-        Alex.setBounds(730, 220, 200, 50);
+        Alex.setBounds(760, 230, 200, 50);
 
         john.setText(resourceMap.getString("john.text")); // NOI18N
         john.setName("john"); // NOI18N
@@ -171,7 +173,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
             }
         });
         mainPanel.add(john);
-        john.setBounds(730, 590, 200, 50);
+        john.setBounds(760, 630, 200, 50);
 
         background.setName("background"); // NOI18N
         background.setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -235,8 +237,17 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
-     JFrame alexObject = new AlexForm();
-   //  TheFaultInOurBaldSpotView.setVisible(false);
+     JFrame alexObject = null;
+        try {
+            alexObject = new AlexForm();
+            //  TheFaultInOurBaldSpotView.setVisible(false);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
+        }
    
      alexObject.setVisible(true); 
      // TODO add your handling code here:

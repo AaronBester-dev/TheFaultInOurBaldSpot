@@ -57,8 +57,8 @@ public class Victory extends javax.swing.JFrame {
 
         victoryLabel = new javax.swing.JLabel();
         winPlane = new javax.swing.JLabel();
-        Winner = new javax.swing.JLabel();
         returnMain = new javax.swing.JButton();
+        Winner = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,14 +80,7 @@ public class Victory extends javax.swing.JFrame {
         winPlane.setText(resourceMap.getString("winPlane.text")); // NOI18N
         winPlane.setName("winPlane"); // NOI18N
         getContentPane().add(winPlane);
-        winPlane.setBounds(120, 140, 210, 140);
-
-        Winner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Winner.setText(resourceMap.getString("Winner.text")); // NOI18N
-        Winner.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        Winner.setName("Winner"); // NOI18N
-        getContentPane().add(Winner);
-        Winner.setBounds(0, 330, 480, 120);
+        winPlane.setBounds(130, 160, 210, 140);
 
         returnMain.setText(resourceMap.getString("returnMain.text")); // NOI18N
         returnMain.setName("returnMain"); // NOI18N
@@ -98,6 +91,12 @@ public class Victory extends javax.swing.JFrame {
         });
         getContentPane().add(returnMain);
         returnMain.setBounds(200, 460, 103, 23);
+
+        Winner.setFont(resourceMap.getFont("Winner.font")); // NOI18N
+        Winner.setText(resourceMap.getString("Winner.text")); // NOI18N
+        Winner.setName("Winner"); // NOI18N
+        getContentPane().add(Winner);
+        Winner.setBounds(10, 370, 460, 80);
 
         backGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backGround.setText(resourceMap.getString("backGround.text")); // NOI18N
@@ -110,8 +109,7 @@ public class Victory extends javax.swing.JFrame {
 
     private void returnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnMainActionPerformed
         // TODO add your handling code here:
-//        JFrame main = new TheFaultInOurBaldSpotView();
-        //TheFaultInOurBaldSpotView.display();
+dispose();
         
     }//GEN-LAST:event_returnMainActionPerformed
 

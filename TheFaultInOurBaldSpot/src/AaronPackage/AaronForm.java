@@ -69,7 +69,7 @@ boolean animateOn = false;
             if (movingRight) {
                 //Checks to see if there is any object in the way of the player
                 if (!checkCollision(player, +1, 0)) {
-                     repaint();
+                
 //Finds the location for every single object and enemy JLabel and moves it to the left by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
@@ -123,7 +123,7 @@ boolean animateOn = false;
             //Checks to see if moving left is true
             if (movingLeft) {
                 if (!checkCollision(player, -1, 0)) {
-                    repaint();
+              
   //Finds the location for every single object and enemy JLabel and moves it to the right by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
@@ -179,16 +179,19 @@ boolean animateOn = false;
 //Timer task that is responsible for moving the player up smoothly when the user jumps
     TimerTask jumpGravity = new TimerTask() {
         public void run() {
-            
+             
             //Checks to see if jumping is true
             if (jumping) {
                 //Increases the jump timer by 1 every time it runs
                 jumpTimer++;
                 //Checks to see if the jump timer is greater less than 22
+               
                 if (jumpTimer <= 22) {
+                       if (!checkCollision(player, 0, -10) ) {
                     //Sets the players location to be ten y values up from its previous location
                     player.setLocation(player.getLocation().x, player.getLocation().y - 10);
                     //Checks to see if jump timer is above 22
+                       }
                 } else if (jumpTimer > 22) {
 //Resets Jump Timer
                     jumpTimer = 0;
@@ -197,7 +200,8 @@ boolean animateOn = false;
                   
 
                 }
-            }
+            
+               }
         }
     };
     
@@ -402,7 +406,7 @@ TimerTask createFatBullets = new TimerTask() {
 
                     }
                     //Checks to see if the item is out of the bounds of the outside of a certain area around the player
-                    if (item.getLocation().x > 1500 || (item.getLocation().x < 0)) {
+                    if (item.getLocation().x > 1450 || (item.getLocation().x < 0)) {
                         //Removes the item if its outside of the certain area and removes it from the form and from the array.
                         remove(item);
                         guardbullets.remove(item);
@@ -432,7 +436,7 @@ TimerTask createFatBullets = new TimerTask() {
 
                     }
                     //If statement removes the bullets from the form adnt eh array list if they are outside of a certain boundary
-                    if (item.getLocation().x > 1500 || (item.getLocation().x < 0)) {
+                    if (item.getLocation().x > 1450 || (item.getLocation().x < 0)) {
                         remove(item);
                         fatbullets.remove(item);
                     }
@@ -658,7 +662,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         if (evt.getKeyCode() == 90) {
             
             //Checks if the player is standing on top of a block and that the player has run above his head
-            if (!checkCollision(player, 0, -1) && (checkCollision(player, 0, +10))) {
+            if (!checkCollision(player, 0, -10) && (checkCollision(player, 0, +10))) {
                 //Sets jumping to true which starts the jumpGravity timer task
                 jumping = true;
             }
@@ -1034,18 +1038,25 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 //Creates a temp rectangle with the same bounds as the bullets
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
+        //For loop makes an item out of every  officeWorker in the office worker array
         for (EnemyClass item : officeWorkerStats) {
+            //If statement checks if the bullet collides with the enemy label
             if (rect.intersects(item.getLabel().getBounds())) {
+                //Sets the health of the enemy one lower when you hit them
                 item.setHealth(item.getHealth() - 1);
-                //  System.out.println("Enenmy Hit" + item.getHealth());
+    
+                //If statements check if the enemies health is zero
                 if (item.getHealth() == 0) {
+                    //Removes the office worker label from the form and from the array
                     officeWorkerStats.remove(item);
                     getContentPane().remove(item.getLabel());
+                    //Repaints the whole screen
                     repaint();
                 }
                 return true;
             }
         }
+        //Section of code is the exact same as the one for officeWorker except this one checks the collision with the fat enemies
         for (EnemyClass item : fatOfficeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
@@ -1058,6 +1069,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
                 return true;
             }
         }
+         //Section of code is the exact same as the one for officeWorker except this one checks the collision with the fat enemies
         for (EnemyClass item : securityGuardStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
@@ -1073,11 +1085,11 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         return false;
 
     }
-
+//Void checks if the enemy bullet has collided with the player
     public boolean bulletCollisionPlayer(javax.swing.JLabel _lbl, int _x, int _y) {
-
+//Sets the temp rect bounds to be the same as the enemies bullet's bounds
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
+//Checks if the temp rect intersects with the player's bullets
         if (rect.intersects(playerCharacter.getLabel().getBounds())) {
 
             return true;
@@ -1086,13 +1098,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         return false;
     }
   
-
+//Void that takes one points off the player's helth
     public void takeDamage() {
-     
+ //Taktes the current player's health and subtracts it by 1    
         playerCharacter.setHealth(playerCharacter.getHealth() - 1);
-
+//Sets the value of the health bar to the new player's health
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
-
+//Checks if the players health become 0
         if (playerCharacter.getHealth() == 0) {
             
             this.dispose();
