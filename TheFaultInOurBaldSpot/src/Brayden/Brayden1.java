@@ -32,7 +32,7 @@ public int counterS = 40;
 public int counterC = 4;
 public int counterC2 = 4;
 public int counterC3 = 4;
-public character me = new character();
+public character me;// = new character();
 public Pot potOne = new Pot();
 public Pot potTwo = new Pot();
 public Pot potThree = new Pot();
@@ -1106,7 +1106,24 @@ counterC3 = 3;
         timerCook2.scheduleAtFixedRate(taskC2, 1000, 1000);
         timerCook3.scheduleAtFixedRate(taskC3, 1000, 1000);
 
-        
+        me = new character();
+         me.setPotato(false);
+ me.setTomato(false);
+ me.setMushroom(false);
+         me.setPotatoS(false);
+ me.setTomatoS(false);
+ me.setMushroomS(false);
+// mushroomI = false;
+// potatoS = false;
+// tomatoS = false;
+// mushroomS = false; 
+        System.out.println("INITIALIZED");
+        System.out.println(me.getMushroom());
+        System.out.println(me.getPotato());
+        System.out.println(me.getTomato());
+        System.out.println(me.getMushroomS());
+        System.out.println(me.getPotatoS());
+        System.out.println(me.getTomatoS());
         
         
     }
