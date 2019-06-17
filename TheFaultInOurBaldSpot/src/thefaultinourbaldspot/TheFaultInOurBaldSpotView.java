@@ -19,9 +19,13 @@ import Brayden.Brayden1;
 import AaronPackage.AaronForm;
 import JohnPackage.JohnF;
 import AlexPackage.AlexForm;
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  * The application's main frame.
@@ -32,7 +36,11 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         super(app);
 
         initComponents();
-
+                    try {
+                        background.setIcon(new ImageIcon((ImageIO.read(new File("B1.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -112,6 +120,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         aaron = new javax.swing.JButton();
         Alex = new javax.swing.JButton();
         john = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -119,6 +128,8 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         progressBar = new javax.swing.JProgressBar();
 
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.setPreferredSize(new java.awt.Dimension(1080, 720));
+        mainPanel.setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(TheFaultInOurBaldSpotView.class);
         brayden.setText(resourceMap.getString("brayden.text")); // NOI18N
@@ -128,6 +139,8 @@ public class TheFaultInOurBaldSpotView extends FrameView {
                 braydenActionPerformed(evt);
             }
         });
+        mainPanel.add(brayden);
+        brayden.setBounds(140, 220, 200, 50);
 
         aaron.setText(resourceMap.getString("aaron.text")); // NOI18N
         aaron.setName("aaron"); // NOI18N
@@ -136,6 +149,8 @@ public class TheFaultInOurBaldSpotView extends FrameView {
                 aaronActionPerformed(evt);
             }
         });
+        mainPanel.add(aaron);
+        aaron.setBounds(130, 610, 200, 50);
 
         Alex.setText(resourceMap.getString("Alex.text")); // NOI18N
         Alex.setName("Alex"); // NOI18N
@@ -144,6 +159,8 @@ public class TheFaultInOurBaldSpotView extends FrameView {
                 AlexActionPerformed(evt);
             }
         });
+        mainPanel.add(Alex);
+        Alex.setBounds(730, 220, 200, 50);
 
         john.setText(resourceMap.getString("john.text")); // NOI18N
         john.setName("john"); // NOI18N
@@ -152,33 +169,13 @@ public class TheFaultInOurBaldSpotView extends FrameView {
                 johnActionPerformed(evt);
             }
         });
+        mainPanel.add(john);
+        john.setBounds(730, 590, 200, 50);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(brayden)
-                .addGap(18, 18, 18)
-                .addComponent(aaron)
-                .addGap(18, 18, 18)
-                .addComponent(Alex)
-                .addGap(18, 18, 18)
-                .addComponent(john)
-                .addContainerGap(267, Short.MAX_VALUE))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(brayden)
-                    .addComponent(aaron)
-                    .addComponent(Alex)
-                    .addComponent(john))
-                .addContainerGap(350, Short.MAX_VALUE))
-        );
+        background.setName("background"); // NOI18N
+        background.setPreferredSize(new java.awt.Dimension(1080, 720));
+        mainPanel.add(background);
+        background.setBounds(0, 0, 1080, 700);
 
         statusPanel.setName("statusPanel"); // NOI18N
 
@@ -195,11 +192,11 @@ public class TheFaultInOurBaldSpotView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 910, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -254,6 +251,7 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton Alex;
     javax.swing.JButton aaron;
+    javax.swing.JLabel background;
     javax.swing.JButton brayden;
     javax.swing.JButton john;
     javax.swing.JPanel mainPanel;

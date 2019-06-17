@@ -46,7 +46,28 @@ public void setMushroom(boolean input){
 public boolean getMushroom(){
     return mushroomI;
 }
+public void setPotatoS(boolean input){
+    potatoS= input;   
+} 
 
+public boolean getPotatoS(){
+    return potatoS;
+}
+public void setTomatoS(boolean input){
+    tomatoS= input;   
+} 
+
+public boolean getTomatoS(){
+    return tomatoS;
+}
+
+public void setMushroomS(boolean input){
+    mushroomS= input;   
+} 
+
+public boolean getMushroomS(){
+    return mushroomS;
+}
 
 }
 

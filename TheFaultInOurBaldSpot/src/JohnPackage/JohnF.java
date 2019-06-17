@@ -1,10 +1,8 @@
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game 
 
-/*
- * Written by Mr. van Straten
- * May 21, 2019
- * JFrameImages
- * This is a demo program for images and collision detection
- */
 package JohnPackage;
 
 import java.awt.Component;
@@ -33,61 +31,84 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class JohnF extends javax.swing.JFrame {
-
+    //delcaring varibles 
+    //mx and my are varibles which store the mouses location
     int mx, my;
+    //boolean to see if the bone saw tool has been clicked
     boolean boneSawClick = false;
+    //boolean to see if the sewing needle tool has been clicked
     boolean sewNeedleClick = false;
+    //following booleans determine if the user has started cutting a box
     boolean cutClick = false;
     boolean cutClick2 = false;
     boolean cutClick3 = false;
     boolean cutClick4 = false;
     boolean cutClick5 = false;
     boolean cutClick6 = false;
+    boolean sewClick = false;
+    //following booleans determine if the user entered the box during the cut 
     boolean boxEntered = false;
     boolean boxEntered6 = false;
     boolean boxEntered2 = false;
     boolean boxEntered3 = false;
     boolean boxEntered4 = false;
     boolean boxEntered5 = false;
-    boolean sewClick = false;
-    int healthValue = 100;
-    int counter = 0;
-    int gameCounter = 120;
-    int leftCounter = 0;
-    int rightCounter = 0;
-    int score = 0;
-    Tool needle, bonesaw;
     boolean sewBoxEntered = false;
-
+    //mr v's health
+    int healthValue = 100;
+    //counter which determines how many times the player makes a sucsessful cut 
+    int counter = 0;
+    //counter which keeps track of how much time the suer has to complete the game
+    int gameCounter = 120;
+    //this counter keeps track of how much time the user has left to complete the game
+    int leftCounter = 0;
+    //score
+    int score = 0;
+    //tools avaible which are part of a class
+    Tool needle, bonesaw;
+    
+    //function which is called whenever mr.V loses heath
     private void injured() {
+        //starts timer task
         Timer injuredTimer = new Timer();
         TimerTask stopInjured = new TimerTask() {
+            //what happens when the timer stops
             public void run() {
+                //blood image goes away
                 hurt.setVisible(false);
+                //mr V normal face becomes visible
+                mrV.setVisible(true);
             }
 
         };
         injuredTimer.schedule(stopInjured, 500);
-        System.out.println("injured");
+        //if the bonesaw is equipped take a certain amout of damage off
         if (bonesaw.isClicked == true) {
             healthValue = healthValue - bonesaw.getDamage();
+        //if the needle is equipped take a certain amout of damage off
         } else if (needle.isClicked == true) {
             healthValue = healthValue - needle.getDamage();
         }
+        //substracts damaged from the health bar
         healthBar.setValue(healthValue);
-        System.out.println(healthValue);
+        //checks to see if the health bar is 0
         if (healthBar.getValue() == 0) {
+            //if it does, end the game by calling the endgame function
             endGame();
         }
+        //when the timer runs intinally the blood appears and mr.V's normal face dissappers to show his bad one
         hurt.show();
-
+        mrV.setVisible(false);
+        //calls the scream audio file
         try {
             AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AHHH2.wav"));
             // Get a sound clip resource.
             Clip clip1 = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
             clip1.open(audio);
+            //starts short clip
             clip1.start();
+            //catches the many errors which can occur
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -99,68 +120,100 @@ public class JohnF extends javax.swing.JFrame {
         }
 
     }
-
+    //edngame function
     private void endGame() {
+        //uses formula to caluculate the players score
         score = healthBar.getValue() * gameCounter;
-        System.out.println("Your score is: " + score);
+        //try to catch IOExceptions as im going to call a function which writes data
         try {
+            //calls fucntion to write data into an external file
             highScore();
         } catch (IOException e) {
         }
     }
-
+    //function which writes scoreto en external file
     private void highScore() throws IOException {
+        //locates file to put scores in
         PrintWriter fileOut = new PrintWriter(new FileWriter("HighScores.txt", true));
+        //adds score to it
         fileOut.println(score);
+        //closes file
         fileOut.close();
-        scoreFrame johnObject = new scoreFrame();
-        johnObject.setVisible(true);
+        //if the score is greater than 0 call the win game frame 
+        if (score > 0) {
+            //calls the win frame
+            scoreFrame johnObject = new scoreFrame();
+            johnObject.setVisible(true);
+        //if the score is zero meaning they bleed out ot time runs out call the lose game frame
+        } else {
+            lost johnObject = new lost();
+            johnObject.setVisible(true);
+        }
     }
-
+    //funtion that is called every time the player sucsesffuly cuts a box
     private void success() {
+        //adds to counter
         counter++;
+        //creates timer
         Timer cutTimer = new Timer();
         TimerTask stopCut = new TimerTask() {
+            //when the timer is up hide the sissors
             public void run() {
                 cut.setVisible(false);
             }
         };
         cutTimer.schedule(stopCut, 500);
+        //shows the sissors to indicate the task was sucsessfull
         cut.setVisible(true);
+        //if the counter equal's 6 we know the ribs must be cut
         if (counter == 6) {
+            //if that occurs hide the ribs and show the heart
             ribs.setVisible(false);
             sewBox.setVisible(true);
+            //calls function which starts timer as the cutbox on the heart moves
             SewBoxTimer();
+        //if the counter equals 7 the heart must be sewed up and the game is over
         } else if (counter == 7) {
+            //calls endgame fuction
             endGame();
         }
     }
-
+    //gamecounter. Runs the big timer which is how much time they have to complete the game
     public void gameCounter() {
+        //creates timer
         Timer gameTimer = new Timer();
         TimerTask stopGame = new TimerTask() {
+            //when the timer stops lower the gamecounter, set that equal to the time label, ehack to see if the timer is 0 (when the game ends)
             public void run() {
                 time.setText(String.valueOf(gameCounter));
                 gameCounter--;
                 if (gameCounter == 0) {
+                    //calls endgame function if timer is 0 - runs out 
                     endGame();
                 }
             }
         };
+        //timer is scheduled to go down at a constant rate
         gameTimer.scheduleAtFixedRate(stopGame, 1000, 1000);
     }
-
+    //timer which moves the box on the heart 
     public void SewBoxTimer() {
+        //creates timer
         Timer heartTimer = new Timer();
         TimerTask moveBox = new TimerTask() {
             public void run() {
+                //counter increases each time the timer runs
                 leftCounter++;
+                //if the counter is less than 15 move the box to the left 15 spaces
                 if (leftCounter <= 15) {
                     sewBox.setLocation(sewBox.getLocation().x - 1, sewBox.getLocation().y);
+                //greater than 15 move the box to the right 30 spaces
                 } else if (leftCounter > 15 & leftCounter <= 45) {
                     sewBox.setLocation(sewBox.getLocation().x + 1, sewBox.getLocation().y);
+                //left again 30 spaces (differnt values from the fist one which is why it's needed)
                 } else if (leftCounter >= 45 & leftCounter < 76) {
                     sewBox.setLocation(sewBox.getLocation().x - 1, sewBox.getLocation().y);
+                 //resets counter at 15 so this process starts over 
                 } else if (leftCounter > 75) {
                     leftCounter = 15;
                 }
@@ -168,21 +221,20 @@ public class JohnF extends javax.swing.JFrame {
         };
         heartTimer.scheduleAtFixedRate(moveBox, 50, 50);
     }
-
+    //when the form opens
     public JohnF() {
+        //initualizes componets
         initComponents();
+        //sets health bar to 100
         healthBar.setValue(100);
-        int health = 100;
         //Initialize the label with the scaled image icon
         myInitComponents(background);
-        hurt.hide();
+        //hides certain images as they shouldn't be shown yet
+        hurt.setVisible(false);
         sewBox.setVisible(false);
         cut.setVisible(false);
+        //starts game counter
         gameCounter();
-
-//        ribs.setVisible(false);
-//        SewBoxTimer();
-//        sewBox.setVisible(true);
     }
 
     /**
@@ -211,6 +263,8 @@ public class JohnF extends javax.swing.JFrame {
         cut = new javax.swing.JLabel();
         sewNeedleLabel = new javax.swing.JLabel();
         boneSawLabel = new javax.swing.JLabel();
+        mrV = new javax.swing.JLabel();
+        mrVHurt = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -243,7 +297,7 @@ public class JohnF extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
         getContentPane().add(healthBar);
-        healthBar.setBounds(20, 10, 148, 14);
+        healthBar.setBounds(20, 10, 146, 14);
 
         cutBox.setText("cutBox");
         cutBox.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -260,11 +314,17 @@ public class JohnF extends javax.swing.JFrame {
             }
         });
         cutBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cutBoxMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cutBoxMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBoxMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBoxMousePressed(evt);
             }
         });
         getContentPane().add(cutBox);
@@ -301,6 +361,9 @@ public class JohnF extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBox2MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBox2MousePressed(evt);
+            }
         });
         getContentPane().add(cutBox2);
         cutBox2.setBounds(410, 440, 10, 80);
@@ -320,6 +383,9 @@ public class JohnF extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBox3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBox3MousePressed(evt);
             }
         });
         getContentPane().add(cutBox3);
@@ -341,6 +407,9 @@ public class JohnF extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBox4MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBox4MousePressed(evt);
+            }
         });
         getContentPane().add(cutBox4);
         cutBox4.setBounds(660, 310, 10, 70);
@@ -360,6 +429,9 @@ public class JohnF extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBox5MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBox5MousePressed(evt);
             }
         });
         getContentPane().add(cutBox5);
@@ -381,6 +453,9 @@ public class JohnF extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cutBox6MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cutBox6MousePressed(evt);
+            }
         });
         getContentPane().add(cutBox6);
         cutBox6.setBounds(640, 570, 10, 90);
@@ -400,6 +475,9 @@ public class JohnF extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 sewBoxMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sewBoxMousePressed(evt);
             }
         });
         getContentPane().add(sewBox);
@@ -460,12 +538,23 @@ public class JohnF extends javax.swing.JFrame {
         sewNeedleLabel.setForeground(new java.awt.Color(255, 0, 51));
         sewNeedleLabel.setText("SEWING NEEDLE");
         getContentPane().add(sewNeedleLabel);
-        sewNeedleLabel.setBounds(970, 580, 100, 15);
+        sewNeedleLabel.setBounds(970, 580, 100, 14);
 
         boneSawLabel.setForeground(new java.awt.Color(255, 0, 51));
         boneSawLabel.setText("BONE SAW");
         getContentPane().add(boneSawLabel);
-        boneSawLabel.setBounds(5, 580, 70, 15);
+        boneSawLabel.setBounds(5, 580, 70, 14);
+
+        mrV.setText("mrV good");
+        getContentPane().add(mrV);
+        mrV.setBounds(480, 20, 180, 190);
+
+        mrVHurt.setText("mrVbad");
+        mrVHurt.setMaximumSize(new java.awt.Dimension(45, 14));
+        mrVHurt.setMinimumSize(new java.awt.Dimension(45, 14));
+        mrVHurt.setPreferredSize(new java.awt.Dimension(45, 14));
+        getContentPane().add(mrVHurt);
+        mrVHurt.setBounds(480, 20, 180, 190);
 
         background.setText("background");
         getContentPane().add(background);
@@ -474,30 +563,18 @@ public class JohnF extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //check if a collision between images is occurring
-    private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
-//creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
-//also same width and height as original
-        Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
-
-//check if temporary rectangle intersect with wallLabel        
-        if (rect.intersects(time.getBounds())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //checks which key is pressed and moves image if no collision is detected
+    //is key is pressed
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         //prints KeyCode for the key pressed
         // System.out.println(evt.getKeyCode());
 
-        //up key pressed
+        //spacebar key pressed
         if (evt.getKeyCode() == 32) {
+            //if the bonesaw is clicked unclick is and return it to its original location
             if (bonesaw.isClicked == true) {
                 bonesaw.isClicked = false;
                 bonesaw.toolLabel.setLocation(10, 430);
+            //if the needle is clicked unclick it and return it to its original location
             } else if (needle.isClicked == true) {
                 needle.isClicked = false;
                 needle.toolLabel.setLocation(980, 430);
@@ -505,12 +582,15 @@ public class JohnF extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_formKeyPressed
-
+    //makes it so the image follows the cursor
     private void moveTool() {
+        //gets mouse cordinates
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        //if bonesaw is clicked than set the bonesaw image location to just below the mouse
         if (bonesaw.getClicked() == true) {
             bonesaw.getLabel().setLocation((mx - 32), (my - 30));
+        //if needle is clicked than set the needle image location to just below the mouse
         } else if (needle.getClicked() == true) {
             needle.getLabel().setLocation((mx - 45), (my - 30));
         }
@@ -518,14 +598,14 @@ public class JohnF extends javax.swing.JFrame {
 
 
     private void boneSawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseClicked
-//        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-//                new ImageIcon("JSumBoneSaw.png").getImage(),
-//                new Point(0, 0), "custom cursor"));
-        bonesaw.isClicked = true;
-//        int counter = 0;
-//        counter++;
+        //using the tool class is setss the isclicked proptert to true when you click it
+        //the other tools must not be clicked and that is what the if statmetent is for
+        System.out.println(needle.isClicked);
+        if (needle.isClicked == false) {
+             bonesaw.isClicked = true;
+        }
     }//GEN-LAST:event_boneSawMouseClicked
-
+    //folloing events move image with the mouse overthe form or bonesaw image whenever the mouse is moved 
     private void boneSawMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseMoved
         moveTool();
     }//GEN-LAST:event_boneSawMouseMoved
@@ -541,78 +621,81 @@ public class JohnF extends javax.swing.JFrame {
     private void boneSawMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boneSawMouseDragged
         moveTool();
     }//GEN-LAST:event_boneSawMouseDragged
-
+    
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
-        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
-
-        System.out.println(mx + ", " + my);
-
 
     }//GEN-LAST:event_formMouseClicked
-
+    //if the first cutbox is exited
     private void cutBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseExited
-        System.out.println("Exited");
+        //if the user has a tool equiped and they exit the box, call the injured function
         if (cutClick == true & bonesaw.isClicked == true) {
+            //if they exit it from the bottom don't call the injured function
             if (mx > 433 & mx < 449 & my > 400 & my < 430) {
-                System.out.println("adasdasd");
             } else {
                 injured();
             }
         }
     }//GEN-LAST:event_cutBoxMouseExited
-
+    //action event if they press the form
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        //gets the mouse coordinates
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        //if the bonesaw is eqiped
         if (bonesaw.isClicked == true) {
+            //check to see if the user has clicked above a cutbox
             if (mx > 433 & mx < 449 & my < 340 & my > 320) {
+                //if they do make cutClick = true which esstianly tells the program the've started a cut
                 cutClick = true;
-                System.out.println("cutClick is: " + cutClick);
             } else if (mx > 414 & mx < 426 & my < 470 & my > 453) {
                 cutClick2 = true;
-                System.out.println("cutClick2 is: " + cutClick2);
             } else if (mx > 465 & mx < 477 & my < 597 & my > 580) {
                 cutClick3 = true;
             } else if (mx > 665 & mx < 677 & my < 340 & my > 322) {
                 cutClick4 = true;
-                System.out.println("hello");
             } else if (mx > 676 & mx < 688 & my < 468 & my > 452) {
                 cutClick5 = true;
             } else if (mx > 646 & mx < 658 & my < 600 & my > 585) {
                 cutClick6 = true;
+                //if they don't. Call injured function
             } else {
                 injured();
             }
+        //if the needle is clicked
         } else if (needle.isClicked == true) {
-            System.out.println("PLeaseee");
+            //check to see where the click
             if (mx > 594 & mx < 630 & my < 429 & my > 410) {
+                //if its above the right cutbox,start cut (sewClick = true)
                 sewClick = true;
-                System.out.println("Reconginzed");
             } else {
-                System.out.println("PLeaseee");
+                //if it isn't, injured
                 injured();
             }
         }
     }//GEN-LAST:event_formMousePressed
-
+    //action event when they release the mouse
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        //gets mouse coordinates
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        //if the cut is started and the corressponign box has been entered
         if (cutClick == true & boxEntered == true) {
+            //checks coordinates
             if (mx > 433 & mx < 449 & my > 410 & my < 430) {
-                System.out.println("Awesome");
+                //if they realse in the right spot call the sucsess fuction
                 success();
+                //hide cut box
                 cutBox.setVisible(false);
-                cutClick = false;
+                //if they don'r release in the right spot
             } else {
+                //call injured function
                 injured();
-                System.out.println("hello");
+                //set the cut and boxentered booleans to false
                 boxEntered = false;
-                cutClick = false;
-                System.out.println(cutClick);
             }
+            //sets cutClick = false so they have to start cut over again
             cutClick = false;
+        //following ifs the same as previous if with differnet boxes and differert coordinates
         } else if (cutClick2 == true & boxEntered2 == true) {
             System.out.println("cutClick 2 is:" + cutClick2);
             if (mx > 414 & mx < 426 & my > 550 & my < 567) {
@@ -683,6 +766,8 @@ public class JohnF extends javax.swing.JFrame {
                 sewClick = false;
             }
             sewClick = false;
+            //else if the player never enters the box
+            //resets everything so they have to go throught the box
         } else {
             cutClick = false;
             cutClick2 = false;
@@ -705,7 +790,7 @@ public class JohnF extends javax.swing.JFrame {
     private void cutBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutBoxFocusLost
 
     }//GEN-LAST:event_cutBoxFocusLost
-
+        //following events call the move tool function so the tool can move over the cut boxes
     private void cutBoxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseMoved
         moveTool();
     }//GEN-LAST:event_cutBoxMouseMoved
@@ -755,66 +840,101 @@ public class JohnF extends javax.swing.JFrame {
     }//GEN-LAST:event_cutBox6MouseMoved
 
     private void cutBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MouseExited
-        System.out.println("Exited");
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
         if (cutClick2 == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 414 & mx < 426 & my > 550 & my < 567) {
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBox2MouseExited
 
     private void cutBox3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MouseExited
-        System.out.println("Exited");
+        //gets mouse coordinates 
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        //if the user has a tool equiped and they exit the box, call the injured function
         if (cutClick3 == true & bonesaw.isClicked == true) {
-            if (mx > 433 & mx < 449 & my > 410 & my < 430) {
-
+            //if they exit it from the bottom don't call the injured function
+            if (mx > 464 & mx < 478 & my > 681 & my < 701) {
             } else {
                 injured();
             }
         }
     }//GEN-LAST:event_cutBox3MouseExited
-
+    //following events same as previous event jsut with differnt coordaintes and boxes 
     private void cutBox4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MouseExited
         mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
         my = (int) MouseInfo.getPointerInfo().getLocation().getY();
 
         System.out.println("Exited");
         if (cutClick4 == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 665 & mx < 678 & my > 401 & my < 424) {
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBox4MouseExited
 
     private void cutBox5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MouseExited
-        System.out.println("Exited");
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
         if (cutClick5 == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 677 & mx < 690 & my > 542 & my < 561) {
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBox5MouseExited
 
     private void cutBox6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MouseExited
-        System.out.println("Exited");
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+
         if (cutClick6 == true & bonesaw.isClicked == true) {
-            injured();
+            if (mx > 646 & mx < 658 & my > 690 & my < 704) {
+            } else {
+                injured();
+            }
         }
     }//GEN-LAST:event_cutBox6MouseExited
-
+    //event if the needle is clicked
     private void sewNeedleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseClicked
-        needle.setClicked(true);
+        //if to ensure no other tools are clicked
+        if (bonesaw.isClicked == false) {
+            needle.setClicked(true);
+        } 
     }//GEN-LAST:event_sewNeedleMouseClicked
-
+        //makes it so you ca drag the tool over the sewBox
     private void sewNeedleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseDragged
         moveTool();
     }//GEN-LAST:event_sewNeedleMouseDragged
-
+        //makes it so you ca move the tool over the sewBox
     private void sewNeedleMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewNeedleMouseMoved
         moveTool();
     }//GEN-LAST:event_sewNeedleMouseMoved
-
+        //evet if the sewBox is exited
     private void sewBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseExited
+        //gets mouse coordinates
+        mx = (int) MouseInfo.getPointerInfo().getLocation().getX();
+        my = (int) MouseInfo.getPointerInfo().getLocation().getY();
+        //if the cut is started adn the needle is equiped 
         if (sewClick == true && needle.isClicked == true) {
-            injured();
+            //if it is existed from the bottom
+            if (mx > 594 & mx < 630 & my > 502 & my < 538) {
+                //if it's not existed from the bottom
+            } else {
+                //calls injured fucntion 
+                injured();
+            }
         }
     }//GEN-LAST:event_sewBoxMouseExited
-
+    //following events check to see if the player has dragged the mouse through a cutbox when cutting
     private void sewBoxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMouseEntered
+        //for this to occur a tool must be equiped and the cut started
         if (needle.isClicked == true && sewClick == true) {
             sewBoxEntered = true;
         }
@@ -866,17 +986,48 @@ public class JohnF extends javax.swing.JFrame {
         moveTool();
     }//GEN-LAST:event_sewBoxMouseMoved
 
+    private void cutBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMouseClicked
+
+    }//GEN-LAST:event_cutBoxMouseClicked
+    //injured mrV when the following images are clicked
+    private void cutBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBoxMousePressed
+        injured();
+    }//GEN-LAST:event_cutBoxMousePressed
+
+    private void cutBox2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox2MousePressed
+        injured();
+    }//GEN-LAST:event_cutBox2MousePressed
+
+    private void cutBox3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox3MousePressed
+        injured();
+    }//GEN-LAST:event_cutBox3MousePressed
+
+    private void cutBox4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox4MousePressed
+        injured();
+    }//GEN-LAST:event_cutBox4MousePressed
+
+    private void cutBox5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox5MousePressed
+        injured();
+    }//GEN-LAST:event_cutBox5MousePressed
+
+    private void cutBox6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cutBox6MousePressed
+        injured();
+    }//GEN-LAST:event_cutBox6MousePressed
+
+    private void sewBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sewBoxMousePressed
+        injured();
+    }//GEN-LAST:event_sewBoxMousePressed
+
     /**
      * Creates new form NewJFrame
      */
-//Initializes the labels with their images
+   //Initializes the labels with their images
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-
-        //same as above, but in a condensed version
+        //catched IOException
         try {
-
+            //initilizes images
             background.setIcon(new ImageIcon((ImageIO.read(new File("JSumBackground.png"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
             ribs.setIcon(new ImageIcon((ImageIO.read(new File("JSumRibs.png"))).getScaledInstance(ribs.getWidth(), ribs.getHeight(), Image.SCALE_SMOOTH)));
             cutBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(cutBox.getWidth(), cutBox.getHeight(), Image.SCALE_SMOOTH)));
@@ -889,13 +1040,13 @@ public class JohnF extends javax.swing.JFrame {
             cut.setIcon(new ImageIcon((ImageIO.read(new File("scissors.png"))).getScaledInstance(cut.getWidth(), cut.getHeight(), Image.SCALE_SMOOTH)));
             badHeart.setIcon(new ImageIcon((ImageIO.read(new File("badHeart.png"))).getScaledInstance(badHeart.getWidth(), badHeart.getHeight(), Image.SCALE_SMOOTH)));
             sewBox.setIcon(new ImageIcon((ImageIO.read(new File("cutBox.png"))).getScaledInstance(sewBox.getWidth(), sewBox.getHeight(), Image.SCALE_SMOOTH)));
-
-            sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("SewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
-
-            needle = new Tool(sewNeedle, 3);
-            bonesaw = new Tool(boneSaw, 6);
+            mrVHurt.setIcon(new ImageIcon((ImageIO.read(new File("mrVbad.jpg"))).getScaledInstance(mrVHurt.getWidth(), mrVHurt.getHeight(), Image.SCALE_SMOOTH)));
+            mrV.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(mrV.getWidth(), mrV.getHeight(), Image.SCALE_SMOOTH)));
+            sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("sewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
             boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
-
+            //initilizes tools
+            needle = new Tool(sewNeedle, 6);
+            bonesaw = new Tool(boneSaw, 12);
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -958,6 +1109,8 @@ public class JohnF extends javax.swing.JFrame {
     private javax.swing.JLabel cutBox6;
     private javax.swing.JProgressBar healthBar;
     private javax.swing.JLabel hurt;
+    private javax.swing.JLabel mrV;
+    private javax.swing.JLabel mrVHurt;
     private javax.swing.JLabel ribs;
     private javax.swing.JLabel sewBox;
     private javax.swing.JLabel sewNeedle;

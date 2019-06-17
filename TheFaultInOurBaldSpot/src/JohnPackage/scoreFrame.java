@@ -1,17 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,25 +27,38 @@ import javax.swing.JOptionPane;
  */
 public class scoreFrame extends javax.swing.JFrame {
 
+    int score;
+
     /**
      * Creates new form scoreFrame
      */
     public scoreFrame() throws IOException {
-        initComponents();
-        jLabel1.setText("Game High Scores");
-         //dummy varible
+        //declares varibles
         BufferedReader readFile = null;
         String reading = "";
         int intReading = 0;
         //array list to store the data from the file 
-        ArrayList myArrayList= new ArrayList<Integer>();
-
-        //OptionPane to ask the reader what local file they would like the program to read
-        //NO SAFE GAURD FOR THE NULL POINTER EXCEPTION, THIS HAS BEEN APPROVED BY MR.V
-       
+        ArrayList myArrayList = new ArrayList<Integer>();
+        //initializes components 
+        initComponents();
+        myInitComponents(john);
+        //creates fonts
+        Font font1 = new Font("SansSerif", Font.BOLD, 40);
+        Font font2 = new Font("SansSerif", Font.BOLD, 20);
+        //sets text and font to various labels and buttons
+        jButton1.setText("MINIGAME?");
+        jLabel1.setText("Game High Scores");
+        jLabel1.setFont(font1);
+        yourScoreLabel.setText("Your Score:");
+        yourScoreLabel.setFont(font2);
+        yourScore.setFont(font2);
+        highScore1.setFont(font2);
+        highScore2.setFont(font2);
+        highScore3.setFont(font2);
+        winLabel.setText("Congrats on your great cutting and a great 4 years, thanks MR.V");
+        winLabel.setFont(font2);
         //Opens the text file and attaches a BufferedReader
         readFile = new BufferedReader(new FileReader("HighScores.txt"));
-               
         //do loop to continue to get data until theres no more lines to read
         do {
             //sets the line of the external file to the dummy varible
@@ -47,51 +67,74 @@ public class scoreFrame extends javax.swing.JFrame {
             if (reading != null) {
                 //adds line to array
                 try {
-                intReading = Integer.parseInt(reading);
-                }catch (NumberFormatException e){
-                        }
+                    intReading = Integer.parseInt(reading);
+                } catch (NumberFormatException e) {
+                }
                 myArrayList.add(intReading);
             }
         } while (reading != null);
         //closes text file as thats proper coding 
         readFile.close();
         //prints the text, uses for loop to print each line on its own line
+        //gets the last index added and sets it equal to "score"
         for (int i = 0; i < myArrayList.size(); i++) {
             System.out.println(myArrayList.get(i));
+            score = (Integer) myArrayList.get(i);
         }
-         selectionSort(myArrayList);
-         System.out.println("These numbers in a sorted list are: " + myArrayList);
-         highScore1.setText(String.valueOf(myArrayList.get(0)));
-         highScore2.setText(String.valueOf(myArrayList.get(1))); 
-         highScore3.setText(String.valueOf(myArrayList.get(2))); 
+        //prints last score to a label
+        yourScore.setText("" + score);
+        //callse sort function
+        selectionSort(myArrayList);
+        System.out.println("These numbers in a sorted list are: " + myArrayList);
+        //sets highest scores to labels
+        highScore1.setText(String.valueOf(myArrayList.get(0)));
+        highScore2.setText(String.valueOf(myArrayList.get(1)));
+        highScore3.setText(String.valueOf(myArrayList.get(2)));
     }
 
     public static void selectionSort(ArrayList myArrayList) {
         int smallest;
-         for (int i = 0; i < myArrayList.size() - 1; i++) {
-                smallest = i;
-                //see if there is a smaller number further in the array
-                for (int index = i + 1; index < myArrayList.size(); index++) {
-                    //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
-                    if ((Integer) myArrayList.get(smallest) < (Integer) myArrayList.get(index)) {
-                        swap(myArrayList, smallest, index);
-                    }
+        for (int i = 0; i < myArrayList.size() - 1; i++) {
+            smallest = i;
+            //see if there is a smaller number further in the array
+            for (int index = i + 1; index < myArrayList.size(); index++) {
+                //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
+                if ((Integer) myArrayList.get(smallest) < (Integer) myArrayList.get(index)) {
+                    swap(myArrayList, smallest, index);
                 }
+            }
         }
     }
-    
+
     public static void swap(ArrayList array2, int first, int second) {
         int hold = (Integer) array2.get(first);
         array2.set(first, array2.get(second));
         array2.set(second, hold);
     }
 
-        /**
-         * This method is called from within the constructor to initialize the
-         * form. WARNING: Do NOT modify this code. The content of this method is
-         * always regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
+    public void myInitComponents(javax.swing.JLabel jLabel1) {
+        //Initialize a Buffered Image
+        BufferedImage img = null;
+        //try to cathc IOexceptions
+        try {
+            //sets icons to labels 
+            mrV.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(mrV.getWidth(), mrV.getHeight(), Image.SCALE_SMOOTH)));
+            brayden.setIcon(new ImageIcon((ImageIO.read(new File("brayden.jpg"))).getScaledInstance(brayden.getWidth(), brayden.getHeight(), Image.SCALE_SMOOTH)));
+            aaron.setIcon(new ImageIcon((ImageIO.read(new File("aaronJohnGame.jpg"))).getScaledInstance(aaron.getWidth(), aaron.getHeight(), Image.SCALE_SMOOTH)));
+            john.setIcon(new ImageIcon((ImageIO.read(new File("john.jpg"))).getScaledInstance(john.getWidth(), john.getHeight(), Image.SCALE_SMOOTH)));
+            alex.setIcon(new ImageIcon((ImageIO.read(new File("alex.jpg"))).getScaledInstance(alex.getWidth(), alex.getHeight(), Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(JohnF.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -99,58 +142,104 @@ public class scoreFrame extends javax.swing.JFrame {
         highScore1 = new javax.swing.JLabel();
         highScore2 = new javax.swing.JLabel();
         highScore3 = new javax.swing.JLabel();
+        yourScoreLabel = new javax.swing.JLabel();
+        yourScore = new javax.swing.JLabel();
+        winLabel = new javax.swing.JLabel();
+        john = new javax.swing.JLabel();
+        mrV = new javax.swing.JLabel();
+        brayden = new javax.swing.JLabel();
+        aaron = new javax.swing.JLabel();
+        alex = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 713));
         setName("Form"); // NOI18N
+        getContentPane().setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(scoreFrame.class);
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 10, 380, 47);
 
         highScore1.setText(resourceMap.getString("highScore1.text")); // NOI18N
         highScore1.setName("highScore1"); // NOI18N
+        getContentPane().add(highScore1);
+        highScore1.setBounds(10, 80, 61, 20);
 
         highScore2.setText(resourceMap.getString("highScore2.text")); // NOI18N
         highScore2.setName("highScore2"); // NOI18N
+        getContentPane().add(highScore2);
+        highScore2.setBounds(10, 110, 61, 20);
 
         highScore3.setText(resourceMap.getString("highScore3.text")); // NOI18N
         highScore3.setName("highScore3"); // NOI18N
+        getContentPane().add(highScore3);
+        highScore3.setBounds(10, 140, 61, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(highScore3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(highScore2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(highScore1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(733, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(highScore1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(highScore2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(highScore3)
-                .addContainerGap(529, Short.MAX_VALUE))
-        );
+        yourScoreLabel.setText(resourceMap.getString("yourScoreLabel.text")); // NOI18N
+        yourScoreLabel.setName("yourScoreLabel"); // NOI18N
+        getContentPane().add(yourScoreLabel);
+        yourScoreLabel.setBounds(760, 20, 130, 30);
+
+        yourScore.setText(resourceMap.getString("yourScore.text")); // NOI18N
+        yourScore.setName("yourScore"); // NOI18N
+        getContentPane().add(yourScore);
+        yourScore.setBounds(900, 20, 120, 30);
+
+        winLabel.setText(resourceMap.getString("winLabel.text")); // NOI18N
+        winLabel.setName("winLabel"); // NOI18N
+        getContentPane().add(winLabel);
+        winLabel.setBounds(170, 190, 790, 80);
+
+        john.setText(resourceMap.getString("john.text")); // NOI18N
+        john.setName("john"); // NOI18N
+        getContentPane().add(john);
+        john.setBounds(180, 300, 130, 130);
+
+        mrV.setText(resourceMap.getString("mrV.text")); // NOI18N
+        mrV.setName("mrV"); // NOI18N
+        getContentPane().add(mrV);
+        mrV.setBounds(400, 380, 170, 160);
+
+        brayden.setText(resourceMap.getString("brayden.text")); // NOI18N
+        brayden.setName("brayden"); // NOI18N
+        getContentPane().add(brayden);
+        brayden.setBounds(660, 310, 130, 130);
+
+        aaron.setText(resourceMap.getString("aaron.text")); // NOI18N
+        aaron.setName("aaron"); // NOI18N
+        getContentPane().add(aaron);
+        aaron.setBounds(180, 520, 130, 130);
+
+        alex.setText(resourceMap.getString("alex.text")); // NOI18N
+        alex.setName("alex"); // NOI18N
+        getContentPane().add(alex);
+        alex.setBounds(650, 530, 130, 130);
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(880, 300, 120, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        miniGame johnObject = new miniGame();
+        johnObject.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -188,9 +277,18 @@ public class scoreFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aaron;
+    private javax.swing.JLabel alex;
+    private javax.swing.JLabel brayden;
     private javax.swing.JLabel highScore1;
     private javax.swing.JLabel highScore2;
     private javax.swing.JLabel highScore3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel john;
+    private javax.swing.JLabel mrV;
+    private javax.swing.JLabel winLabel;
+    private javax.swing.JLabel yourScore;
+    private javax.swing.JLabel yourScoreLabel;
     // End of variables declaration//GEN-END:variables
 }
