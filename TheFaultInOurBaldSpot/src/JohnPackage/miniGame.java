@@ -21,7 +21,7 @@ public class miniGame extends javax.swing.JFrame {
     public miniGame() {
         initComponents();
         Font font1 = new Font("SansSerif", Font.BOLD, 25);
-        jLabel1.setText("Isn't that crazy. Who knew recurion could be so cool");
+        jLabel1.setText("Isn't that crazy. Who knew recursion could be so cool");
         jLabel1.setFont(font1);
         jLabel1.setForeground(Color.red);
         //declaring varibles 

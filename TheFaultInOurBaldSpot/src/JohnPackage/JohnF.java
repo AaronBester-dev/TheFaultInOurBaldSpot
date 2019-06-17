@@ -994,8 +994,8 @@ public class JohnF extends javax.swing.JFrame {
             mrV.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(mrV.getWidth(), mrV.getHeight(), Image.SCALE_SMOOTH)));
             sewNeedle.setIcon(new ImageIcon((ImageIO.read(new File("sewNeedle.png"))).getScaledInstance(sewNeedle.getWidth(), sewNeedle.getHeight(), Image.SCALE_SMOOTH)));
 
-            needle = new Tool(sewNeedle, 3);
-            bonesaw = new Tool(boneSaw, 6);
+            needle = new Tool(sewNeedle, 6);
+            bonesaw = new Tool(boneSaw, 12);
             boneSaw.setIcon(new ImageIcon((ImageIO.read(new File("JSumBoneSaw.png"))).getScaledInstance(boneSaw.getWidth(), boneSaw.getHeight(), Image.SCALE_SMOOTH)));
 
         } catch (IOException ex) {
