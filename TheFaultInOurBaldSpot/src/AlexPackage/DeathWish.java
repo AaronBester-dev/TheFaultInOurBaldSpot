@@ -5,10 +5,10 @@
  */
 package AlexPackage;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the deathwish constructor
 public class DeathWish extends EnemiesClass {
 //deathwish Constructor
     public DeathWish() {
