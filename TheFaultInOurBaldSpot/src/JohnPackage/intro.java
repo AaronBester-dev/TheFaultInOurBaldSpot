@@ -140,7 +140,6 @@ public class intro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(580, 450));
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(580, 450));
         getContentPane().setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(intro.class);
@@ -152,7 +151,7 @@ public class intro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(instructions);
-        instructions.setBounds(320, 360, 120, 23);
+        instructions.setBounds(320, 360, 120, 26);
 
         quit.setText(resourceMap.getString("quit.text")); // NOI18N
         quit.setName("quit"); // NOI18N
@@ -161,8 +160,13 @@ public class intro extends javax.swing.JFrame {
                 quitMouseClicked(evt);
             }
         });
+        quit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitActionPerformed(evt);
+            }
+        });
         getContentPane().add(quit);
-        quit.setBounds(450, 360, 90, 23);
+        quit.setBounds(450, 360, 90, 26);
 
         play.setText(resourceMap.getString("play.text")); // NOI18N
         play.setName("play"); // NOI18N
@@ -172,7 +176,7 @@ public class intro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(play);
-        play.setBounds(210, 360, 90, 23);
+        play.setBounds(210, 360, 90, 26);
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
@@ -199,7 +203,7 @@ public class intro extends javax.swing.JFrame {
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 100, 280, 14);
+        jLabel3.setBounds(10, 100, 280, 16);
 
         mrV.setText(resourceMap.getString("mrV.text")); // NOI18N
         mrV.setName("mrV"); // NOI18N
@@ -214,7 +218,7 @@ public class intro extends javax.swing.JFrame {
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 120, 310, 14);
+        jLabel4.setBounds(10, 120, 310, 16);
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
@@ -236,8 +240,7 @@ public class intro extends javax.swing.JFrame {
     }//GEN-LAST:event_playMouseClicked
     //if quit button is clicked
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
-        //closes game
-        System.exit(0);
+        
     }//GEN-LAST:event_quitMouseClicked
     //if instruction button is clicked
     private void instructionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instructionsMouseClicked
@@ -245,6 +248,11 @@ public class intro extends javax.swing.JFrame {
        instructions johnObject = new instructions();
        johnObject.setVisible(true);
     }//GEN-LAST:event_instructionsMouseClicked
+
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
+        //closes game
+        this.dispose();
+    }//GEN-LAST:event_quitActionPerformed
 
     /**
      * @param args the command line arguments
