@@ -911,7 +911,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
     }
 //Void spawns in the security guard enemies
     public void securityGuardSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates security guard labels
         for (int i = 0; i < numberOfObjects; i++) {
             if (objectsArray[0][i].equals("guard")) {
 
@@ -920,7 +920,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
                 securityGuardStats.add(guard);
                 JLabel label = new JLabel();
                 guard.setLabel(label);
-//           
+
                 guard.getLabel().setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 100, 250);
                 try {
                     guard.getLabel().setIcon(new ImageIcon((ImageIO.read(new File("AaronSecurityGuard.png"))).getScaledInstance(guard.getLabel().getWidth(), guard.getLabel().getHeight(), Image.SCALE_SMOOTH)));
@@ -934,9 +934,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in office worker enemies
     public void officeWorkerSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates office worker labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("worker")) {
@@ -959,9 +959,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in fat office worker enemies
     public void fatAlbertSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates fat office worker labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("fat")) {
@@ -985,16 +985,20 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         }
     }
 
-  
+  //Void creates player bullet labels
     public void bullet() {
+        //Creates a new bullet label
         JLabel bullet1 = new JLabel();
 
         System.out.println("Label Created");
+        //Makes the new bullet label visible
         getContentPane().add(bullet1);
+        //Sets the bounds of the label
         bullet1.setBounds(player.getX() + player.getWidth() + 10, player.getY(), 50, 100);
 
         System.out.println("Bounds Set");
         try {
+            //Sets the bullet label to be the staple bullet png
             bullet1.setIcon(new ImageIcon((ImageIO.read(new File("StapleBullet.png"))).getScaledInstance(bullet1.getWidth(), bullet1.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             System.out.println("NO IMAGE");
@@ -1002,12 +1006,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         }
 
         System.out.println("Try performed");
+        //Adds the bullet label to the staple bullets array
         staplebullets.add(bullet1);
 
     }
-
+//Void checks if the player's bullets collides with the enemies
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
-
+//Creates a temp rectangle with the same bounds as the bullets
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
         for (EnemyClass item : officeWorkerStats) {
