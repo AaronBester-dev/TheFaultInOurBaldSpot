@@ -15,10 +15,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the Loser screen
 public class Losser extends javax.swing.JFrame {
 
     /**
@@ -28,12 +28,11 @@ public class Losser extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
     }
+    //initializes components
     public void myInitComponents() {
         BufferedImage img = null;
-        //same as above, but in a condensed version
-     
+        //same as above, but in a condensed version   
         try {
-            // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             backGround.setIcon(new ImageIcon((ImageIO.read(new File("LossingBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class
@@ -107,6 +106,7 @@ public class Losser extends javax.swing.JFrame {
 
     private void RetryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetryActionPerformed
         // TODO add your handling code here:
+        //allows playing of other games
         dispose();
     }//GEN-LAST:event_RetryActionPerformed
 

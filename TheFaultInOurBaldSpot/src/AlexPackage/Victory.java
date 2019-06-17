@@ -16,10 +16,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import thefaultinourbaldspot.TheFaultInOurBaldSpotView;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the victory screen
 public class Victory extends javax.swing.JFrame {
 
     /**
@@ -29,22 +29,17 @@ public class Victory extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
     }
-    
+    //initializes components
     public void myInitComponents() {
         BufferedImage img = null;
-        //same as above, but in a condensed version
-        
-
+        //same as above, but in a condensed version        
         try {
-            // backGround.setIcon(new ImageIcon((ImageIO.read(new File("hellBackground5.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
             backGround.setIcon(new ImageIcon((ImageIO.read(new File("sunnyBackground.png"))).getScaledInstance(backGround.getWidth(), backGround.getHeight(), Image.SCALE_SMOOTH)));
-              winPlane.setIcon(new ImageIcon((ImageIO.read(new File("planeFlying.png"))).getScaledInstance(winPlane.getWidth(), winPlane.getHeight(), Image.SCALE_SMOOTH)));
+            winPlane.setIcon(new ImageIcon((ImageIO.read(new File("planeFlying.png"))).getScaledInstance(winPlane.getWidth(), winPlane.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AlexForm.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,7 +60,7 @@ public class Victory extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(500, 500));
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(500, 500));
-        setSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(500, 600));
         getContentPane().setLayout(null);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(thefaultinourbaldspot.TheFaultInOurBaldSpotApp.class).getContext().getResourceMap(Victory.class);
@@ -90,7 +85,7 @@ public class Victory extends javax.swing.JFrame {
             }
         });
         getContentPane().add(returnMain);
-        returnMain.setBounds(200, 460, 103, 23);
+        returnMain.setBounds(200, 430, 130, 23);
 
         Winner.setFont(resourceMap.getFont("Winner.font")); // NOI18N
         Winner.setText(resourceMap.getString("Winner.text")); // NOI18N
@@ -109,7 +104,8 @@ public class Victory extends javax.swing.JFrame {
 
     private void returnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnMainActionPerformed
         // TODO add your handling code here:
-dispose();
+        //allows playing other games
+        dispose();
         
     }//GEN-LAST:event_returnMainActionPerformed
 

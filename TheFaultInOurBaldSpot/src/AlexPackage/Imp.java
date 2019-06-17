@@ -5,12 +5,12 @@
  */
 package AlexPackage;
 
-/**
- *
- * @author alexander.rejep819
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the Imp constructor
 public class Imp extends EnemiesClass {
-
+//Imp Constructor
     public Imp() {
         health = 1;
         speed = 3;

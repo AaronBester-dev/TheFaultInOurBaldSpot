@@ -4,26 +4,26 @@
  * and open the template in the editor.
  */
 package AlexPackage;
-
+//importing packages
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexander.rejep819
- */
+
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the HighScores Screen
 public class scores extends javax.swing.JFrame {
 
     /**
      * Creates new form scores
      */
+    //sorts score and initials arrayList
     public scores() throws IOException {
         initComponents();
         jLabel1.setText("Game High Scores");
@@ -56,14 +56,14 @@ public class scores extends javax.swing.JFrame {
                 ScoreArrayList.add(Integer.parseInt(readFile.readLine()));
             }
         } while (myLine != null);
-        System.out.println("");
+
 
         //prints the text, uses for loop to print each line on its own line
         for (int i = 0; i < ScoreArrayList.size(); i++) {
             System.out.println(ScoreArrayList.get(i));
         }
         selectionSort(ScoreArrayList, InitialsArrayList);
-        System.out.println("These numbers in a sorted list are: " + ScoreArrayList);
+        //displays score and initials
         highScore1.setText(String.valueOf(ScoreArrayList.get(0)));
         highScore2.setText(String.valueOf(ScoreArrayList.get(1)));
         highScore3.setText(String.valueOf(ScoreArrayList.get(2)));
@@ -77,7 +77,7 @@ public class scores extends javax.swing.JFrame {
         Initial5.setText(String.valueOf(InitialsArrayList.get(4)));
 
     }
-
+    // sorts arraylists
     public static void selectionSort(ArrayList<Integer> myArrayList, ArrayList<String> TextArray) {
         int smallest;
         for (int i = 0; i < myArrayList.size() - 1; i++) {
@@ -91,7 +91,7 @@ public class scores extends javax.swing.JFrame {
             }
         }
     }
-
+    //swaps values to sort arrayList
     public static void swap(ArrayList<Integer> array2, ArrayList<String> array3, int first, int second) {
         int hold = array2.get(first);
         array2.set(first, array2.get(second));
@@ -225,6 +225,7 @@ public class scores extends javax.swing.JFrame {
 
     private void VictoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VictoryActionPerformed
         // TODO add your handling code here:
+        //opens victory form
         JFrame Victory1 = new Victory();
         Victory1.setVisible(true);
         dispose();

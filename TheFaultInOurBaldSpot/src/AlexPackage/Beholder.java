@@ -5,12 +5,12 @@
  */
 package AlexPackage;
 
-/**
- *
- * @author alexander.rejep819
- */
+///*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the beholder constructor
 public class Beholder extends EnemiesClass {
-
+//beholder constructor
     public Beholder() {
         health = 2;
         speed = 2;

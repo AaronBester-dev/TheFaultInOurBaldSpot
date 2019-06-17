@@ -1,6 +1,11 @@
-/*
- * TheFaultInOurBaldSpotView.java
- */
+
+
+//Program title: The FaultInOurBaldSpot 
+//Author: Aaron Bester,John Diemert,Brayden McQueen, Alex Rejep
+//Date: June 17th, 2019
+//Program Description: The level select screen for the game
+
+
 
 package thefaultinourbaldspot;
 
@@ -17,6 +22,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import Brayden.Brayden1;
 import AaronPackage.AaronForm;
+import AaronPackage.AaronInstructions;
+import AaronPackage.LoseScreen;
 import JohnPackage.JohnF;
 import AlexPackage.AlexForm;
 import JohnPackage.intro;
@@ -227,13 +234,12 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_braydenActionPerformed
 
     private void aaronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaronActionPerformed
-     AaronForm aaronObject=null;
-        try {
-            aaronObject = new AaronForm();
-        } catch (IOException ex) {
-            Logger.getLogger(TheFaultInOurBaldSpotView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     aaronObject.setVisible(true);
+    
+            AaronInstructions aaronObject = new AaronInstructions();
+            aaronObject.setVisible(true);
+         
+      
+      
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed

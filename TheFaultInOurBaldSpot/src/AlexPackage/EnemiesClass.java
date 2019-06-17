@@ -5,17 +5,19 @@
  */
 package AlexPackage;
 
-/**
- *
- *
- */
+//*File Name: TheFaultInOurBaldSpot
+//* Date: June 17, 2019
+//* Name: Alex Rejep
+// *Description: This form creates the constructors
 public class EnemiesClass {
-
+    // declaring enemies variables
     int health, speed, strength, height;
     String picFile, soundFile;
     boolean direction;
     javax.swing.JLabel enemyLabel;
 
+    
+    // all of the below methods allow the getting and setting of variables by other forms
     public int getHealth() {
         return health;
     }
