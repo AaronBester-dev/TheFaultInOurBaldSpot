@@ -8,11 +8,10 @@ JAMES
 AARON
 12
 MEGAN
-=======
+12
 AGR
 20
 ALB
->>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519
 17
 YEW
 12
@@ -21,13 +20,12 @@ VIA
 EXR
 14
 AGR
-<<<<<<< HEAD
 10
 OLD
 10
 ILS
 2
-=======
+ALS
 8
 lax
 24
@@ -53,12 +51,10 @@ asd
 14
 xxxx
 24
->>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519
 bm
 42
 xx
 20
-<<<<<<< HEAD
 JD
 30
 JD
@@ -71,7 +67,5 @@ ALEX
 70
 ALEX
 49
-=======
 x
 33
->>>>>>> 6741e01c4ff23c2f78a222704422d5d95dc8d519
