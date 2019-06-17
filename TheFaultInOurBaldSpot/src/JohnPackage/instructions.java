@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
 import java.awt.Image;
@@ -24,14 +24,17 @@ public class instructions extends javax.swing.JFrame {
      * Creates new form instructions
      */
     public instructions() {
+        //initializes components 
         initComponents();
+        //sets text to button. labels
         play.setText("PLAY");
         myInitComponents(jLabel2);
         jLabel1.setText("INSTRUCTIONS");
+        //text for instructions
         jTextArea1.setText("Oh, NO! MR.V has been diagonosed with \n"
                 + "stage 4 baldspot Cancer. He's so sad that\n"
-                + "he'll never see his children again: john,\n"
-                + "aaron, Alex, and brayden,his heart \n"
+                + "he'll never see his children, john,\n"
+                + "aaron, Alex, and brayden, again his heart \n"
                 + "broke. Naturally, he comes to you (john) \n"
                 + "for help. In the following game we'll have\n"
                 + "to give MR.V heart surgery. \n"
@@ -47,15 +50,14 @@ public class instructions extends javax.swing.JFrame {
                 + "Don't worry it's only a life on the line.\n"
                 + "");
     }
+    //initializes components
     public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-
-        //same as above, but in a condensed version
+        //try to catch Ioexceptions
         try {
-
+            //sets icon to label
             jLabel2.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH)));
-            
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);

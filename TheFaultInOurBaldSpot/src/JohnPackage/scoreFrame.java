@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
 import java.awt.Color;
@@ -26,15 +26,26 @@ import javax.swing.JOptionPane;
  * @author john.diemert744
  */
 public class scoreFrame extends javax.swing.JFrame {
-       int score;
+
+    int score;
+
     /**
      * Creates new form scoreFrame
      */
     public scoreFrame() throws IOException {
+        //declares varibles
+        BufferedReader readFile = null;
+        String reading = "";
+        int intReading = 0;
+        //array list to store the data from the file 
+        ArrayList myArrayList = new ArrayList<Integer>();
+        //initializes components 
         initComponents();
         myInitComponents(john);
+        //creates fonts
         Font font1 = new Font("SansSerif", Font.BOLD, 40);
         Font font2 = new Font("SansSerif", Font.BOLD, 20);
+        //sets text and font to various labels and buttons
         jButton1.setText("MINIGAME?");
         jLabel1.setText("Game High Scores");
         jLabel1.setFont(font1);
@@ -46,20 +57,8 @@ public class scoreFrame extends javax.swing.JFrame {
         highScore3.setFont(font2);
         winLabel.setText("Congrats on your great cutting and a great 4 years, thanks MR.V");
         winLabel.setFont(font2);
-        
-         //dummy varible
-        BufferedReader readFile = null;
-        String reading = "";
-        int intReading = 0;
-        //array list to store the data from the file 
-        ArrayList myArrayList= new ArrayList<Integer>();
-
-        //OptionPane to ask the reader what local file they would like the program to read
-        //NO SAFE GAURD FOR THE NULL POINTER EXCEPTION, THIS HAS BEEN APPROVED BY MR.V
-       
         //Opens the text file and attaches a BufferedReader
         readFile = new BufferedReader(new FileReader("HighScores.txt"));
-               
         //do loop to continue to get data until theres no more lines to read
         do {
             //sets the line of the external file to the dummy varible
@@ -68,69 +67,74 @@ public class scoreFrame extends javax.swing.JFrame {
             if (reading != null) {
                 //adds line to array
                 try {
-                intReading = Integer.parseInt(reading);
-                }catch (NumberFormatException e){
-                        }
+                    intReading = Integer.parseInt(reading);
+                } catch (NumberFormatException e) {
+                }
                 myArrayList.add(intReading);
             }
         } while (reading != null);
         //closes text file as thats proper coding 
         readFile.close();
         //prints the text, uses for loop to print each line on its own line
+        //gets the last index added and sets it equal to "score"
         for (int i = 0; i < myArrayList.size(); i++) {
             System.out.println(myArrayList.get(i));
             score = (Integer) myArrayList.get(i);
         }
-         yourScore.setText("" + score);
-         selectionSort(myArrayList);
-         System.out.println("These numbers in a sorted list are: " + myArrayList);
-         highScore1.setText(String.valueOf(myArrayList.get(0)));
-         highScore2.setText(String.valueOf(myArrayList.get(1))); 
-         highScore3.setText(String.valueOf(myArrayList.get(2))); 
+        //prints last score to a label
+        yourScore.setText("" + score);
+        //callse sort function
+        selectionSort(myArrayList);
+        System.out.println("These numbers in a sorted list are: " + myArrayList);
+        //sets highest scores to labels
+        highScore1.setText(String.valueOf(myArrayList.get(0)));
+        highScore2.setText(String.valueOf(myArrayList.get(1)));
+        highScore3.setText(String.valueOf(myArrayList.get(2)));
     }
 
     public static void selectionSort(ArrayList myArrayList) {
         int smallest;
-         for (int i = 0; i < myArrayList.size() - 1; i++) {
-                smallest = i;
-                //see if there is a smaller number further in the array
-                for (int index = i + 1; index < myArrayList.size(); index++) {
-                    //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
-                    if ((Integer) myArrayList.get(smallest) < (Integer) myArrayList.get(index)) {
-                        swap(myArrayList, smallest, index);
-                    }
+        for (int i = 0; i < myArrayList.size() - 1; i++) {
+            smallest = i;
+            //see if there is a smaller number further in the array
+            for (int index = i + 1; index < myArrayList.size(); index++) {
+                //the conditions in this if statement are switched (compared to the previous statement) to make it descending 
+                if ((Integer) myArrayList.get(smallest) < (Integer) myArrayList.get(index)) {
+                    swap(myArrayList, smallest, index);
                 }
+            }
         }
     }
-    
+
     public static void swap(ArrayList array2, int first, int second) {
         int hold = (Integer) array2.get(first);
         array2.set(first, array2.get(second));
         array2.set(second, hold);
     }
-public void myInitComponents(javax.swing.JLabel jLabel1) {
+
+    public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-
-        //same as above, but in a condensed version
+        //try to cathc IOexceptions
         try {
+            //sets icons to labels 
             mrV.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(mrV.getWidth(), mrV.getHeight(), Image.SCALE_SMOOTH)));
             brayden.setIcon(new ImageIcon((ImageIO.read(new File("brayden.jpg"))).getScaledInstance(brayden.getWidth(), brayden.getHeight(), Image.SCALE_SMOOTH)));
             aaron.setIcon(new ImageIcon((ImageIO.read(new File("aaronJohnGame.jpg"))).getScaledInstance(aaron.getWidth(), aaron.getHeight(), Image.SCALE_SMOOTH)));
             john.setIcon(new ImageIcon((ImageIO.read(new File("john.jpg"))).getScaledInstance(john.getWidth(), john.getHeight(), Image.SCALE_SMOOTH)));
             alex.setIcon(new ImageIcon((ImageIO.read(new File("alex.jpg"))).getScaledInstance(alex.getWidth(), alex.getHeight(), Image.SCALE_SMOOTH)));
-            
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-        /**
-         * This method is called from within the constructor to initialize the
-         * form. WARNING: Do NOT modify this code. The content of this method is
-         * always regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -229,13 +233,13 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       miniGame johnObject = new miniGame();
-       johnObject.setVisible(true);
+        miniGame johnObject = new miniGame();
+        johnObject.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
