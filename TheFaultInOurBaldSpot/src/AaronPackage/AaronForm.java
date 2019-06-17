@@ -364,17 +364,23 @@ TimerTask createFatBullets = new TimerTask() {
      //TimerTask that moves the fat bullets
     TimerTask fatBulletMovement = new TimerTask() {
         public void run() {
+        //Try catch statement catches any exceptions
             try {
+                //For statement creates an item for each J Label in the fat bullets array
                 for (JLabel item : fatbullets) {
-
-                    item.setLocation(item.getLocation().x - 15, item.getLocation().y);
-                    if (bulletCollisionPlayer(item, -5, 0) == true) {
+//Sets the location of the JLabel to be 15 x values to the left from where it previously was
+                    item.setLocation(item.getLocation().x - 20, item.getLocation().y);
+                    //If statements checks to see if the bullet collides with the player
+                    if (bulletCollisionPlayer(item, -20, 0) == true) {
+                        //Runs the take damage function that subtracts 1 from the players health
                         takeDamage();
+                        //Removes the fatbullets from the form and the array list
                         fatbullets.remove(item);
                         remove(item);
 
                     }
-                    if (item.getLocation().x > 1400 || (item.getLocation().x < 0)) {
+                    //If statement removes the bullets from the form adnt eh array list if they are outside of a certain boundary
+                    if (item.getLocation().x > 1500 || (item.getLocation().x < 0)) {
                         remove(item);
                         fatbullets.remove(item);
                     }
@@ -385,18 +391,22 @@ TimerTask createFatBullets = new TimerTask() {
             }
         }
     };
+    //TimerTask that moves the crazy office worker at breakneck speeds
     TimerTask officeWorkerMovement = new TimerTask() {
         public void run() {
-
+//If statement checks if the office worker is set to move
             if (officeWorkerMove) {
+               //Try catch catches any exceptions that could occur
                 try {
-
+//For statement takes every thing in the officeworker array and turns it into a item
                     for (EnemyClass item : officeWorkerStats) {
-
+//Sets the locatoin of the JLabel of the office worker 15 x values to the left of its previous position
                         item.getLabel().setLocation(item.getLabel().getLocation().x - 15, (item.getLabel().getLocation().y));
-
+//If statement checks to see if the office worker hit the player
                         if (bulletCollisionPlayer(item.getLabel(), -15, 0) == true) {
+                        //Runs the take damange function that lowers the player's health by 1
                             takeDamage();
+                            //Removes the label from the form and the office worker array
                             remove(item.getLabel());
                             officeWorkerStats.remove(item);
                         }
@@ -408,42 +418,50 @@ TimerTask createFatBullets = new TimerTask() {
         }
     };
  
-
+//Boolean checks the collision of the player with the objects of the game
     private boolean checkCollision(javax.swing.JLabel _lbl, int _x, int _y) {
 //creating a temporary rectangle with (x, y) coordinates equal to where image is trying to move
 //also same width and height as original
         Rectangle rect = new Rectangle(_lbl.getBounds().x + _x, _lbl.getBounds().y + _y, _lbl.getWidth(), _lbl.getHeight());
 
-//check if temporary rectangle intersect with wallLabel        
+//check if temporary rectangle intersect with bottomFloor       
         if (rect.intersects(bottomFloor.getBounds())) {
             return true;
         } else {
 
             for (JLabel item : activeFloor) {
-
+//Checks if temporary rectangle intersects with floor blocks
                 if (rect.intersects(item.getBounds())) {
                     return true;
                 }
             }
             for (JLabel item : activeSpike) {
-
+//Checks if temporary rectangle intersects with spike blocks
                 if (rect.intersects(item.getBounds())) {
+                    //Runs the take damage function that lowers the player's health by 1
                     takeDamage();
                     return true;
                 }
             }
             for (JLabel item : activeDoor) {
+                //Checks if temporary rectangle intersects with the door block
                 if (rect.intersects(item.getBounds())) {
+                    //Opens the AaronWin Screen
                     AaronWinScreen winScreen = new AaronWinScreen();
+                    //Makes the win screen visible to the user
                     winScreen.setVisible(true);
+                    //Makes the current form invisible
                     this.setVisible(false);
-                    this.dispose();
+                    //Turns off movement so you don't constantly run into it
+                    movingRight=false;
+                    movingLeft=false;
+                  
                 }
             }
             return false;
         }
     }
-
+//Main void that runs the initialization of the game
     public AaronForm() throws IOException {
         initComponents();
 
@@ -499,10 +517,11 @@ TimerTask createFatBullets = new TimerTask() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//Void that runs as soon as the form is created
     public void myInitComponents() throws IOException {
-
+//Try catch statements catch any exceptions that could occur due to problems in the audio
         try {
+            //Imports the audio for the game
             AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AaronLevelMusic.wav"));
             // Get a sound clip resource.
             Clip clip1 = AudioSystem.getClip();
@@ -522,30 +541,35 @@ TimerTask createFatBullets = new TimerTask() {
 //Initialize a Buffered Image
         BufferedImage img = null;
         //set the Buffered Image to the picture file
-
-//        same as above, but in a condensed version
         try {
-
+//Sets the bottomFloor label to the floor png
             bottomFloor.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(bottomFloor.getWidth(), bottomFloor.getHeight(), Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
+            //Runs the function that reads the level file
             readLevelFile();
         } catch (IOException ex) {
             Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        playerSpawner();
-        jProgressBar1.setMaximum(playerCharacter.getHealth());
-        jProgressBar1.setValue(playerCharacter.getHealth());
-        fillUpArray();
+        //Function that fills up the array of every object in the game
+          fillUpArray();
+          
+          //Functions that spawns every object in the game
+        playerSpawner(); 
         spikeSpawner();
         floorSpawner();
         securityGuardSpawner();
         officeWorkerSpawner();
         fatAlbertSpawner();
         exitSpawner();
-
+        
+        //Sets the progress bar to the value of the player's health
+jProgressBar1.setMaximum(playerCharacter.getHealth());
+        jProgressBar1.setValue(playerCharacter.getHealth());
+        
+        //Starts all of the timer tasks
         aaronGameTimer.scheduleAtFixedRate(bulletMovement, 100, 10);
         aaronJumpTimer.scheduleAtFixedRate(jumpGravity, 20, 25);
         aaronGameTimer.scheduleAtFixedRate(gravity, 20, 25);
@@ -559,23 +583,27 @@ TimerTask createFatBullets = new TimerTask() {
         aaronGameTimer.scheduleAtFixedRate(officeWorkerMovement, 100, 10);
     }
 
-
+//Void that deals with all of the key presses
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
+        //Z key pressed
         if (evt.getKeyCode() == 90) {
-            if (!checkCollision(player, 0, -100) && (checkCollision(player, 0, +10))) {
+            //Checks if the player is standing on top of a block and that the player has run above his head
+            if (!checkCollision(player, 0, -10) && (checkCollision(player, 0, +10))) {
+                //Sets jumping to true which starts the jumpGravity timer task
                 jumping = true;
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
-//          
+//          //Sets moving left to true which starts the moveLeft timer task
             movingLeft = true;
             System.out.println("moving Left" + movingLeft);
 //            
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
+            //Sets moving left to right which starts the moveRight timer task
             movingRight = true;
             System.out.println("moving Left" + movingRight);
   
@@ -583,16 +611,17 @@ TimerTask createFatBullets = new TimerTask() {
 
 
     }//GEN-LAST:event_formKeyPressed
-
+//Void that deals with the keys being released
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+     //X key released
         if (evt.getKeyCode() == 88) {
+            //If statement checks to see if there is more than one bullet in the staplebullets array
             if (staplebullets.size() < 1) {
+                //Runs the function that creates the bullets
                 bullet();
-
+//Try catch statement catches any exceptions that will cause the audio to break
                 try {
-                    // Open an audio input stream.
-                    // URL url = this.getClass().getClassLoader().getResource("PewPew.wav");
-
+                  //Makes the audio for the bullet shoot play when you shoot
                     AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("AaronShoot.wav"));
                     // Get a sound clip resource.
                     Clip clip = AudioSystem.getClip();
@@ -611,28 +640,28 @@ TimerTask createFatBullets = new TimerTask() {
 
             }
         }
+        //left key released
         if (evt.getKeyCode() == 37) {
-            if (!checkCollision(player, 0, 0)) {
+            
+          //Changes moving left to false when the left key is realeased
                 movingLeft = false;
                 System.out.println("stopped moving Left" + movingLeft);
-            }
+            
         }
-        //right key pressed
+        //right key released
         if (evt.getKeyCode() == 39) {
-            if (!checkCollision(player, 0, 0)) {
+           //Changes moving right to false when the right key is released
                 movingRight = false;
                 System.out.println("stopped moving right" + movingRight);
-            }
+            
         }
     }//GEN-LAST:event_formKeyReleased
-
+//USELESS STUFF I WANT GONE
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
 
     }//GEN-LAST:event_formKeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
+  //Main void that makes the form visible
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -640,71 +669,84 @@ TimerTask createFatBullets = new TimerTask() {
 
                 try {
                     new AaronForm().setVisible(true);
-//    readLevelFile(block1);
+
                 } catch (IOException ex) {
                     Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
-
+//Void that reads the level file and adds the data to various arrays
      public void readLevelFile() throws IOException {
-        //Initilizises a string varibable that stores the line the program is currently reading
+        //Initilizises a string variable that stores the line the program is currently reading
         String myLine = null;
+        //Initializes a variable that stores the section of the text that contains the useful data
         String blockAdd = myLine;
-
+//Creates a new buffered reader that reads the level file
         BufferedReader readFile = new BufferedReader(new FileReader("AaronLevelFile.txt"));
         //Do statement ensures that the program only stops reading the file when it reaches a blank line
         do {
             //Stores the line that the program is currently looking at as the variable myLine
             myLine = readFile.readLine();
+            //If statement checks if my line is null and if it is breaks the program out of the do loop
             if (myLine == null) {
                 break;
             }
 
-//If statement ensures that if the line the program is currently looking at is null then the program removes the null from the array list and breaks out of the loop
-//TYPE 
+            //Declares the index 
             int index = myLine.indexOf(",");
+            //Adds one to the counter that counts the number of total objects
             numberOfObjects++;
+            //Takes the name of the object and makes it equal to the variable blockadd
             blockAdd = myLine.substring(0, index);
             System.out.println("BLOCK" + blockAdd);
+            //Adds blockadd to the blockType array
             blockType.add(blockAdd);
-
+//Cuts off the data that has already been read and reads the next stretch of data
             myLine = myLine.substring(index + 1, myLine.length());
             System.out.println("NEW line " + myLine);
 
             //X- VALUE
+            //Makes the index the data that contains the x value of the block
             index = myLine.indexOf(",");
+            //Makes the block add equal to the x value of the block
             blockAdd = myLine.substring(0, index);
             System.out.println(blockAdd);
+            //Adds the X value contained in the block add to the blockX array
             blockX.add(blockAdd);
+            //Cuts off the data that has already been read and reads the next stretch of data
             myLine = myLine.substring(index + 1, myLine.length());
 
             //Y=VALUE
+            //Adds the data that contains the Y value to the block add variable
             blockAdd = myLine;
             System.out.println(blockAdd);
-
+//Adds the Y value to the block Y array
             blockY.add(blockAdd);
 
         } while (true);
-//Closez the file to ensure there is no complications
+//Closes the file to ensure there is no complications
         readFile.close();
 
     }
+     //Void that fills up the 2d array that contains all the objects.
   public void fillUpArray() {
-
+//For statement ensures that the loops adds every single obeject to the 2d array
         for (int i = 0; i < numberOfObjects; i++) {
+            //Adds the name of the block to the first column of the array
             objectsArray[0][i] = blockType.get(i);
             System.out.println(objectsArray[0][i]);
+            //Adds the x value of the block to the second column of the array
             objectsArray[1][i] = blockX.get(i);
             System.out.println(objectsArray[1][i]);
+            //Adds the y value of the block to the third column of the array
             objectsArray[2][i] = blockY.get(i);
             System.out.println(objectsArray[2][i]);
         }
 
     }
     
-  
+  //Void that spawns in the player character
     public void playerSpawner() throws IOException {
         playerCharacter = new MegaAaron();
         playerCharacter.setLabel(player);
@@ -887,11 +929,6 @@ TimerTask createFatBullets = new TimerTask() {
         System.out.println("Try performed");
         staplebullets.add(bullet1);
 
-    }
-
-   
-    public void fatOfficeWorkerBullets() {
-       
     }
 
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
