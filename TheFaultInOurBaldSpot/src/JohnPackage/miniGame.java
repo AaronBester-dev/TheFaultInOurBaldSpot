@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
 import java.awt.Color;
@@ -19,16 +19,20 @@ public class miniGame extends javax.swing.JFrame {
      * Creates new form miniGame
      */
     public miniGame() {
-        initComponents();
-        Font font1 = new Font("SansSerif", Font.BOLD, 25);
-        jLabel1.setText("Isn't that crazy. Who knew recurion could be so cool");
-        jLabel1.setFont(font1);
-        jLabel1.setForeground(Color.red);
         //declaring varibles 
         int numerator, denominator, numerator2, denominator2, ans;
+        
+        //initulizes components
+        initComponents();
+        //creates font
+        Font font1 = new Font("SansSerif", Font.BOLD, 25);
+        //sets text, font, and colour to label
+        jLabel1.setText("Isn't that crazy. Who knew recursion could be so cool");
+        jLabel1.setFont(font1);
+        jLabel1.setForeground(Color.red);
         //do loop to ensure the user enters a value 
         //NOTE: THE JOPTIONPANE DOES NOT EXIT UPON PRESSING THE 'X' OR 'CANCEL' BUTTON. ~ 
-        //THIS IS BY DEISGN (I WANT THE USER TO ENTER SOMTHING) AND HAS BEEN APPROVED BY MR. V     
+        //THIS IS BY DEISGN (I WANT THE USER TO ENTER SOMTHING)    
         do {
             //try to catch NumberFormatExceptions 
             try {

@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
 import java.awt.Color;
@@ -28,16 +28,19 @@ import javax.swing.ImageIcon;
  * @author John Diemert
  */
 public class intro extends javax.swing.JFrame {
+        //declares varibles 
         int counter = 0;
     /**
      * Creates new form intro
      */
     public intro() {
+        //inislizes form and images
         initComponents();
         myInitComponents(introBackground);
+        //creates font (as I have to do it manually for some reason)
         Font font1 = new Font("SansSerif", Font.BOLD, 40);
         Font font2 = new Font("SansSerif", Font.BOLD, 15);
-        
+        //sets text, colour, and font to various lables and buttons 
         play.setText("PLAY");
         quit.setText("QUIT");
         instructions.setText("INSTRUCTIONS");
@@ -45,15 +48,13 @@ public class intro extends javax.swing.JFrame {
         jLabel1.setFont(font1);
         jLabel1.setForeground(Color.blue);
         jLabel2.setText("I'm a surgeon");
-        
         jLabel3.setText("Patient: Joel VanStraton");
         jLabel3.setFont(font2);
         jLabel4.setText("Notes: wants Dr.Diemert to preform the");
-        jLabel4.setFont(font2);
-        
-        jLabel5.setText("surgery and to give goo news to his widow");
+        jLabel4.setFont(font2);  
+        jLabel5.setText("surgery and to give good news to his widow");
         jLabel5.setFont(font2);
-        
+        //adds addio, the "Like a surgeon" song
         try {
             AudioInputStream audio = AudioSystem.getAudioInputStream(new File("likeASurgeon.wav"));
             // Get a sound clip resource.
@@ -70,14 +71,17 @@ public class intro extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+        //starts tier
         coffinBoxTimer();
     }
-    
+    //timer which makes coffin move on screen
     public void coffinBoxTimer() {
+        //creates timer
         Timer coffinTimer = new Timer();
         TimerTask moveBox = new TimerTask() {
+            //when timer runs
             public void run() {
+                //increases counter
                 counter++;
                 if (counter <= 15) {
                     malPractice.setLocation(malPractice.getLocation().x - 1, malPractice.getLocation().y);
@@ -90,21 +94,20 @@ public class intro extends javax.swing.JFrame {
                 }
             }
         };
+        //counter runs at fixed rate
         coffinTimer.scheduleAtFixedRate(moveBox, 50, 50);
     }
- public void myInitComponents(javax.swing.JLabel jLabel1) {
+    //initilizes components 
+    public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-
-        //same as above, but in a condensed version
         try {
-
+            //sets icons to labels
             introBackground.setIcon(new ImageIcon((ImageIO.read(new File("hospital.jpg"))).getScaledInstance(introBackground.getWidth(), introBackground.getHeight(), Image.SCALE_SMOOTH)));
             john.setIcon(new ImageIcon((ImageIO.read(new File("john.jpg"))).getScaledInstance(john.getWidth(), john.getHeight(), Image.SCALE_SMOOTH)));
             thoughtBubble.setIcon(new ImageIcon((ImageIO.read(new File("thoughtBubble.png"))).getScaledInstance(thoughtBubble.getWidth(), thoughtBubble.getHeight(), Image.SCALE_SMOOTH)));
             mrV.setIcon(new ImageIcon((ImageIO.read(new File("mrVnormal.jpg"))).getScaledInstance(mrV.getWidth(), mrV.getHeight(), Image.SCALE_SMOOTH)));
             malPractice.setIcon(new ImageIcon((ImageIO.read(new File("coffin.png"))).getScaledInstance(malPractice.getWidth(), malPractice.getHeight(), Image.SCALE_SMOOTH)));
-            
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -216,7 +219,7 @@ public class intro extends javax.swing.JFrame {
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 140, 300, 14);
+        jLabel5.setBounds(10, 140, 330, 20);
 
         introBackground.setText(resourceMap.getString("introBackground.text")); // NOI18N
         introBackground.setName("introBackground"); // NOI18N
@@ -225,17 +228,20 @@ public class intro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //if play button is clicked
     private void playMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseClicked
+        //calles main game form
        JohnF johnObject = new JohnF();
        johnObject.setVisible(true);
     }//GEN-LAST:event_playMouseClicked
-
+    //if quit button is clicked
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
-       System.exit(0);
+        //closes game
+        System.exit(0);
     }//GEN-LAST:event_quitMouseClicked
-
+    //if instruction button is clicked
     private void instructionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instructionsMouseClicked
+       //calls instrution form
        instructions johnObject = new instructions();
        johnObject.setVisible(true);
     }//GEN-LAST:event_instructionsMouseClicked

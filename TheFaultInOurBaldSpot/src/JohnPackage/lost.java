@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Program title: The FaultInOurBaldSpot 
+//Author: John Diemert
+//Date: june 17th, 2019
+//Program Description: surgeon simulator game
+
 package JohnPackage;
 
 import java.awt.Color;
@@ -28,50 +28,51 @@ public class lost extends javax.swing.JFrame {
      * Creates new form lost
      */
     public lost() {
+        //initializes components and images
         initComponents();
         myInitComponents(graveStone);
+        //hides buttons
         retry.setVisible(false);
         quit.setVisible(false);
-        
+        //creates font
         Font font1 = new Font("SansSerif", Font.BOLD, 25);
         Font font2 = new Font("SansSerif", Font.BOLD, 40);
-        
+        //sets text to buttons
         retry.setText("RETRY");
         quit.setText("QUIT");
-        
-        
+        //hides labels
         jLabel1.setVisible(false);
         jLabel2.setVisible(false);
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
-        
+        //sets text, font and colou to labels
         jLabel1.setText("J");
         jLabel1.setFont(font1);
         jLabel1.setForeground(Color.red);
-        
         jLabel2.setText("O");
         jLabel2.setFont(font1);
         jLabel2.setForeground(Color.red);
-        
         jLabel3.setText("E");
         jLabel3.setFont(font1);
         jLabel3.setForeground(Color.red);
-        
         jLabel4.setText("L");
         jLabel4.setFont(font1);
         jLabel4.setForeground(Color.red);
-        
         jLabel5.setText("YOU LOSE!!!");
         jLabel5.setFont(font2);
         jLabel5.setForeground(Color.red);
-        
+        //starts timer
         graveTimer();
     }
+    //makes "joel" appear on tombstone very suspensfully 
      public void graveTimer() {
+         //creates timer
         Timer graveStoneTimer = new Timer();
         TimerTask moveBox = new TimerTask() {
             public void run() {
+                //increases timer
                 counter++;
+                //when counter equals two make the first letter appear, when the counter goes up again, show the next letter etc.
                 if (counter == 2) {
                     jLabel1.setVisible(true);
                 } else if (counter == 3) {
@@ -81,20 +82,21 @@ public class lost extends javax.swing.JFrame {
                 } else if (counter == 5) {
                       jLabel2.setVisible(true);
                 } else if (counter == 6) {
+                    //makes buttons appear once all the letters have
                      retry.setVisible(true);
                      quit.setVisible(true);
                 }
             }
         };
+        //goes at a fixed rate
         graveStoneTimer.scheduleAtFixedRate(moveBox, 1500, 1500);
     }
 public void myInitComponents(javax.swing.JLabel jLabel1) {
         //Initialize a Buffered Image
         BufferedImage img = null;
-
-        //same as above, but in a condensed version
+        //catchs IOExceptions
         try {
-
+            //sets incons to labels
             graveStone.setIcon(new ImageIcon((ImageIO.read(new File("graveStone.png"))).getScaledInstance(graveStone.getWidth(), graveStone.getHeight(), Image.SCALE_SMOOTH)));
             background.setIcon(new ImageIcon((ImageIO.read(new File("deathBg.jpg"))).getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
             brayden.setIcon(new ImageIcon((ImageIO.read(new File("braydenNude.png"))).getScaledInstance(brayden.getWidth(), brayden.getHeight(), Image.SCALE_SMOOTH)));
@@ -103,7 +105,6 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
             aaron.setIcon(new ImageIcon((ImageIO.read(new File("aaronJohnGame.jpg"))).getScaledInstance(aaron.getWidth(), aaron.getHeight(), Image.SCALE_SMOOTH)));
             john.setIcon(new ImageIcon((ImageIO.read(new File("john.jpg"))).getScaledInstance(john.getWidth(), john.getHeight(), Image.SCALE_SMOOTH)));
             alex.setIcon(new ImageIcon((ImageIO.read(new File("alex.jpg"))).getScaledInstance(alex.getWidth(), alex.getHeight(), Image.SCALE_SMOOTH)));
-            
         } catch (IOException ex) {
             Logger.getLogger(JohnF.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -227,13 +228,15 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //if retry buttons is clicked
     private void retryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retryMouseClicked
+       //calls main game form
        JohnF johnObject = new JohnF();
        johnObject.setVisible(true);
     }//GEN-LAST:event_retryMouseClicked
-
+    //if quit button is clicked
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
+        //exits program
         System.exit(0);
     }//GEN-LAST:event_quitMouseClicked
 

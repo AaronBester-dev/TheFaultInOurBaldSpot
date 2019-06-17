@@ -47,18 +47,18 @@ public class AlexForm extends javax.swing.JFrame  {
     public int score;
     public int points =0;
     public int health = 4;
-    public int counter = 20;
+    public int counter = 60;
     Timer gameTimer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             counter--;
             timerLabel.setText(String.valueOf(counter));
             // System.out.println("Seconds Passed: " + counter);
-            if (counter == 15) {
+            if (counter == 55) {
                 gameTimer.scheduleAtFixedRate(EnemyAnimation, 400, 400);
             }
             if (counter == 0) {
-                //closeForm();
+                gameTimer.cancel();
                 endGame();
             }
         }
@@ -271,7 +271,6 @@ public class AlexForm extends javax.swing.JFrame  {
     static ArrayList<EnemiesClass> beholderStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> demonStats = new ArrayList<EnemiesClass>(0);
     static ArrayList<EnemiesClass> deathWishStats = new ArrayList<EnemiesClass>(0);
-    //static ArrayList<EnemiesClass> enemyStats = new ArrayList<EnemiesClass>(0);
     static ArrayList[] enemyStats1 = new ArrayList[4];
 
     ArrayList<JLabel> bullets = new ArrayList<JLabel>(0);
@@ -393,10 +392,10 @@ public class AlexForm extends javax.swing.JFrame  {
                 }
             }
             if (health <= 0) {
-                Losser gameOver = new Losser();
-
+                JFrame gameOver = new Losser();
+                gameTimer.cancel();
                 gameOver.setVisible(true);
-                this.setVisible(false);
+                dispose();
             }
             return true;
         } else {
@@ -437,9 +436,10 @@ public class AlexForm extends javax.swing.JFrame  {
                 }
             }
             if (health <= 0) {
-                Losser gameOver = new Losser();
+                JFrame gameOver = new Losser();
                 gameOver.setVisible(true);
-                this.setVisible(false);
+               gameTimer.cancel();
+                dispose();
             }
             healthLabel.setText(String.valueOf(health));
             return true;
@@ -697,13 +697,7 @@ public class AlexForm extends javax.swing.JFrame  {
         }); 
         
     }
-    
 
-//    public void int impMovement(int x, int y) {
-//        
-//        
-//        return y;
-//    }
     public void enemySpawning() {
         int spawn = (int) (Math.random() * 100 + 1);
         if (spawn <= 40) {
@@ -816,11 +810,8 @@ public class AlexForm extends javax.swing.JFrame  {
 
     public void closeForm(JFrame AlexForm) {
         Victory winner = new Victory();
-
         setVisible(false);
-
         winner.setVisible(true);
-
 dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
     }
     
@@ -843,9 +834,9 @@ dispatchEvent(new WindowEvent(AlexForm, WindowEvent.WINDOW_CLOSING));
         
         fileOut.close();
       
-        
-         scores highScorePage = new scores();   
+         JFrame highScorePage = new scores();   
          highScorePage.setVisible(true);
+         dispose();
     }
 
 

@@ -19,6 +19,7 @@ import Brayden.Brayden1;
 import AaronPackage.AaronForm;
 import JohnPackage.JohnF;
 import AlexPackage.AlexForm;
+import JohnPackage.intro;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -234,16 +235,15 @@ public class TheFaultInOurBaldSpotView extends FrameView {
     }//GEN-LAST:event_aaronActionPerformed
 
     private void AlexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlexActionPerformed
-     AlexForm alexObject = new AlexForm();
+     JFrame alexObject = new AlexForm();
    //  TheFaultInOurBaldSpotView.setVisible(false);
    
      alexObject.setVisible(true); 
-    // this.getFrame(TheFaultinOurBaldSpotView).setVisible(false);
      // TODO add your handling code here:
     }//GEN-LAST:event_AlexActionPerformed
 
     private void johnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_johnActionPerformed
-   JohnF johnObject = new JohnF();   
+   intro johnObject = new intro();   
    johnObject.setVisible(true);
    
     }//GEN-LAST:event_johnActionPerformed
