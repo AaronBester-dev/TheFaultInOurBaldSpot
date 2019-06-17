@@ -34,12 +34,14 @@ public class lost extends javax.swing.JFrame {
         //hides buttons
         retry.setVisible(false);
         quit.setVisible(false);
+        goToIntro.setVisible(false);
         //creates font
         Font font1 = new Font("SansSerif", Font.BOLD, 25);
         Font font2 = new Font("SansSerif", Font.BOLD, 40);
         //sets text to buttons
         retry.setText("RETRY");
         quit.setText("QUIT");
+        goToIntro.setText("GO TO INTRO");
         //hides labels
         jLabel1.setVisible(false);
         jLabel2.setVisible(false);
@@ -85,6 +87,7 @@ public class lost extends javax.swing.JFrame {
                     //makes buttons appear once all the letters have
                      retry.setVisible(true);
                      quit.setVisible(true);
+                     goToIntro.setVisible(true);
                 }
             }
         };
@@ -133,6 +136,7 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
         alex = new javax.swing.JLabel();
         retry = new javax.swing.JButton();
         quit = new javax.swing.JButton();
+        goToIntro = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -144,12 +148,12 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(540, 280, 34, 40);
+        jLabel1.setBounds(540, 280, 41, 40);
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(580, 280, 34, 40);
+        jLabel2.setBounds(580, 280, 41, 40);
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
@@ -209,7 +213,7 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
             }
         });
         getContentPane().add(retry);
-        retry.setBounds(700, 50, 90, 23);
+        retry.setBounds(700, 50, 100, 26);
 
         quit.setText(resourceMap.getString("quit.text")); // NOI18N
         quit.setName("quit"); // NOI18N
@@ -219,12 +223,22 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
             }
         });
         getContentPane().add(quit);
-        quit.setBounds(700, 80, 90, 23);
+        quit.setBounds(700, 80, 100, 26);
+
+        goToIntro.setText(resourceMap.getString("goToIntro.text")); // NOI18N
+        goToIntro.setName("goToIntro"); // NOI18N
+        goToIntro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToIntroMouseClicked(evt);
+            }
+        });
+        getContentPane().add(goToIntro);
+        goToIntro.setBounds(700, 110, 100, 26);
 
         background.setText(resourceMap.getString("background.text")); // NOI18N
         background.setName("background"); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, 0, 830, 420);
+        background.setBounds(0, 0, 840, 440);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,9 +252,14 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
     }//GEN-LAST:event_retryMouseClicked
     //if quit button is clicked
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
-        //exits program
+        //closes game      
         System.exit(0);
     }//GEN-LAST:event_quitMouseClicked
+    //if go to intro is clicked
+    private void goToIntroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToIntroMouseClicked
+         //closes form
+        this.dispose();
+    }//GEN-LAST:event_goToIntroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -282,6 +301,7 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
     private javax.swing.JLabel alex;
     private javax.swing.JLabel background;
     private javax.swing.JLabel brayden;
+    private javax.swing.JButton goToIntro;
     private javax.swing.JLabel graveStone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
