@@ -44,6 +44,17 @@ public class soup {
 public String getPhotoCode(){
     return photoCode;
 }
-    
+public boolean getPotato(){
+            return potato;
+
+}    
+public boolean getTomato(){
+            return tomato;
+
+} 
+public boolean getMushroom(){
+            return mushroom;
+
+} 
     
 }

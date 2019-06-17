@@ -64,7 +64,7 @@ public class AaronForm extends javax.swing.JFrame {
             if (movingRight) {
                 //Checks to see if there is any object in the way of the player
                 if (!checkCollision(player, -movementSpeed, 0)) {
-
+//Finds the location for every single object and enemy JLabel and moves it to the left by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
 
@@ -103,11 +103,13 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
-
+//Timer task responsible for moving every block and enemy left when the user wants to move right
     TimerTask moveLeft = new TimerTask() {
         public void run() {
+            //Checks to see if moving left is true
             if (movingLeft) {
                 if (!checkCollision(player, +movementSpeed, 0)) {
+  //Finds the location for every single object and enemy JLabel and moves it to the right by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
 
@@ -143,29 +145,35 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
-
+//Timer task that is responsible for moving the player down when they aren't on solid ground or jumping
      TimerTask gravity = new TimerTask() {
         public void run() {
-
+//Checks to see if there is no block 10 spaces below the player and that the player isn't jumping
             if ((!checkCollision(player, 0, +10) && (jumping == false))) {
-
+//Takes the current player y location and sets it down blocks lower
                 player.setLocation(player.getLocation().x, player.getLocation().y + 10);
 
             }
 
         }
     };
-
+//Timer task that is responsible for moving the player up smoothly when the user jumps
     TimerTask jumpGravity = new TimerTask() {
         public void run() {
             System.out.println("Running jumpy " + jumping);
+            //Checks to see if jumping is true
             if (jumping) {
+                //Increases the jump timer by 1 every time it runs
                 jumpTimer++;
+                //Checks to see if the jump timer is greater less than 22
                 if (jumpTimer <= 22) {
+                    //Sets the players location to be ten y values up from its previous location
                     player.setLocation(player.getLocation().x, player.getLocation().y - 10);
+                    //Checks to see if jump timer is above 22
                 } else if (jumpTimer > 22) {
-
+//Resets Jump Timer
                     jumpTimer = 0;
+                    //Sets jumping to false which tells the computer when to stop jumping
                     jumping = false;
                     System.out.println("Stop Running jumpy");
 
@@ -173,11 +181,14 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    //TimerTask checks every object and enemy label and sees if its in the user's field of view then sets makes the labels visible if it's visible
   TimerTask checkVisible = new TimerTask() {
         public void run() {
-
+//For loops check every single Object and enemy to see if its in the user's field of view
             for (JLabel item : activeFloor) {
+                //Checks to see if the item is in the user's field of view
                 if (item.getLocation().x > 0 && item.getLocation().x < 1080) {
+                    //Makes the item visible to the user
                     getContentPane().add(item);
                 }
             }
@@ -228,20 +239,25 @@ public class AaronForm extends javax.swing.JFrame {
 
     };
     
-    //Timer tasks thats responsible for moving the player's movement
+    //Timer tasks thats responsible for moving the player's bullets
     TimerTask bulletMovement = new TimerTask() {
         public void run() {
-
+//Try catch catches any exceptions
             try {
-
+//For statements ensures that the task checks every staplebullet
                 for (JLabel item : staplebullets) {
+                    //Sets the bullets location to 20 x values to the right from the previous location
                     item.setLocation(item.getLocation().x + 20, item.getLocation().y);
-
+//Checks to see if the bullet label collides with an enemy label
                     if (bulletCollisionEnemies(item, +20, 0) == true) {
+                        //Removes the staple bullet from the form if it hits an enemy
                         remove(item);
+                        //Removes the stable bullet from the bullets array.
                         staplebullets.remove(item);
                     }
+                    //Checks to see if the bullet is out of the player's view
                     if (item.getLocation().x > 1080) {
+                        //Removes the bullet if the bullet is out of the player's view
                         remove(item);
                         staplebullets.remove(item);
                     }
@@ -251,33 +267,91 @@ public class AaronForm extends javax.swing.JFrame {
             }
         }
     };
+    //TimerTask that creates the fat enemies bullets
 TimerTask createFatBullets = new TimerTask() {
         public void run() {
+//Finds each fatOfficeWorker object in the fatOfficeWorker array
+            for (EnemyClass item : fatOfficeWorkerStats) {
+//Creates a new JLabel for the fat bullet
+            JLabel fatbullet = new JLabel();
 
-            fatOfficeWorkerBullets();
+            System.out.println("Label Created");
+            //Makes the fatbullet visible to the user
+            getContentPane().add(fatbullet);
+            //Sets the location to be the same as the fat bullet enemy and the bullet size
+            fatbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 100, 50, 50);
+
+            System.out.println("Bounds Set");
+            //Try catch statement catches any IO exceptions
+            try {
+                //Sets the fatbullet icon to the hamburger png
+                fatbullet.setIcon(new ImageIcon((ImageIO.read(new File("AaronHamburger.png"))).getScaledInstance(fatbullet.getWidth(), fatbullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+            System.out.println("Try performed");
+            //adds the fatbullets to the fatbullets array
+            fatbullets.add(fatbullet);
+        }
 
         }
     };
+
+//Timertask creates the guards bullets
     TimerTask createGuardBullets = new TimerTask() {
         public void run() {
+//Finds every security guard object in the enemyclass
+              for (EnemyClass item : securityGuardStats) {
+//Creates a new security guard JLabel
+            JLabel guardbullet = new JLabel();
 
-            securityGuardBullets();
+            System.out.println("Label Created");
+            //Makes the label visible to the user
+            getContentPane().add(guardbullet);
+            //Sets the guardbullet location to be the same as the security guard
+            guardbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 100, 50, 50);
+
+            System.out.println("Bounds Set");
+         //Try catch statement catches any IO exceptions
+            try {
+                //Sets the guard bullet JLabel to the security guard bullet png
+                guardbullet.setIcon(new ImageIcon((ImageIO.read(new File("SecurityGuardBullet.png"))).getScaledInstance(guardbullet.getWidth(), guardbullet.getHeight(), Image.SCALE_SMOOTH)));
+            } catch (IOException ex) {
+                System.out.println("NO IMAGE");
+                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     
+            System.out.println("Try performed");
+            //Adds the guard bullet to the guard bullet array
+            guardbullets.add(guardbullet);
+        }
 
         }
     };
+    //TimerTask moves the guard bullets
      TimerTask guardBulletMovement = new TimerTask() {
         public void run() {
+            //Try catch statements catches any exceptions
             try {
+                //For statement looks through every Jlabel in the guard bullets array and sets it to item
                 for (JLabel item : guardbullets) {
+                    //Sets the location of item 20 x values to the left of where it previously was
                     item.setLocation(item.getLocation().x - 20, item.getLocation().y);
+                    //If statement checks if the bullet will hit the player or not
                     if (bulletCollisionPlayer(item, -20, 0) == true) {
+                        //Runs the take damage function if the bullet collides with the player
                         takeDamage();
-
+//Removes the guard bullet from the guardbullets array list
                         guardbullets.remove(item);
+                        //Removes the guard bullet from the form
                         remove(item);
 
                     }
-                    if (item.getLocation().x > 1400 || (item.getLocation().x < 0)) {
+                    //Checks to see if the item is out of the bounds of the outside of a certain area around the player
+                    if (item.getLocation().x > 1500 || (item.getLocation().x < 0)) {
+                        //Removes the item if its outside of the certain area and removes it from the form and from the array.
                         remove(item);
                         guardbullets.remove(item);
                     }
@@ -287,6 +361,7 @@ TimerTask createFatBullets = new TimerTask() {
             }
         }
     };
+     //TimerTask that moves the fat bullets
     TimerTask fatBulletMovement = new TimerTask() {
         public void run() {
             try {
@@ -420,7 +495,7 @@ TimerTask createFatBullets = new TimerTask() {
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(50, 40, 146, 14);
+        jProgressBar1.setBounds(50, 40, 146, 7);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -814,49 +889,9 @@ TimerTask createFatBullets = new TimerTask() {
 
     }
 
-    public void securityGuardBullets() {
-
-        for (EnemyClass item : securityGuardStats) {
-
-            JLabel guardbullet = new JLabel();
-
-            System.out.println("Label Created");
-            getContentPane().add(guardbullet);
-            guardbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 100, 50, 50);
-
-            System.out.println("Bounds Set");
-            try {
-                guardbullet.setIcon(new ImageIcon((ImageIO.read(new File("SecurityGuardBullet.png"))).getScaledInstance(guardbullet.getWidth(), guardbullet.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                System.out.println("NO IMAGE");
-                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //  setComponentZOrder(bullet1, 0);
-            System.out.println("Try performed");
-            guardbullets.add(guardbullet);
-        }
-    }
-
+   
     public void fatOfficeWorkerBullets() {
-        for (EnemyClass item : fatOfficeWorkerStats) {
-
-            JLabel fatbullet = new JLabel();
-
-            System.out.println("Label Created");
-            getContentPane().add(fatbullet);
-            fatbullet.setBounds(item.getLabel().getLocation().x, item.getLabel().getLocation().y + 100, 50, 50);
-
-            System.out.println("Bounds Set");
-            try {
-                fatbullet.setIcon(new ImageIcon((ImageIO.read(new File("AaronHamburger.png"))).getScaledInstance(fatbullet.getWidth(), fatbullet.getHeight(), Image.SCALE_SMOOTH)));
-            } catch (IOException ex) {
-                System.out.println("NO IMAGE");
-                Logger.getLogger(AaronForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //  setComponentZOrder(bullet1, 0);
-            System.out.println("Try performed");
-            fatbullets.add(fatbullet);
-        }
+       
     }
 
     public boolean bulletCollisionEnemies(javax.swing.JLabel _lbl, int _x, int _y) {
