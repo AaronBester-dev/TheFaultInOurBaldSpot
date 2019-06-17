@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
+//Program title: The FaultInOurBaldSpot 
+//Author: Aaron Bester
+//Date: June 17th, 2019
+//Program Description: Mega Man Game
+
+
+
 package AaronPackage;
 
-/**
- *
- * @author aaron.bester708
- */
+
 //Class that deals with the health of the fat office worker
 public class FatOfficeWorker extends EnemyClass {
      public FatOfficeWorker() {

@@ -1,8 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+//Program title: The FaultInOurBaldSpot 
+//Author: Aaron Bester
+//Date: June 17th, 2019
+//Program Description: Mega Man Game
+
+
+
 package AaronPackage;
 
 import java.io.IOException;
@@ -115,7 +118,6 @@ public class LoseScreen extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoseScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

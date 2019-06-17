@@ -1,6 +1,11 @@
-/*
- * TheFaultInOurBaldSpotView.java
- */
+
+
+//Program title: The FaultInOurBaldSpot 
+//Author: Aaron Bester,John Diemert,Brayden McQueen, Alex Rejep
+//Date: June 17th, 2019
+//Program Description: The level select screen for the game
+
+
 
 package thefaultinourbaldspot;
 
