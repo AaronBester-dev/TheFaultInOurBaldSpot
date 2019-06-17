@@ -144,6 +144,20 @@
         </Constraint>
       </Constraints>
     </Component>
+    <Component class="javax.swing.JLabel" name="Instructions">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="Instructions.font"/>
+        <Property name="foreground" type="java.awt.Color" resourceKey="Instructions.foreground"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" resourceKey="Instructions.text"/>
+        <Property name="name" type="java.lang.String" value="Instructions" noResource="true"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="250" y="40" width="410" height="150"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="javax.swing.JLabel" name="backGround">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>

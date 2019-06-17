@@ -233,6 +233,8 @@ public void myInitComponents(javax.swing.JLabel jLabel1) {
        //calls main game form
        JohnF johnObject = new JohnF();
        johnObject.setVisible(true);
+       //closes form
+       this.dispose();
     }//GEN-LAST:event_retryMouseClicked
     //if quit button is clicked
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
