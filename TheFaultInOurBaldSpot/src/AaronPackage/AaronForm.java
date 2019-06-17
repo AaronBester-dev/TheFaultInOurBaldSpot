@@ -60,10 +60,14 @@ public class AaronForm extends javax.swing.JFrame {
 //Moves all objects except the player to the character right
     TimerTask moveRight = new TimerTask() {
         public void run() {
+              try{
+                  
+             
             //Checks to see if moving right is true
             if (movingRight) {
                 //Checks to see if there is any object in the way of the player
-                if (!checkCollision(player, -movementSpeed, 0)) {
+                if (!checkCollision(player, +1, 0)) {
+                     repaint();
 //Finds the location for every single object and enemy JLabel and moves it to the left by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x - movementSpeed, item.getLocation().y);
@@ -100,15 +104,24 @@ public class AaronForm extends javax.swing.JFrame {
 
                     }
                 }
+                
             }
+             }catch(Exception e){
+                  
+              }
         }
     };
 //Timer task responsible for moving every block and enemy left when the user wants to move right
     TimerTask moveLeft = new TimerTask() {
+      
         public void run() {
+      try{
+          
+    
             //Checks to see if moving left is true
             if (movingLeft) {
-                if (!checkCollision(player, +movementSpeed, 0)) {
+                if (!checkCollision(player, -1, 0)) {
+                    repaint();
   //Finds the location for every single object and enemy JLabel and moves it to the right by 1 x value.
                     for (JLabel item : activeFloor) {
                         item.setLocation(item.getLocation().x + movementSpeed, item.getLocation().y);
@@ -141,8 +154,12 @@ public class AaronForm extends javax.swing.JFrame {
                     for (EnemyClass item : securityGuardStats) {
                         item.getLabel().setLocation(item.getLabel().getLocation().x + movementSpeed, item.getLabel().getLocation().y);
                     }
+                     
                 }
             }
+              }catch(Exception e){
+          
+      }
         }
     };
 //Timer task that is responsible for moving the player down when they aren't on solid ground or jumping
@@ -588,25 +605,34 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         //Z key pressed
         if (evt.getKeyCode() == 90) {
+            
             //Checks if the player is standing on top of a block and that the player has run above his head
-            if (!checkCollision(player, 0, -10) && (checkCollision(player, 0, +10))) {
+            if (!checkCollision(player, 0, -1) && (checkCollision(player, 0, +10))) {
                 //Sets jumping to true which starts the jumpGravity timer task
                 jumping = true;
             }
         }
         //left key pressed
         if (evt.getKeyCode() == 37) {
+            try{
+                
+          
 //          //Sets moving left to true which starts the moveLeft timer task
             movingLeft = true;
             System.out.println("moving Left" + movingLeft);
-//            
+       }catch(Exception e){
+                
+            }
         }
         //right key pressed
         if (evt.getKeyCode() == 39) {
+             try{
             //Sets moving left to right which starts the moveRight timer task
             movingRight = true;
             System.out.println("moving Left" + movingRight);
-  
+    }catch(Exception e){
+                
+            }
         }
 
 
@@ -748,25 +774,30 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
     
   //Void that spawns in the player character
     public void playerSpawner() throws IOException {
+        //Makes the player character object that is apart of the megaaaron class
         playerCharacter = new MegaAaron();
+        //Sets the label of the object to the player label
         playerCharacter.setLabel(player);
+        //Sets the player label icon to be the megaaaron png
         player.setIcon(new ImageIcon((ImageIO.read(new File("MegaAaron.png"))).getScaledInstance(player.getWidth(), player.getHeight(), Image.SCALE_SMOOTH)));
     }
-
+//Void that spawns the floor lablels
     public void floorSpawner() {
-
+//For statement ensures that the program runs the floor spawner for each floor label 
         for (int i = 0; i < numberOfObjects; i++) {
-
+//Checks if the name of the object that the program is looking at is equal to floor
             if (objectsArray[0][i].equals("floor")) {
-
+                //Creates a new floor JLabel
                 JLabel floor1 = new JLabel();
 
                 System.out.println("Label Created");
-
+//Sets the bounds of the new floor JLabel
                 floor1.setBounds(Integer.parseInt(objectsArray[1][i]), Integer.parseInt(objectsArray[2][i]), 50, 50);
 
                 System.out.println("Bounds Set");
+                //Tray catch catches any IO Exceptions
                 try {
+                    //Sets the icon of the floor label to be the floor png
                     floor1.setIcon(new ImageIcon((ImageIO.read(new File("AaronFloor.png"))).getScaledInstance(floor1.getWidth(), floor1.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     System.out.println("NO IMAGE");
@@ -774,15 +805,16 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
                 }
 
                 System.out.println("Try performed");
+                //Adds the floor label to the active floor array
                 activeFloor.add(floor1);
             }
 
         }
 
     }
-
+//Spawns all the spike objects
     public void spikeSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates spike labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("spike")) {
@@ -807,9 +839,9 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Spawns the exit
     public void exitSpawner() {
-
+//This section of code is the exact same as the floorspawner except this one creates door labels
         for (int i = 0; i < numberOfObjects; i++) {
 
             if (objectsArray[0][i].equals("door")) {
@@ -834,7 +866,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
 
         }
     }
-
+//Void spawns in the security guard enemies
     public void securityGuardSpawner() {
 
         for (int i = 0; i < numberOfObjects; i++) {
