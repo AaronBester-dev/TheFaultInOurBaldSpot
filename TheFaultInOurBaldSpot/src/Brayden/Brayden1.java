@@ -801,7 +801,7 @@ counterC3 = 3;
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushrromSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -916,7 +916,7 @@ counterC3 = 3;
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushrromSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1028,7 +1028,7 @@ counterC3 = 3;
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
-                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushrromSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
+                    itemV.setIcon(new ImageIcon((ImageIO.read(new File("mushroomSoup.png"))).getScaledInstance(itemV.getWidth(), itemV.getHeight(), Image.SCALE_SMOOTH)));
                 } catch (IOException ex) {
                     Logger.getLogger(Brayden1.class.getName()).log(Level.SEVERE, null, ex);
                 }
