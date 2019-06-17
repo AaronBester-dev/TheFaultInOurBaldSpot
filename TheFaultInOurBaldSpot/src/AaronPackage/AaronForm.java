@@ -645,10 +645,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
           aaronAnimateTimer.scheduleAtFixedRate(animatePlayer, 200, 200);
           
           
-          for (int i = 0; i<3;i++){
-              for(int j = 0;j<44;j++){
-                  System.out.println(objectsArray[i][j]);
-              }}
+      
           
           
           
@@ -804,7 +801,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
             index = myLine.indexOf(",");
             //Makes the block add equal to the x value of the block
             blockAdd = myLine.substring(0, index);
-            System.out.println(blockAdd);
+          
             //Adds the X value contained in the block add to the blockX array
             blockX.add(blockAdd);
             //Cuts off the data that has already been read and reads the next stretch of data
@@ -813,7 +810,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
             //Y=VALUE
             //Adds the data that contains the Y value to the block add variable
             blockAdd = myLine;
-            System.out.println(blockAdd);
+          
 //Adds the Y value to the block Y array
             blockY.add(blockAdd);
 
@@ -828,13 +825,13 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (int i = 0; i < numberOfObjects; i++) {
             //Adds the name of the block to the first column of the array
             objectsArray[0][i] = blockType.get(i);
-            System.out.println(objectsArray[0][i]);
+            
             //Adds the x value of the block to the second column of the array
             objectsArray[1][i] = blockX.get(i);
-            System.out.println(objectsArray[1][i]);
+          
             //Adds the y value of the block to the third column of the array
             objectsArray[2][i] = blockY.get(i);
-            System.out.println(objectsArray[2][i]);
+          
         }
 
     }
@@ -1060,7 +1057,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (EnemyClass item : fatOfficeWorkerStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                //  System.out.println("Enenmy Hit" + item.getHealth());
+            
                 if (item.getHealth() == 0) {
                     fatOfficeWorkerStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -1073,7 +1070,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         for (EnemyClass item : securityGuardStats) {
             if (rect.intersects(item.getLabel().getBounds())) {
                 item.setHealth(item.getHealth() - 1);
-                //   System.out.println("Enenmy Hit" + item.getHealth());
+
                 if (item.getHealth() == 0) {
                     securityGuardStats.remove(item);
                     getContentPane().remove(item.getLabel());
@@ -1098,7 +1095,7 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         return false;
     }
   
-//Void that takes one points off the player's helth
+//Void that takes one points off the player's health
     public void takeDamage() {
  //Taktes the current player's health and subtracts it by 1    
         playerCharacter.setHealth(playerCharacter.getHealth() - 1);
@@ -1106,15 +1103,16 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 //Checks if the players health become 0
         if (playerCharacter.getHealth() == 0) {
-            
+            //Diisposes the form but it doesn't work
             this.dispose();
+            //Creates the new death screen
             LoseScreen loser = new LoseScreen();
-                    //Makes the win screen visible to the user
+                    //Makes the death screen visible to the user
                     loser.setVisible(true);
-                    //Makes the current form invisible
-                //    this.setVisible(false);
+               
+        
                    
-                   System.out.println(this.toString());
+                
                    
         }
 

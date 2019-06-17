@@ -9,6 +9,7 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
+//Class for the Win Screen
 public class AaronWinScreen extends javax.swing.JFrame {
 
     /**
@@ -91,6 +92,7 @@ public class AaronWinScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //Makes te win screen visible when it runs
                 new AaronWinScreen().setVisible(true);
             }
         });

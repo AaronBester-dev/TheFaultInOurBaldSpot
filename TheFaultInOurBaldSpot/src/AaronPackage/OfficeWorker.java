@@ -9,9 +9,11 @@ package AaronPackage;
  *
  * @author aaron.bester708
  */
+//Class that sets the health of the officeworker enemy
 public class OfficeWorker extends EnemyClass {
        public OfficeWorker() {
-        health = 3;
+           //Sets his health to 3
+        health = 1;
       
      
     }
