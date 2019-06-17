@@ -548,9 +548,7 @@ for(int i= 0;i<soupBoy.length;i++){
 //                System.out.println(item.getPotato());
 //                System.out.println(item.getTomato());
 //                System.out.println(item.getMushroom());
-
-   
-              
+         
                       
 
                 if (soupBoy[i].getPotato()) {
@@ -558,12 +556,15 @@ for(int i= 0;i<soupBoy.length;i++){
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
                                                 soupBoy[i] = new soup();
+                                                break;
                     }
+                }
                 if (soupBoy[i].getTomato()) {
                     if (me.getTomatoS()) {
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
                         soupBoy[i] = new soup();
+                        break;
   
                     }
                 }
@@ -572,11 +573,11 @@ for(int i= 0;i<soupBoy.length;i++){
                         score = score + 10;
                         scoreV.setText(String.valueOf(score));
                         soupBoy[i] = new soup();
-                        
+                        break;
                     }
                 }
                     
-                }
+                
 }
                         
                      
