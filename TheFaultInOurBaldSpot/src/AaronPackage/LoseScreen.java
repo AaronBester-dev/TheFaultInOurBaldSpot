@@ -94,6 +94,7 @@ public class LoseScreen extends javax.swing.JFrame {
         try {
             AaronForm retry = new AaronForm();
             retry.setVisible(true);
+            dispose();
         } catch (IOException ex) {
             Logger.getLogger(LoseScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
