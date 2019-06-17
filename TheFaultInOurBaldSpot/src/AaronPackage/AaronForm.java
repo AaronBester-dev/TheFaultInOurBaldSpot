@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 //Main class of the form
 public class AaronForm extends javax.swing.JFrame {
 //Declaring all the different variables 
+    Clip clip1;
 int animateTimer = 0;
 boolean animateOn = false;
     int movementSpeed = 1;
@@ -502,15 +503,22 @@ TimerTask createFatBullets = new TimerTask() {
             for (JLabel item : activeDoor) {
                 //Checks if temporary rectangle intersects with the door block
                 if (rect.intersects(item.getBounds())) {
+                    //Stops the music
+                     clip1.stop();
+                    
+                    //Cancels all game timers
+                    aaronGameTimer.cancel();
+     aaronJumpTimer.cancel();
+       aaronAnimateTimer.cancel();
+       
                     //Opens the AaronWin Screen
                     AaronWinScreen winScreen = new AaronWinScreen();
                     //Makes the win screen visible to the user
                     winScreen.setVisible(true);
                     //Makes the current form invisible
                     this.setVisible(false);
-                    //Turns off movement so you don't constantly run into it
-                    movingRight=false;
-                    movingLeft=false;
+               
+                
                   
                 }
             }
@@ -585,10 +593,11 @@ TimerTask createFatBullets = new TimerTask() {
             //Imports the audio for the game
             AudioInputStream audio = AudioSystem.getAudioInputStream(new File("AaronLevelMusic.wav"));
             // Get a sound clip resource.
-            Clip clip1 = AudioSystem.getClip();
+             clip1 = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
             clip1.open(audio);
             clip1.start();
+            
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -1103,13 +1112,19 @@ jProgressBar1.setMaximum(playerCharacter.getHealth());
         jProgressBar1.setValue(playerCharacter.getHealth() - 1);
 //Checks if the players health become 0
         if (playerCharacter.getHealth() == 0) {
-            //Diisposes the form but it doesn't work
-            this.dispose();
+        //Stops the music
+           clip1.stop();
+            
+            //Cancels all the game timers to ensure they don't conflict with anything
+   aaronGameTimer.cancel();
+     aaronJumpTimer.cancel();
+       aaronAnimateTimer.cancel();
             //Creates the new death screen
             LoseScreen loser = new LoseScreen();
                     //Makes the death screen visible to the user
-                    loser.setVisible(true);
-               
+                    loser.setVisible(true);   
+//Disposes the form but it doesn't work
+                 this.setVisible(false);
         
                    
                 
