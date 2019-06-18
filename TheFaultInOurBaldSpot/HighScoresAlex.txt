@@ -18,10 +18,7 @@ JOHNNYD
 240
 ALEX
 212
-<<<<<<< HEAD
 John
 376
-=======
 ALEX
 244
->>>>>>> cf323835093abe309cde723f5a4621ca4e07792b
