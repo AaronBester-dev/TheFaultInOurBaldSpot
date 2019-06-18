@@ -18,14 +18,9 @@ JOHNNYD
 240
 ALEX
 212
-<<<<<<< HEAD
 John
 376
 ALEX
 244
 ALEX
 207
-
-
-=======
->>>>>>> parent of 336159e... beat alex's score
