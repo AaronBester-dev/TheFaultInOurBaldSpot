@@ -10,10 +10,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author john.diemert744
- */
 public class Tool {
     //declares varibles/properties of the tools
     javax.swing.JLabel toolLabel;
